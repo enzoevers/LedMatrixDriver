@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name 74HC138D-T)(type Legacy)(uri C:/Users/enzoe/OneDrive/NewStructure/Projects/LedMatrixBusLarge/74HC138D-T/74HC138D-T.lib)(options "")(descr ""))
+  (lib (name 74HC373D)(type Legacy)(uri C:/Users/enzoe/OneDrive/NewStructure/Projects/LedMatrixBusLarge/74HC373D/74HC373D.lib)(options "")(descr ""))
+  (lib (name 74HC14D_652)(type Legacy)(uri C:/Users/enzoe/OneDrive/NewStructure/Projects/LedMatrixBusLarge/74HC14D_652/74HC14D_652.lib)(options "")(descr ""))
+  (lib (name LedDriverIc)(type Legacy)(uri C:/Users/enzoe/OneDrive/NewStructure/Projects/LedMatrixBusLarge/LedDriverIc/LedDriverIc.lib)(options "")(descr ""))
+)
