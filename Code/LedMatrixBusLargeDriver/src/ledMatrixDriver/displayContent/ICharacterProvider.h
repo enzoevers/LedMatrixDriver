@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "Character.h"
+#include <ledMatrixDriver/displayContent/Character.h>
 
 class ICharacterProvider {
   public:

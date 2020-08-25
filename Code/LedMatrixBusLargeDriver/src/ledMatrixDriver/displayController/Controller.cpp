@@ -1,8 +1,7 @@
 #pragma once
 
-#define ARDUINO_PLATFORM
-#include "Controller.h"
-#include "Platforms.h"
+#include <ledMatrixDriver/displayController/Controller.h>
+#include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
 Controller::Controller(ILedMatrix& ledMatrix)
   : m_ledMatrix(ledMatrix)
@@ -34,7 +33,7 @@ void Controller::test()
   
   for(int32_t b = 0xFFFF; b >= 0; b -=10) {
     m_ledMatrix.setBrightness(0xFFFF & b);
-    PlatformAbstraction::timingHandling.waitMilliseconds(2);
+    PlatformAbstraction::timingHandling.waitMilliseconds(1);
   }
 
   PlatformAbstraction::timingHandling.waitMilliseconds(1000);

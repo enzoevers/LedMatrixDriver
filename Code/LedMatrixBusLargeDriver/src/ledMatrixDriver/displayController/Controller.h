@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ILedMatrix.h"
+#include <ledMatrixDriver/targetDisplays/ILedMatrix.h>
 //#include "ICharacterProvider.h"
 
 class Controller {

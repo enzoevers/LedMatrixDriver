@@ -1,8 +1,7 @@
 #pragma once
 
-#define ARDUINO_PLATFORM
-#include "LedMatrix_Hanover_OL037A.h"
-#include "Platforms.h"
+#include <ledMatrixDriver/targetDisplays/LedMatrix_Hanover_OL037A.h>
+#include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
 LedMatrix_Hanover_OL037A::LedMatrix_Hanover_OL037A(uint8_t clkDestSelectPin,
     uint8_t clkLedDriverPin,

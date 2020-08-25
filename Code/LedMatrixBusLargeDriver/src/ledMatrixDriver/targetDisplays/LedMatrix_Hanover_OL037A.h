@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ILedMatrix.h"
+#include <ledMatrixDriver/targetDisplays/ILedMatrix.h>
 
 class LedMatrix_Hanover_OL037A : public ILedMatrix {
     public:

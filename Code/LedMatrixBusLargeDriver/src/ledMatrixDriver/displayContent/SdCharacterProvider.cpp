@@ -1,4 +1,4 @@
-#include "SdCharacterProvider.h"
+#include <ledMatrixDriver/displayContent/SdCharacterProvider.h>
 
 #include <SPI.h>
 #include <SD.h>

@@ -1,66 +1,17 @@
 #pragma once
 
-#include <wiringPi.h>
+#include <Arduino.h>
+#include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
-/*
-namespace GpioHandling 
-{
 
-void setDirection(int pin, GpioDirection direction)
-{
-    if(direction == GpioDirection::DIR_OUTPUT) {
-        pinMode(pin, OUTPUT);
-    } else if(direction == GpioDirection::DIR_INPUT) {
-        pinMode(pin, INPUT);
-    } else if(direction == GpioDirection::DIR_PWM_OUTPUT) {
-        pinMode(pin, PWM_OUTPUT);
-    }
-}
-
-void writeDigital(int pin, bool value)
-{
-    digitalWrite(pin, value);
-}
-
-bool readDigital(int pin)
-{
-    return digitalRead(pin);
-}
-
-void writePwm(int pin, uint16_t value)
-{
-    uint8_t val = GpioHandling::map(value, 0, (2^16)-1, 0, (2^10)-1);
-    pwmWrite(pin, val);
-}
-
-void writeAnalog(int pin, int value)
-{
-    analogWrite(pin, value);
-}
-
-int readAnalog(int pin)
-{
-    return analogRead(pin);
-}
-
-}
-
-namespace Timing
-{
-
-}
-*/
-
-class RaspberryPiIo {
+class ArduinoIo {
     public:
         inline static void setDirection(int pin, GpioDirection direction)
         {
-            if(direction == GpioDirection::DIR_OUTPUT) {
+            if(direction == GpioDirection::DIR_OUTPUT || direction == GpioDirection::DIR_PWM_OUTPUT) {
                 pinMode(pin, OUTPUT);
             } else if(direction == GpioDirection::DIR_INPUT) {
                 pinMode(pin, INPUT);
-            } else if(direction == GpioDirection::DIR_PWM_OUTPUT) {
-                pinMode(pin, PWM_OUTPUT);
             }
         }
 
@@ -92,7 +43,7 @@ class RaspberryPiIo {
 
 };
 
-class RaspberryPiTiming {
+class ArduinoTiming {
     public:
         inline static void waitMilliseconds(unsigned int time)
         {
