@@ -9,8 +9,9 @@ class RaspberryPiIo {
         {
             static bool didWiringPiSetup = false;
             if(didWiringPiSetup == false) {
+                //pwmSetRange(0xFF);
+                //pwmSetMode(PWM_MODE_BAL);
                 wiringPiSetupGpio(); // Allows for the Broadcom pin numbers to be used: http://wiringpi.com/reference/setup/
-                pwmSetRange(0xFFFF);
                 didWiringPiSetup = true;
             }
 
@@ -35,8 +36,8 @@ class RaspberryPiIo {
 
         inline static void writePwm(int pin, uint16_t value)
         {
-            uint16_t val = map(value, 0x0, 0xFFFF, 0x0, 0xFF);
-            pwmWrite (pin, val);
+            uint16_t val = map(value, 0x0, 0xFFFF, 0x0, 0x3FF);
+            pwmWrite(pin, val);
         }
 
         inline static void writeAnalog(int pin, int value)

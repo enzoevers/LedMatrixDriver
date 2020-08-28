@@ -35,9 +35,9 @@ void Controller::test()
   PlatformAbstraction::timingHandling.waitMilliseconds(1000);
   
   std::cout << "Fade out display\n";
-  for(int32_t b = 0xFFFF; b >= 0; b -=10) {
+  for(int32_t b = 0xFFFF; b >= 0; b--) {
     m_ledMatrix.setBrightness(0xFFFF & b);
-    PlatformAbstraction::timingHandling.waitMilliseconds(1);
+    PlatformAbstraction::timingHandling.waitMicroseconds(100);
   }
 
   PlatformAbstraction::timingHandling.waitMilliseconds(1000);
