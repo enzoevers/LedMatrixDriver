@@ -1,5 +1,3 @@
-#pragma once
-
 #include <ledMatrixDriver/targetDisplays/LedMatrix_Hanover_OL037A.h>
 #include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
@@ -62,7 +60,8 @@ void LedMatrix_Hanover_OL037A::fillDisplay()
 
 void LedMatrix_Hanover_OL037A::enableDisplay(bool state)
 {
-  PlatformAbstraction::gpioHandling.writeDigital(m_outputEnableLedDriverPin, !state); // Active-low
+  //PlatformAbstraction::gpioHandling.writeDigital(m_outputEnableLedDriverPin, !state); // Active-low
+  PlatformAbstraction::gpioHandling.writePwm(m_outputEnableLedDriverPin, 0xFFFF * !state); // Active-low
 }
 
 void LedMatrix_Hanover_OL037A::setBrightness(uint16_t brightnessPercent) 
@@ -130,8 +129,11 @@ void LedMatrix_Hanover_OL037A::writeSection(uint8_t panel, uint8_t section)
 
   for (int8_t i = m_numRowsPerSections-1; i >= 0; i--) {
     PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 0);
+    PlatformAbstraction::timingHandling.waitMicroseconds(10);
     PlatformAbstraction::gpioHandling.writeDigital(m_dataOutPin, 0b1 & (panelSectionSelectData >> i));
+    PlatformAbstraction::timingHandling.waitMicroseconds(10);
     PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 1); // Clock the data into the 74HC164 shift registers for the selection
+    PlatformAbstraction::timingHandling.waitMicroseconds(10);
   }
 
   //==========
@@ -146,10 +148,14 @@ void LedMatrix_Hanover_OL037A::writeSection(uint8_t panel, uint8_t section)
 
     for (uint8_t i = 0; i < m_numRowsPerSections; i++) {
       PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 0);
+      PlatformAbstraction::timingHandling.waitMicroseconds(10);
       PlatformAbstraction::gpioHandling.writeDigital(m_dataOutPin, (columnData & (0b1 << i)));
+      PlatformAbstraction::timingHandling.waitMicroseconds(10);
       PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 1); // Clock the data into the 74HC164 shift registers for the LED data
+      PlatformAbstraction::timingHandling.waitMicroseconds(10);
     }
     PlatformAbstraction::gpioHandling.writeDigital(m_clkLedDriverPin, 1); // Clock the data into the MBI5167G LED drivers
     PlatformAbstraction::gpioHandling.writeDigital(m_latchLedDriverPin, 1); // Latch the data to the MBI5167G LED driver outputs
+    PlatformAbstraction::timingHandling.waitMicroseconds(10);
   }
 }

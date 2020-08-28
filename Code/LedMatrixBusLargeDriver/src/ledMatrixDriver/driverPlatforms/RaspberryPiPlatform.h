@@ -7,6 +7,13 @@ class RaspberryPiIo {
     public:
         inline static void setDirection(int pin, GpioDirection direction)
         {
+            static bool didWiringPiSetup = false;
+            if(didWiringPiSetup == false) {
+                wiringPiSetupGpio(); // Allows for the Broadcom pin numbers to be used: http://wiringpi.com/reference/setup/
+                pwmSetRange(0xFFFF);
+                didWiringPiSetup = true;
+            }
+
             if(direction == GpioDirection::DIR_OUTPUT) {
                 pinMode(pin, OUTPUT);
             } else if(direction == GpioDirection::DIR_INPUT) {
@@ -29,12 +36,12 @@ class RaspberryPiIo {
         inline static void writePwm(int pin, uint16_t value)
         {
             uint16_t val = map(value, 0x0, 0xFFFF, 0x0, 0xFF);
-            analogWrite(pin, val);
+            pwmWrite (pin, val);
         }
 
         inline static void writeAnalog(int pin, int value)
         {
-            analogWrite(pin, value);
+            pwmWrite (pin, value);
         }
 
         inline static int readAnalog(int pin)
