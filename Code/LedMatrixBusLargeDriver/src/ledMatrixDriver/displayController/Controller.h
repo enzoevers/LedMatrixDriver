@@ -1,12 +1,14 @@
 #pragma once
 
-#include "ILedMatrix.h"
+#include <ledMatrixDriver/targetDisplays/ILedMatrix.h>
 //#include "ICharacterProvider.h"
 
 class Controller {
   public:
     Controller(ILedMatrix& ledMatrix);
 
+    void clearDisplay();
+    void fillDisplay();
     void test();
 
   private:

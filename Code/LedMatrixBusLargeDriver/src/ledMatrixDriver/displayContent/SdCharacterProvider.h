@@ -2,7 +2,8 @@
 
 #include <Arduino.h>
 #include <stdint.h>
-#include "ICharacterProvider.h"
+#include <ledMatrixDriver/displayContent/ICharacterProvider.h>
+
 
 class SdCharacterProvider : public ICharacterProvider {
     public:
