@@ -9,6 +9,22 @@ Controller::Controller(ILedMatrix& ledMatrix)
   
 };
 
+void Controller::clearDisplay()
+{
+  m_ledMatrix.enableDisplay(false);
+  m_ledMatrix.clearDisplay();
+  m_ledMatrix.updateDisplay();
+  m_ledMatrix.enableDisplay(true);
+}
+
+void Controller::fillDisplay()
+{
+  m_ledMatrix.enableDisplay(false);
+  m_ledMatrix.fillDisplay();
+  m_ledMatrix.updateDisplay();
+  m_ledMatrix.enableDisplay(true);
+}
+
 void Controller::test()
 {
   std::cout << "Clearing display\n";
@@ -34,6 +50,7 @@ void Controller::test()
 
   PlatformAbstraction::timingHandling.waitMilliseconds(1000);
   
+  /*
   std::cout << "Fade out display\n";
   for(int32_t b = 0xFFFF; b >= 0; b--) {
     m_ledMatrix.setBrightness(0xFFFF & b);
@@ -41,4 +58,5 @@ void Controller::test()
   }
 
   PlatformAbstraction::timingHandling.waitMilliseconds(1000);
+  */
 }

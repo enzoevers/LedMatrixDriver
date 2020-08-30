@@ -1,6 +1,7 @@
 #include <ledMatrixDriver/targetDisplays/LedMatrix_Hanover_OL037A.h>
 #include <ledMatrixDriver/displayController/Controller.h>
 
+#include <unistd.h>
 #include <iostream>
 
 int main()
@@ -8,8 +9,8 @@ int main()
     ILedMatrix* display = nullptr;
     Controller* controller = nullptr;
 
-    const uint8_t clkDestSelectPin = 4;
-    const uint8_t clkLedDriverPin = 17;
+    const uint8_t clkDestSelectPin = 25;
+    const uint8_t clkLedDriverPin = 24;
     const uint8_t dataOutPin = 27;
     const uint8_t clkPin = 23;
     const uint8_t latchLedDriverPin = 22;
@@ -37,6 +38,14 @@ int main()
     std::cout << "Running the test\n";
 
     controller->test();
+    usleep(1000*1000);
+    for(int i = 0; i < 4; i++) {
+        controller->clearDisplay();
+        usleep(1000*1000);
+        controller->fillDisplay();
+        usleep(1000*1000);
+    }
+    controller->clearDisplay();
 
     std::cout << "Cleaning up\n";
 

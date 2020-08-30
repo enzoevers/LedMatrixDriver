@@ -7,6 +7,8 @@ class Controller {
   public:
     Controller(ILedMatrix& ledMatrix);
 
+    void clearDisplay();
+    void fillDisplay();
     void test();
 
   private:

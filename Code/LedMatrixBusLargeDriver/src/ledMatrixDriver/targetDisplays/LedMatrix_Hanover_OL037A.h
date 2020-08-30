@@ -45,6 +45,10 @@ class LedMatrix_Hanover_OL037A : public ILedMatrix {
         static const uint8_t m_numRows = 19;
         static const uint8_t m_numColums = m_numColumnsPerPanel * m_numPanels;
 
+        // Used for optimization
+        uint8_t m_lastUpdatedPanel = 0xFF;
+        uint8_t m_lastUpdatedSection = 0xFF;
+
         // displayData[0][0][0] means:
         //      - Section 0 (top section)
         //      - Panel 0 (most left)
