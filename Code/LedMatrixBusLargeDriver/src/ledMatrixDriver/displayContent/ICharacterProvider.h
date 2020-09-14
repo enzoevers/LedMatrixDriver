@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Arduino.h>
-#include <ledMatrixDriver/displayContent/Character.h>
+#include <stdint.h>
+#include <ledMatrixDriver/displayContent/ContentData.h>
 
 class ICharacterProvider {
   public:
@@ -49,5 +49,11 @@ class ICharacterProvider {
     //          /Kurzgesacht_bird.txt
     //          /Cube.txt
     //          /Circle.txt
-    virtual bool getCharacter(String characterID, Character& characterStructToFill) = 0;
+
+
+
+
+
+    // The characterID is a uint16_t to support ASCII extents
+    virtual bool getCharacter(uint16_t characterID, ContentData& contentStructToFill) = 0;
 };
