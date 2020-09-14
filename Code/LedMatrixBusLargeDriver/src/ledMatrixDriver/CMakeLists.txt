@@ -9,3 +9,5 @@ if(DEFINED RASPBERRYPI_PLATFORM)
 elseif(DEFINED ARDUINO_PLATFORM)
     target_compile_definitions(ledMatrixDriver PRIVATE ARDUINO_PLATFORM)
 endif()
+
+target_link_libraries(ledMatrixDriver Adafruit_GFX)

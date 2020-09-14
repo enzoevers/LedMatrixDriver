@@ -1,8 +1,6 @@
 #include <ledMatrixDriver/displayController/Controller.h>
 #include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
-#include <iostream>
-
 Controller::Controller(ILedMatrix& ledMatrix)
   : m_ledMatrix(ledMatrix)
 {
@@ -27,7 +25,6 @@ void Controller::fillDisplay()
 
 void Controller::test()
 {
-  std::cout << "Clearing display\n";
   m_ledMatrix.enableDisplay(false);
   m_ledMatrix.clearDisplay();
   m_ledMatrix.updateDisplay();
@@ -35,7 +32,6 @@ void Controller::test()
 
   PlatformAbstraction::timingHandling.waitMilliseconds(1000);
 
-  std::cout << "Filling display pixel-by-pixel\n";
   for (uint8_t y = 0; y < m_ledMatrix.getHeight(); y++) {
     for (uint8_t x = 0; x < m_ledMatrix.getWidth(); x++) {
       m_ledMatrix.setPixel(x, y, 1);

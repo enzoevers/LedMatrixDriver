@@ -5,5 +5,6 @@ cmake_minimum_required(VERSION 3.7)
 
 project(LedMatrixDriver)
 
-add_subdirectory(./src/ledMatrixDriver)
+add_subdirectory(./lib)
+add_subdirectory(./src)
 add_subdirectory(./demo)

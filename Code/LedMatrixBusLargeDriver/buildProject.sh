@@ -1,0 +1,1 @@
+cmake -DRASPBERRYPI_PLATFORM:BOOL=1 && make
