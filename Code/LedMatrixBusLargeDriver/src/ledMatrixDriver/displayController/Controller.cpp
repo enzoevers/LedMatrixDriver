@@ -1,8 +1,9 @@
 #include <ledMatrixDriver/displayController/Controller.h>
 #include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
-Controller::Controller(ILedMatrix& ledMatrix)
-  : m_ledMatrix(ledMatrix)
+Controller::Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvider)
+  : m_ledMatrix(ledMatrix),
+    m_characterProvider(characterProvider)
 {
   
 };

@@ -1,12 +1,13 @@
 #pragma once
 
 #include <stdint.h>
+#include <string>
 #include <ledMatrixDriver/displayContent/ContentData.h>
-#include <Adafruit_GFX/gfxfonts.h>
+#include <Adafruit_GFX/gfxfont.h>
 
 class ICharacterProvider {
   public:
-    virtual ~ICharacterProvider();
+    virtual ~ICharacterProvider() {};
 
     //
     // https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=IWS-Chapter08#:~:text=A%20TrueType%20font%20is%20a%20binary%20file%20containing%20a%20number%20of%20tables.&text=Each%20table%20and%20the%20whole,smart%20rendering%20and%20PostScript%20glyphs.

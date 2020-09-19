@@ -1,15 +1,15 @@
 #pragma once
 
-#include <LedMatrixDriver/displayContent/ICharacterProvider.h>
+#include <ledMatrixDriver/displayContent/ICharacterProvider.h>
 
 // Fonts
-#include <Adafruit_GFX/gfxfonts.h>
+#include <Adafruit_GFX/gfxfont.h>
 #include <Adafruit_GFX/Fonts/FreeMono12pt7b.h>
 //#include <Adafruit_GFX/Fonts/....h>
 //#include <Adafruit_GFX/Fonts/....h>
 //etc
 
-class CharacterProvider_AdafruitGFX : ICharacterProvider {
+class CharacterProvider_AdafruitGFX : public ICharacterProvider {
     public:
         CharacterProvider_AdafruitGFX();
         ~CharacterProvider_AdafruitGFX() =default;

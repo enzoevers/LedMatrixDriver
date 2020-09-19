@@ -1,10 +1,10 @@
-#include <LedMatrixDriver/displayContent/CharacterProvider_AdafruitGFX.h>
+#include <ledMatrixDriver/displayContent/CharacterProvider_AdafruitGFX.h>
 
 #include <math.h> // ceil()
 
 CharacterProvider_AdafruitGFX::CharacterProvider_AdafruitGFX()
 {
-    setFont(FreeMono12pt7b);
+    //setFont(FreeMono12pt7b);
 }
 
 //===============
@@ -13,7 +13,7 @@ CharacterProvider_AdafruitGFX::CharacterProvider_AdafruitGFX()
 
 bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
 {
-    GFXglyph* fontGlyphs = font->glyph;
+    GFXglyph* fontGlyphs = font.glyph;
     unsigned int glyphCount = m_activeFont->last - m_activeFont->first + 1;
     uint8_t maxPointsAboveBaseline = 0;
     uint8_t maxPointsBelowBaseline = 0;
@@ -63,32 +63,38 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
     bool success = true;
 
     contentStructToFill.height = m_totalGlyphHeigt;
+    uint8_t cursorX = 0;
 
     for(int i = 0; i < text.length(); i++) {
         uint16_t glyphIndex = text.at(i) - m_activeFont->first;
-        GFXglyph* glyph = m_activeFont->glyph[glyphIndex];
+        GFXglyph glyph = m_activeFont->glyph[glyphIndex];
 
         // Dividing by 8 bits. The .0 is to make it a float which makes it possible to
         // use the ceil() function.
-        const numBytesFromTableNeeded = ceil((glyph->height * glyph->width) / 8.0);
+        const uint8_t numBytesFromTableNeeded = ceil((glyph.height * glyph.width) / 8.0);
         
-        bool newRow = true;
-        uint8_t curRow = 0;
-        uint8_t curCol = 0;
+        // (-1) to get the zero-based index
+        uint8_t curRow = m_glyphBaseLineInTotalHeight + glyph.yOffset -1;
         contentStructToFill.clearData();
 
         // If the first character has a negative x offset
         // then the whole display should be shifted by that offset
         // in order to show the complete first character
-        int8_t xStartOffset = 0;
-        if(i == 0 && glyph->xOffset < 0) {
-            xStartOffset = glyph->xOffset * 1; 
+        cursorX += glyph.xOffset;
+        if(i == 0 && glyph.xOffset < 0) {
+            cursorX = 0;
         }
 
-        for(uint16_t i = glyph->bitmapOffset; i < numBytesFromTableNeeded; i++) {
-            
-        }
+        // !! TODO: Change the ContentData struct to probide the size of the mask to prevent
+        // the magic numbers in this loop.
 
-        contentStructToFill.width = curCol;
+        // Fill the data struct row-by-row
+        for(uint16_t i = glyph.bitmapOffset; i < numBytesFromTableNeeded && i < 32; i++) {
+            uint8_t byteRow = m_activeFont->bitmap[i];
+            contentStructToFill.contentMask[curRow] |= (byteRow << (31 - cursorX));
+            curRow++;
+        }
     }
+
+    //contentStructToFill.width = curCol;
 }

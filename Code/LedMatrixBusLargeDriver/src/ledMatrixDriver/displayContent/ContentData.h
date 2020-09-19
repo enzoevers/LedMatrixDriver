@@ -15,6 +15,8 @@ typedef struct ContentData {
     void clearData() {
         width = 0;
         height = 0;
-        contentMask = {};
+        for(int i = 0; i < sizeof(contentMask)/sizeof(contentMask[0]); i++) {
+            contentMask[i] = 0;
+        }
     }
 };
