@@ -188,9 +188,6 @@ LedMatrixDriver_BINARY_DIR:STATIC=C:/Users/enzoe/Documents/GIT/ledmatrixdriver/C
 //Value Computed by CMake
 LedMatrixDriver_SOURCE_DIR:STATIC=C:/Users/enzoe/Documents/GIT/ledmatrixdriver/Code/LedMatrixBusLargeDriver
 
-//Dependencies for the target
-ledMatrixDriver_LIB_DEPENDS:STATIC=general;Adafruit_GFX;
-
 
 ########################
 # INTERNAL cache entries

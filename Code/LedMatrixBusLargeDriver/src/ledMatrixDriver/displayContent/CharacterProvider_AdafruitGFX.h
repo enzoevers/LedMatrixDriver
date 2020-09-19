@@ -16,9 +16,11 @@ class CharacterProvider_AdafruitGFX : ICharacterProvider {
         //===============
         // ICharacterProvider
         //===============
+        bool setFont(GFXfont& font) override;
         bool getCharacter(uint16_t characterID, ContentData& contentStructToFill) override;
 
     private:
-        // !! TODO: Make the font switchable
         GFXfont* m_activeFont = &FreeMono12pt7b;
+        uint8_t m_totalGlyphHeigt = 0;
+        int8_t m_glyphBaseLineInTotalHeight = 0;
 };

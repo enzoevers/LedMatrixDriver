@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <ledMatrixDriver/displayContent/ContentData.h>
+#include <Adafruit_GFX/gfxfonts.h>
 
 class ICharacterProvider {
   public:
@@ -52,8 +53,7 @@ class ICharacterProvider {
 
 
 
-
-
+    virtual bool setFont(GFXfont& font) =0;
     // The characterID is a uint16_t to support ASCII extents
     virtual bool getCharacter(uint16_t characterID, ContentData& contentStructToFill) = 0;
 };

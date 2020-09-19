@@ -6,6 +6,40 @@
 // ICharacterProvider
 //===============
 
+bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
+{
+    GFXglyph* fontGlyphs = font->glyph;
+    unsigned int glyphCount = m_activeFont->last - m_activeFont->first + 1;
+    uint8_t maxPointsAboveBaseline = 0;
+    uint8_t maxPointsBelowBaseline = 0;
+
+    for(unsigned int i = 0; i < glyphCount; i++) {
+        int8_t yOffset = fontGlyphs[i].yOffset;
+
+        if(yOffset > 0) {
+            if(maxPointsBelowBaseline < yOffset) {
+                maxPointsBelowBaseline = yOffset;
+            }
+        } else if(yOffset < 0) {
+            yOffset *= -1; // Make it possitive
+
+            if(maxPointsAboveBaseline < yOffset) {
+                maxPointsAboveBaseline = yOffset;
+            }
+        }
+        
+        uint8_t pointsBelowGlypsBaseline = yOffset + fontGlyphs[i].height;
+
+        if(maxPointsBelowBaseline < pointsBelowGlypsBaseline) {
+            maxPointsBelowBaseline = pointsBelowGlypsBaseline;
+        }
+    }
+    
+    m_activeFont = &font;
+    m_totalGlyphHeigt = maxPointsAboveBaseline + maxPointsBelowBaseline;
+    m_glyphBaseLineInTotalHeight = maxPointsAboveBaseline;
+}
+
 bool CharacterProvider_AdafruitGFX::getCharacter(uint16_t characterID, ContentData& contentStructToFill)
 {
     // !! TODO: No silent error
