@@ -54,6 +54,5 @@ class ICharacterProvider {
 
 
     virtual bool setFont(GFXfont& font) =0;
-    // The characterID is a uint16_t to support ASCII extents
-    virtual bool getCharacter(uint16_t characterID, ContentData& contentStructToFill) = 0;
+    virtual bool getText(std::string text, ContentData& contentStructToFill) = 0;
 };

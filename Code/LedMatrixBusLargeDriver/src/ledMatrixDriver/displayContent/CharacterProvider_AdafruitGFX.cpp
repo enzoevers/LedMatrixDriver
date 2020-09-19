@@ -2,6 +2,11 @@
 
 #include <math.h> // ceil()
 
+CharacterProvider_AdafruitGFX::CharacterProvider_AdafruitGFX()
+{
+    setFont(FreeMono12pt7b);
+}
+
 //===============
 // ICharacterProvider
 //===============
@@ -34,42 +39,56 @@ bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
             maxPointsBelowBaseline = pointsBelowGlypsBaseline;
         }
     }
-    
+
     m_activeFont = &font;
     m_totalGlyphHeigt = maxPointsAboveBaseline + maxPointsBelowBaseline;
     m_glyphBaseLineInTotalHeight = maxPointsAboveBaseline;
 }
 
-bool CharacterProvider_AdafruitGFX::getCharacter(uint16_t characterID, ContentData& contentStructToFill)
+bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& contentStructToFill)
 {
     // !! TODO: No silent error
-    if(characterID < m_activeFont->first)
-    {
-        return false;
-    }
-    if(characterID > m_activeFont->last)
-    {
-        return false;
+    // Check if all characters are availible in the active font.
+    for(char& c : text) {
+        if(c < m_activeFont->first)
+        {
+            return false;
+        }
+        if(c > m_activeFont->last)
+        {
+            return false;
+        }
     }
 
     bool success = true;
 
-    uint16_t glyphIndex = characterID - m_activeFont->first;
-    GFXglyph* glyph = m_activeFont->glyph[glyphIndex];
+    contentStructToFill.height = m_totalGlyphHeigt;
 
-    contentStructToFill.height = glyph->height;
-    contentStructToFill.width = glyph->xAdvance;
+    for(int i = 0; i < text.length(); i++) {
+        uint16_t glyphIndex = text.at(i) - m_activeFont->first;
+        GFXglyph* glyph = m_activeFont->glyph[glyphIndex];
 
-    const numBytesFromTableNeeded = ceil((glyph->height * glyph->width) / 8.0);
-    
-    bool newRow = true;
-    uint8_t curRow = 0;
-    uint8_t curCol = 0;
-    contentStructToFill.clearData();
-    for(uint16_t i = glyph->bitmapOffset; i < numBytesFromTableNeeded; i++) {
-        if(newRow) {
-            newRow = false;
+        // Dividing by 8 bits. The .0 is to make it a float which makes it possible to
+        // use the ceil() function.
+        const numBytesFromTableNeeded = ceil((glyph->height * glyph->width) / 8.0);
+        
+        bool newRow = true;
+        uint8_t curRow = 0;
+        uint8_t curCol = 0;
+        contentStructToFill.clearData();
+
+        // If the first character has a negative x offset
+        // then the whole display should be shifted by that offset
+        // in order to show the complete first character
+        int8_t xStartOffset = 0;
+        if(i == 0 && glyph->xOffset < 0) {
+            xStartOffset = glyph->xOffset * 1; 
         }
-        contentStructToFill.contentMask
+
+        for(uint16_t i = glyph->bitmapOffset; i < numBytesFromTableNeeded; i++) {
+            
+        }
+
+        contentStructToFill.width = curCol;
     }
 }
