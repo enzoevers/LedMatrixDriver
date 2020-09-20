@@ -1,6 +1,9 @@
 #include <ledMatrixDriver/displayController/Controller.h>
 #include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
+#include <iostream>
+#include <bitset>
+
 
 Controller::Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvider)
   : m_ledMatrix(ledMatrix),
@@ -13,6 +16,10 @@ void Controller::showText(std::string text)
 {
   ContentData textMap;
   m_characterProvider.getText(text, textMap);
+
+  for(int i = 0; i < 32; i++) {
+    std::cout << std::bitset<32>(textMap.contentMask[i]) << "\n";
+  }
 
   for (uint8_t y = 0; y < textMap.height; y++) {
     uint32_t curRow = textMap.contentMask[y];

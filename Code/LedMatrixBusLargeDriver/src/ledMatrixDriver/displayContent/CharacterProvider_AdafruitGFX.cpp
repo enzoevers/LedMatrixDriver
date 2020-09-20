@@ -30,21 +30,18 @@ bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
     uint8_t maxPointsAboveBaseline = 0;
     uint8_t maxPointsBelowBaseline = 0;
 
-    std::cout << "glyphCount: " << glyphCount << "\n";
     for(unsigned int i = 0; i < glyphCount; i++) {
         int8_t yOffset = fontGlyphs[i].yOffset;
 
         if(yOffset > 0) {
             if(maxPointsBelowBaseline < yOffset) {
                 maxPointsBelowBaseline = yOffset;
-                std::cout << "new from yOffset maxPointsBelowBaseline: " << int(maxPointsBelowBaseline) << "\n";
             }
         } else if(yOffset < 0) {
             yOffset *= -1; // Make it possitive
 
             if(maxPointsAboveBaseline < yOffset) {
                 maxPointsAboveBaseline = yOffset;
-                std::cout << "new from yOffset maxPointsAboveBaseline: " << int(maxPointsAboveBaseline) << "\n";
             }
         }
         
@@ -52,7 +49,6 @@ bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
 
         if(maxPointsBelowBaseline < pointsBelowGlypsBaseline) {
             maxPointsBelowBaseline = pointsBelowGlypsBaseline;
-            std::cout << "new from yOffset + fontGlyphs[i].height maxPointsBelowBaseline: " << int(maxPointsBelowBaseline) << "with i: " << i << "\n";
         }
     }
 
@@ -92,54 +88,69 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
     std::cout << "Printing text '" << text << "' to the screen\n";
     for(int i = 0; i < text.length(); i++) {
         std::cout << "Printing character '" << text.at(i) << "' to the screen\n";
+        std::cout << "Bitmap index: " << int(text.at(i) - m_activeFont->first) << "\n";
         uint16_t glyphIndex = text.at(i) - m_activeFont->first;
         GFXglyph glyph = m_activeFont->glyph[glyphIndex];
 
         // Dividing by 8 bits. The .0 is to make it a float which makes it possible to
         // use the ceil() function.
         const uint8_t numBytesFromTableNeeded = ceil((glyph.height * glyph.width) / 8.0);
+        std::cout << "numBytesFromTableNeeded: " << int(numBytesFromTableNeeded) << "\n";
         
         uint8_t overlapBitsRemaining = 0;
         // (-1) to get the zero-based index
         uint8_t curY = m_glyphBaseFromTop + glyph.yOffset -1;
+        std::cout << "curY: " << int(curY) << "\n";
         contentStructToFill.clearData();
 
         // !! TODO: Change the ContentData struct to provide the size of the mask to prevent
         // the magic numbers in this loop.
 
         // Fill the data struct row-by-row
-        for(uint16_t i = glyph.bitmapOffset; i < numBytesFromTableNeeded && i < 32; i++) {
+        for(uint16_t i = glyph.bitmapOffset; i < (glyph.bitmapOffset + numBytesFromTableNeeded); i++) {
             // !! TODO: Implement something to indicate the overlap of a character on two separate contectStructs
             
             uint8_t charByte = m_activeFont->bitmap[i];
-            std::cout << "Current charByte: " << std::bitset<8>(charByte) << " witht index screen\n";
+            std::cout << "Current charByte: " << std::bitset<8>(charByte) << " with index: " << i << "\n";
 
+            std::cout << "overlapBitsRemaining: " << int(overlapBitsRemaining) << "\n";
             if(overlapBitsRemaining != 0) {
                 // Create a bitmask for the character width
                 uint8_t charByteActivePart = 0x0;
                 for(uint8_t p = 0; p < overlapBitsRemaining; p++) {
                     charByteActivePart |= (0x1 << p);
                 }
+                std::cout << "charByteActivePart overlapping: " << std::bitset<8>(charByteActivePart) << "\n";
 
                 // Add the character data to the contentStruct
-                std::cout << "Adding overlapping charByte to row: " << curY << "\n";
+                std::cout << "Adding overlapping charByte to row: " << int(curY) << "\n";
                 contentStructToFill.contentMask[curY] |= ((charByte & charByteActivePart)  << (31 - cursorX - (glyph.width-overlapBitsRemaining)));
+                std::cout << "contentStructToFill.contentMask[curY] overlapping: " << std::bitset<32>(contentStructToFill.contentMask[curY]) << "\n";
                 curY++;
                 overlapBitsRemaining = 0;
             }
             
             // A single byte can possibly contain data for multiple row if the with of the character is less than 8.
-            for(int8_t w = ceil(8.0/glyph.width)-1; w >= 0; w--) {
+            uint8_t numRowsInOneByte = ceil(8.0/glyph.width);
+            for(int8_t w = numRowsInOneByte-1; w >= 0; w--) {
                 // Create a bitmask for the character width
                 uint8_t charByteActivePart = 0x0;
-                for(uint8_t p = 0; p < glyph.width; p++) {
+                std::cout << "glyph.width: " << int(glyph.width) << "\n";
+                for(uint8_t p = 0; p < glyph.width && p < 8; p++) {
                     charByteActivePart |= (0x1 << p);
+                    std::cout << "charByteActivePart internal: " << std::bitset<8>(charByteActivePart) << "\n";
                 }
-                charByteActivePart <<= (w*glyph.width)-1;
+                if(glyph.width < 8) {
+                    charByteActivePart <<= (w*glyph.width)-1;
+                }
+                std::cout << "charByteActivePart: " << std::bitset<8>(charByteActivePart) << "\n";
 
                 // Add the character data to the contentStruct
-                std::cout << "Adding charByte to row: " << curY << "\n";
-                contentStructToFill.contentMask[curY] |= ((charByte & charByteActivePart)  << (31 - cursorX));
+                std::cout << "Adding charByte to row: " << int(curY) << "\n";
+                std::cout << "Shifting data with " << int(31 - cursorX - glyph.width) << " points\n";
+                // !! NOTE: the (31 - ) wont work for overlapping contentStructs if the cursor would keep increasing
+                contentStructToFill.contentMask[curY] |= ((charByte & charByteActivePart)  << (31 - cursorX - glyph.width));
+                std::cout << "contentStructToFill.contentMask[curY]: " << std::bitset<32>(contentStructToFill.contentMask[curY]) << "\n";
 
                 if((w > 0) || ((w == 0) && (8 % glyph.width) == 0)) {
                     curY++;
