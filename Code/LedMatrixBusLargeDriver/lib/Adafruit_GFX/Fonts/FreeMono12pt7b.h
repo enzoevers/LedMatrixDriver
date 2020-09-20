@@ -1,3 +1,5 @@
+#pragma once 
+
 const uint8_t FreeMono12pt7bBitmaps[] /*PROGMEM*/ = {
     0x49, 0x24, 0x92, 0x48, 0x01, 0xF8, 0xE7, 0xE7, 0x67, 0x42, 0x42, 0x42,
     0x42, 0x09, 0x02, 0x41, 0x10, 0x44, 0x11, 0x1F, 0xF1, 0x10, 0x4C, 0x12,
@@ -220,7 +222,7 @@ const GFXglyph FreeMono12pt7bGlyphs[] /*PROGMEM*/ = {
     {1444, 5, 18, 14, 5, -14},  // 0x7D '}'
     {1456, 10, 3, 14, 2, -7}};  // 0x7E '~'
 
-const GFXfont FreeMono12pt7b /*PROGMEM*/ = {(uint8_t *)FreeMono12pt7bBitmaps,
+/*const*/ GFXfont FreeMono12pt7b /*PROGMEM*/ = {(uint8_t *)FreeMono12pt7bBitmaps,
                                         (GFXglyph *)FreeMono12pt7bGlyphs, 0x20,
                                         0x7E, 24}; //ASCII start, ASCII stop,y Advance
 

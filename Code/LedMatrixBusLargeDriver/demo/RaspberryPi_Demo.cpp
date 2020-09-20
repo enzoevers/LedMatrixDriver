@@ -40,15 +40,18 @@ int main()
 
     std::cout << "Running the test\n";
 
-    controller->test();
+    //controller->test();
     usleep(1000*1000);
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i < 2; i++) {
         controller->clearDisplay();
         usleep(1000*1000);
         controller->fillDisplay();
         usleep(1000*1000);
     }
     controller->clearDisplay();
+
+    controller->showText("a");
+    usleep(1000*1000);
 
     std::cout << "Cleaning up\n";
 

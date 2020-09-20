@@ -1,12 +1,34 @@
 #include <ledMatrixDriver/displayController/Controller.h>
 #include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
+
 Controller::Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvider)
   : m_ledMatrix(ledMatrix),
     m_characterProvider(characterProvider)
 {
   
 };
+
+void Controller::showText(std::string text)
+{
+  ContentData textMap;
+  m_characterProvider.getText(text, textMap);
+
+  for (uint8_t y = 0; y < textMap.height; y++) {
+    uint32_t curRow = textMap.contentMask[y];
+    for (uint8_t x = 0; x < textMap.width; x++) {
+      if(curRow & (0x1 << (31-x)) ) {
+        m_ledMatrix.setPixel(x, y, 1);
+      } else {
+        m_ledMatrix.setPixel(x, y, 0);
+      }
+    }
+  }
+
+  m_ledMatrix.enableDisplay(false);
+  m_ledMatrix.updateDisplay();
+  m_ledMatrix.enableDisplay(true);
+}
 
 void Controller::clearDisplay()
 {
