@@ -88,11 +88,13 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
     bool needExtraContectStructForText = false;
 
     std::cout << "Printing text '" << text << "' to the screen\n";
-    for(int i = 0; i < text.length(); i++) {
-        std::cout << "Printing character '" << text.at(i) << "' to the screen\n";
-        std::cout << "Bitmap index: " << int(text.at(i) - m_activeFont->first) << "\n";
-        uint16_t glyphIndex = text.at(i) - m_activeFont->first;
+    for(int c = 0; c < text.length(); c++) {
+        std::cout << "Printing character '" << text.at(c) << "' to the screen\n";
+        std::cout << "Bitmap index: " << int(text.at(c) - m_activeFont->first) << "\n";
+        uint16_t glyphIndex = text.at(c) - m_activeFont->first;
         GFXglyph glyph = m_activeFont->glyph[glyphIndex];
+
+        std::cout << "glyph.width: " << int(glyph.width) << "\n";
 
         // Dividing by 8 bits. The .0 is to make it a float which makes it possible to
         // use the ceil() function.
@@ -112,20 +114,26 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
             // !! TODO: Implement something to indicate the overlap of a character on two separate contectStructs
             
             uint8_t charByte = m_activeFont->bitmap[i];
-            std::cout << "Current charByte: " << std::bitset<8>(charByte) << " with index: " << i << "\n";
+            std::cout << "\nCurrent charByte: " << std::bitset<8>(charByte) << " with index: " << i << "\n";
+
+            // !! TODO: integrate the overlapping bytes exception in the for loop below to make
+            // overallap handling easier
 
             std::cout << "overlapBitsRemaining: " << int(overlapBitsRemaining) << "\n";
             if(overlapBitsRemaining != 0) {
                 // Create a bitmask for the character width
                 uint8_t charByteActivePart = 0x0;
                 for(uint8_t p = 0; p < overlapBitsRemaining; p++) {
-                    charByteActivePart |= (0x1 << p);
+                    charByteActivePart |= (0x1 << 7-p);
                 }
                 std::cout << "charByteActivePart overlapping: " << std::bitset<8>(charByteActivePart) << "\n";
 
                 // Add the character data to the contentStruct
                 std::cout << "Adding overlapping charByte to row: " << int(curY) << "\n";
-                contentStructToFill.contentMask[curY] |= ((charByte & charByteActivePart)  << (31 - cursorX - (glyph.width-overlapBitsRemaining)));
+                std::cout << "Shifting overlapping data with " << int(31 - cursorX - glyph.width) << " points\n";
+                // !! TODO: This shifting does not always work
+                uint8_t overlappingData = (charByte & charByteActivePart) >> (glyph.width-overlapBitsRemaining);
+                contentStructToFill.contentMask[curY] |= (overlappingData  << (31 - cursorX - glyph.width));
                 std::cout << "contentStructToFill.contentMask[curY] overlapping: " << std::bitset<32>(contentStructToFill.contentMask[curY]) << "\n";
                 curY++;
                 overlapBitsRemaining = 0;
@@ -133,17 +141,16 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
             
             // A single byte can possibly contain data for multiple row if the with of the character is less than 8.
             uint8_t numRowsInOneByte = ceil(8.0/glyph.width);
+            std::cout << "numRowsInOneByte: " << int(numRowsInOneByte) << "\n";
             for(int8_t w = numRowsInOneByte-1; w >= 0; w--) {
+                std::cout << "w: " << int(w) << "\n";
                 // Create a bitmask for the character width
                 uint8_t charByteActivePart = 0x0;
-                std::cout << "glyph.width: " << int(glyph.width) << "\n";
                 for(uint8_t p = 0; p < glyph.width && p < 8; p++) {
-                    charByteActivePart |= (0x1 << p);
-                    std::cout << "charByteActivePart internal: " << std::bitset<8>(charByteActivePart) << "\n";
+                    charByteActivePart |= (0x1 << 7-p);
                 }
-                if(glyph.width < 8) {
-                    charByteActivePart <<= (w*glyph.width)-1;
-                }
+                charByteActivePart >>= glyph.width*((numRowsInOneByte-1) - w);
+
                 std::cout << "charByteActivePart: " << std::bitset<8>(charByteActivePart) << "\n";
 
                 // Add the character data to the contentStruct

@@ -42,12 +42,12 @@ int main()
 
     //controller->test();
     //usleep(1000*1000);
-    for(int i = 0; i < 2; i++) {
+    /*for(int i = 0; i < 2; i++) {
         controller->clearDisplay();
         usleep(1000*1000);
         controller->fillDisplay();
         usleep(1000*1000);
-    }
+    }*/
     controller->clearDisplay();
 
     controller->showText("1");
