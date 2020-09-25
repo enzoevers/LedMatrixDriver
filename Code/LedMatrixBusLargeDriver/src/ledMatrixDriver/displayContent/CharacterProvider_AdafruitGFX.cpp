@@ -1,4 +1,5 @@
 #include <ledMatrixDriver/displayContent/CharacterProvider_AdafruitGFX.h>
+#include <vector>
 
 // Fonts
 #include <Adafruit_GFX/Fonts/FreeMono12pt7b.h>
@@ -96,10 +97,15 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
 
         std::cout << "glyph.width: " << int(glyph.width) << "\n";
 
+        const uint16_t numPixelsNedded = glyph.height * glyph.width;
+        std::cout << "numPixelsNedded: " << int(numPixelsNedded) << "\n";
+
         // Dividing by 8 bits. The .0 is to make it a float which makes it possible to
         // use the ceil() function.
-        const uint8_t numBytesFromTableNeeded = ceil((glyph.height * glyph.width) / 8.0);
+        const uint8_t numBytesFromTableNeeded = ceil((numPixelsNedded) / 8.0);
         std::cout << "numBytesFromTableNeeded: " << int(numBytesFromTableNeeded) << "\n";
+
+        std::vector<uint8_t> pixelArray = {};
         
         uint8_t overlapBitsRemaining = 0;
         // (-1) to get the zero-based index
@@ -111,6 +117,42 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
 
         // Fill the data struct row-by-row
         for(uint16_t i = glyph.bitmapOffset; i < (glyph.bitmapOffset + numBytesFromTableNeeded); i++) {
+
+            uint8_t charByte = m_activeFont->bitmap[i];
+            std::cout << "\nCurrent charByte: " << std::bitset<8>(charByte) << " with index: " << i << "\n";
+            
+            int8_t lastBit = 0;
+            if(i == (glyph.bitmapOffset + numBytesFromTableNeeded) -1) {
+                lastBit = ((numBytesFromTableNeeded*8)-numPixelsNedded);
+            }
+
+            for(int8_t b = 7; b >=lastBit ; b--) {
+                uint8_t activeBit = ((charByte & (0x1 << b)) >> b);
+                pixelArray.push_back(activeBit);
+            }
+        }
+
+        // The lazy option
+        
+        std::cout << "pixelArray size: " << pixelArray.size() << std::endl;
+        for(auto& p : pixelArray) {
+            std::cout << int(p) << std::endl;
+        }
+
+        for(uint16_t y = 0; y < glyph.height; y++) {
+            for(uint8_t x = 0; x < glyph.width; x++) {
+                uint16_t index = y*glyph.width + x;
+                contentStructToFill.contentMask[curY] |= ((pixelArray.at(index) & 0x1)  << (31 - cursorX - x));
+            }   
+            curY++;
+        }
+
+        cursorX += glyph.xAdvance + glyph.xOffset;
+
+        contentStructToFill.width = cursorX;
+
+        /*
+
             // !! TODO: Implement something to indicate the overlap of a character on two separate contectStructs
             
             uint8_t charByte = m_activeFont->bitmap[i];
@@ -172,10 +214,8 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
 
         std::cout << "glyph.xAdvance: " << int(glyph.xAdvance) << std::endl;
         std::cout << "glyph.xOffset: " << int(glyph.xOffset) << std::endl;
-        std::cout << "new cursorX: " << int(cursorX) << std::endl;
+        std::cout << "new cursorX: " << int(cursorX) << std::endl;*/
     }
-
-    contentStructToFill.width = cursorX;
 
     return success;
 }
