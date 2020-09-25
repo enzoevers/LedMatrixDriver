@@ -50,7 +50,7 @@ int main()
     }
     controller->clearDisplay();
 
-    controller->showText("a");
+    controller->showText("1");
     usleep(1000*1000);
 
     std::cout << "Cleaning up\n";
@@ -59,4 +59,4 @@ int main()
     controller = nullptr;
     delete(display);
     display = nullptr;
-}
+} 

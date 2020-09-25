@@ -81,6 +81,8 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
 
     bool success = true;
 
+    contentStructToFill.clearData();
+
     contentStructToFill.height = m_totalGlyphHeigt;
     uint8_t cursorX = 0;
     bool needExtraContectStructForText = false;
@@ -101,7 +103,6 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
         // (-1) to get the zero-based index
         uint8_t curY = m_glyphBaseFromTop + glyph.yOffset -1;
         std::cout << "curY: " << int(curY) << "\n";
-        contentStructToFill.clearData();
 
         // !! TODO: Change the ContentData struct to provide the size of the mask to prevent
         // the magic numbers in this loop.
@@ -158,9 +159,13 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
                     overlapBitsRemaining = glyph.width - (8 % glyph.width);
                 }
             }
-
-            cursorX += glyph.xAdvance + glyph.xOffset;
         }
+
+        cursorX += glyph.xAdvance + glyph.xOffset;
+
+        std::cout << "glyph.xAdvance: " << int(glyph.xAdvance) << std::endl;
+        std::cout << "glyph.xOffset: " << int(glyph.xOffset) << std::endl;
+        std::cout << "new cursorX: " << int(cursorX) << std::endl;
     }
 
     contentStructToFill.width = cursorX;
