@@ -1,9 +1,6 @@
 #include <ledMatrixDriver/targetDisplays/LedMatrix_Hanover_OL037A.h>
 #include <ledMatrixDriver/driverPlatforms/Platforms.h>
 
-#include <iostream>
-#include <bitset>
-
 LedMatrix_Hanover_OL037A::LedMatrix_Hanover_OL037A(uint8_t clkDestSelectPin,
     uint8_t clkLedDriverPin,
     uint8_t dataOutPin,
@@ -124,6 +121,7 @@ void LedMatrix_Hanover_OL037A::setPixel(uint8_t x, uint8_t y, bool state)
 
 void LedMatrix_Hanover_OL037A::writeSection(uint8_t panel, uint8_t section)
 {
+  const unsigned int delayBetweenIoOperation_us = 5;
   if(m_lastUpdatedPanel != panel || m_lastUpdatedSection != section) {
     m_lastUpdatedPanel = panel;
     m_lastUpdatedSection = section;
@@ -134,22 +132,20 @@ void LedMatrix_Hanover_OL037A::writeSection(uint8_t panel, uint8_t section)
 
     // Select the clock for the panel & section select shift register
     PlatformAbstraction::gpioHandling.writeDigital(m_clkDestSelectPin, 1);
-    PlatformAbstraction::timingHandling.waitMicroseconds(2);
+    PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
 
     // panelSectionSelectData[7:6] = reversed binary section select (1 -> 0b10 and 2 -> 0b01)
     // panelSectionSelectData[5:0] = inverted one-hot panel select
 
     const uint8_t panelSectionSelectData = 0b0 | ((section & 0b11) << 6) | (0x3F & ~(0b1 << panel));
 
-    std::cout << "Section: " << int(section) << " Panel: " << int(panel) << " panelSectionSelectData: " << std::bitset<8>(panelSectionSelectData) << std::endl;
-
     for (int8_t i = m_numRowsPerSections-1; i >= 0; i--) {
       PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 0);
-      PlatformAbstraction::timingHandling.waitMicroseconds(2);
+      PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
       PlatformAbstraction::gpioHandling.writeDigital(m_dataOutPin, 0b1 & (panelSectionSelectData >> i));
-      PlatformAbstraction::timingHandling.waitMicroseconds(2);
+      PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
       PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 1); // Clock the data into the 74HC164 shift registers for the selection
-      PlatformAbstraction::timingHandling.waitMicroseconds(2);
+      PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
     }
   }
 
@@ -158,28 +154,28 @@ void LedMatrix_Hanover_OL037A::writeSection(uint8_t panel, uint8_t section)
   //==========
   // Select the clock for the LED data shift register
   PlatformAbstraction::gpioHandling.writeDigital(m_clkDestSelectPin, 0);
-  PlatformAbstraction::timingHandling.waitMicroseconds(2);
+  PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
   
   for (uint8_t c = 0; c < m_numColumnsPerPanel; c++) {
     PlatformAbstraction::gpioHandling.writeDigital(m_clkLedDriverPin, 0);
-    PlatformAbstraction::timingHandling.waitMicroseconds(2);
+    PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
     PlatformAbstraction::gpioHandling.writeDigital(m_latchLedDriverPin, 0);
-    PlatformAbstraction::timingHandling.waitMicroseconds(2);
+    PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
 
     uint8_t columnData = displayData[section][panel][c];
 
     for (uint8_t i = 0; i < m_numRowsPerSections; i++) {
       PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 0);
-      PlatformAbstraction::timingHandling.waitMicroseconds(2);
+      PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
       PlatformAbstraction::gpioHandling.writeDigital(m_dataOutPin, (columnData & (0b1 << i)));
-      PlatformAbstraction::timingHandling.waitMicroseconds(2);
+      PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
       PlatformAbstraction::gpioHandling.writeDigital(m_clkPin, 1); // Clock the data into the 74HC164 shift registers for the LED data
-      PlatformAbstraction::timingHandling.waitMicroseconds(2);
+      PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
     }
-    PlatformAbstraction::timingHandling.waitMicroseconds(2);
+    PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
     PlatformAbstraction::gpioHandling.writeDigital(m_clkLedDriverPin, 1); // Clock the data into the MBI5167G LED drivers
-    PlatformAbstraction::timingHandling.waitMicroseconds(2);
+    PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
     PlatformAbstraction::gpioHandling.writeDigital(m_latchLedDriverPin, 1); // Latch the data to the MBI5167G LED driver outputs
-    PlatformAbstraction::timingHandling.waitMicroseconds(2);
+    PlatformAbstraction::timingHandling.waitMicroseconds(delayBetweenIoOperation_us);
   }
 }
