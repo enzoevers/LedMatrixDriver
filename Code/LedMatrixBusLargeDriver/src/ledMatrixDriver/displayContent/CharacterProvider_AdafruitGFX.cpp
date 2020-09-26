@@ -14,7 +14,6 @@
 
 CharacterProvider_AdafruitGFX::CharacterProvider_AdafruitGFX()
 {
-    std::cout << "Setting the font\n";
     setFont(FreeMono12pt7b);
 }
 
@@ -33,6 +32,7 @@ bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
 
     for(unsigned int i = 0; i < glyphCount; i++) {
         int8_t yOffset = fontGlyphs[i].yOffset;
+        int8_t height = fontGlyphs[i].height;
 
         if(yOffset > 0) {
             if(maxPointsBelowBaseline < yOffset) {
@@ -44,23 +44,22 @@ bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
             if(maxPointsAboveBaseline < yOffset) {
                 maxPointsAboveBaseline = yOffset;
             }
+
+            yOffset *= -1; // Make it negative again to be used later
         }
         
-        uint8_t pointsBelowGlypsBaseline = fontGlyphs[i].yOffset + fontGlyphs[i].height;
+        int8_t pointsBelowGlypsBaseline = yOffset + height;
 
-        if(maxPointsBelowBaseline < pointsBelowGlypsBaseline) {
+        if((pointsBelowGlypsBaseline > 0) && maxPointsBelowBaseline < pointsBelowGlypsBaseline) {
             maxPointsBelowBaseline = pointsBelowGlypsBaseline;
         }
     }
 
-    // !! TODO: When detect is a certain in-betweeen character code is missing
+    // !! TODO: Detect if a certain in-betweeen character code is missing
 
     m_activeFont = &font;
     m_totalGlyphHeigt = maxPointsAboveBaseline + maxPointsBelowBaseline;
     m_glyphBaseFromTop = maxPointsAboveBaseline;
-
-    std::cout << "m_totalGlyphHeigt: " << int(m_totalGlyphHeigt) << "\n";
-    std::cout << "m_glyphBaseFromTop: " << int(m_glyphBaseFromTop) << "\n";
 
     return success;
 }
@@ -88,39 +87,31 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
     uint8_t cursorX = 0;
     bool needExtraContectStructForText = false;
 
-    std::cout << "Printing text '" << text << "' to the screen\n";
     for(int c = 0; c < text.length(); c++) {
-        std::cout << "Printing character '" << text.at(c) << "' to the screen\n";
-        std::cout << "Bitmap index: " << int(text.at(c) - m_activeFont->first) << "\n";
         uint16_t glyphIndex = text.at(c) - m_activeFont->first;
         GFXglyph glyph = m_activeFont->glyph[glyphIndex];
 
-        std::cout << "glyph.width: " << int(glyph.width) << "\n";
-
         const uint16_t numPixelsNedded = glyph.height * glyph.width;
-        std::cout << "numPixelsNedded: " << int(numPixelsNedded) << "\n";
 
         // Dividing by 8 bits. The .0 is to make it a float which makes it possible to
         // use the ceil() function.
         const uint8_t numBytesFromTableNeeded = ceil((numPixelsNedded) / 8.0);
-        std::cout << "numBytesFromTableNeeded: " << int(numBytesFromTableNeeded) << "\n";
 
         std::vector<uint8_t> pixelArray = {};
         
-        uint8_t overlapBitsRemaining = 0;
-        // (-1) to get the zero-based index
-        uint8_t curY = m_glyphBaseFromTop + glyph.yOffset -1;
-        std::cout << "curY: " << int(curY) << "\n";
+        // The glyph.yOffset if negative for most 'normal' characters
+        int8_t curY = m_glyphBaseFromTop + glyph.yOffset;
 
         // !! TODO: Change the ContentData struct to provide the size of the mask to prevent
         // the magic numbers in this loop.
 
+        // The lazy option
+
         // Fill the data struct row-by-row
         for(uint16_t i = glyph.bitmapOffset; i < (glyph.bitmapOffset + numBytesFromTableNeeded); i++) {
-
             uint8_t charByte = m_activeFont->bitmap[i];
-            std::cout << "\nCurrent charByte: " << std::bitset<8>(charByte) << " with index: " << i << "\n";
             
+            // It can be that in the last byte only a few bits belong to the current character
             int8_t lastBit = 0;
             if(i == (glyph.bitmapOffset + numBytesFromTableNeeded) -1) {
                 lastBit = ((numBytesFromTableNeeded*8)-numPixelsNedded);
@@ -130,13 +121,6 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
                 uint8_t activeBit = ((charByte & (0x1 << b)) >> b);
                 pixelArray.push_back(activeBit);
             }
-        }
-
-        // The lazy option
-        
-        std::cout << "pixelArray size: " << pixelArray.size() << std::endl;
-        for(auto& p : pixelArray) {
-            std::cout << int(p) << std::endl;
         }
 
         for(uint16_t y = 0; y < glyph.height; y++) {
@@ -149,72 +133,11 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
 
         cursorX += glyph.xAdvance + glyph.xOffset;
 
-        contentStructToFill.width = cursorX;
-
-        /*
-
-            // !! TODO: Implement something to indicate the overlap of a character on two separate contectStructs
-            
-            uint8_t charByte = m_activeFont->bitmap[i];
-            std::cout << "\nCurrent charByte: " << std::bitset<8>(charByte) << " with index: " << i << "\n";
-
-            // !! TODO: integrate the overlapping bytes exception in the for loop below to make
-            // overallap handling easier
-
-            std::cout << "overlapBitsRemaining: " << int(overlapBitsRemaining) << "\n";
-            if(overlapBitsRemaining != 0) {
-                // Create a bitmask for the character width
-                uint8_t charByteActivePart = 0x0;
-                for(uint8_t p = 0; p < overlapBitsRemaining; p++) {
-                    charByteActivePart |= (0x1 << 7-p);
-                }
-                std::cout << "charByteActivePart overlapping: " << std::bitset<8>(charByteActivePart) << "\n";
-
-                // Add the character data to the contentStruct
-                std::cout << "Adding overlapping charByte to row: " << int(curY) << "\n";
-                std::cout << "Shifting overlapping data with " << int(31 - cursorX - glyph.width) << " points\n";
-                // !! TODO: This shifting does not always work
-                uint8_t overlappingData = (charByte & charByteActivePart) >> (glyph.width-overlapBitsRemaining);
-                contentStructToFill.contentMask[curY] |= (overlappingData  << (31 - cursorX - glyph.width));
-                std::cout << "contentStructToFill.contentMask[curY] overlapping: " << std::bitset<32>(contentStructToFill.contentMask[curY]) << "\n";
-                curY++;
-                overlapBitsRemaining = 0;
-            }
-            
-            // A single byte can possibly contain data for multiple row if the with of the character is less than 8.
-            uint8_t numRowsInOneByte = ceil(8.0/glyph.width);
-            std::cout << "numRowsInOneByte: " << int(numRowsInOneByte) << "\n";
-            for(int8_t w = numRowsInOneByte-1; w >= 0; w--) {
-                std::cout << "w: " << int(w) << "\n";
-                // Create a bitmask for the character width
-                uint8_t charByteActivePart = 0x0;
-                for(uint8_t p = 0; p < glyph.width && p < 8; p++) {
-                    charByteActivePart |= (0x1 << 7-p);
-                }
-                charByteActivePart >>= glyph.width*((numRowsInOneByte-1) - w);
-
-                std::cout << "charByteActivePart: " << std::bitset<8>(charByteActivePart) << "\n";
-
-                // Add the character data to the contentStruct
-                std::cout << "Adding charByte to row: " << int(curY) << "\n";
-                std::cout << "Shifting data with " << int(31 - cursorX - glyph.width) << " points\n";
-                // !! NOTE: the (31 - ) wont work for overlapping contentStructs if the cursor would keep increasing
-                contentStructToFill.contentMask[curY] |= ((charByte & charByteActivePart)  << (31 - cursorX - glyph.width));
-                std::cout << "contentStructToFill.contentMask[curY]: " << std::bitset<32>(contentStructToFill.contentMask[curY]) << "\n";
-
-                if((w > 0) || ((w == 0) && (8 % glyph.width) == 0)) {
-                    curY++;
-                } else {
-                    overlapBitsRemaining = glyph.width - (8 % glyph.width);
-                }
-            }
+        if(cursorX > 32) {
+            contentStructToFill.width = 32;
+        } else {
+            contentStructToFill.width = cursorX;
         }
-
-        cursorX += glyph.xAdvance + glyph.xOffset;
-
-        std::cout << "glyph.xAdvance: " << int(glyph.xAdvance) << std::endl;
-        std::cout << "glyph.xOffset: " << int(glyph.xOffset) << std::endl;
-        std::cout << "new cursorX: " << int(cursorX) << std::endl;*/
     }
 
     return success;

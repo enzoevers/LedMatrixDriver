@@ -28,15 +28,11 @@ void Controller::showText(std::string text)
     uint32_t curRow = textMap.contentMask[y];
     for (uint8_t x = 0; x < textMap.width; x++) {
       if(curRow & (0x1 << (31-x)) ) {
-        std::cout << "Enable pixel x: " << int(x) << " y: " << int(y) << std::endl;
+        std::cout << "Enable pixel on x: " << int(x) << " y: " << int(y) << std::endl;
         m_ledMatrix.setPixel(x, y, 1);
       } else {
         m_ledMatrix.setPixel(x, y, 0);
       }
-
-      //m_ledMatrix.enableDisplay(false);
-      //m_ledMatrix.updateDisplay();
-      //m_ledMatrix.enableDisplay(true);
     }
   }
 
