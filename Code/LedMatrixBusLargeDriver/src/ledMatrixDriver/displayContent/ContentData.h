@@ -10,12 +10,15 @@ typedef struct ContentData {
     // The actual used size is given in the 'width' and 'height' variables.
     //
     // Each index represents a single row. Each bit in a single uint32_t value represents a single led.
-    uint32_t contentMask[32] = {};
+    uint64_t contentMask[32] = {};
+
+    const size_t maxRowWidth = sizeof(contentMask[0]) * 8;
+    const size_t maxRows = sizeof(contentMask) / sizeof(contentMask[0]);
 
     void clearData() {
         width = 0;
         height = 0;
-        for(int i = 0; i < sizeof(contentMask)/sizeof(contentMask[0]); i++) {
+        for(int i = 0; i < maxRows; i++) {
             contentMask[i] = 0;
         }
     }

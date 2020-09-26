@@ -102,9 +102,6 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
         // The glyph.yOffset if negative for most 'normal' characters
         int8_t curY = m_glyphBaseFromTop + glyph.yOffset;
 
-        // !! TODO: Change the ContentData struct to provide the size of the mask to prevent
-        // the magic numbers in this loop.
-
         // The lazy option
 
         // Fill the data struct row-by-row
@@ -126,15 +123,20 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
         for(uint16_t y = 0; y < glyph.height; y++) {
             for(uint8_t x = 0; x < glyph.width; x++) {
                 uint16_t index = y*glyph.width + x;
-                contentStructToFill.contentMask[curY] |= ((pixelArray.at(index) & 0x1)  << (31 - cursorX - x));
+                if(pixelArray.at(index)) {
+                    contentStructToFill.contentMask[curY] |= ((uint64_t)0x1 << ((contentStructToFill.maxRowWidth-1) - cursorX - x));
+                }                
             }   
             curY++;
+            if(curY == contentStructToFill.maxRows) {
+                curY = contentStructToFill.maxRows;
+            }
         }
 
         cursorX += glyph.xAdvance + glyph.xOffset;
 
-        if(cursorX > 32) {
-            contentStructToFill.width = 32;
+        if(cursorX > contentStructToFill.maxRowWidth) {
+            contentStructToFill.width = contentStructToFill.maxRowWidth;
         } else {
             contentStructToFill.width = cursorX;
         }
