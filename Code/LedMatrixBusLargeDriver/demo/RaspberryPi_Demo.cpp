@@ -50,7 +50,7 @@ int main()
     }*/
     controller->clearDisplay();
 
-    controller->showText("2/");
+    controller->showText("2a/B");
     usleep(1000*1000);
 
     std::cout << "Cleaning up\n";

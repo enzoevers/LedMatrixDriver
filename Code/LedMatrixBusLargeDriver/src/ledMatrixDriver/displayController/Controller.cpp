@@ -20,14 +20,14 @@ void Controller::showText(std::string text)
   std::cout << "textMap.height: " << int(textMap.height) << std::endl;
   std::cout << "textMap.width: " << int(textMap.width) << std::endl;
 
-  for(int i = 0; i < 32; i++) {
-    std::cout << std::bitset<32>(textMap.contentMask[i]) << "\n";
+  for(int i = 0; i < textMap.maxRows; i++) {
+    std::cout << std::bitset<64>(textMap.contentMask[i]) << "\n";
   }
 
   for (uint8_t y = 0; y < textMap.height; y++) {
-    uint32_t curRow = textMap.contentMask[y];
+    uint64_t curRow = textMap.contentMask[y];
     for (uint8_t x = 0; x < textMap.width; x++) {
-      if(curRow & (0x1 << (31-x)) ) {
+      if(curRow & ((uint64_t)0x1 << ((textMap.maxRowWidth-1)-x)) ) {
         std::cout << "Enable pixel on x: " << int(x) << " y: " << int(y) << std::endl;
         m_ledMatrix.setPixel(x, y, 1);
       } else {
