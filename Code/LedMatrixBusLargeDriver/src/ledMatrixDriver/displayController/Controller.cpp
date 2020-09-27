@@ -16,6 +16,7 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
 {
   ContentData textMap;
   static bool needExtraPass = false;
+  static uint8_t passCount = 0;
   needExtraPass = m_characterProvider.getText(text, textMap, needExtraPass);
 
   std::cout << "textMap.height: " << int(textMap.height) << std::endl;
@@ -29,10 +30,14 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
     uint64_t curRow = textMap.contentMask[y];
     for (uint8_t x = 0; x < textMap.width; x++) {
       if(curRow & ((uint64_t)0x1 << ((textMap.maxRowWidth-1)-x)) ) {
-        std::cout << "Enable pixel on x: " << int(x) << " y: " << int(y) << std::endl;
-        m_ledMatrix.setPixel(x+xOffset, y+yOffset, 1);
+        //std::cout << "Enable pixel on x: " << int(x) << " y: " << int(y) << std::endl;
+        if(x+xOffset < m_ledMatrix.getWidth() && y+yOffset < m_ledMatrix.getHeight()) {
+          m_ledMatrix.setPixel(x+xOffset, y+yOffset, 1);
+        }
       } else {
-        m_ledMatrix.setPixel(x+xOffset, y+yOffset, 0);
+        if(x+xOffset < m_ledMatrix.getWidth() && y+yOffset < m_ledMatrix.getHeight()) {
+          m_ledMatrix.setPixel(x+xOffset, y+yOffset, 0);
+        }
       }
     }
   }
@@ -42,7 +47,8 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
   m_ledMatrix.enableDisplay(true);
 
   if(needExtraPass == true) {
-    showText(text, textMap.width, 0);
+    passCount++;
+    showText(text, passCount*textMap.width, 0);
   }
 }
 

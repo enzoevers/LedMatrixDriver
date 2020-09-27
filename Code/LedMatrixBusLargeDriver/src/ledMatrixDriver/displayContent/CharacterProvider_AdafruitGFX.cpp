@@ -96,6 +96,7 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
     bool needExtraContectStructForText = false;
 
     for(uint16_t c = m_currentTextIndex; c < m_currentText.length(); c++) {
+        std::cout << "Current character: " << char(m_currentText.at(c)) << std::endl;
         uint16_t glyphIndex = m_currentText.at(c) - m_activeFont->first;
         GFXglyph glyph = m_activeFont->glyph[glyphIndex];
 
@@ -109,6 +110,10 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
         
         // The glyph.yOffset if negative for most 'normal' characters
         int8_t curY = m_glyphBaseFromTop + glyph.yOffset;
+
+        if(c == 0 && contentOverflow == false) {
+            m_cursorX -= glyph.xOffset; // To save some space on the left
+        }
 
         // The lazy option
 
@@ -149,36 +154,36 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
             std::cout << "Write complete\n";
             needExtraPass = false;
             contentStructToFill.width = m_cursorX+1; // m_cursorX is a zero-based index, thus the +1.
-        } else if(m_cursorX >= contentStructToFill.maxRowWidth && c == m_currentText.length()-1) {
-            std::cout << "Only last part of character needed complete\n";
-            contentStructToFill.width = contentStructToFill.maxRowWidth;
-            m_cursorX -= glyph.xAdvance; // On order to only get the last right part of the character on the next struct
-            m_currentTextIndex = c; // The rest of this character should be handled on the next call to this function
-            break;
         } else if (m_cursorX >= contentStructToFill.maxRowWidth) {
-            // Either the next character has a negative xOffset which means
+            // Either part of the current character is already written to the struct and the last part
+            // needs to be written on the next struct
+            if((m_cursorX - contentStructToFill.maxRowWidth) < glyph.xAdvance){
+                std::cout << "Only last part of character needed complete\n";
+                contentStructToFill.width = contentStructToFill.maxRowWidth;
+                m_cursorX -= glyph.xAdvance; // In order to only get the last right part of the character on the next struct
+                m_currentTextIndex = c; // The rest of this character should be handled on the next call to this function
+                break;
+            }
+            
+            // Or the next character has a negative xOffset which means
             // a part of the character is still in this content struct.
             uint16_t local_glyphIndex = m_currentText.at(c+1) - m_activeFont->first;
             GFXglyph local_glyph = m_activeFont->glyph[local_glyphIndex];
-
 
             if(local_glyph.xOffset >= 0 || ((m_cursorX + local_glyph.xOffset) - contentStructToFill.maxRowWidth) >= 0) {
                 std::cout << "Just the complete next character on the next struct\n";
                 contentStructToFill.width = contentStructToFill.maxRowWidth;
                 break; // In these cases the complete next character is on the next datastruct. So there is no problem.
-            }
-
-
-            // Or part of the current character is already written to the struct and the last part
-            // needs to be written on the next struct
-            if(doLastCharacter) {
-                std::cout << "part of next character on this struct\n";
-                contentStructToFill.width = contentStructToFill.maxRowWidth;
-                break;
-            }
-            std::cout << "set doLastCharacter to true\n";
-            doLastCharacter = true;
-            m_currentTextIndex = c; // The rest of this character should be handled on the next call to this function
+            } else {
+                if(doLastCharacter) {
+                    std::cout << "part of next character on this struct\n";
+                    contentStructToFill.width = contentStructToFill.maxRowWidth;
+                    break;
+                }
+                std::cout << "set doLastCharacter to true\n";
+                doLastCharacter = true;
+                m_currentTextIndex = c; // The rest of this character should be handled on the next call to this function
+            }            
         }
     }
 
