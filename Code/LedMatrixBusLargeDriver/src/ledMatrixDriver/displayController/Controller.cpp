@@ -42,14 +42,14 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
     }
   }
 
-  m_ledMatrix.enableDisplay(false);
-  m_ledMatrix.updateDisplay();
-  m_ledMatrix.enableDisplay(true);
-
   if(needExtraPass == true) {
     passCount++;
     showText(text, passCount*textMap.width, 0);
   }
+
+  m_ledMatrix.enableDisplay(false);
+  m_ledMatrix.updateDisplay();
+  m_ledMatrix.enableDisplay(true);
 }
 
 void Controller::clearDisplay()
