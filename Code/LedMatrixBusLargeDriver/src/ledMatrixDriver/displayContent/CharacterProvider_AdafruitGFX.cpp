@@ -124,7 +124,7 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
             for(uint8_t x = 0; x < glyph.width; x++) {
                 uint16_t index = y*glyph.width + x;
                 if(pixelArray.at(index)) {
-                    contentStructToFill.contentMask[curY] |= ((uint64_t)0x1 << ((contentStructToFill.maxRowWidth-1) - cursorX - x));
+                    contentStructToFill.contentMask[curY] |= ((uint64_t)0x1 << ((contentStructToFill.maxRowWidth-1) - cursorX - glyph.xOffset - x));
                 }                
             }   
             curY++;
@@ -133,7 +133,7 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
             }
         }
 
-        cursorX += glyph.xAdvance + glyph.xOffset;
+        cursorX += glyph.xAdvance;
 
         if(cursorX > contentStructToFill.maxRowWidth) {
             contentStructToFill.width = contentStructToFill.maxRowWidth;
