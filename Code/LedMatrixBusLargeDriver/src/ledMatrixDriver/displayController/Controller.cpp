@@ -12,10 +12,11 @@ Controller::Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvi
   
 };
 
-void Controller::showText(std::string text)
+void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
 {
   ContentData textMap;
-  m_characterProvider.getText(text, textMap);
+  static bool needExtraPass = false;
+  needExtraPass = m_characterProvider.getText(text, textMap, needExtraPass);
 
   std::cout << "textMap.height: " << int(textMap.height) << std::endl;
   std::cout << "textMap.width: " << int(textMap.width) << std::endl;
@@ -29,9 +30,9 @@ void Controller::showText(std::string text)
     for (uint8_t x = 0; x < textMap.width; x++) {
       if(curRow & ((uint64_t)0x1 << ((textMap.maxRowWidth-1)-x)) ) {
         std::cout << "Enable pixel on x: " << int(x) << " y: " << int(y) << std::endl;
-        m_ledMatrix.setPixel(x, y, 1);
+        m_ledMatrix.setPixel(x+xOffset, y+yOffset, 1);
       } else {
-        m_ledMatrix.setPixel(x, y, 0);
+        m_ledMatrix.setPixel(x+xOffset, y+yOffset, 0);
       }
     }
   }
@@ -39,6 +40,10 @@ void Controller::showText(std::string text)
   m_ledMatrix.enableDisplay(false);
   m_ledMatrix.updateDisplay();
   m_ledMatrix.enableDisplay(true);
+
+  if(needExtraPass == true) {
+    showText(text, textMap.width, 0);
+  }
 }
 
 void Controller::clearDisplay()

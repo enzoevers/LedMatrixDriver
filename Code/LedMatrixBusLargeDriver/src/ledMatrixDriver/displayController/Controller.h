@@ -9,7 +9,7 @@ class Controller {
   public:
     Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvider);
 
-    void showText(std::string text);
+    void showText(std::string text, int16_t xOffset = 0, int16_t yOffset = 0);
     void clearDisplay();
     void fillDisplay();
     void test();

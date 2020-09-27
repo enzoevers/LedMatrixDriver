@@ -64,7 +64,7 @@ bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
     return success;
 }
 
-bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& contentStructToFill)
+bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& contentStructToFill, bool contentOverflow)
 {
     // !! TODO: No silent error
     // Check if all characters are availible in the active font.
@@ -79,16 +79,24 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
         }
     }
 
-    bool success = true;
+    bool needExtraPass = true;
+    bool doLastCharacter = false;
+
+    if(contentOverflow == false) {
+        m_cursorX = 0;
+        m_currentText = text;
+        m_currentTextIndex = 0;
+    } else {
+        m_cursorX -= contentStructToFill.maxRowWidth;
+    }
 
     contentStructToFill.clearData();
 
     contentStructToFill.height = m_totalGlyphHeigt;
-    uint8_t cursorX = 0;
     bool needExtraContectStructForText = false;
 
-    for(int c = 0; c < text.length(); c++) {
-        uint16_t glyphIndex = text.at(c) - m_activeFont->first;
+    for(uint16_t c = m_currentTextIndex; c < m_currentText.length(); c++) {
+        uint16_t glyphIndex = m_currentText.at(c) - m_activeFont->first;
         GFXglyph glyph = m_activeFont->glyph[glyphIndex];
 
         const uint16_t numPixelsNedded = glyph.height * glyph.width;
@@ -124,7 +132,7 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
             for(uint8_t x = 0; x < glyph.width; x++) {
                 uint16_t index = y*glyph.width + x;
                 if(pixelArray.at(index)) {
-                    contentStructToFill.contentMask[curY] |= ((uint64_t)0x1 << ((contentStructToFill.maxRowWidth-1) - cursorX - glyph.xOffset - x));
+                    contentStructToFill.contentMask[curY] |= ((uint64_t)0x1 << ((contentStructToFill.maxRowWidth-1) - m_cursorX - glyph.xOffset - x));
                 }                
             }   
             curY++;
@@ -133,14 +141,47 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
             }
         }
 
-        cursorX += glyph.xAdvance;
-
-        if(cursorX > contentStructToFill.maxRowWidth) {
+        std::cout << "m_cursorX: " << m_cursorX << std::endl;
+        m_cursorX += glyph.xAdvance;
+        std::cout << "new m_cursorX: " << m_cursorX << std::endl;        
+        
+        if(m_cursorX < contentStructToFill.maxRowWidth && c == m_currentText.length()-1) {
+            std::cout << "Write complete\n";
+            needExtraPass = false;
+            contentStructToFill.width = m_cursorX+1; // m_cursorX is a zero-based index, thus the +1.
+        } else if(m_cursorX >= contentStructToFill.maxRowWidth && c == m_currentText.length()-1) {
+            std::cout << "Only last part of character needed complete\n";
             contentStructToFill.width = contentStructToFill.maxRowWidth;
-        } else {
-            contentStructToFill.width = cursorX;
+            m_cursorX -= glyph.xAdvance; // On order to only get the last right part of the character on the next struct
+            m_currentTextIndex = c; // The rest of this character should be handled on the next call to this function
+            break;
+        } else if (m_cursorX >= contentStructToFill.maxRowWidth) {
+            // Either the next character has a negative xOffset which means
+            // a part of the character is still in this content struct.
+            uint16_t local_glyphIndex = m_currentText.at(c+1) - m_activeFont->first;
+            GFXglyph local_glyph = m_activeFont->glyph[local_glyphIndex];
+
+
+            if(local_glyph.xOffset >= 0 || ((m_cursorX + local_glyph.xOffset) - contentStructToFill.maxRowWidth) >= 0) {
+                std::cout << "Just the complete next character on the next struct\n";
+                contentStructToFill.width = contentStructToFill.maxRowWidth;
+                break; // In these cases the complete next character is on the next datastruct. So there is no problem.
+            }
+
+
+            // Or part of the current character is already written to the struct and the last part
+            // needs to be written on the next struct
+            if(doLastCharacter) {
+                std::cout << "part of next character on this struct\n";
+                contentStructToFill.width = contentStructToFill.maxRowWidth;
+                break;
+            }
+            std::cout << "set doLastCharacter to true\n";
+            doLastCharacter = true;
+            m_currentTextIndex = c; // The rest of this character should be handled on the next call to this function
         }
     }
 
-    return success;
+    std::cout << "needExtraPass: " << needExtraPass << std::endl;
+    return needExtraPass;
 }
