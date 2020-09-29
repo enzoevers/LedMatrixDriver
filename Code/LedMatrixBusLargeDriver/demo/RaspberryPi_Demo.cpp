@@ -48,10 +48,42 @@ int main()
         controller->fillDisplay();
         usleep(1000*1000);
     }*/
-    controller->clearDisplay();
 
-    controller->showText("aAbBcCdD:123");
+    std::string spookyText = "~(O.O)~";
+    uint16_t spookyTextScrollDelay_ms = 10;
+    uint16_t endWidth = controller->getDisplayWidth() - 70;
+
+    for(int i = 0; i < endWidth; i+=2){
+        controller->clearDisplay(false);
+        controller->showText(spookyText, i);
+        usleep(spookyTextScrollDelay_ms*1000);
+    }
+
+    for(int i = endWidth-1; i >= 0; i-=2){
+        controller->clearDisplay(false);
+        controller->showText(spookyText, i);
+        usleep(spookyTextScrollDelay_ms*1000);
+    }
+
+    std::string myText = "aA\"B{cdD:123";
+
+    controller->clearDisplay(false);
+    controller->showText(myText);
     usleep(1000*1000);
+    controller->clearDisplay(false);
+    controller->showText(myText, 12, 12);
+    usleep(1000*1000);
+    controller->clearDisplay(false);
+    controller->showText(myText, -12, -12);
+    usleep(1000*1000);
+    controller->clearDisplay(false);
+    controller->showText(myText, -12, 12);
+    usleep(1000*1000);
+    controller->clearDisplay(false);
+    controller->showText(myText, 12, -12);
+    usleep(1000*1000);
+    controller->clearDisplay(false);
+    controller->showText(myText);
 
     std::cout << "Cleaning up\n";
 

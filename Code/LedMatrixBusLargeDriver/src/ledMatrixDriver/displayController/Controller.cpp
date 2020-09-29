@@ -12,19 +12,19 @@ Controller::Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvi
   
 };
 
-void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
+void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset, bool isTransparant, bool updateDisplayNow)
 {
   ContentData textMap;
   static bool needExtraPass = false;
 
   needExtraPass = m_characterProvider.getText(text, textMap, needExtraPass);
 
-  std::cout << "textMap.height: " << int(textMap.height) << std::endl;
-  std::cout << "textMap.width: " << int(textMap.width) << std::endl;
+  //std::cout << "textMap.height: " << int(textMap.height) << std::endl;
+  //std::cout << "textMap.width: " << int(textMap.width) << std::endl;
 
-  for(int i = 0; i < textMap.maxRows; i++) {
-    std::cout << std::bitset<64>(textMap.contentMask[i]) << "\n";
-  }
+  //for(int i = 0; i < textMap.maxRows; i++) {
+  //  std::cout << std::bitset<64>(textMap.contentMask[i]) << "\n";
+  //}
 
   for (uint8_t y = 0; y < textMap.height; y++) {
     uint64_t curRow = textMap.contentMask[y];
@@ -37,7 +37,9 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
           //std::cout << "Enable pixel on x: " << int(x) << " y: " << int(y) << std::endl;
             m_ledMatrix.setPixel(x+xOffset, y+yOffset, 1);
         } else {
-          m_ledMatrix.setPixel(x+xOffset, y+yOffset, 0);
+          if(!isTransparant) {
+            m_ledMatrix.setPixel(x+xOffset, y+yOffset, 0);
+          }
         }
 
       }
@@ -52,23 +54,41 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset)
   // Reset static variables
   needExtraPass = false;
 
-  m_ledMatrix.enableDisplay(false);
-  m_ledMatrix.updateDisplay();
-  m_ledMatrix.enableDisplay(true);
+  if(updateDisplayNow) {
+    updateDisplay();
+  }
 }
 
-void Controller::clearDisplay()
+void Controller::clearDisplay(bool updateDisplayNow)
 {
-  m_ledMatrix.enableDisplay(false);
   m_ledMatrix.clearDisplay();
-  m_ledMatrix.updateDisplay();
-  m_ledMatrix.enableDisplay(true);
+
+  if(updateDisplayNow) {
+    updateDisplay();
+  }
 }
 
-void Controller::fillDisplay()
+void Controller::fillDisplay(bool updateDisplayNow)
+{
+  m_ledMatrix.fillDisplay();
+
+  if(updateDisplayNow) {
+    updateDisplay();
+  }
+}
+
+void Controller::shiftDisplay(int16_t xDelta, int16_t yDelta)
+{
+  uint16_t width = 0;
+  uint16_t height = 0;
+  uint8_t* displayDataPtr = m_ledMatrix.getDisplayData(width, height);
+
+  // TODO: Do the shifting
+}
+
+void Controller::updateDisplay()
 {
   m_ledMatrix.enableDisplay(false);
-  m_ledMatrix.fillDisplay();
   m_ledMatrix.updateDisplay();
   m_ledMatrix.enableDisplay(true);
 }
@@ -105,4 +125,14 @@ void Controller::test()
 
   PlatformAbstraction::timingHandling.waitMilliseconds(1000);
   */
+}
+
+uint16_t Controller::getDisplayWidth()
+{
+  return m_ledMatrix.getWidth();
+}
+
+uint16_t Controller::getDisplayHeight()
+{
+  return m_ledMatrix.getHeight();
 }

@@ -9,10 +9,18 @@ class Controller {
   public:
     Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvider);
 
-    void showText(std::string text, int16_t xOffset = 0, int16_t yOffset = 0);
-    void clearDisplay();
-    void fillDisplay();
+
+    // TODO: Add in 'invert' option to showText.
+    // Meaning the active character leds are turned of and the rest on
+    void showText(std::string text, int16_t xOffset = 0, int16_t yOffset = 0, bool isTransparant = false, bool updateDisplayNow = true);
+    void clearDisplay(bool updateDisplayNow = true);
+    void fillDisplay(bool updateDisplayNow = true);
+    void shiftDisplay(int16_t xDelta, int16_t yDelta);
+    void updateDisplay();
     void test();
+
+    uint16_t getDisplayWidth();
+    uint16_t getDisplayHeight();
 
   private:
     ILedMatrix& m_ledMatrix;

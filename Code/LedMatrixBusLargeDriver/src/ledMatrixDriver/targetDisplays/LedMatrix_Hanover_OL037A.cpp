@@ -121,7 +121,7 @@ void LedMatrix_Hanover_OL037A::setPixel(uint8_t x, uint8_t y, bool state)
 
 void LedMatrix_Hanover_OL037A::writeSection(uint8_t panel, uint8_t section)
 {
-  const unsigned int delayBetweenIoOperation_us = 8;
+  const unsigned int delayBetweenIoOperation_us = 5;
   if(m_lastUpdatedPanel != panel || m_lastUpdatedSection != section) {
     m_lastUpdatedPanel = panel;
     m_lastUpdatedSection = section;

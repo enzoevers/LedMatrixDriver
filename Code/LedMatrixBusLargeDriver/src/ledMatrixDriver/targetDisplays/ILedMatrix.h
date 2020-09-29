@@ -5,8 +5,9 @@
 class ILedMatrix {
   public:
     virtual ~ILedMatrix() {};
-    virtual uint8_t getWidth() = 0;
-    virtual uint8_t getHeight() = 0;
+    virtual uint16_t getWidth() = 0;
+    virtual uint16_t getHeight() = 0;
+    virtual uint8_t* getDisplayData(uint16_t& width, uint16_t& height) = 0;
     virtual void clearDisplay() = 0;
     virtual void fillDisplay() = 0;
     virtual void enableDisplay(bool state) = 0;
