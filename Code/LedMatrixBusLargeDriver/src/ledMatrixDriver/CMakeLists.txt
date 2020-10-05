@@ -1,5 +1,8 @@
+add_subdirectory(./Images)
+
 add_library(ledMatrixDriver ${CMAKE_CURRENT_SOURCE_DIR}/displayController/Controller.cpp
                             ${CMAKE_CURRENT_SOURCE_DIR}/displayContent/CharacterProvider_AdafruitGFX.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/displayContent/ImageProvider.cpp
                             ${CMAKE_CURRENT_SOURCE_DIR}/targetDisplays/LedMatrix_Hanover_OL037A.cpp)
 
 get_filename_component(PARENT_DIR ../ ABSOLUTE)
