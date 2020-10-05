@@ -14,10 +14,10 @@ Controller::Controller(ILedMatrix& ledMatrix, ICharacterProvider& characterProvi
 
 void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset, bool isTransparant, bool updateDisplayNow)
 {
-  ContentData textMap;
+  ContentData* textMap = new ContentData();
   static bool needExtraPass = false;
 
-  needExtraPass = m_characterProvider.getText(text, textMap, needExtraPass);
+  needExtraPass = m_characterProvider.getText(text, *textMap, needExtraPass);
 
   //std::cout << "textMap.height: " << int(textMap.height) << std::endl;
   //std::cout << "textMap.width: " << int(textMap.width) << std::endl;
@@ -26,14 +26,14 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset, bo
   //  std::cout << std::bitset<64>(textMap.contentMask[i]) << "\n";
   //}
 
-  for (uint8_t y = 0; y < textMap.height; y++) {
-    uint64_t curRow = textMap.contentMask[y];
-    for (uint8_t x = 0; x < textMap.width; x++) {
+  for (uint8_t y = 0; y < textMap->height; y++) {
+    uint64_t curRow = textMap->contentMask[y];
+    for (uint8_t x = 0; x < textMap->width; x++) {
 
       if(x+xOffset < m_ledMatrix.getWidth() && x+xOffset >= 0 &&
           y+yOffset < m_ledMatrix.getHeight() && y+yOffset >= 0) {
 
-        if(curRow & ((uint64_t)0x1 << ((textMap.maxRowWidth-1)-x)) ) {
+        if(curRow & ((uint64_t)0x1 << ((textMap->maxRowWidth-1)-x)) ) {
           //std::cout << "Enable pixel on x: " << int(x) << " y: " << int(y) << std::endl;
             m_ledMatrix.setPixel(x+xOffset, y+yOffset, 1);
         } else {
@@ -47,8 +47,13 @@ void Controller::showText(std::string text, int16_t xOffset, int16_t yOffset, bo
     }
   }
 
+  uint8_t textMap_width = textMap->width;
+
+  delete textMap;
+  textMap = nullptr;
+
   if(needExtraPass == true) {
-    showText(text, xOffset + textMap.width, yOffset);
+    showText(text, xOffset + textMap_width, yOffset);
   }
 
   // Reset static variables
@@ -75,15 +80,6 @@ void Controller::fillDisplay(bool updateDisplayNow)
   if(updateDisplayNow) {
     updateDisplay();
   }
-}
-
-void Controller::shiftDisplay(int16_t xDelta, int16_t yDelta)
-{
-  uint16_t width = 0;
-  uint16_t height = 0;
-  uint8_t* displayDataPtr = m_ledMatrix.getDisplayData(width, height);
-
-  // TODO: Do the shifting
 }
 
 void Controller::updateDisplay()

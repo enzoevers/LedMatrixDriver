@@ -17,7 +17,6 @@ class LedMatrix_Hanover_OL037A : public ILedMatrix {
         //===============
         uint16_t getWidth() override {return m_numColums;};
         uint16_t getHeight() override {return m_numRows;};
-        uint8_t* getDisplayData(uint16_t& width, uint16_t& height) override {width = m_numColums; height = m_numRows; return displayData};
         void clearDisplay() override;
         void fillDisplay() override;
         void enableDisplay(bool state) override;

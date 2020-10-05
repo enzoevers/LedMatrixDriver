@@ -15,7 +15,6 @@ class Controller {
     void showText(std::string text, int16_t xOffset = 0, int16_t yOffset = 0, bool isTransparant = false, bool updateDisplayNow = true);
     void clearDisplay(bool updateDisplayNow = true);
     void fillDisplay(bool updateDisplayNow = true);
-    void shiftDisplay(int16_t xDelta, int16_t yDelta);
     void updateDisplay();
     void test();
 
