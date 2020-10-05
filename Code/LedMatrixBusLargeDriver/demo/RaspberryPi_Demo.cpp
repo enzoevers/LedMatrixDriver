@@ -50,8 +50,8 @@ int main()
     }*/
 
     std::string spookyText = "~(O.O)~";
-    uint16_t spookyTextScrollDelay_ms = 10;
-    uint16_t endWidth = controller->getDisplayWidth() - 70;
+    uint16_t spookyTextScrollDelay_ms = 1;
+    uint16_t endWidth = controller->getDisplayWidth() - 100;
 
     for(int i = 0; i < endWidth; i++){
         controller->clearDisplay(false);
