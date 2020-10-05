@@ -15,8 +15,8 @@ class LedMatrix_Hanover_OL037A : public ILedMatrix {
         //===============
         // ILedMatrix
         //===============
-        uint8_t getWidth() override {return m_numColums;};
-        uint8_t getHeight() override {return m_numRows;};
+        uint16_t getWidth() override {return m_numColums;};
+        uint16_t getHeight() override {return m_numRows;};
         void clearDisplay() override;
         void fillDisplay() override;
         void enableDisplay(bool state) override;
@@ -42,8 +42,8 @@ class LedMatrix_Hanover_OL037A : public ILedMatrix {
         static const uint8_t m_numVerticalSections = 3;
         static const uint8_t m_numRowsPerSections = 8;
         static const uint8_t m_numColumnsPerPanel = 40;
-        static const uint8_t m_numRows = 19;
-        static const uint8_t m_numColums = m_numColumnsPerPanel * m_numPanels;
+        static const uint16_t m_numRows = 19;
+        static const uint16_t m_numColums = m_numColumnsPerPanel * m_numPanels;
 
         // Used for optimization
         uint8_t m_lastUpdatedPanel = 0xFF;
