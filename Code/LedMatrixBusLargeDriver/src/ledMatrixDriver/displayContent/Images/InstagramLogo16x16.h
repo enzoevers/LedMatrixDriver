@@ -3,7 +3,7 @@
 #include <ledMatrixDriver/displayContent/Images/ImageMeta.h>
 
 // TODO: Add the centre lens and flash
-const uint8_t InstagramLogo16x16Bitmap[32] = {
+const uint8_t InstagramLogo16x16Bitmap[((16/8) * 16)] = {
     0x3F, 0xFC,
     0x3F, 0xFC,
     0x70, 0x0E,

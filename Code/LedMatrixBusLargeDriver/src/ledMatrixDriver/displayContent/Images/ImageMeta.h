@@ -1,6 +1,8 @@
 #pragma once
 
 #include <stdint.h>
+#include <string>
+#include <unordered_map>
 
 // https://onlinepngtools.com/pixelate-png
 
