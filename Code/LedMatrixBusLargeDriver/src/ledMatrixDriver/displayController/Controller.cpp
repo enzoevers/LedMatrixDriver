@@ -89,6 +89,7 @@ void Controller::setBrightness(uint16_t brightnessPercent)
 
 void Controller::updateDisplay()
 {
+  setBrightness(0x0000);
   m_ledMatrix.enableDisplay(false);
   m_ledMatrix.updateDisplay();
   m_ledMatrix.enableDisplay(true);
