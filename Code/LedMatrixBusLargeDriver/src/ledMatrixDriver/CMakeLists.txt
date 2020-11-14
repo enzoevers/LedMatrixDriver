@@ -1,4 +1,4 @@
-add_subdirectory(./Images)
+add_subdirectory(./displayContent/Images)
 
 add_library(ledMatrixDriver ${CMAKE_CURRENT_SOURCE_DIR}/displayController/Controller.cpp
                             ${CMAKE_CURRENT_SOURCE_DIR}/displayContent/CharacterProvider_AdafruitGFX.cpp

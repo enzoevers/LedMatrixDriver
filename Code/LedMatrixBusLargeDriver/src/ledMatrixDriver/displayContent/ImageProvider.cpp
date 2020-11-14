@@ -17,7 +17,7 @@ bool ImageProvider::getImage(const std::string imageID, ContentData& contentStru
     contentStructToFill.clearData();
 
     try {
-        imageDataType& imageData = imageMap.at(imageID);
+        imageDataType imageData = imageMap.at(imageID);
         contentStructToFill.height = imageData.height;
     } catch (std::out_of_range) {
         return false;
