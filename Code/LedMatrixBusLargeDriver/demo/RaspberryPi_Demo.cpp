@@ -90,7 +90,7 @@ int main()
     int prevMinute = -1;
     struct tm * timeinfo;
     char buffer[20];
-    const int checkTimeInterval_s = 2; 
+    const int checkTimeInterval_s = 2;
 
     while(forever) {
         time (&rawtime);
@@ -105,6 +105,7 @@ int main()
             std::string myText(buffer);
             controller->clearDisplay(false);
             controller->showText(myText);
+            controller->setBrightness(0x4000);
         }
         usleep(checkTimeInterval_s*1000*1000);
     }

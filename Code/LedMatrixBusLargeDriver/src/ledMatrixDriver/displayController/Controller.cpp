@@ -82,6 +82,11 @@ void Controller::fillDisplay(bool updateDisplayNow)
   }
 }
 
+void Controller::setBrightness(uint16_t brightnessPercent)
+{
+  m_ledMatrix.setBrightness(brightnessPercent);
+}
+
 void Controller::updateDisplay()
 {
   m_ledMatrix.enableDisplay(false);
