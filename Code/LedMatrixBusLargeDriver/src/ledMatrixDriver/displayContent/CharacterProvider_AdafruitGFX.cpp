@@ -15,6 +15,7 @@
 CharacterProvider_AdafruitGFX::CharacterProvider_AdafruitGFX()
 {
     setFont(FreeMonoBold12pt7b);
+    //setFont(FreeMono12pt7b);
 }
 
 //===============
