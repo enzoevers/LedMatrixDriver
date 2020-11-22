@@ -87,7 +87,7 @@ int main()
     controller->showText(myText, 25, -1);
     controller->setBrightness(0x4F00);
  
-    usleep(2*1000*1000);
+    usleep(20*1000*1000);
 
     time_t rawtime;
     int prevMinute = -1;
@@ -103,7 +103,7 @@ int main()
             prevMinute = timeinfo->tm_min;
             timeinfo->tm_hour= (timeinfo->tm_hour+CET)%24;
 
-            strftime(buffer,sizeof(buffer)/sizeof(buffer[0]),"%H : %M   %d/%m",timeinfo);
+            strftime(buffer,sizeof(buffer)/sizeof(buffer[0]),"%H:%M   %d/%m",timeinfo);
             
             std::string myText(buffer);
             controller->clearDisplay(false);
