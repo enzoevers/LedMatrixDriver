@@ -4,6 +4,9 @@
 // Fonts
 #include <Adafruit_GFX/Fonts/FreeMono12pt7b.h>
 #include <Adafruit_GFX/Fonts/FreeMonoBold12pt7b.h>
+#include <Adafruit_GFX/Fonts/FreeMonoBoldOblique12pt7b.h>
+#include <Adafruit_GFX/Fonts/FreeSansBoldOblique12pt7b.h>
+#include <Adafruit_GFX/Fonts/FreeSerifBoldItalic12pt7b.h>
 //#include <Adafruit_GFX/Fonts/....h>
 //etc
 
@@ -14,8 +17,11 @@
 
 CharacterProvider_AdafruitGFX::CharacterProvider_AdafruitGFX()
 {
-    setFont(FreeMonoBold12pt7b);
     //setFont(FreeMono12pt7b);
+    //setFont(FreeMonoBold12pt7b);
+    //setFont(FreeMonoBoldOblique12pt7b);
+    //setFont(FreeSansBoldOblique12pt7b);
+    setFont(FreeSerifBoldItalic12pt7b);
 }
 
 //===============

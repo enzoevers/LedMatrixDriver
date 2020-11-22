@@ -82,9 +82,9 @@ int main()
     }
     */
 
-    std::string myText = "Heyhey c:";
+    std::string myText = "Heyhey  c:";
     controller->clearDisplay(false);
-    controller->showText(myText);
+    controller->showText(myText, 25, -1);
     controller->setBrightness(0x4F00);
  
     usleep(2*1000*1000);
@@ -103,11 +103,11 @@ int main()
             prevMinute = timeinfo->tm_min;
             timeinfo->tm_hour= (timeinfo->tm_hour+CET)%24;
 
-            strftime (buffer,sizeof(buffer)/sizeof(buffer[0]),"%R %d/%m",timeinfo);
+            strftime(buffer,sizeof(buffer)/sizeof(buffer[0]),"%H : %M   %d/%m",timeinfo);
             
             std::string myText(buffer);
             controller->clearDisplay(false);
-            controller->showText(myText);
+            controller->showText(myText, 10, -1);
             controller->setBrightness(0x4F00);
         }
         usleep(checkTimeInterval_s*1000*1000);
