@@ -15,6 +15,7 @@ class Controller {
     void showText(std::string text, int16_t xOffset = 0, int16_t yOffset = 0, bool isTransparant = false, bool updateDisplayNow = true);
     void clearDisplay(bool updateDisplayNow = true);
     void fillDisplay(bool updateDisplayNow = true);
+    void setBrightness(uint16_t brightnessPercent); // 0xFF = 100%, 0x00 = 0%
     void updateDisplay();
     void test();
 

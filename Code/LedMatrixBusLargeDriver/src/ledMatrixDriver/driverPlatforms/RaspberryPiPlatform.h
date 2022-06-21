@@ -37,7 +37,7 @@ class RaspberryPiIo {
         inline static void writePwm(int pin, uint16_t value)
         {
             uint16_t val = map(value, 0x0, 0xFFFF, 0x0, 0x3FF);
-            pwmWrite(pin, val);
+            pwmWrite(pin, int(val));
         }
 
         inline static void writeAnalog(int pin, int value)

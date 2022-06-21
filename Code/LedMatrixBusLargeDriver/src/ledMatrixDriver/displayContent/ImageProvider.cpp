@@ -1,107 +1,33 @@
-#include <ledMatrixDriver/displayContent/CharacterProvider_AdafruitGFX.h>
-#include <vector>
+#include <ledMatrixDriver/displayContent/ImageProvider.h>
+#include <ledMatrixDriver/displayContent/Images/AvailableImages.h>
 
-// Fonts
-#include <Adafruit_GFX/Fonts/FreeMono12pt7b.h>
-#include <Adafruit_GFX/Fonts/FreeMonoBold12pt7b.h>
-#include <Adafruit_GFX/Fonts/FreeMonoBoldOblique12pt7b.h>
-#include <Adafruit_GFX/Fonts/FreeSansBoldOblique12pt7b.h>
-#include <Adafruit_GFX/Fonts/FreeSerifBoldItalic12pt7b.h>
-//#include <Adafruit_GFX/Fonts/....h>
-//etc
+#include  <stdexcept>
 
-#include <math.h> // ceil()
-
-#include <iostream>
-#include <bitset>
-
-CharacterProvider_AdafruitGFX::CharacterProvider_AdafruitGFX()
+bool ImageProvider::getImage(const std::string imageID, ContentData& contentStructToFill, bool contentOverflow)
 {
-    //setFont(FreeMono12pt7b);
-    //setFont(FreeMonoBold12pt7b);
-    //setFont(FreeMonoBoldOblique12pt7b);
-    //setFont(FreeSansBoldOblique12pt7b);
-    setFont(FreeSerifBoldItalic12pt7b);
-}
-
-//===============
-// ICharacterProvider
-//===============
-
-bool CharacterProvider_AdafruitGFX::setFont(GFXfont& font)
-{
-    bool success = true;
-
-    const GFXglyph* fontGlyphs = font.glyph;
-    unsigned int glyphCount = font.last - font.first + 1;
-    uint8_t maxPointsAboveBaseline = 0;
-    uint8_t maxPointsBelowBaseline = 0;
-
-    for(unsigned int i = 0; i < glyphCount; i++) {
-        int8_t yOffset = fontGlyphs[i].yOffset;
-        int8_t height = fontGlyphs[i].height;
-
-        if(yOffset > 0) {
-            if(maxPointsBelowBaseline < yOffset) {
-                maxPointsBelowBaseline = yOffset;
-            }
-        } else if(yOffset < 0) {
-            yOffset *= -1; // Make it possitive
-
-            if(maxPointsAboveBaseline < yOffset) {
-                maxPointsAboveBaseline = yOffset;
-            }
-
-            yOffset *= -1; // Make it negative again to be used later
-        }
-        
-        int8_t pointsBelowGlypsBaseline = yOffset + height;
-
-        if((pointsBelowGlypsBaseline > 0) && maxPointsBelowBaseline < pointsBelowGlypsBaseline) {
-            maxPointsBelowBaseline = pointsBelowGlypsBaseline;
-        }
-    }
-
-    // !! TODO: Detect if a certain in-betweeen character code is missing
-
-    m_activeFont = &font;
-    m_totalGlyphHeigt = maxPointsAboveBaseline + maxPointsBelowBaseline;
-    m_glyphBaseFromTop = maxPointsAboveBaseline;
-
-    return success;
-}
-
-bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& contentStructToFill, bool contentOverflow)
-{
-    // !! TODO: No silent error
-    // Check if all characters are availible in the active font.
-    for(char& c : text) {
-        if(c < m_activeFont->first)
-        {
-            return false;
-        }
-        if(c > m_activeFont->last)
-        {
-            return false;
-        }
-    }
-
     bool needExtraPass = true;
-    bool doLastCharacter = false;
+    bool doLastPartt = false;
 
     if(contentOverflow == false) {
         m_cursorX = 0;
-        m_currentText = text;
-        m_currentTextIndex = 0;
     } else {
         m_cursorX -= contentStructToFill.maxRowWidth;
     }
 
     contentStructToFill.clearData();
 
-    contentStructToFill.height = m_totalGlyphHeigt;
+    try {
+        imageDataType imageData = imageMap.at(imageID);
+        contentStructToFill.height = imageData.height;
+    } catch (std::out_of_range) {
+        return false;
+    }
+
     bool needExtraContectStructForText = false;
 
+    // TODO: To be adapted for the image provider
+
+    /*
     for(uint16_t c = m_currentTextIndex; c < m_currentText.length(); c++) {
         uint16_t glyphIndex = m_currentText.at(c) - m_activeFont->first;
         GFXglyph glyph = m_activeFont->glyph[glyphIndex];
@@ -187,4 +113,5 @@ bool CharacterProvider_AdafruitGFX::getText(std::string text, ContentData& conte
     }
 
     return needExtraPass;
+    */
 }

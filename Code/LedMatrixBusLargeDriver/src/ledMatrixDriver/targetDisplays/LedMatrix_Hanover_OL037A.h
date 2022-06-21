@@ -2,6 +2,17 @@
 
 #include <ledMatrixDriver/targetDisplays/ILedMatrix.h>
 
+//=================
+//=====IDC pins=====
+// 1: GND
+// 3: clkLedDriverPin
+// 5: clkPin
+// 7: outputEnableLedDriverPin
+// 2: clkDestSelectPin
+// 4: dataInputPin
+// 6: latchLedDriverPin
+// 8: -
+
 class LedMatrix_Hanover_OL037A : public ILedMatrix {
     public:
         LedMatrix_Hanover_OL037A(uint8_t clkDestSelectPin,

@@ -20,7 +20,7 @@ LedMatrix_Hanover_OL037A::LedMatrix_Hanover_OL037A(uint8_t clkDestSelectPin,
   PlatformAbstraction::gpioHandling.setDirection(m_dataOutPin, PlatformAbstraction::GpioDirection::DIR_OUTPUT);
   PlatformAbstraction::gpioHandling.setDirection(m_clkPin, PlatformAbstraction::GpioDirection::DIR_OUTPUT);
   PlatformAbstraction::gpioHandling.setDirection(m_latchLedDriverPin, PlatformAbstraction::GpioDirection::DIR_OUTPUT);
-  PlatformAbstraction::gpioHandling.setDirection(m_outputEnableLedDriverPin, PlatformAbstraction::GpioDirection::DIR_OUTPUT);
+  PlatformAbstraction::gpioHandling.setDirection(m_outputEnableLedDriverPin, PlatformAbstraction::GpioDirection::DIR_PWM_OUTPUT);
 
   PlatformAbstraction::gpioHandling.writeDigital(m_clkDestSelectPin, 1);
   PlatformAbstraction::gpioHandling.writeDigital(m_clkLedDriverPin, 0);
@@ -72,7 +72,7 @@ void LedMatrix_Hanover_OL037A::enableDisplay(bool state)
 
 void LedMatrix_Hanover_OL037A::setBrightness(uint16_t brightnessPercent) 
 {
-  //PlatformAbstraction::gpioHandling.writePwm(m_outputEnableLedDriverPin, 0xFFFF - brightnessPercent); // Generates an active-low PWM waveform
+  PlatformAbstraction::gpioHandling.writePwm(m_outputEnableLedDriverPin, 0xFFFF - brightnessPercent); // Generates an active-low PWM waveform
 }
 
 void LedMatrix_Hanover_OL037A::updateDisplay()
