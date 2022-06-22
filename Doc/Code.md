@@ -124,7 +124,7 @@ scp -r LedMatrixBusLargeDriver/* pi@192.168.x.x:~/Documents/LedMatrixBusLargeDri
 RASPBERRYPI_PLATFORM is used in `Platforms.h` to select the correct implementation. It is also used in the `CMakeLists.txt` files.
 ```sh
 $ cd ~/Documents/LedMatrixBusLargeDriver
-$ cmake -DRASPBERRYPI_PLATFORM:BOOL=1 && make
+$ ./buildProject.sh
 ```
 
 ### Running
