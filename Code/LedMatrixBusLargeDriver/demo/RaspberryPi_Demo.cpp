@@ -8,8 +8,6 @@
 #include <unistd.h>
 #include <iostream>
 
-#define CET (+1)
-
 bool forever = true;
 
 void terminationHandler(int sig) {
@@ -97,11 +95,11 @@ int main()
 
     while(forever) {
         time (&rawtime);
-        timeinfo = gmtime(&rawtime);
+        timeinfo = localtime(&rawtime);
 
         if(prevMinute != timeinfo->tm_min){
             prevMinute = timeinfo->tm_min;
-            timeinfo->tm_hour= (timeinfo->tm_hour+CET)%24;
+            timeinfo->tm_hour= (timeinfo->tm_hour)%24;
 
             strftime(buffer,sizeof(buffer)/sizeof(buffer[0]),"%H:%M   %d/%m",timeinfo);
             
