@@ -134,6 +134,27 @@ $ cd minimumDemo
 $ sudo ./ledMatrixDriver_demo_RaspberryPi
 ```
 
+To start the application always when the Raspberry pi starts up created a file called `myLedMatrixApplication.service` and fill it with:
+```
+[Unit]
+Description=Led matrix application
+DefaultDependencies=false
+
+[Service]
+Type=oneshot
+ExecStart=/home/pi/Documents/LedMatrixBusLargeDriver/minimumDemo/ledMatrixDriver_demo_RaspberryPi
+Restart=no
+
+[Install]
+WantedBy=sysinit.target
+```
+
+In the Raspberry Pi add this file in the `/lib/systemd/system` folder. Then to activate for running on startup run:
+
+```sh
+sudo systemctl enable myLedMatrixApplication
+```
+
 # Usefull links used during development
 ### Systemd
 - https://www.raspberrypi.org/documentation/linux/usage/systemd.md
