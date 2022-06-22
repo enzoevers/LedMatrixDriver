@@ -115,7 +115,7 @@ From the host pc:
 ```
 cd <path to>LedMatrixBusLargeDriver/../
 
-scp -r LedMatrixBusLargeDriver pi@192.168.x.x:~/Documents/LedMatrixBusLargeDriver
+scp -r LedMatrixBusLargeDriver/* pi@192.168.x.x:~/Documents/LedMatrixBusLargeDriver
 ```
 
 #### Running cmake
