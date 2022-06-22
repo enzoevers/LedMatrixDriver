@@ -131,7 +131,7 @@ $ ./buildProject.sh
 Now run:
 ```sh
 $ cd minimumDemo
-$ ./ledMatrixDriver_demo_RaspberryPi
+$ sudo ./ledMatrixDriver_demo_RaspberryPi
 ```
 
 # Usefull links used during development
