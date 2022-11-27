@@ -1,10 +1,12 @@
 # Development
 
 ## Raspberry pi
+
 ### Minimum setup code
+
 Go into the `LedMatrixBusLargeDriver` folder and a folder named `minimumDemo`. In this folder create a file named `RaspberryPi_Demo.cpp` with the following content.
 
-```c
+```cpp
 // minimumDemo/RaspberryPi_Demo.cpp
 
 // ledMatrixDriver is provided by the CMakeLists.txt in the driver source
@@ -69,8 +71,11 @@ int main()
     display = nullptr;
 } 
 ```
+
 ### Compiling
-#### cmake
+
+#### Configure cmake
+
 In `LedMatrixBusLargeDriver/CMakeLists.txt` we create a new project and add the required subdirectories
 
 ```cmake
@@ -108,6 +113,7 @@ target_link_libraries(ledMatrixDriver_demo_RaspberryPi ledMatrixDriver)
 ```
 
 #### Transfering the code to the raspberry pi
+
 **It is assumed that a headless Raspberry Pi is used and that an ssh connection was esteblished.**
 
 From the host pc:
@@ -121,7 +127,6 @@ scp -r LedMatrixBusLargeDriver/* pi@192.168.x.x:~/Documents/LedMatrixBusLargeDri
 #### Running cmake
 **This is done on the Raspberry Pi!**
 
-RASPBERRYPI_PLATFORM is used in `Platforms.h` to select the correct implementation. It is also used in the `CMakeLists.txt` files.
 ```sh
 $ cd ~/Documents/LedMatrixBusLargeDriver
 $ ./buildProject.sh
@@ -134,7 +139,9 @@ $ cd minimumDemo
 $ sudo ./ledMatrixDriver_demo_RaspberryPi
 ```
 
-To start the application always when the Raspberry pi starts up created a file called `myLedMatrixApplication.service` and fill it with:
+### Running at Pi startup
+
+To start the application always when the Raspberry pi starts up, create a file called `myLedMatrixApplication.service` and fill it with:
 ```
 [Unit]
 Description=Led matrix application
@@ -149,7 +156,7 @@ Restart=no
 WantedBy=sysinit.target
 ```
 
-In the Raspberry Pi add this file in the `/lib/systemd/system` folder. Then to activate for running on startup run:
+~~On~~ the Raspberry Pi add this file in the `/lib/systemd/system` folder. Then to activate for running on startup run:
 
 ```sh
 sudo systemctl enable myLedMatrixApplication
