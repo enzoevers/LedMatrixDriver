@@ -18,7 +18,7 @@ The cathode (negative) of the LEDs are connected to the ~OUTn pins of the MBI516
 
 In the image above you can see the small IC's in between the LEDs. These are the MBI5167G ICs. 
 
-The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Looking from the same perspective as in the image above. Note that the control signals (CLK, LE, ~OE) are connected together while each row has a seperate data input input line. This means on each clock pulse of a section, we write four pixels (in one column).
+The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Note that the signals from in from the right of the panel. Looking from the same perspective as in the image above. Note that the control signals (CLK, LE, ~OE) are connected together while each row has a seperate data input input line. This means on each clock pulse of a section, we write four pixels (in one column).
 
 <img src="./Img/KiCad/LedMatrixBusLarge-LedDrivers.jpg" width="80%">
 
@@ -33,42 +33,44 @@ The inverted output enable (~OE) pin is used to set all ~OUTn pins to 1 or 0. Wh
 
 # MBI5167G connections to other ICs
 The folliwng ICs are connected to the MBI5167Gs
-- 74HC164 (the right one on the panel): Provides data on the SDI pins.
-- 74HC373: Three of these are connected.
+- [74HC164](./Datasheet/sn74hc164.pdf) (the right one on the panel): Provides data on the SDI pins.
+- [74HC373](./Datasheet/74HC_HCT373.pdf): Three of these are connected.
     - Outer left: Controls the ~OE pins.
     - Center left: Controls the LE pins.
     - Center right: Controls the CLK pins.
 
 ## 74HC164
-<img src="./Img/Datasheet/74HC164_Diagram.PNG">
 
-The 74HC164 is a shift register. On the panel both input B (pin 2) and ~CLR (pin 9) are connected to 5V. This means that **only input A (pin 1) takes data input**.
+The 74HC164 is a shift register as shown on the diagram below. On the panel both input B (pin 2) and ~CLR (pin 9) are connected to 5V. This means that **only input A (pin 1) takes data input**.
 
-The outputs of the 74HC164 are connected the most right MBI5167G IC of each row. It is important to see that **a single output of the shift register is connected to multiple rows**.
+<img src="./Img/Datasheet/74HC164_Diagram.PNG" width="60%">
 
-<img src="./Img/KiCad/75HC164_Connection_To_MBI5167G_SDI.PNG" height="500px">
+The outputs of the 74HC164 are connected the most right MBI5167G IC of each row. It is important to see that **a single output of the shift register is connected to multiple rows**. The LedDriver block seen in the image below contains 5 of the diagrams as shown in the [Direct LED control](#direct-led-control) section.
+
+<img src="./Img/KiCad/75HC164_Connection_To_MBI5167G_SDI.PNG" width="40%">
 
 ## 74HC373
-<img src="./Img/Datasheet/74HC373_Diagram.PNG">
 
-As shown previously, there are sections of 4 rows (and one with 3 rows). Each section shares the CLK/LE/~OE signals and are controlled by the outputs of three 74HC373 ICs. These **sections are used to control which rows take the current values of the 74HC164**.
+As shown previously, a panel has sections of 4 rows (and one with 3 rows). Each section shares the CLK/LE/~OE signals and are controlled by the outputs of three 74HC373 ICs. These **sections are used to control which rows take the current values of the 74HC164**.
+
+<img src="./Img/Datasheet/74HC373_Diagram.PNG" width="60%">
 
 Since ~OE is pulled low and LE is pulled HIGH the **data between Dn and Qn is transparant**.
 
-<img src="./Img/KiCad/75HC164_Connection_To_MBI5167G_CLK_LE_OE.PNG" height="500px">
-
 ### MBI5167G control input signals
-For simplicity the clock and data for the right 74HC164 IC is ignored. It is assumed that the clock of the shift register is setup so that the correct data is shifted in the MBI5167G on the clock for a certain section. More detail about this will be discussed later on.
+For simplicity, the clock and data for the most right 74HC164 IC is ignored. It is assumed that the clock of the shift register is setup so that the correct data is shifted in the MBI5167G on the clock for a certain section. More detail about this will be discussed later on.
 
 The right 74HC164 output 8 bits and this covers 8 rows. This is equivalent to 2 sections (of 4 rows). To **not** shift data into the MBI5167G the CLK pin should be kept low.
 
 **Once the first eight rows of the first column are fed with data the next two sections are clocked in** and after that the last section (with 3 rows) is clocked in.
 
-There is the option to either to it column-by-columns, or to shift a complete row of data into the row and only then go to the next sections.
+There is the option to either do it column-by-columns, or to shift a complete row of data into the row and only then go to the next sections.
 
 The **latch signal should be pulsed after every column**. Otherwise no new data will be presented to the output of the MBI5167Gs. While all latch signals are tied together (see the input of the 'Center left' 74HC373), not all clocks are and thus not all all MBI5167G ICs get new data clocked in. Which is good. 
 
 The **~OE signals have a fixed time difference between them**. When the ~OE signal of section 1 and 2 is pulled down, section 3 and 4 are pulled down 1us later and section 5 is pulled down 1us after that. It is of course possible to keep the ~OE signals for section 1 and 2 pulled down to have pull all other ~OE signals down.
+
+<img src="./Img/KiCad/75HC164_Connection_To_MBI5167G_CLK_LE_OE.PNG" height="500px">
 
 # LED data and clock shift register
 There are two 74HC164 shift registers on a panel. The input port of both are connected with each other. The left 74HC164 is used for driving the clock signals of the MBI5167G sections. The right one is used for the LED data.
