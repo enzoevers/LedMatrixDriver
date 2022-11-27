@@ -1,25 +1,35 @@
 # Purpose
-This document will analyse the signal flow of a single LED matrix panel. This is done by starting at the LEDs and going backwards until the input the input header is reached.
+This document will analyse the signal flow of a single LED matrix panel. This is done by starting at the LEDs and going backwards until the input header is reached.
 
-# LED drivers: MBI5167G
-<img src="./Img/Panel/MBI5167G.jpg" width="300">
-<br>
-<img src="./Img/Datasheet/MBI5167G_Diagram.PNG">
+## Basic description of the hardware
+
+The LED matrix consists of four panels, each with 40x19 LEDs linked together.
+
+<img src="./Img/Panel/LedMatrixOpen.jpg" width="50%">
+
+Each panel consist of 5 sections that are stacked on top of eachother (later more on this).
+
+<img src="./Img/Panel/LedMatrixLayout_panel_overlay.png" width="45%">
 
 ## Direct LED control
-Each panel of matrix contains 19 rows and 40 columns of LEDs. The cathode of the leds are connected to the ~OUTn pins of the MBI5167G. A single MBI5167G has 8 ~OUTn pins. This means that each row has 5 MBI5167G ICs. The **~OUTn pins are active-low**. This means that when the shift register of the MBI5167G is completely filled with 1's (through the SDI pin), All outputs are 0 and the LEDs will turn on.
+The LEDs are driven by the the [MBI5167G](./Datasheet/MBI5167/MBI5167_Datasheet.pdf) 8-channel LED driver chip.
+
+The cathode (negative) of the LEDs are connected to the ~OUTn pins of the MBI5167G. A single MBI5167G has 8 ~OUTn pins. Each row has 40 LEDs, meaning that each row needs 5 MBI5167G ICs. The **~OUTn pins are active-low**. This means that when the shift register of the MBI5167G is completely filled with 1's (through the SDI pin), All outputs are 0 (since the output is only active if it's corresponding bit in the shift register is filled with a 0) and the LEDs will turn on due to the negative of the led now being connected to 0v.
+
+In the image above you can see the small IC's in between the LEDs. These are the MBI5167G ICs. 
+
+The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Looking from the same perspective as in the image above. Note that the control signals (CLK, LE, ~OE) are connected together while each row has a seperate data input input line. This means on each clock pulse of a section, we write four pixels (in one column).
+
+<img src="./Img/KiCad/LedMatrixBusLarge-LedDrivers.jpg" width="80%">
 
 ## Data input
 The MBI5167G acts as an 8-bit shift register with SDI (data input) and SDO (data out). Data on the **SDI is clocked in at the rising-clock**.
 
-The latch pin (LE) is used to separate the input from the output. The **shifted data is shown on the output when when LE is high**
+The latch pin (LE) is used to separate the input from the output. The **shifted data is shown on the output when when LE is pulsed high**
 
-The inverted output enable (~OE) pin is used to set all ~OUTn pins to 1 or 0. When **~OE is low the latched data is shown**.
+The inverted output enable (~OE) pin is used to set all ~OUTn pins to 1 or 0. When **~OE is low the latched data is shown (meaning the output is enabled)**.
 
 <img src="./Img/Datasheet/MBI5167G_Control.PNG">
-
-## Connections between MBI5167G ICs
-<img src="./Img/DrawIo/MBI5167G_CLK_LE_OE_planes.jpg">
 
 # MBI5167G connections to other ICs
 The folliwng ICs are connected to the MBI5167Gs
