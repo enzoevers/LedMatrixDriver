@@ -65,7 +65,7 @@ The right 74HC164 output 8 bits and this covers 8 rows. This is equivalent to 2 
 **Once the first eight rows of the first column are fed with data the next two sections are clocked in** and after that the last section (with 3 rows) is clocked in.
 
 There is the option to either do it column-by-columns, or to shift a complete row of data into the row and only then go to the next sections.
-
+-
 The **latch signal should be pulsed after every column**. Otherwise no new data will be presented to the output of the MBI5167Gs. While all latch signals are tied together (see the input of the 'Center left' 74HC373), not all clocks are and thus not all all MBI5167G ICs get new data clocked in. Which is good. 
 
 The **~OE signals have a fixed time difference between them**. When the ~OE signal of section 1 and 2 is pulled down, section 3 and 4 are pulled down 1us later and section 5 is pulled down 1us after that. It is of course possible to keep the ~OE signals for section 1 and 2 pulled down to have pull all other ~OE signals down.
