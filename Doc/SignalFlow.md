@@ -3,22 +3,20 @@ This document will analyse the signal flow of a single LED matrix panel. This is
 
 ## Basic description of the hardware
 
-The LED matrix consists of four panels, each with 40x19 LEDs linked together.
+The LED matrix consists of 4 panels, each with 40x19 LEDs linked together. In the picture below you see one of the panels taken out.
 
-<img src="./Img/Panel/LedMatrixOpen.jpg" width="50%">
+<img src="./Img/Panel/LedMatrixOpen.jpg" width="50%"> <br>
 
-Each panel consist of 5 sections that are stacked on top of eachother (later more on this).
+Each panel consist of 5 sections that are stacked on top of eachother (later more on this). The top 4 sections are 4 LEDs in height and the last section is 3 LEDs in height. This can also be seen in the image below.
 
 <img src="./Img/Panel/LedMatrixLayout_panel_overlay.png" width="45%">
 
 ## Direct LED control
-The LEDs are driven by the the [MBI5167G](./Datasheet/MBI5167/MBI5167_Datasheet.pdf) 8-channel LED driver chip.
+The LEDs are driven by the the [MBI5167G](./Datasheet/MBI5167_Datasheet.pdf) 8-channel (shift register) LED driver chip. In the image above you can see the small IC's in between the LEDs. These are the MBI5167G ICs. 
 
 The cathode (negative) of the LEDs are connected to the ~OUTn pins of the MBI5167G. A single MBI5167G has 8 ~OUTn pins. Each row has 40 LEDs, meaning that each row needs 5 MBI5167G ICs. The **~OUTn pins are active-low**. This means that when the shift register of the MBI5167G is completely filled with 1's (through the SDI pin), All outputs are 0 (since the output is only active if it's corresponding bit in the shift register is filled with a 0) and the LEDs will turn on due to the negative of the led now being connected to 0v.
 
-In the image above you can see the small IC's in between the LEDs. These are the MBI5167G ICs. 
-
-The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Note that the signals from in from the right of the panel. Looking from the same perspective as in the image above. Note that the control signals (CLK, LE, ~OE) are connected together while each row has a seperate data input input line. This means on each clock pulse of a section, we write four pixels (in one column).
+The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Note that the signals come in from the right of the panel (looking from the same perspective as in the image above). Note that the control signals (CLK, LE, ~OE) of all ICs in one section are connected together while each row has a separate data input line. This means that on each clock pulse of a section we write four pixels (in one column).
 
 <img src="./Img/KiCad/LedMatrixBusLarge-LedDrivers.jpg" width="80%">
 
@@ -32,12 +30,17 @@ The inverted output enable (~OE) pin is used to set all ~OUTn pins to 1 or 0. Wh
 <img src="./Img/Datasheet/MBI5167G_Control.PNG">
 
 # MBI5167G connections to other ICs
-The folliwng ICs are connected to the MBI5167Gs
-- [74HC164](./Datasheet/sn74hc164.pdf) (the right one on the panel): Provides data on the SDI pins.
-- [74HC373](./Datasheet/74HC_HCT373.pdf): Three of these are connected.
-    - Outer left: Controls the ~OE pins.
-    - Center left: Controls the LE pins.
-    - Center right: Controls the CLK pins.
+The following ICs (seen on the bottom of the PCB in the picture of the panel above) are connected to the MBI5167Gs:
+
+- [74HC164](./Datasheet/sn74hc164.pdf): An 8-bit shift register.
+  - Right: Provides data on the SDI pins.
+  - Left: Provide clock signal data. TODO: to the 74HC373?
+- [74HC373](./Datasheet/74HC_HCT373.pdf): An 8-bit latch. Three of these are connected.
+  - Outer left: Controls the ~OE pins.
+  - Center left: Controls the LE pins.
+  - Center right: Controls the CLK pins.
+- [74HC138](./Datasheet/sn74hc138.pdf): 3-bit To 8-bit Decoders/Demultiplexers:
+  - Right: controls the CLK signals of the 74HC164 ICs.
 
 ## 74HC164
 
@@ -45,17 +48,27 @@ The 74HC164 is a shift register as shown on the diagram below. On the panel both
 
 <img src="./Img/Datasheet/74HC164_Diagram.PNG" width="60%">
 
-The outputs of the 74HC164 are connected the most right MBI5167G IC of each row. It is important to see that **a single output of the shift register is connected to multiple rows**. The LedDriver block seen in the image below contains 5 of the diagrams as shown in the [Direct LED control](#direct-led-control) section.
+The outputs of the 74HC164 are connected the most right MBI5167G IC of each row. It is important to see that **a single output of the shift register is connected to multiple rows**. The *LedDriver* block seen in the image below (the right one) contains 5 copies of the diagram shown in the [Direct LED control](#direct-led-control) section (where section 5 has 3 rows instead of 4).
 
-<img src="./Img/KiCad/75HC164_Connection_To_MBI5167G_SDI.PNG" width="40%">
+<img src="./Img/KiCad/75HC164_Connection_To_MBI5167G_SDI.PNG" width="40%"> <br>
+
+Handling the mapping between one 74HC164 shift register output to multiple MBI5167G SDI lines is explained in section [MBI5167G control input signals](#mbi5167g-control-input-signals).
 
 ## 74HC373
 
-As shown previously, a panel has sections of 4 rows (and one with 3 rows). Each section shares the CLK/LE/~OE signals and are controlled by the outputs of three 74HC373 ICs. These **sections are used to control which rows take the current values of the 74HC164**.
+As shown previously, a panel has sections of 4 rows (and one with 3 rows). Each section shares the CLK/LE/~OE signals and are controlled by the outputs of three 74HC373 ICs. These sections are used to control which rows take the current values of the 74HC164.
 
-<img src="./Img/Datasheet/74HC373_Diagram.PNG" width="60%">
+<img src="./Img/Datasheet/74HC373_Diagram.PNG" width="60%"> <br>
 
-Since ~OE is pulled low and LE is pulled HIGH the **data between Dn and Qn is transparant**.
+The line ~OE is pulled LOW and LE is pulled HIGH. Meaning that the **data between Dn and Qn is transparant**.
+
+- The outer left IC controls the ~OE signals of the MBI5167G ICs.
+- The center left IC controls the LE signals of the MBI5167G ICs.
+- The center right IC controls the CLK signals of the MBI5167G ICs.
+
+## 74HC138
+
+TODO:
 
 ### MBI5167G control input signals
 For simplicity, the clock and data for the most right 74HC164 IC is ignored. It is assumed that the clock of the shift register is setup so that the correct data is shifted in the MBI5167G on the clock for a certain section. More detail about this will be discussed later on.
@@ -66,9 +79,9 @@ The right 74HC164 output 8 bits and this covers 8 rows. This is equivalent to 2 
 
 There is the option to either do it column-by-columns, or to shift a complete row of data into the row and only then go to the next sections.
 -
-The **latch signal should be pulsed after every column**. Otherwise no new data will be presented to the output of the MBI5167Gs. While all latch signals are tied together (see the input of the 'Center left' 74HC373), not all clocks are and thus not all all MBI5167G ICs get new data clocked in. Which is good. 
+The **latch signal should be pulsed after every column**. Otherwise no new data will be presented to the output of the MBI5167Gs. While all latch signals of all section are tied together (controlled by the *center left* 74HC373D in the diagram below), not all clocks are and thus not all all MBI5167G ICs get new data clocked in. Which is good. 
 
-The **~OE signals have a fixed time difference between them**. When the ~OE signal of section 1 and 2 is pulled down, section 3 and 4 are pulled down 1us later and section 5 is pulled down 1us after that. It is of course possible to keep the ~OE signals for section 1 and 2 pulled down to have pull all other ~OE signals down.
+The **~OE signals of the MBI5167G ICs have a fixed time difference between them**. When the ~OE signals of section 1 and 2 (the top 8 rows) are pulled down, section 3 and 4 are pulled down 1us later and section 5 is pulled down 1us after that.
 
 <img src="./Img/KiCad/75HC164_Connection_To_MBI5167G_CLK_LE_OE.PNG" height="500px">
 
