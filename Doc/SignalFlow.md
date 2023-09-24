@@ -39,6 +39,7 @@ The following ICs (seen on the bottom of the PCB in the picture of the panel abo
   - Outer left: Controls the ~OE pins.
   - Center left: Controls the LE pins.
   - Center right: Controls the CLK pins.
+  - Outer right: Connects to the external interface connector   .
 - [74HC138](./Datasheet/sn74hc138.pdf): 3-bit To 8-bit Decoders/Demultiplexers:
   - Right: controls the CLK signals of the 74HC164 ICs.
 
@@ -68,7 +69,9 @@ The line ~OE is pulled LOW and LE is pulled HIGH. Meaning that the **data betwee
 
 ## 74HC138
 
-TODO:
+TODO: More text
+
+<img src="./Img/Datasheet/74HC138_LogicDiagram.png" width="60%"> <br>
 
 ### MBI5167G control input signals
 For simplicity, the clock and data for the most right 74HC164 IC is ignored. It is assumed that the clock of the shift register is setup so that the correct data is shifted in the MBI5167G on the clock for a certain section. More detail about this will be discussed later on.
@@ -88,7 +91,7 @@ The **~OE signals of the MBI5167G ICs have a fixed time difference between them*
 # LED data and clock shift register
 There are two 74HC164 shift registers on a panel. The input port of both are connected with each other. The left 74HC164 is used for driving the clock signals of the MBI5167G sections. The right one is used for the LED data.
 
-The reason that a shared data input line works is because the clock for both 74HC164 shift registers is driven by the right 74HC138 (8-bit) demultiplexer. Of this 74HC138 the B and C inputs are pulled low while the A input is controlled by the input connector (pin 2 of Conn1). By toggling input A the outputs Y0 and Y1 are pulsing inverted relative to each other. Y0 is connected to the clock of the right 74HC164 (LED data) while Y1 is connected to the clock of the left 74HC164 (section clock). **The data on the data input line should this allign with the rising clock of the shift register in which the data should end up**.
+The reason that a shared data input line works is because the clock for both 74HC164 shift registers is driven by the right 74HC138 (8-bit) demultiplexer. Of this 74HC138 the B and C inputs are pulled low while the A input is controlled by the input connector (pin 2 of Conn1). By toggling input A the outputs Y0 and Y1 are pulsing inverted relative to each other. Y0 is connected to the clock of the right 74HC164 (LED data) while Y1 is connected to the clock of the left 74HC164 (section clock). **The data on the data input line should thus align with the rising clock of the shift register in which the data should end up**.
 
 If input A at the right 74HC138 is kept at a certain value then the corresponding output can also be toggled by using the active-low enable input which is connected to pin 5 on Conn1. The same goes for the active-low enable input of the left 74HC138 which is connected to pin 2 on Conn1.
 
@@ -115,7 +118,7 @@ When sending the data, a single bit should be held for one clock cycle starting 
 After this data is shifted into the left 74HC164 the signal on pin 1 can be pulled low to start clocking the right 74HC164. Pulling pin 1 down can be done at the rising clock edge of for the last data bit. Pulling pin 1 down will result in a high-pulled clock for the left 74HC164 which is what the clock was already doing anyway. The duration of this last data bit should still be a complete clock cycle however just like the others.
 
 ## Data input
-When all bits for the section and panel select are shifted in the data can be send. On the falling clock edge after the last data bit the data for the rows can be clocked in. For the row data the first data being send corresponds to the first row. Sending 10010100 this results in the first led of row 0 to be on, the first leds of row 1 and 2 of, on for row 3 and 5 and off for row 4, 6 and 7. 
+When all bits for the section and panel select are shifted in the data can be send. On the falling clock edge after the last data bit the data for the rows can be clocked in. For the row data the first data being send corresponds to the first row. Sending 10010100 thus results in the first led of row 0 to be on, the first leds of row 1 and 2 of, on for row 3 and 5 and off for row 4, 6 and 7. 
 
 During this time the signal on pin 3 (left 74HC138 active-low enable) and 6 (Latch enable for the MBI5167Gs) should be kept low.
 
