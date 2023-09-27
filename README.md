@@ -1,7 +1,7 @@
 # LedMatrixDriver
 
 - [Code](./Code/)
-    - [Library sourse code](./Code/LedMatrixBusLargeDriver)
+    - [Library source code](./Code/LedMatrixBusLargeDriver)
     - [Demo usage](./Code/LedMatrixBusLargeDriver/demo/)
 - [Doc](./Doc/)
     - [Documentation of the code](./Doc/UsingTheLibrary.md)
