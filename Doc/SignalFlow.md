@@ -16,7 +16,7 @@ The LEDs are driven by the the [MBI5167G](./Datasheet/MBI5167_Datasheet.pdf) 8-c
 
 The cathode (negative) of the LEDs are connected to the ~OUTn pins of the MBI5167G. A single MBI5167G has 8 ~OUTn pins. Each row has 40 LEDs, meaning that each row needs 5 MBI5167G ICs. The **~OUTn pins are active-low**. This means that when the shift register of the MBI5167G is completely filled with 1's (through the SDI pin), All outputs are 0 (since the output is only active if it's corresponding bit in the shift register is filled with a 0) and the LEDs will turn on due to the negative of the led now being connected to 0v.
 
-The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Note that the signals come in from the right of the panel (looking from the same perspective as in the image above). Note that the control signals (CLK, LE, ~OE) of all ICs in one section are connected together while each row has a separate data input line. This means that on each clock pulse of a section we write four pixels (in one column).
+The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Note that the signals come in from the right of the panel (looking from the same perspective as in the image above). Note that the control signals (CLK, LE, ~OE) of all ICs in one section are connected together while each row has a separate data input line. **This means that on each clock pulse of a panel we write four pixels (in one column)**.
 
 <img src="./Img/KiCad/LedMatrixBusLarge-LedDrivers.jpg" width="80%">
 
