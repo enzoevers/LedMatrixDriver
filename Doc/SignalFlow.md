@@ -1,5 +1,5 @@
 # Purpose
-This document will analyse the signal flow of a single LED matrix panel. This is done by starting at the LEDs and going backwards until the input header is reached.
+This document will analyse the signal flow of a single LED matrix panel. This is done by starting at the LEDs and going 'upwards' until the input header is reached.
 
 ## Basic description of the hardware
 
@@ -7,27 +7,41 @@ The LED matrix consists of 4 panels, each with 40x19 LEDs linked together. In th
 
 <img src="./Img/Panel/LedMatrixOpen.jpg" width="50%"> <br>
 
-Each panel consist of 5 sections that are stacked on top of eachother (later more on this). The top 4 sections are 4 LEDs in height and the last section is 3 LEDs in height. This can also be seen in the image below.
+Each panel consist of 5 sections that are stacked on top of each other (later more on this). The top 4 sections are 4 LEDs in height and the last section is 3 LEDs in height. This can also be seen in the image below.
 
-<img src="./Img/Panel/LedMatrixLayout_panel_overlay.png" width="45%">
+<img src="./Img/Panel/LedMatrixLayout_panel_overlay.png" width="60%">
+
+The ICs seen on a single panel are described in the schematic below.
+
+<img src="./Img/KiCad/LedMatrixBusLarge.svg">
+
+The block in the schematic with the text "Single LED panel" look on the inside like this:
+
+<img src="./Img/KiCad/LedMatrixBusLarge-LedDrivers.svg">
+
+Each block represents one outlined section on the panel. Each section looks as follows:
+
+<img src="./Img/KiCad/LedMatrixBusLarge-LedDrivers-LedDriver_Part1.svg">
+
+The only different for the last section is that it has 3 rows instead of 4.
 
 ## Direct LED control
 The LEDs are driven by the the [MBI5167G](./Datasheet/MBI5167_Datasheet.pdf) 8-channel (shift register) LED driver chip. In the image above you can see the small IC's in between the LEDs. These are the MBI5167G ICs. 
 
-The cathode (negative) of the LEDs are connected to the ~OUTn pins of the MBI5167G. A single MBI5167G has 8 ~OUTn pins. Each row has 40 LEDs, meaning that each row needs 5 MBI5167G ICs. The **~OUTn pins are active-low**. This means that when the shift register of the MBI5167G is completely filled with 1's (through the SDI pin), All outputs are 0 (since the output is only active if it's corresponding bit in the shift register is filled with a 0) and the LEDs will turn on due to the negative of the led now being connected to 0v.
+The cathode (negative) of the LEDs are connected to the ~OUTn pins of the MBI5167G. A single MBI5167G has 8 ~OUTn pins. Each row has 40 LEDs, meaning that each row needs 5 MBI5167G ICs. The **~OUTn pins are active-low**. This means that when the shift register of the MBI5167G is completely filled with 1's (through the SDI pin), All outputs are 0 and the LEDs will turn on due to the negative of the LED now being connected to 0v.
 
-The connections for a single section (one of the white boxes from above) are as shown in the schematic below. Note that the signals come in from the right of the panel (looking from the same perspective as in the image above). Note that the control signals (CLK, LE, ~OE) of all ICs in one section are connected together while each row has a separate data input line. **This means that on each clock pulse of a panel we write four pixels (in one column)**.
+<img src="./Img/Datasheet/MBI5167G_Control.PNG" width="50%">
 
-<img src="./Img/KiCad/LedMatrixBusLarge-LedDrivers.jpg" width="80%">
+The connections for a single section (one of the white boxes from above) are as shown in the schematic above. Note that the signals come in from the right of the panel (looking from the same perspective as in the image above). Note that the control signals (CLK, LE, ~OE) of all ICs in one section are connected together while each row has a separate data input line. **This means that on each clock pulse of a panel we write four pixels (in one column)**.
 
-## Data input
-The MBI5167G acts as an 8-bit shift register with SDI (data input) and SDO (data out). Data on the **SDI is clocked in at the rising-clock**.
+Another thing to note in the schematics is that the clock signals are controlled in pairs. Meaning that section 1 and 2 are clocked together, sections 3 and 4 are clocked together, and section 5 is clocked separately. This makes sense when you think about it. One of the 74HC164 ICs (in the "LED controls" box) provides 8 shifted-in data bits. This allows providing a pixel to each row in a single clock cycle.
 
-The latch pin (LE) is used to separate the input from the output. The **shifted data is shown on the output when when LE is pulsed high**
-
-The inverted output enable (~OE) pin is used to set all ~OUTn pins to 1 or 0. When **~OE is low the latched data is shown (meaning the output is enabled)**.
-
-<img src="./Img/Datasheet/MBI5167G_Control.PNG">
+## Clock structure
+The blocks "Main clock control" and "LED data shift register clock" needs some more attention. The signals in these blocks control:
+- Whether LED data is clocked in or if panel/section select data is clocked in.
+- What panel is selected
+- What section of a panel is selected
+- Clocking in LED or panel/section select data 
 
 # MBI5167G connections to other ICs
 The following ICs (seen on the bottom of the PCB in the picture of the panel above) are connected to the MBI5167Gs:
@@ -115,10 +129,10 @@ In this state the data on pin 4 should send 8 bits of data. The first 2 bits bei
 
 When sending the data, a single bit should be held for one clock cycle starting at the falling edge of the clock. This ensures that at the next rising clock the signal on the data line is stable.
 
-After this data is shifted into the left 74HC164 the signal on pin 1 can be pulled low to start clocking the right 74HC164. Pulling pin 1 down can be done at the rising clock edge of for the last data bit. Pulling pin 1 down will result in a high-pulled clock for the left 74HC164 which is what the clock was already doing anyway. The duration of this last data bit should still be a complete clock cycle however just like the others.
+After this data is shifted into the left 74HC164 the signal on pin 2 can be pulled low to start clocking the right 74HC164. Pulling pin 2 down can be done at the rising clock edge of for the last data bit. Pulling pin 2 down will result in a high-pulled clock for the left 74HC164 which is what the clock was already doing anyway. The duration of this last data bit should still be a complete clock cycle however just like the others.
 
 ## Data input
-When all bits for the section and panel select are shifted in the data can be send. On the falling clock edge after the last data bit the data for the rows can be clocked in. For the row data the first data being send corresponds to the first row. Sending 10010100 thus results in the first led of row 0 to be on, the first leds of row 1 and 2 of, on for row 3 and 5 and off for row 4, 6 and 7. 
+When all bits for the section and panel select are shifted in, the data can be send. On the falling clock edge after the last data bit the data for the rows can be clocked in. For the row data the first data being send corresponds to the first row. Sending 10010100 thus results in the first led of row 0 to be on, the first leds of row 1 and 2 of, on for row 3 and 5 and off for row 4, 6 and 7. 
 
 During this time the signal on pin 3 (left 74HC138 active-low enable) and 6 (Latch enable for the MBI5167Gs) should be kept low.
 

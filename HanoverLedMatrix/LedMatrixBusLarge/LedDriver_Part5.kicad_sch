@@ -1975,7 +1975,7 @@
   (symbol (lib_id "Device:LED_Small") (at 212.09 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 01fc42dc-e538-42c5-a1a0-2bb5454f0b24)
-    (property "Reference" "D?" (at 209.55 30.48 90)
+    (property "Reference" "D683" (at 209.55 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 213.868 29.083 90)
@@ -1992,7 +1992,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D683") (unit 1)
         )
       )
     )
@@ -2001,7 +2001,7 @@
   (symbol (lib_id "Device:LED_Small") (at 161.29 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0295184d-f995-41fe-99d5-54b3094ba550)
-    (property "Reference" "D?" (at 158.75 101.6 90)
+    (property "Reference" "D749" (at 158.75 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 163.068 100.203 90)
@@ -2018,7 +2018,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D749") (unit 1)
         )
       )
     )
@@ -2027,7 +2027,7 @@
   (symbol (lib_id "power:GND") (at 182.88 78.74 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 04d4a592-4bd7-432b-aea5-b4f258ac4e40)
-    (property "Reference" "#PWR?" (at 182.88 85.09 0)
+    (property "Reference" "#PWR0307" (at 182.88 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 183.007 83.1342 0)
@@ -2043,7 +2043,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0307") (unit 1)
         )
       )
     )
@@ -2052,7 +2052,7 @@
   (symbol (lib_id "Device:LED_Small") (at 97.79 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 06b96ed2-de0a-4f5e-802b-bb3d01123377)
-    (property "Reference" "D?" (at 95.25 101.6 90)
+    (property "Reference" "D736" (at 95.25 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 99.568 100.203 90)
@@ -2069,7 +2069,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D736") (unit 1)
         )
       )
     )
@@ -2078,7 +2078,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 60.96 41.91 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 06fb2978-9c22-4aa0-8b51-b730417b729e)
-    (property "Reference" "U?" (at 73.66 49.53 90)
+    (property "Reference" "U90" (at 73.66 49.53 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 68.58 52.07 90)
@@ -2109,7 +2109,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U90") (unit 1)
         )
       )
     )
@@ -2118,7 +2118,7 @@
   (symbol (lib_id "power:+5V") (at 81.28 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 07442af4-ff06-4cb2-91be-a8ff5573d2cd)
-    (property "Reference" "#PWR?" (at 81.28 80.01 0)
+    (property "Reference" "#PWR0300" (at 81.28 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 81.661 71.8058 0)
@@ -2134,7 +2134,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0300") (unit 1)
         )
       )
     )
@@ -2143,7 +2143,7 @@
   (symbol (lib_id "Device:LED_Small") (at 140.97 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0a9976a6-8b21-417f-a2bf-4604805f56bf)
-    (property "Reference" "D?" (at 138.43 66.04 90)
+    (property "Reference" "D707" (at 138.43 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 142.748 64.643 90)
@@ -2160,7 +2160,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D707") (unit 1)
         )
       )
     )
@@ -2169,7 +2169,7 @@
   (symbol (lib_id "Device:LED_Small") (at 196.85 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0aa2dcc6-542e-4309-a95d-6763dbb699b3)
-    (property "Reference" "D?" (at 194.31 30.48 90)
+    (property "Reference" "D677" (at 194.31 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 198.628 29.083 90)
@@ -2186,7 +2186,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D677") (unit 1)
         )
       )
     )
@@ -2195,7 +2195,7 @@
   (symbol (lib_id "Device:LED_Small") (at 163.83 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0d12b146-1462-490e-9c66-68dea9788475)
-    (property "Reference" "D?" (at 161.29 101.6 90)
+    (property "Reference" "D750" (at 161.29 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 165.608 100.203 90)
@@ -2212,7 +2212,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D750") (unit 1)
         )
       )
     )
@@ -2221,7 +2221,7 @@
   (symbol (lib_id "Device:LED_Small") (at 143.51 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0e4b118f-408d-4643-9af4-deb52f6a1a90)
-    (property "Reference" "D?" (at 140.97 66.04 90)
+    (property "Reference" "D708" (at 140.97 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 145.288 64.643 90)
@@ -2238,7 +2238,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D708") (unit 1)
         )
       )
     )
@@ -2247,7 +2247,7 @@
   (symbol (lib_id "Device:LED_Small") (at 161.29 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0ec04e90-6358-49d3-a2a5-ee9a5d471657)
-    (property "Reference" "D?" (at 158.75 30.48 90)
+    (property "Reference" "D669" (at 158.75 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 163.068 29.083 90)
@@ -2264,7 +2264,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D669") (unit 1)
         )
       )
     )
@@ -2273,7 +2273,7 @@
   (symbol (lib_id "Device:LED_Small") (at 166.37 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 125bd0a9-4203-457f-b0f7-e242af78ee20)
-    (property "Reference" "D?" (at 163.83 101.6 90)
+    (property "Reference" "D751" (at 163.83 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 168.148 100.203 90)
@@ -2290,7 +2290,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D751") (unit 1)
         )
       )
     )
@@ -2299,7 +2299,7 @@
   (symbol (lib_id "Device:LED_Small") (at 179.07 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 138a5e22-0ddd-4713-a544-7f6bb4fa8db2)
-    (property "Reference" "D?" (at 176.53 101.6 90)
+    (property "Reference" "D756" (at 176.53 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 180.848 100.203 90)
@@ -2316,7 +2316,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D756") (unit 1)
         )
       )
     )
@@ -2325,7 +2325,7 @@
   (symbol (lib_id "Device:LED_Small") (at 64.77 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 14270bf5-7c69-4492-a5e3-4b5b05f5cd0d)
-    (property "Reference" "D?" (at 62.23 101.6 90)
+    (property "Reference" "D729" (at 62.23 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 66.548 100.203 90)
@@ -2342,7 +2342,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D729") (unit 1)
         )
       )
     )
@@ -2351,7 +2351,7 @@
   (symbol (lib_id "Device:LED_Small") (at 64.77 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 174a945c-bac1-4c63-a2e6-965a434337c0)
-    (property "Reference" "D?" (at 62.23 66.04 90)
+    (property "Reference" "D689" (at 62.23 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 66.548 64.643 90)
@@ -2368,7 +2368,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D689") (unit 1)
         )
       )
     )
@@ -2377,7 +2377,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 203.2 113.03 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 17a883ea-9d04-4ad0-9b30-2b58b467d3ab)
-    (property "Reference" "U?" (at 215.9 120.65 90)
+    (property "Reference" "U104" (at 215.9 120.65 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 210.82 123.19 90)
@@ -2408,7 +2408,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U104") (unit 1)
         )
       )
     )
@@ -2417,7 +2417,7 @@
   (symbol (lib_id "Device:LED_Small") (at 135.89 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 17ea89ff-5d31-4981-a3ee-6e0a72df3509)
-    (property "Reference" "D?" (at 133.35 66.04 90)
+    (property "Reference" "D705" (at 133.35 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 137.668 64.643 90)
@@ -2434,7 +2434,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D705") (unit 1)
         )
       )
     )
@@ -2443,7 +2443,7 @@
   (symbol (lib_id "Device:LED_Small") (at 105.41 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1874745a-ab7f-4c72-84b9-608ebd638cb0)
-    (property "Reference" "D?" (at 102.87 30.48 90)
+    (property "Reference" "D659" (at 102.87 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 107.188 29.083 90)
@@ -2460,7 +2460,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D659") (unit 1)
         )
       )
     )
@@ -2469,7 +2469,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 167.64 113.03 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 19b759c5-1ca2-43dc-ab13-cdfbc5eb687c)
-    (property "Reference" "U?" (at 180.34 120.65 90)
+    (property "Reference" "U103" (at 180.34 120.65 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 175.26 123.19 90)
@@ -2500,7 +2500,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U103") (unit 1)
         )
       )
     )
@@ -2509,7 +2509,7 @@
   (symbol (lib_id "Device:LED_Small") (at 102.87 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1aa811e8-4535-4f48-a906-e2f71981fdb2)
-    (property "Reference" "D?" (at 100.33 30.48 90)
+    (property "Reference" "D658" (at 100.33 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 104.648 29.083 90)
@@ -2526,7 +2526,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D658") (unit 1)
         )
       )
     )
@@ -2535,7 +2535,7 @@
   (symbol (lib_id "Device:LED_Small") (at 100.33 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1b8d3d67-15d7-4b68-b723-1e02f6b10cb6)
-    (property "Reference" "D?" (at 97.79 30.48 90)
+    (property "Reference" "D657" (at 97.79 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 102.108 29.083 90)
@@ -2552,7 +2552,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D657") (unit 1)
         )
       )
     )
@@ -2561,7 +2561,7 @@
   (symbol (lib_id "Device:LED_Small") (at 140.97 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1caf0cf8-7cd1-44ac-ab93-85fce4bcae40)
-    (property "Reference" "D?" (at 138.43 101.6 90)
+    (property "Reference" "D747" (at 138.43 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 142.748 100.203 90)
@@ -2578,7 +2578,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D747") (unit 1)
         )
       )
     )
@@ -2587,7 +2587,7 @@
   (symbol (lib_id "Device:LED_Small") (at 95.25 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1e2e9ab9-e597-41d0-aeaa-9d56f7738f4e)
-    (property "Reference" "D?" (at 92.71 66.04 90)
+    (property "Reference" "D695" (at 92.71 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 97.028 64.643 90)
@@ -2604,7 +2604,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D695") (unit 1)
         )
       )
     )
@@ -2613,7 +2613,7 @@
   (symbol (lib_id "Device:LED_Small") (at 64.77 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1f562876-036d-460e-a023-52afad62b463)
-    (property "Reference" "D?" (at 62.23 30.48 90)
+    (property "Reference" "D649" (at 62.23 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 66.548 29.083 90)
@@ -2630,7 +2630,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D649") (unit 1)
         )
       )
     )
@@ -2639,7 +2639,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 132.08 41.91 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1fea88eb-90fe-4b92-b938-586fcd43242f)
-    (property "Reference" "U?" (at 144.78 49.53 90)
+    (property "Reference" "U92" (at 144.78 49.53 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 139.7 52.07 90)
@@ -2670,7 +2670,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U92") (unit 1)
         )
       )
     )
@@ -2679,7 +2679,7 @@
   (symbol (lib_id "Device:LED_Small") (at 214.63 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 215e6216-5ca8-4e24-ad7a-fdc7bdc98f37)
-    (property "Reference" "D?" (at 212.09 101.6 90)
+    (property "Reference" "D764" (at 212.09 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 216.408 100.203 90)
@@ -2696,7 +2696,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D764") (unit 1)
         )
       )
     )
@@ -2705,7 +2705,7 @@
   (symbol (lib_id "Device:LED_Small") (at 102.87 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2211ff45-5f62-40f1-ad6c-11b8247d9704)
-    (property "Reference" "D?" (at 100.33 101.6 90)
+    (property "Reference" "D738" (at 100.33 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 104.648 100.203 90)
@@ -2722,7 +2722,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D738") (unit 1)
         )
       )
     )
@@ -2731,7 +2731,7 @@
   (symbol (lib_id "Device:R_Small") (at 87.63 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 232b860f-c161-462f-a570-5dd5f96efe05)
-    (property "Reference" "R?" (at 86.36 52.07 90)
+    (property "Reference" "R86" (at 86.36 52.07 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 87.63 54.61 90)
@@ -2748,7 +2748,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R86") (unit 1)
         )
       )
     )
@@ -2757,7 +2757,7 @@
   (symbol (lib_id "Device:LED_Small") (at 95.25 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 24c33e35-1711-4fcd-bb63-0e169b3fe8e1)
-    (property "Reference" "D?" (at 92.71 101.6 90)
+    (property "Reference" "D735" (at 92.71 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 97.028 100.203 90)
@@ -2774,7 +2774,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D735") (unit 1)
         )
       )
     )
@@ -2783,7 +2783,7 @@
   (symbol (lib_id "Device:LED_Small") (at 171.45 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 252f9e9b-a62b-4a5a-8142-1c92c47ffe10)
-    (property "Reference" "D?" (at 168.91 101.6 90)
+    (property "Reference" "D753" (at 168.91 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 173.228 100.203 90)
@@ -2800,7 +2800,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D753") (unit 1)
         )
       )
     )
@@ -2809,7 +2809,7 @@
   (symbol (lib_id "Device:LED_Small") (at 138.43 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 254146c4-eed5-4588-b460-7736b41a21ef)
-    (property "Reference" "D?" (at 135.89 101.6 90)
+    (property "Reference" "D746" (at 135.89 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 140.208 100.203 90)
@@ -2826,7 +2826,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D746") (unit 1)
         )
       )
     )
@@ -2835,7 +2835,7 @@
   (symbol (lib_id "power:GND") (at 76.2 114.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 25818422-af6b-43df-a62d-3d07f2c858ab)
-    (property "Reference" "#PWR?" (at 76.2 120.65 0)
+    (property "Reference" "#PWR0319" (at 76.2 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 76.327 118.6942 0)
@@ -2851,7 +2851,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0319") (unit 1)
         )
       )
     )
@@ -2860,7 +2860,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 132.08 77.47 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 27e771df-0517-462c-a239-a50238c7a065)
-    (property "Reference" "U?" (at 144.78 85.09 90)
+    (property "Reference" "U97" (at 144.78 85.09 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 139.7 87.63 90)
@@ -2891,7 +2891,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U97") (unit 1)
         )
       )
     )
@@ -2900,7 +2900,7 @@
   (symbol (lib_id "power:GND") (at 111.76 43.18 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2bd09f2a-36bc-431b-9fc0-cd76ddbdf4b7)
-    (property "Reference" "#PWR?" (at 111.76 49.53 0)
+    (property "Reference" "#PWR0290" (at 111.76 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 111.887 47.5742 0)
@@ -2916,7 +2916,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0290") (unit 1)
         )
       )
     )
@@ -2925,7 +2925,7 @@
   (symbol (lib_id "Device:LED_Small") (at 67.31 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2cc29cd6-8e3e-4a9b-a727-ac99ae9c4f5b)
-    (property "Reference" "D?" (at 64.77 101.6 90)
+    (property "Reference" "D730" (at 64.77 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 69.088 100.203 90)
@@ -2942,7 +2942,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D730") (unit 1)
         )
       )
     )
@@ -2951,7 +2951,7 @@
   (symbol (lib_id "power:+5V") (at 187.96 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2fb9284a-11e5-4c55-9c02-4f4ce05c8f05)
-    (property "Reference" "#PWR?" (at 187.96 80.01 0)
+    (property "Reference" "#PWR0303" (at 187.96 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 188.341 71.8058 0)
@@ -2967,7 +2967,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0303") (unit 1)
         )
       )
     )
@@ -2976,7 +2976,7 @@
   (symbol (lib_id "Device:LED_Small") (at 173.99 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 30086263-d234-4525-a748-ecf2a69868b8)
-    (property "Reference" "D?" (at 171.45 30.48 90)
+    (property "Reference" "D674" (at 171.45 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 175.768 29.083 90)
@@ -2993,7 +2993,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D674") (unit 1)
         )
       )
     )
@@ -3002,7 +3002,7 @@
   (symbol (lib_id "Device:LED_Small") (at 107.95 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3288eb19-bea3-4b20-9061-8e65a02eb6c6)
-    (property "Reference" "D?" (at 105.41 66.04 90)
+    (property "Reference" "D700" (at 105.41 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 109.728 64.643 90)
@@ -3019,7 +3019,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D700") (unit 1)
         )
       )
     )
@@ -3028,7 +3028,7 @@
   (symbol (lib_id "Device:LED_Small") (at 173.99 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 32bf7b6b-7f33-4581-9768-cb9864ab2e19)
-    (property "Reference" "D?" (at 171.45 101.6 90)
+    (property "Reference" "D754" (at 171.45 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 175.768 100.203 90)
@@ -3045,7 +3045,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D754") (unit 1)
         )
       )
     )
@@ -3054,7 +3054,7 @@
   (symbol (lib_id "power:GND") (at 191.77 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 335e2d7a-619b-4b5a-b258-15400314960a)
-    (property "Reference" "#PWR?" (at 185.42 125.73 0)
+    (property "Reference" "#PWR0328" (at 185.42 125.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 188.5188 125.857 90)
@@ -3070,7 +3070,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0328") (unit 1)
         )
       )
     )
@@ -3079,7 +3079,7 @@
   (symbol (lib_id "Device:LED_Small") (at 54.61 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 341b5a31-f06d-4671-8d63-7b672b6e46d1)
-    (property "Reference" "D?" (at 52.07 101.6 90)
+    (property "Reference" "D725" (at 52.07 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 56.388 100.203 90)
@@ -3096,7 +3096,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D725") (unit 1)
         )
       )
     )
@@ -3105,7 +3105,7 @@
   (symbol (lib_id "Device:LED_Small") (at 102.87 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 34a2ec7a-cb8e-4f7f-9240-16551bcbb9a9)
-    (property "Reference" "D?" (at 100.33 66.04 90)
+    (property "Reference" "D698" (at 100.33 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 104.648 64.643 90)
@@ -3122,7 +3122,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D698") (unit 1)
         )
       )
     )
@@ -3131,7 +3131,7 @@
   (symbol (lib_id "power:GND") (at 120.65 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 38c430e3-8c78-45e0-a069-bbf777a9dc8d)
-    (property "Reference" "#PWR?" (at 114.3 125.73 0)
+    (property "Reference" "#PWR0326" (at 114.3 125.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 117.3988 125.857 90)
@@ -3147,7 +3147,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0326") (unit 1)
         )
       )
     )
@@ -3156,7 +3156,7 @@
   (symbol (lib_id "power:+5V") (at 116.84 40.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 398d97d4-b90e-4342-92d1-c36cb3e720fc)
-    (property "Reference" "#PWR?" (at 116.84 44.45 0)
+    (property "Reference" "#PWR0286" (at 116.84 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 117.221 36.2458 0)
@@ -3172,7 +3172,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0286") (unit 1)
         )
       )
     )
@@ -3181,7 +3181,7 @@
   (symbol (lib_id "power:+3V0") (at 25.4 25.4 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3bda77a7-152b-431e-9806-65d000ac2b79)
-    (property "Reference" "#PWR?" (at 25.4 29.21 0)
+    (property "Reference" "#PWR0283" (at 25.4 29.21 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V0" (at 25.781 21.0058 0)
@@ -3197,7 +3197,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0283") (unit 1)
         )
       )
     )
@@ -3206,7 +3206,7 @@
   (symbol (lib_id "power:+5V") (at 152.4 40.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3db1054f-781f-4f24-900a-7c00f85b8431)
-    (property "Reference" "#PWR?" (at 152.4 44.45 0)
+    (property "Reference" "#PWR0287" (at 152.4 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 152.781 36.2458 0)
@@ -3222,7 +3222,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0287") (unit 1)
         )
       )
     )
@@ -3231,7 +3231,7 @@
   (symbol (lib_id "power:+5V") (at 116.84 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3dc4cee2-b45e-4d2e-ab7d-7c560bcfa996)
-    (property "Reference" "#PWR?" (at 116.84 80.01 0)
+    (property "Reference" "#PWR0301" (at 116.84 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 117.221 71.8058 0)
@@ -3247,7 +3247,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0301") (unit 1)
         )
       )
     )
@@ -3256,7 +3256,7 @@
   (symbol (lib_id "Device:LED_Small") (at 176.53 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 40c34782-164d-4640-b32c-b98b5c3e54ed)
-    (property "Reference" "D?" (at 173.99 30.48 90)
+    (property "Reference" "D675" (at 173.99 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 178.308 29.083 90)
@@ -3273,7 +3273,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D675") (unit 1)
         )
       )
     )
@@ -3282,7 +3282,7 @@
   (symbol (lib_id "Device:LED_Small") (at 163.83 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 42b2a9ab-4b5a-4e86-a345-750522e60dd1)
-    (property "Reference" "D?" (at 161.29 30.48 90)
+    (property "Reference" "D670" (at 161.29 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 165.608 29.083 90)
@@ -3299,7 +3299,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D670") (unit 1)
         )
       )
     )
@@ -3308,7 +3308,7 @@
   (symbol (lib_id "Device:LED_Small") (at 125.73 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 42ba35c6-da0b-4bd2-82e1-c35178bfc1ea)
-    (property "Reference" "D?" (at 123.19 101.6 90)
+    (property "Reference" "D741" (at 123.19 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 127.508 100.203 90)
@@ -3325,7 +3325,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D741") (unit 1)
         )
       )
     )
@@ -3334,7 +3334,7 @@
   (symbol (lib_id "Device:LED_Small") (at 199.39 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 46e8f495-a6ce-4f42-92de-144081ed7d69)
-    (property "Reference" "D?" (at 196.85 66.04 90)
+    (property "Reference" "D718" (at 196.85 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 201.168 64.643 90)
@@ -3351,7 +3351,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D718") (unit 1)
         )
       )
     )
@@ -3360,7 +3360,7 @@
   (symbol (lib_id "Device:LED_Small") (at 166.37 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 49032917-ebcb-4574-89ae-e795ecc886c3)
-    (property "Reference" "D?" (at 163.83 66.04 90)
+    (property "Reference" "D711" (at 163.83 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 168.148 64.643 90)
@@ -3377,7 +3377,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D711") (unit 1)
         )
       )
     )
@@ -3386,7 +3386,7 @@
   (symbol (lib_id "Device:LED_Small") (at 207.01 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 49079173-1122-4dc0-b201-3a199ef5aecc)
-    (property "Reference" "D?" (at 204.47 101.6 90)
+    (property "Reference" "D761" (at 204.47 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 208.788 100.203 90)
@@ -3403,7 +3403,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D761") (unit 1)
         )
       )
     )
@@ -3412,7 +3412,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 96.52 41.91 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4bb26f11-f1e1-461c-9480-24ce5775d198)
-    (property "Reference" "U?" (at 109.22 49.53 90)
+    (property "Reference" "U91" (at 109.22 49.53 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 104.14 52.07 90)
@@ -3443,7 +3443,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U91") (unit 1)
         )
       )
     )
@@ -3452,7 +3452,7 @@
   (symbol (lib_id "Device:R_Small") (at 158.75 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4e7b5275-7e66-43cd-bf9a-24e01b54e046)
-    (property "Reference" "R?" (at 157.48 123.19 90)
+    (property "Reference" "R98" (at 157.48 123.19 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 158.75 125.73 90)
@@ -3469,7 +3469,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R98") (unit 1)
         )
       )
     )
@@ -3478,7 +3478,7 @@
   (symbol (lib_id "Device:LED_Small") (at 107.95 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4f59a86e-7dc6-45f9-b612-6168ac6241a6)
-    (property "Reference" "D?" (at 105.41 30.48 90)
+    (property "Reference" "D660" (at 105.41 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 109.728 29.083 90)
@@ -3495,7 +3495,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D660") (unit 1)
         )
       )
     )
@@ -3504,7 +3504,7 @@
   (symbol (lib_id "Device:R_Small") (at 123.19 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 52217245-cdc1-4e74-9944-fe5ceb24a292)
-    (property "Reference" "R?" (at 121.92 87.63 90)
+    (property "Reference" "R92" (at 121.92 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 123.19 90.17 90)
@@ -3521,7 +3521,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R92") (unit 1)
         )
       )
     )
@@ -3530,7 +3530,7 @@
   (symbol (lib_id "Device:LED_Small") (at 214.63 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 526afc3e-9b69-4664-b0c2-352bf8530c38)
-    (property "Reference" "D?" (at 212.09 66.04 90)
+    (property "Reference" "D724" (at 212.09 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 216.408 64.643 90)
@@ -3547,7 +3547,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D724") (unit 1)
         )
       )
     )
@@ -3556,7 +3556,7 @@
   (symbol (lib_id "Device:LED_Small") (at 69.85 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5273e5e8-8661-4069-b789-539e0708bcc6)
-    (property "Reference" "D?" (at 67.31 30.48 90)
+    (property "Reference" "D651" (at 67.31 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 71.628 29.083 90)
@@ -3573,7 +3573,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D651") (unit 1)
         )
       )
     )
@@ -3582,7 +3582,7 @@
   (symbol (lib_id "Device:R_Small") (at 87.63 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 52e3cc68-91a5-40b1-ae82-b4fcaeec9e15)
-    (property "Reference" "R?" (at 86.36 87.63 90)
+    (property "Reference" "R91" (at 86.36 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 87.63 90.17 90)
@@ -3599,7 +3599,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R91") (unit 1)
         )
       )
     )
@@ -3608,7 +3608,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 203.2 41.91 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 530daf45-2eed-4de2-9b28-f1e30f02e4fd)
-    (property "Reference" "U?" (at 215.9 49.53 90)
+    (property "Reference" "U94" (at 215.9 49.53 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 210.82 52.07 90)
@@ -3639,7 +3639,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U94") (unit 1)
         )
       )
     )
@@ -3648,7 +3648,7 @@
   (symbol (lib_id "Device:LED_Small") (at 199.39 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 53ac6f18-be02-41d6-8d23-9ba36a5a4b2f)
-    (property "Reference" "D?" (at 196.85 30.48 90)
+    (property "Reference" "D678" (at 196.85 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 201.168 29.083 90)
@@ -3665,7 +3665,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D678") (unit 1)
         )
       )
     )
@@ -3674,7 +3674,7 @@
   (symbol (lib_id "power:GND") (at 120.65 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5506b8e5-319d-4cf1-91a2-070fed940e90)
-    (property "Reference" "#PWR?" (at 114.3 90.17 0)
+    (property "Reference" "#PWR0311" (at 114.3 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 117.3988 90.297 90)
@@ -3690,7 +3690,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0311") (unit 1)
         )
       )
     )
@@ -3699,7 +3699,7 @@
   (symbol (lib_id "power:GND") (at 49.53 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5521f598-16a1-417f-b1d4-b5ad5e78af35)
-    (property "Reference" "#PWR?" (at 43.18 125.73 0)
+    (property "Reference" "#PWR0324" (at 43.18 125.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 46.2788 125.857 90)
@@ -3715,7 +3715,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0324") (unit 1)
         )
       )
     )
@@ -3724,7 +3724,7 @@
   (symbol (lib_id "power:GND") (at 147.32 114.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 561f091f-fa69-47b8-834a-04fb98c936f1)
-    (property "Reference" "#PWR?" (at 147.32 120.65 0)
+    (property "Reference" "#PWR0321" (at 147.32 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 147.447 118.6942 0)
@@ -3740,7 +3740,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0321") (unit 1)
         )
       )
     )
@@ -3749,7 +3749,7 @@
   (symbol (lib_id "Device:R_Small") (at 87.63 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 56ff4c1f-4397-40f8-9b2a-fe5b990f6087)
-    (property "Reference" "R?" (at 86.36 123.19 90)
+    (property "Reference" "R96" (at 86.36 123.19 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 87.63 125.73 90)
@@ -3766,7 +3766,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R96") (unit 1)
         )
       )
     )
@@ -3775,7 +3775,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 96.52 77.47 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 578628c6-cd3a-4072-8960-e29d56fa0ba9)
-    (property "Reference" "U?" (at 109.22 85.09 90)
+    (property "Reference" "U96" (at 109.22 85.09 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 104.14 87.63 90)
@@ -3806,7 +3806,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U96") (unit 1)
         )
       )
     )
@@ -3815,7 +3815,7 @@
   (symbol (lib_id "power:GND") (at 218.44 43.18 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5c94e413-3d5c-4287-905d-e5a8b9b1a2b8)
-    (property "Reference" "#PWR?" (at 218.44 49.53 0)
+    (property "Reference" "#PWR0293" (at 218.44 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 218.567 47.5742 0)
@@ -3831,7 +3831,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0293") (unit 1)
         )
       )
     )
@@ -3840,7 +3840,7 @@
   (symbol (lib_id "Device:R_Small") (at 123.19 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5ce15ac4-1fae-4b7c-873b-2bc63753d547)
-    (property "Reference" "R?" (at 121.92 123.19 90)
+    (property "Reference" "R97" (at 121.92 123.19 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 123.19 125.73 90)
@@ -3857,7 +3857,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R97") (unit 1)
         )
       )
     )
@@ -3866,7 +3866,7 @@
   (symbol (lib_id "Device:LED_Small") (at 140.97 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5d888bf7-4ed1-4e6f-b38b-6f128bcd3902)
-    (property "Reference" "D?" (at 138.43 30.48 90)
+    (property "Reference" "D667" (at 138.43 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 142.748 29.083 90)
@@ -3883,7 +3883,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D667") (unit 1)
         )
       )
     )
@@ -3892,7 +3892,7 @@
   (symbol (lib_id "Device:LED_Small") (at 125.73 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5da06055-02c4-4d0a-826b-51c609fe402d)
-    (property "Reference" "D?" (at 123.19 66.04 90)
+    (property "Reference" "D701" (at 123.19 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 127.508 64.643 90)
@@ -3909,7 +3909,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D701") (unit 1)
         )
       )
     )
@@ -3918,7 +3918,7 @@
   (symbol (lib_id "Device:LED_Small") (at 72.39 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5da3f4d0-8395-439e-b791-0505cad24a1d)
-    (property "Reference" "D?" (at 69.85 101.6 90)
+    (property "Reference" "D732" (at 69.85 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 74.168 100.203 90)
@@ -3935,7 +3935,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D732") (unit 1)
         )
       )
     )
@@ -3944,7 +3944,7 @@
   (symbol (lib_id "Device:LED_Small") (at 90.17 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 61bcc9e8-e30e-4292-a462-badc5d4bde61)
-    (property "Reference" "D?" (at 87.63 101.6 90)
+    (property "Reference" "D733" (at 87.63 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 91.948 100.203 90)
@@ -3961,7 +3961,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D733") (unit 1)
         )
       )
     )
@@ -3970,7 +3970,7 @@
   (symbol (lib_id "Device:LED_Small") (at 54.61 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 632b7ca7-f505-4a48-a526-d98f335697ae)
-    (property "Reference" "D?" (at 52.07 30.48 90)
+    (property "Reference" "D645" (at 52.07 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 56.388 29.083 90)
@@ -3987,7 +3987,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D645") (unit 1)
         )
       )
     )
@@ -3996,7 +3996,7 @@
   (symbol (lib_id "Device:LED_Small") (at 62.23 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6554e75d-82b4-4488-a3a3-361b76755db7)
-    (property "Reference" "D?" (at 59.69 101.6 90)
+    (property "Reference" "D728" (at 59.69 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 64.008 100.203 90)
@@ -4013,7 +4013,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D728") (unit 1)
         )
       )
     )
@@ -4022,7 +4022,7 @@
   (symbol (lib_id "power:GND") (at 182.88 43.18 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 65674766-7e4f-469d-8878-fa2abe40dc6a)
-    (property "Reference" "#PWR?" (at 182.88 49.53 0)
+    (property "Reference" "#PWR0292" (at 182.88 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 183.007 47.5742 0)
@@ -4038,7 +4038,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0292") (unit 1)
         )
       )
     )
@@ -4047,7 +4047,7 @@
   (symbol (lib_id "power:GND") (at 191.77 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6871928a-97ae-4e25-966a-3e4b46dd1224)
-    (property "Reference" "#PWR?" (at 185.42 90.17 0)
+    (property "Reference" "#PWR0313" (at 185.42 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 188.5188 90.297 90)
@@ -4063,7 +4063,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0313") (unit 1)
         )
       )
     )
@@ -4072,7 +4072,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 167.64 41.91 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6930abe8-7423-4085-b13f-013b53800568)
-    (property "Reference" "U?" (at 180.34 49.53 90)
+    (property "Reference" "U93" (at 180.34 49.53 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 175.26 52.07 90)
@@ -4103,7 +4103,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U93") (unit 1)
         )
       )
     )
@@ -4112,7 +4112,7 @@
   (symbol (lib_id "Device:LED_Small") (at 209.55 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6a9f1399-84a6-4e01-9441-7741494c5011)
-    (property "Reference" "D?" (at 207.01 66.04 90)
+    (property "Reference" "D722" (at 207.01 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 211.328 64.643 90)
@@ -4129,7 +4129,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D722") (unit 1)
         )
       )
     )
@@ -4138,7 +4138,7 @@
   (symbol (lib_id "Device:LED_Small") (at 135.89 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6d99060c-f573-4d71-992b-57ce6283d7b6)
-    (property "Reference" "D?" (at 133.35 30.48 90)
+    (property "Reference" "D665" (at 133.35 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 137.668 29.083 90)
@@ -4155,7 +4155,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D665") (unit 1)
         )
       )
     )
@@ -4164,7 +4164,7 @@
   (symbol (lib_id "Device:LED_Small") (at 207.01 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6e3197eb-32c5-47b3-bfeb-2e95be582f78)
-    (property "Reference" "D?" (at 204.47 66.04 90)
+    (property "Reference" "D721" (at 204.47 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 208.788 64.643 90)
@@ -4181,7 +4181,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D721") (unit 1)
         )
       )
     )
@@ -4190,7 +4190,7 @@
   (symbol (lib_id "power:+5V") (at 45.72 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6e7d8682-c8f2-4ddf-b0f7-94a854314177)
-    (property "Reference" "#PWR?" (at 45.72 115.57 0)
+    (property "Reference" "#PWR0314" (at 45.72 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 46.101 107.3658 0)
@@ -4206,7 +4206,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0314") (unit 1)
         )
       )
     )
@@ -4215,7 +4215,7 @@
   (symbol (lib_id "Device:LED_Small") (at 100.33 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6f32152c-f8c1-4e1d-8531-ed63656b6618)
-    (property "Reference" "D?" (at 97.79 66.04 90)
+    (property "Reference" "D697" (at 97.79 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 102.108 64.643 90)
@@ -4232,7 +4232,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D697") (unit 1)
         )
       )
     )
@@ -4241,7 +4241,7 @@
   (symbol (lib_id "Device:LED_Small") (at 130.81 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 718d5e93-ebec-4ef0-8c1e-6a88575bac20)
-    (property "Reference" "D?" (at 128.27 101.6 90)
+    (property "Reference" "D743" (at 128.27 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 132.588 100.203 90)
@@ -4258,7 +4258,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D743") (unit 1)
         )
       )
     )
@@ -4267,7 +4267,7 @@
   (symbol (lib_id "Device:R_Small") (at 158.75 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 72a641b8-6633-4b80-b821-cf3e3ab72043)
-    (property "Reference" "R?" (at 157.48 87.63 90)
+    (property "Reference" "R93" (at 157.48 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 158.75 90.17 90)
@@ -4284,7 +4284,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R93") (unit 1)
         )
       )
     )
@@ -4293,7 +4293,7 @@
   (symbol (lib_id "Device:LED_Small") (at 201.93 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 73fe7d0f-087c-4426-bec3-73f7c8d111a7)
-    (property "Reference" "D?" (at 199.39 30.48 90)
+    (property "Reference" "D679" (at 199.39 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 203.708 29.083 90)
@@ -4310,7 +4310,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D679") (unit 1)
         )
       )
     )
@@ -4319,7 +4319,7 @@
   (symbol (lib_id "power:GND") (at 156.21 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 750406f5-4a53-4528-ae5d-09242c07ef2f)
-    (property "Reference" "#PWR?" (at 149.86 90.17 0)
+    (property "Reference" "#PWR0312" (at 149.86 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.9588 90.297 90)
@@ -4335,7 +4335,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0312") (unit 1)
         )
       )
     )
@@ -4344,7 +4344,7 @@
   (symbol (lib_id "Device:LED_Small") (at 201.93 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 758b5499-5f19-4a68-924a-430cc5232ac1)
-    (property "Reference" "D?" (at 199.39 66.04 90)
+    (property "Reference" "D719" (at 199.39 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 203.708 64.643 90)
@@ -4361,7 +4361,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D719") (unit 1)
         )
       )
     )
@@ -4370,7 +4370,7 @@
   (symbol (lib_id "Device:LED_Small") (at 67.31 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 75b8c86b-b377-46bc-9634-1faf8e6f3a72)
-    (property "Reference" "D?" (at 64.77 30.48 90)
+    (property "Reference" "D650" (at 64.77 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 69.088 29.083 90)
@@ -4387,7 +4387,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D650") (unit 1)
         )
       )
     )
@@ -4396,7 +4396,7 @@
   (symbol (lib_id "power:+5V") (at 152.4 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 761062e6-4d7c-4456-992b-ef241ea8309e)
-    (property "Reference" "#PWR?" (at 152.4 115.57 0)
+    (property "Reference" "#PWR0317" (at 152.4 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 152.781 107.3658 0)
@@ -4412,7 +4412,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0317") (unit 1)
         )
       )
     )
@@ -4421,7 +4421,7 @@
   (symbol (lib_id "power:GND") (at 182.88 114.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 782ff192-8ae4-4712-b9ae-a75435616388)
-    (property "Reference" "#PWR?" (at 182.88 120.65 0)
+    (property "Reference" "#PWR0322" (at 182.88 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 183.007 118.6942 0)
@@ -4437,7 +4437,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0322") (unit 1)
         )
       )
     )
@@ -4446,7 +4446,7 @@
   (symbol (lib_id "power:GND") (at 156.21 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7a244e51-3685-4c5c-b464-8445c5a3e609)
-    (property "Reference" "#PWR?" (at 149.86 125.73 0)
+    (property "Reference" "#PWR0327" (at 149.86 125.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.9588 125.857 90)
@@ -4462,7 +4462,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0327") (unit 1)
         )
       )
     )
@@ -4471,7 +4471,7 @@
   (symbol (lib_id "Device:LED_Small") (at 92.71 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7b8b1809-8b5c-4ea8-9c80-37e391343a6d)
-    (property "Reference" "D?" (at 90.17 101.6 90)
+    (property "Reference" "D734" (at 90.17 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 94.488 100.203 90)
@@ -4488,7 +4488,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D734") (unit 1)
         )
       )
     )
@@ -4497,7 +4497,7 @@
   (symbol (lib_id "Device:LED_Small") (at 209.55 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7bba25f2-7090-4289-bf9c-31e090b63a67)
-    (property "Reference" "D?" (at 207.01 30.48 90)
+    (property "Reference" "D682" (at 207.01 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 211.328 29.083 90)
@@ -4514,7 +4514,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D682") (unit 1)
         )
       )
     )
@@ -4523,7 +4523,7 @@
   (symbol (lib_id "Device:LED_Small") (at 138.43 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7bbece03-2e36-4e43-8f8e-9ebdc8d83332)
-    (property "Reference" "D?" (at 135.89 30.48 90)
+    (property "Reference" "D666" (at 135.89 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 140.208 29.083 90)
@@ -4540,7 +4540,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D666") (unit 1)
         )
       )
     )
@@ -4549,7 +4549,7 @@
   (symbol (lib_id "Device:R_Small") (at 158.75 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7d1dc499-7b51-4acb-8e51-9db690d678ea)
-    (property "Reference" "R?" (at 157.48 52.07 90)
+    (property "Reference" "R88" (at 157.48 52.07 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 158.75 54.61 90)
@@ -4566,7 +4566,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R88") (unit 1)
         )
       )
     )
@@ -4575,7 +4575,7 @@
   (symbol (lib_id "Device:LED_Small") (at 59.69 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7d3a0d8c-cdc2-46cd-be83-eceba3e0ca00)
-    (property "Reference" "D?" (at 57.15 101.6 90)
+    (property "Reference" "D727" (at 57.15 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 61.468 100.203 90)
@@ -4592,7 +4592,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D727") (unit 1)
         )
       )
     )
@@ -4601,7 +4601,7 @@
   (symbol (lib_id "Device:LED_Small") (at 92.71 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 848feb06-e494-4916-a449-855f8cdca27d)
-    (property "Reference" "D?" (at 90.17 30.48 90)
+    (property "Reference" "D654" (at 90.17 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 94.488 29.083 90)
@@ -4618,7 +4618,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D654") (unit 1)
         )
       )
     )
@@ -4627,7 +4627,7 @@
   (symbol (lib_id "Device:LED_Small") (at 95.25 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 854499d5-5db1-4c73-80d1-bed9071b4c7d)
-    (property "Reference" "D?" (at 92.71 30.48 90)
+    (property "Reference" "D655" (at 92.71 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 97.028 29.083 90)
@@ -4644,7 +4644,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D655") (unit 1)
         )
       )
     )
@@ -4653,7 +4653,7 @@
   (symbol (lib_id "Device:LED_Small") (at 176.53 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 857f5060-3c45-41a7-a462-e793cda4614c)
-    (property "Reference" "D?" (at 173.99 101.6 90)
+    (property "Reference" "D755" (at 173.99 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 178.308 100.203 90)
@@ -4670,7 +4670,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D755") (unit 1)
         )
       )
     )
@@ -4679,7 +4679,7 @@
   (symbol (lib_id "power:GND") (at 218.44 78.74 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 859c6b31-5bdf-41e5-a7f6-6098cf328a23)
-    (property "Reference" "#PWR?" (at 218.44 85.09 0)
+    (property "Reference" "#PWR0308" (at 218.44 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 218.567 83.1342 0)
@@ -4695,7 +4695,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0308") (unit 1)
         )
       )
     )
@@ -4704,7 +4704,7 @@
   (symbol (lib_id "Device:LED_Small") (at 204.47 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 86f8d468-245f-49b7-b732-211d4930538e)
-    (property "Reference" "D?" (at 201.93 66.04 90)
+    (property "Reference" "D720" (at 201.93 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 206.248 64.643 90)
@@ -4721,7 +4721,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D720") (unit 1)
         )
       )
     )
@@ -4730,7 +4730,7 @@
   (symbol (lib_id "power:+5V") (at 81.28 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 878590e3-c53a-42a0-a0f1-5ec994e34d2c)
-    (property "Reference" "#PWR?" (at 81.28 115.57 0)
+    (property "Reference" "#PWR0315" (at 81.28 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 81.661 107.3658 0)
@@ -4746,7 +4746,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0315") (unit 1)
         )
       )
     )
@@ -4755,7 +4755,7 @@
   (symbol (lib_id "power:GND") (at 191.77 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8839fa58-9f75-426d-8c2f-0919aafac7c6)
-    (property "Reference" "#PWR?" (at 185.42 54.61 0)
+    (property "Reference" "#PWR0298" (at 185.42 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 188.5188 54.737 90)
@@ -4771,7 +4771,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0298") (unit 1)
         )
       )
     )
@@ -4780,7 +4780,7 @@
   (symbol (lib_id "Device:LED_Small") (at 163.83 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 89adda90-718b-4e08-8f83-ae7586361442)
-    (property "Reference" "D?" (at 161.29 66.04 90)
+    (property "Reference" "D710" (at 161.29 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 165.608 64.643 90)
@@ -4797,7 +4797,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D710") (unit 1)
         )
       )
     )
@@ -4806,7 +4806,7 @@
   (symbol (lib_id "Device:LED_Small") (at 90.17 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8f460125-dc68-4a52-88ae-0e78024c138e)
-    (property "Reference" "D?" (at 87.63 66.04 90)
+    (property "Reference" "D693" (at 87.63 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 91.948 64.643 90)
@@ -4823,7 +4823,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D693") (unit 1)
         )
       )
     )
@@ -4832,7 +4832,7 @@
   (symbol (lib_id "Device:LED_Small") (at 214.63 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8f726efb-47e7-403a-b319-42ab655b53b6)
-    (property "Reference" "D?" (at 212.09 30.48 90)
+    (property "Reference" "D684" (at 212.09 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 216.408 29.083 90)
@@ -4849,7 +4849,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D684") (unit 1)
         )
       )
     )
@@ -4858,7 +4858,7 @@
   (symbol (lib_id "power:GND") (at 147.32 43.18 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8fdf15fb-47ab-4a6d-bf11-61be0be35903)
-    (property "Reference" "#PWR?" (at 147.32 49.53 0)
+    (property "Reference" "#PWR0291" (at 147.32 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 147.447 47.5742 0)
@@ -4874,7 +4874,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0291") (unit 1)
         )
       )
     )
@@ -4883,7 +4883,7 @@
   (symbol (lib_id "Device:LED_Small") (at 176.53 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9182cce7-f486-4286-a4ef-6e16f1a500df)
-    (property "Reference" "D?" (at 173.99 66.04 90)
+    (property "Reference" "D715" (at 173.99 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 178.308 64.643 90)
@@ -4900,7 +4900,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D715") (unit 1)
         )
       )
     )
@@ -4909,7 +4909,7 @@
   (symbol (lib_id "Device:LED_Small") (at 171.45 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9328ab0c-ade5-4f55-a2d7-8af8b41b36a2)
-    (property "Reference" "D?" (at 168.91 30.48 90)
+    (property "Reference" "D673" (at 168.91 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 173.228 29.083 90)
@@ -4926,7 +4926,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D673") (unit 1)
         )
       )
     )
@@ -4935,7 +4935,7 @@
   (symbol (lib_id "Device:LED_Small") (at 59.69 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 941ac31b-01ee-4050-8e84-77a9d77c51c1)
-    (property "Reference" "D?" (at 57.15 66.04 90)
+    (property "Reference" "D687" (at 57.15 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 61.468 64.643 90)
@@ -4952,7 +4952,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D687") (unit 1)
         )
       )
     )
@@ -4961,7 +4961,7 @@
   (symbol (lib_id "power:GND") (at 120.65 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 95662001-0925-4944-8798-a1cac348c6d6)
-    (property "Reference" "#PWR?" (at 114.3 54.61 0)
+    (property "Reference" "#PWR0296" (at 114.3 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 117.3988 54.737 90)
@@ -4977,7 +4977,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0296") (unit 1)
         )
       )
     )
@@ -4986,7 +4986,7 @@
   (symbol (lib_id "power:GND") (at 49.53 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9947f10e-113a-4c91-b074-7c809bcd8c69)
-    (property "Reference" "#PWR?" (at 43.18 54.61 0)
+    (property "Reference" "#PWR0294" (at 43.18 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 46.2788 54.737 90)
@@ -5002,7 +5002,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0294") (unit 1)
         )
       )
     )
@@ -5011,7 +5011,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 96.52 113.03 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 99a849ee-1e7b-45ee-9850-bc1588946aa4)
-    (property "Reference" "U?" (at 109.22 120.65 90)
+    (property "Reference" "U101" (at 109.22 120.65 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 104.14 123.19 90)
@@ -5042,7 +5042,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U101") (unit 1)
         )
       )
     )
@@ -5051,7 +5051,7 @@
   (symbol (lib_id "Device:LED_Small") (at 57.15 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9a6ac2e5-4e35-4471-a3e6-d95375c6d3af)
-    (property "Reference" "D?" (at 54.61 66.04 90)
+    (property "Reference" "D686" (at 54.61 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 58.928 64.643 90)
@@ -5068,7 +5068,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D686") (unit 1)
         )
       )
     )
@@ -5077,7 +5077,7 @@
   (symbol (lib_id "Device:LED_Small") (at 173.99 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9b145e53-38d6-46a0-88db-cb23062d9917)
-    (property "Reference" "D?" (at 171.45 66.04 90)
+    (property "Reference" "D714" (at 171.45 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 175.768 64.643 90)
@@ -5094,7 +5094,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D714") (unit 1)
         )
       )
     )
@@ -5103,7 +5103,7 @@
   (symbol (lib_id "Device:LED_Small") (at 72.39 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9b9a29e7-729d-4ddd-8f23-f9a868b83718)
-    (property "Reference" "D?" (at 69.85 30.48 90)
+    (property "Reference" "D652" (at 69.85 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 74.168 29.083 90)
@@ -5120,7 +5120,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D652") (unit 1)
         )
       )
     )
@@ -5129,7 +5129,7 @@
   (symbol (lib_id "Device:LED_Small") (at 72.39 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9f37f96f-1ebe-4d9f-8e13-5b9fcec22197)
-    (property "Reference" "D?" (at 69.85 66.04 90)
+    (property "Reference" "D692" (at 69.85 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 74.168 64.643 90)
@@ -5146,7 +5146,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D692") (unit 1)
         )
       )
     )
@@ -5155,7 +5155,7 @@
   (symbol (lib_id "Device:LED_Small") (at 128.27 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a03c5136-e49b-4451-995b-2df1b97a7c27)
-    (property "Reference" "D?" (at 125.73 66.04 90)
+    (property "Reference" "D702" (at 125.73 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 130.048 64.643 90)
@@ -5172,7 +5172,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D702") (unit 1)
         )
       )
     )
@@ -5181,7 +5181,7 @@
   (symbol (lib_id "Device:LED_Small") (at 128.27 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a042ea37-679a-48ae-998f-158ba36e1284)
-    (property "Reference" "D?" (at 125.73 101.6 90)
+    (property "Reference" "D742" (at 125.73 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 130.048 100.203 90)
@@ -5198,7 +5198,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D742") (unit 1)
         )
       )
     )
@@ -5207,7 +5207,7 @@
   (symbol (lib_id "power:GND") (at 111.76 78.74 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a05e7075-b2c5-4100-bdb4-554aa4655672)
-    (property "Reference" "#PWR?" (at 111.76 85.09 0)
+    (property "Reference" "#PWR0305" (at 111.76 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 111.887 83.1342 0)
@@ -5223,7 +5223,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0305") (unit 1)
         )
       )
     )
@@ -5232,7 +5232,7 @@
   (symbol (lib_id "Device:LED_Small") (at 168.91 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a0dfdea3-2fcf-4482-bc6c-830bac9328d8)
-    (property "Reference" "D?" (at 166.37 30.48 90)
+    (property "Reference" "D672" (at 166.37 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 170.688 29.083 90)
@@ -5249,7 +5249,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D672") (unit 1)
         )
       )
     )
@@ -5258,7 +5258,7 @@
   (symbol (lib_id "Device:LED_Small") (at 133.35 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a1239033-e8c0-40cc-8336-79f71896147e)
-    (property "Reference" "D?" (at 130.81 101.6 90)
+    (property "Reference" "D744" (at 130.81 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 135.128 100.203 90)
@@ -5275,7 +5275,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D744") (unit 1)
         )
       )
     )
@@ -5284,7 +5284,7 @@
   (symbol (lib_id "power:+5V") (at 81.28 40.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a3c17419-7a65-4ae6-88e2-996cb72ad33e)
-    (property "Reference" "#PWR?" (at 81.28 44.45 0)
+    (property "Reference" "#PWR0285" (at 81.28 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 81.661 36.2458 0)
@@ -5300,7 +5300,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0285") (unit 1)
         )
       )
     )
@@ -5309,7 +5309,7 @@
   (symbol (lib_id "Device:LED_Small") (at 97.79 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a5024883-a102-4f96-968e-83c031c6ae5e)
-    (property "Reference" "D?" (at 95.25 66.04 90)
+    (property "Reference" "D696" (at 95.25 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 99.568 64.643 90)
@@ -5326,7 +5326,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D696") (unit 1)
         )
       )
     )
@@ -5335,7 +5335,7 @@
   (symbol (lib_id "power:GND") (at 85.09 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a528367f-8799-4971-8e16-877ec5d5da30)
-    (property "Reference" "#PWR?" (at 78.74 90.17 0)
+    (property "Reference" "#PWR0310" (at 78.74 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 81.8388 90.297 90)
@@ -5351,7 +5351,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0310") (unit 1)
         )
       )
     )
@@ -5360,7 +5360,7 @@
   (symbol (lib_id "Device:LED_Small") (at 204.47 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a8660b92-5bbc-4511-8521-e63998da92d0)
-    (property "Reference" "D?" (at 201.93 30.48 90)
+    (property "Reference" "D680" (at 201.93 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 206.248 29.083 90)
@@ -5377,7 +5377,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D680") (unit 1)
         )
       )
     )
@@ -5386,7 +5386,7 @@
   (symbol (lib_id "Device:LED_Small") (at 130.81 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ac21ca32-482c-454d-8216-2dba7086e8b0)
-    (property "Reference" "D?" (at 128.27 66.04 90)
+    (property "Reference" "D703" (at 128.27 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 132.588 64.643 90)
@@ -5403,7 +5403,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D703") (unit 1)
         )
       )
     )
@@ -5412,7 +5412,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 132.08 113.03 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ac4064ed-ea18-466b-90e8-73e4cc752643)
-    (property "Reference" "U?" (at 144.78 120.65 90)
+    (property "Reference" "U102" (at 144.78 120.65 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 139.7 123.19 90)
@@ -5443,7 +5443,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U102") (unit 1)
         )
       )
     )
@@ -5452,7 +5452,7 @@
   (symbol (lib_id "Device:LED_Small") (at 100.33 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ac5a0e32-c720-4e03-9218-5df7764529f5)
-    (property "Reference" "D?" (at 97.79 101.6 90)
+    (property "Reference" "D737" (at 97.79 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 102.108 100.203 90)
@@ -5469,7 +5469,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D737") (unit 1)
         )
       )
     )
@@ -5478,7 +5478,7 @@
   (symbol (lib_id "Device:LED_Small") (at 201.93 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ac8d15b1-fc37-43d8-ac06-5515bdb5f2bc)
-    (property "Reference" "D?" (at 199.39 101.6 90)
+    (property "Reference" "D759" (at 199.39 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 203.708 100.203 90)
@@ -5495,7 +5495,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D759") (unit 1)
         )
       )
     )
@@ -5504,7 +5504,7 @@
   (symbol (lib_id "Device:R_Small") (at 52.07 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ad474ece-16e9-401c-919a-a3f30f47bbbe)
-    (property "Reference" "R?" (at 50.8 52.07 90)
+    (property "Reference" "R85" (at 50.8 52.07 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 52.07 54.61 90)
@@ -5521,7 +5521,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R85") (unit 1)
         )
       )
     )
@@ -5530,7 +5530,7 @@
   (symbol (lib_id "Device:LED_Small") (at 105.41 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b21084cc-bf1d-4ecd-b468-79e8c2f9fabf)
-    (property "Reference" "D?" (at 102.87 66.04 90)
+    (property "Reference" "D699" (at 102.87 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 107.188 64.643 90)
@@ -5547,7 +5547,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D699") (unit 1)
         )
       )
     )
@@ -5556,7 +5556,7 @@
   (symbol (lib_id "Device:LED_Small") (at 168.91 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b21a378b-9d1c-4de2-9845-e4a9b0b446a2)
-    (property "Reference" "D?" (at 166.37 66.04 90)
+    (property "Reference" "D712" (at 166.37 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 170.688 64.643 90)
@@ -5573,7 +5573,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D712") (unit 1)
         )
       )
     )
@@ -5582,7 +5582,7 @@
   (symbol (lib_id "Device:R_Small") (at 194.31 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b24531e5-96ed-40a3-b246-3cb3cdb60179)
-    (property "Reference" "R?" (at 193.04 52.07 90)
+    (property "Reference" "R89" (at 193.04 52.07 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 194.31 54.61 90)
@@ -5599,7 +5599,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R89") (unit 1)
         )
       )
     )
@@ -5608,7 +5608,7 @@
   (symbol (lib_id "Device:LED_Small") (at 143.51 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b3c56104-4bcf-496a-b2c1-ecb9afdd8641)
-    (property "Reference" "D?" (at 140.97 101.6 90)
+    (property "Reference" "D748" (at 140.97 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 145.288 100.203 90)
@@ -5625,7 +5625,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D748") (unit 1)
         )
       )
     )
@@ -5634,7 +5634,7 @@
   (symbol (lib_id "Device:LED_Small") (at 179.07 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b432613c-7bf3-4c95-9ab4-50f4e77ec69f)
-    (property "Reference" "D?" (at 176.53 30.48 90)
+    (property "Reference" "D676" (at 176.53 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 180.848 29.083 90)
@@ -5651,7 +5651,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D676") (unit 1)
         )
       )
     )
@@ -5660,7 +5660,7 @@
   (symbol (lib_id "Device:R_Small") (at 194.31 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b4f8d64e-7ffd-4be8-a6be-73199d40da48)
-    (property "Reference" "R?" (at 193.04 123.19 90)
+    (property "Reference" "R99" (at 193.04 123.19 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 194.31 125.73 90)
@@ -5677,7 +5677,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R99") (unit 1)
         )
       )
     )
@@ -5686,7 +5686,7 @@
   (symbol (lib_id "Device:LED_Small") (at 125.73 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b5f7204a-1f3f-469e-ac9b-4166019ff372)
-    (property "Reference" "D?" (at 123.19 30.48 90)
+    (property "Reference" "D661" (at 123.19 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 127.508 29.083 90)
@@ -5703,7 +5703,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D661") (unit 1)
         )
       )
     )
@@ -5712,7 +5712,7 @@
   (symbol (lib_id "Device:LED_Small") (at 212.09 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b7fd3ad9-dd85-4d6e-a40c-831b22273390)
-    (property "Reference" "D?" (at 209.55 66.04 90)
+    (property "Reference" "D723" (at 209.55 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 213.868 64.643 90)
@@ -5729,7 +5729,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D723") (unit 1)
         )
       )
     )
@@ -5738,7 +5738,7 @@
   (symbol (lib_id "power:GND") (at 49.53 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b81c989c-0c6b-49a6-9333-c640eb454a29)
-    (property "Reference" "#PWR?" (at 43.18 90.17 0)
+    (property "Reference" "#PWR0309" (at 43.18 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 46.2788 90.297 90)
@@ -5754,7 +5754,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0309") (unit 1)
         )
       )
     )
@@ -5763,7 +5763,7 @@
   (symbol (lib_id "power:GND") (at 218.44 114.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid badcc4e8-129d-44a7-8b89-bdccc8a474bb)
-    (property "Reference" "#PWR?" (at 218.44 120.65 0)
+    (property "Reference" "#PWR0323" (at 218.44 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 218.567 118.6942 0)
@@ -5779,7 +5779,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0323") (unit 1)
         )
       )
     )
@@ -5788,7 +5788,7 @@
   (symbol (lib_id "Device:LED_Small") (at 57.15 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bc0b91a7-1577-4aeb-96ea-4d30c50094d5)
-    (property "Reference" "D?" (at 54.61 30.48 90)
+    (property "Reference" "D646" (at 54.61 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 58.928 29.083 90)
@@ -5805,7 +5805,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D646") (unit 1)
         )
       )
     )
@@ -5814,7 +5814,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 60.96 113.03 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bcd3ceb7-7eea-4988-9b45-484b73126486)
-    (property "Reference" "U?" (at 73.66 120.65 90)
+    (property "Reference" "U100" (at 73.66 120.65 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 68.58 123.19 90)
@@ -5845,7 +5845,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U100") (unit 1)
         )
       )
     )
@@ -5854,7 +5854,7 @@
   (symbol (lib_id "Device:LED_Small") (at 166.37 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bd28eee1-bc11-4aee-943e-13862cb95eab)
-    (property "Reference" "D?" (at 163.83 30.48 90)
+    (property "Reference" "D671" (at 163.83 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 168.148 29.083 90)
@@ -5871,7 +5871,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D671") (unit 1)
         )
       )
     )
@@ -5880,7 +5880,7 @@
   (symbol (lib_id "Device:LED_Small") (at 62.23 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bd507248-7cd5-47d1-ba4f-91dac4bcb418)
-    (property "Reference" "D?" (at 59.69 30.48 90)
+    (property "Reference" "D648" (at 59.69 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 64.008 29.083 90)
@@ -5897,7 +5897,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D648") (unit 1)
         )
       )
     )
@@ -5906,7 +5906,7 @@
   (symbol (lib_id "Device:LED_Small") (at 138.43 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c64e4d1a-6e87-45dd-856e-43b0453f98d6)
-    (property "Reference" "D?" (at 135.89 66.04 90)
+    (property "Reference" "D706" (at 135.89 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 140.208 64.643 90)
@@ -5923,7 +5923,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D706") (unit 1)
         )
       )
     )
@@ -5932,7 +5932,7 @@
   (symbol (lib_id "power:+5V") (at 187.96 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c6d62fe2-e62c-49a7-9367-e8b9f5ac06ce)
-    (property "Reference" "#PWR?" (at 187.96 115.57 0)
+    (property "Reference" "#PWR0318" (at 187.96 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 188.341 107.3658 0)
@@ -5948,7 +5948,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0318") (unit 1)
         )
       )
     )
@@ -5957,7 +5957,7 @@
   (symbol (lib_id "power:GND") (at 76.2 78.74 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c968e87d-7e33-4f2c-b7e4-cd9456e02724)
-    (property "Reference" "#PWR?" (at 76.2 85.09 0)
+    (property "Reference" "#PWR0304" (at 76.2 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 76.327 83.1342 0)
@@ -5973,7 +5973,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0304") (unit 1)
         )
       )
     )
@@ -5982,7 +5982,7 @@
   (symbol (lib_id "Device:LED_Small") (at 130.81 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cb9d73ed-ca6c-4af3-a530-db378bd1b50d)
-    (property "Reference" "D?" (at 128.27 30.48 90)
+    (property "Reference" "D663" (at 128.27 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 132.588 29.083 90)
@@ -5999,7 +5999,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D663") (unit 1)
         )
       )
     )
@@ -6008,7 +6008,7 @@
   (symbol (lib_id "power:+5V") (at 116.84 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cbe687e6-8ff1-470a-8276-373b3f1a66d3)
-    (property "Reference" "#PWR?" (at 116.84 115.57 0)
+    (property "Reference" "#PWR0316" (at 116.84 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 117.221 107.3658 0)
@@ -6024,7 +6024,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0316") (unit 1)
         )
       )
     )
@@ -6033,7 +6033,7 @@
   (symbol (lib_id "power:GND") (at 111.76 114.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cc6583ec-6217-4d37-a13a-717892377150)
-    (property "Reference" "#PWR?" (at 111.76 120.65 0)
+    (property "Reference" "#PWR0320" (at 111.76 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 111.887 118.6942 0)
@@ -6049,7 +6049,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0320") (unit 1)
         )
       )
     )
@@ -6058,7 +6058,7 @@
   (symbol (lib_id "Device:LED_Small") (at 57.15 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ccb8a561-c6ce-4625-b12f-79d2c4dcceb5)
-    (property "Reference" "D?" (at 54.61 101.6 90)
+    (property "Reference" "D726" (at 54.61 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 58.928 100.203 90)
@@ -6075,7 +6075,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D726") (unit 1)
         )
       )
     )
@@ -6084,7 +6084,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 203.2 77.47 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cd04d95b-d5b8-44e5-af9e-de7d3a5bc751)
-    (property "Reference" "U?" (at 215.9 85.09 90)
+    (property "Reference" "U99" (at 215.9 85.09 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 210.82 87.63 90)
@@ -6115,7 +6115,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U99") (unit 1)
         )
       )
     )
@@ -6124,7 +6124,7 @@
   (symbol (lib_id "Device:LED_Small") (at 207.01 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cd4d751c-fa6c-4a3b-972d-4be71ef342b1)
-    (property "Reference" "D?" (at 204.47 30.48 90)
+    (property "Reference" "D681" (at 204.47 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 208.788 29.083 90)
@@ -6141,7 +6141,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D681") (unit 1)
         )
       )
     )
@@ -6150,7 +6150,7 @@
   (symbol (lib_id "Device:R_Small") (at 52.07 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cd6758f6-d41d-48b1-a32d-5c3e1c4fdeb0)
-    (property "Reference" "R?" (at 50.8 87.63 90)
+    (property "Reference" "R90" (at 50.8 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 52.07 90.17 90)
@@ -6167,7 +6167,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R90") (unit 1)
         )
       )
     )
@@ -6176,7 +6176,7 @@
   (symbol (lib_id "Device:LED_Small") (at 69.85 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cde9f125-1010-4d94-8763-a100072a6df4)
-    (property "Reference" "D?" (at 67.31 66.04 90)
+    (property "Reference" "D691" (at 67.31 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 71.628 64.643 90)
@@ -6193,7 +6193,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D691") (unit 1)
         )
       )
     )
@@ -6202,7 +6202,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 60.96 77.47 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ce0b1110-84d4-4a63-8430-64515e664dcf)
-    (property "Reference" "U?" (at 73.66 85.09 90)
+    (property "Reference" "U95" (at 73.66 85.09 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 68.58 87.63 90)
@@ -6233,7 +6233,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U95") (unit 1)
         )
       )
     )
@@ -6242,7 +6242,7 @@
   (symbol (lib_id "power:GND") (at 147.32 78.74 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cec29a7d-e6e2-4343-bb66-38f98152ba83)
-    (property "Reference" "#PWR?" (at 147.32 85.09 0)
+    (property "Reference" "#PWR0306" (at 147.32 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 147.447 83.1342 0)
@@ -6258,7 +6258,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0306") (unit 1)
         )
       )
     )
@@ -6267,7 +6267,7 @@
   (symbol (lib_id "Device:LED_Small") (at 168.91 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cff9864c-08bb-4b52-949a-07ea66cdccad)
-    (property "Reference" "D?" (at 166.37 101.6 90)
+    (property "Reference" "D752" (at 166.37 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 170.688 100.203 90)
@@ -6284,7 +6284,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D752") (unit 1)
         )
       )
     )
@@ -6293,7 +6293,7 @@
   (symbol (lib_id "LedMatrixBusLarge-rescue:MBI5167G-LedDriverIc") (at 167.64 77.47 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d0549f16-7fcd-4a61-bae9-390fc16e814e)
-    (property "Reference" "U?" (at 180.34 85.09 90)
+    (property "Reference" "U98" (at 180.34 85.09 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "MBI5167G" (at 175.26 87.63 90)
@@ -6324,7 +6324,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "U?") (unit 1)
+          (reference "U98") (unit 1)
         )
       )
     )
@@ -6333,7 +6333,7 @@
   (symbol (lib_id "Device:LED_Small") (at 212.09 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d4dc1c7e-5d61-49e1-b0b8-fd58d64f7e32)
-    (property "Reference" "D?" (at 209.55 101.6 90)
+    (property "Reference" "D763" (at 209.55 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 213.868 100.203 90)
@@ -6350,7 +6350,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D763") (unit 1)
         )
       )
     )
@@ -6359,7 +6359,7 @@
   (symbol (lib_id "power:+5V") (at 187.96 40.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d4eebc3f-042e-4694-827e-6c125fe4900e)
-    (property "Reference" "#PWR?" (at 187.96 44.45 0)
+    (property "Reference" "#PWR0288" (at 187.96 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 188.341 36.2458 0)
@@ -6375,7 +6375,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0288") (unit 1)
         )
       )
     )
@@ -6384,7 +6384,7 @@
   (symbol (lib_id "Device:R_Small") (at 194.31 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d62caf7c-1bcd-4bc6-a94c-372a42ec00a4)
-    (property "Reference" "R?" (at 193.04 87.63 90)
+    (property "Reference" "R94" (at 193.04 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 194.31 90.17 90)
@@ -6401,7 +6401,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R94") (unit 1)
         )
       )
     )
@@ -6410,7 +6410,7 @@
   (symbol (lib_id "Device:LED_Small") (at 133.35 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d70890d6-7be5-404b-a9b0-1302f428f759)
-    (property "Reference" "D?" (at 130.81 66.04 90)
+    (property "Reference" "D704" (at 130.81 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 135.128 64.643 90)
@@ -6427,7 +6427,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D704") (unit 1)
         )
       )
     )
@@ -6436,7 +6436,7 @@
   (symbol (lib_id "Device:LED_Small") (at 105.41 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d71709d1-fc2e-4fb4-ae4d-7c45ad05f19f)
-    (property "Reference" "D?" (at 102.87 101.6 90)
+    (property "Reference" "D739" (at 102.87 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 107.188 100.203 90)
@@ -6453,7 +6453,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D739") (unit 1)
         )
       )
     )
@@ -6462,7 +6462,7 @@
   (symbol (lib_id "Device:LED_Small") (at 143.51 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d789512a-699b-431c-8b27-0d5e74fea814)
-    (property "Reference" "D?" (at 140.97 30.48 90)
+    (property "Reference" "D668" (at 140.97 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 145.288 29.083 90)
@@ -6479,7 +6479,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D668") (unit 1)
         )
       )
     )
@@ -6488,7 +6488,7 @@
   (symbol (lib_id "power:+5V") (at 152.4 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d86e1a50-1305-413a-af08-a1d5629a2d8a)
-    (property "Reference" "#PWR?" (at 152.4 80.01 0)
+    (property "Reference" "#PWR0302" (at 152.4 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 152.781 71.8058 0)
@@ -6504,7 +6504,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0302") (unit 1)
         )
       )
     )
@@ -6513,7 +6513,7 @@
   (symbol (lib_id "Device:LED_Small") (at 135.89 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dc234340-ccb7-435a-83a2-778bceecc1db)
-    (property "Reference" "D?" (at 133.35 101.6 90)
+    (property "Reference" "D745" (at 133.35 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 137.668 100.203 90)
@@ -6530,7 +6530,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D745") (unit 1)
         )
       )
     )
@@ -6539,7 +6539,7 @@
   (symbol (lib_id "power:GND") (at 85.09 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid df8f6d44-70dd-4f5d-ae7a-f56237922aae)
-    (property "Reference" "#PWR?" (at 78.74 54.61 0)
+    (property "Reference" "#PWR0295" (at 78.74 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 81.8388 54.737 90)
@@ -6555,7 +6555,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0295") (unit 1)
         )
       )
     )
@@ -6564,7 +6564,7 @@
   (symbol (lib_id "Device:LED_Small") (at 209.55 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e01eb192-e325-4ad2-9ed4-dfa8c6000264)
-    (property "Reference" "D?" (at 207.01 101.6 90)
+    (property "Reference" "D762" (at 207.01 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 211.328 100.203 90)
@@ -6581,7 +6581,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D762") (unit 1)
         )
       )
     )
@@ -6590,7 +6590,7 @@
   (symbol (lib_id "Device:LED_Small") (at 161.29 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e0aae83e-97f8-4258-a149-f5f561398476)
-    (property "Reference" "D?" (at 158.75 66.04 90)
+    (property "Reference" "D709" (at 158.75 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 163.068 64.643 90)
@@ -6607,7 +6607,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D709") (unit 1)
         )
       )
     )
@@ -6616,7 +6616,7 @@
   (symbol (lib_id "Device:LED_Small") (at 199.39 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e1cd3f26-5f3d-4517-84ca-b4e5b3b3a39d)
-    (property "Reference" "D?" (at 196.85 101.6 90)
+    (property "Reference" "D758" (at 196.85 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 201.168 100.203 90)
@@ -6633,7 +6633,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D758") (unit 1)
         )
       )
     )
@@ -6642,7 +6642,7 @@
   (symbol (lib_id "Device:LED_Small") (at 133.35 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e4ae0331-008c-4d60-8ab8-8db424101d38)
-    (property "Reference" "D?" (at 130.81 30.48 90)
+    (property "Reference" "D664" (at 130.81 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 135.128 29.083 90)
@@ -6659,7 +6659,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D664") (unit 1)
         )
       )
     )
@@ -6668,7 +6668,7 @@
   (symbol (lib_id "power:GND") (at 156.21 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e596ee29-e3de-48b8-a300-f239f1d20252)
-    (property "Reference" "#PWR?" (at 149.86 54.61 0)
+    (property "Reference" "#PWR0297" (at 149.86 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.9588 54.737 90)
@@ -6684,7 +6684,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0297") (unit 1)
         )
       )
     )
@@ -6693,7 +6693,7 @@
   (symbol (lib_id "power:+5V") (at 45.72 40.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e83c6daa-c276-49aa-94cb-8177c9db29cf)
-    (property "Reference" "#PWR?" (at 45.72 44.45 0)
+    (property "Reference" "#PWR0284" (at 45.72 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 46.101 36.2458 0)
@@ -6709,7 +6709,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0284") (unit 1)
         )
       )
     )
@@ -6718,7 +6718,7 @@
   (symbol (lib_id "Device:LED_Small") (at 171.45 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid eb4d1c6d-53c5-4a9f-9c75-8177287445d4)
-    (property "Reference" "D?" (at 168.91 66.04 90)
+    (property "Reference" "D713" (at 168.91 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 173.228 64.643 90)
@@ -6735,7 +6735,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D713") (unit 1)
         )
       )
     )
@@ -6744,7 +6744,7 @@
   (symbol (lib_id "Device:LED_Small") (at 196.85 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ebe3b887-1b71-4668-aaa3-7f0035afb7c4)
-    (property "Reference" "D?" (at 194.31 66.04 90)
+    (property "Reference" "D717" (at 194.31 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 198.628 64.643 90)
@@ -6761,7 +6761,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D717") (unit 1)
         )
       )
     )
@@ -6770,7 +6770,7 @@
   (symbol (lib_id "Device:LED_Small") (at 59.69 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ebead867-35d8-4821-a543-229c3538c2e3)
-    (property "Reference" "D?" (at 57.15 30.48 90)
+    (property "Reference" "D647" (at 57.15 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 61.468 29.083 90)
@@ -6787,7 +6787,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D647") (unit 1)
         )
       )
     )
@@ -6796,7 +6796,7 @@
   (symbol (lib_id "power:GND") (at 76.2 43.18 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ec5be1c9-00a1-406f-be8b-a8e4e25e8f53)
-    (property "Reference" "#PWR?" (at 76.2 49.53 0)
+    (property "Reference" "#PWR0289" (at 76.2 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 76.327 47.5742 0)
@@ -6812,7 +6812,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0289") (unit 1)
         )
       )
     )
@@ -6821,7 +6821,7 @@
   (symbol (lib_id "Device:LED_Small") (at 69.85 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ec5eb01d-c1ea-408d-80f0-9e58c6263ff0)
-    (property "Reference" "D?" (at 67.31 101.6 90)
+    (property "Reference" "D731" (at 67.31 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 71.628 100.203 90)
@@ -6838,7 +6838,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D731") (unit 1)
         )
       )
     )
@@ -6847,7 +6847,7 @@
   (symbol (lib_id "Device:R_Small") (at 123.19 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ed5cbdcc-4159-477c-9b5f-311d48486226)
-    (property "Reference" "R?" (at 121.92 52.07 90)
+    (property "Reference" "R87" (at 121.92 52.07 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 123.19 54.61 90)
@@ -6864,7 +6864,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R87") (unit 1)
         )
       )
     )
@@ -6873,7 +6873,7 @@
   (symbol (lib_id "Device:LED_Small") (at 67.31 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid edb5b1f6-150f-44b2-9324-e2557015f452)
-    (property "Reference" "D?" (at 64.77 66.04 90)
+    (property "Reference" "D690" (at 64.77 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 69.088 64.643 90)
@@ -6890,7 +6890,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D690") (unit 1)
         )
       )
     )
@@ -6899,7 +6899,7 @@
   (symbol (lib_id "Device:LED_Small") (at 92.71 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ee952a01-2925-47e5-ac92-8f79e13b72cb)
-    (property "Reference" "D?" (at 90.17 66.04 90)
+    (property "Reference" "D694" (at 90.17 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 94.488 64.643 90)
@@ -6916,7 +6916,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D694") (unit 1)
         )
       )
     )
@@ -6925,7 +6925,7 @@
   (symbol (lib_id "Device:LED_Small") (at 97.79 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ef777838-80aa-4f64-af0a-c3eb1d030665)
-    (property "Reference" "D?" (at 95.25 30.48 90)
+    (property "Reference" "D656" (at 95.25 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 99.568 29.083 90)
@@ -6942,7 +6942,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D656") (unit 1)
         )
       )
     )
@@ -6951,7 +6951,7 @@
   (symbol (lib_id "Device:LED_Small") (at 54.61 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f07a54d4-1f69-43ac-8755-822c44eda01c)
-    (property "Reference" "D?" (at 52.07 66.04 90)
+    (property "Reference" "D685" (at 52.07 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 56.388 64.643 90)
@@ -6968,7 +6968,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D685") (unit 1)
         )
       )
     )
@@ -6977,7 +6977,7 @@
   (symbol (lib_id "Device:LED_Small") (at 179.07 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f0d929cc-61d0-410a-a211-3064994bc682)
-    (property "Reference" "D?" (at 176.53 66.04 90)
+    (property "Reference" "D716" (at 176.53 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 180.848 64.643 90)
@@ -6994,7 +6994,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D716") (unit 1)
         )
       )
     )
@@ -7003,7 +7003,7 @@
   (symbol (lib_id "power:+5V") (at 45.72 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f1295ed2-af4e-4e3b-a7f5-70d491ee5827)
-    (property "Reference" "#PWR?" (at 45.72 80.01 0)
+    (property "Reference" "#PWR0299" (at 45.72 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 46.101 71.8058 0)
@@ -7019,7 +7019,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0299") (unit 1)
         )
       )
     )
@@ -7028,7 +7028,7 @@
   (symbol (lib_id "Device:LED_Small") (at 62.23 63.5 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f27b2ebc-3944-4952-ae82-8e3260ec84e5)
-    (property "Reference" "D?" (at 59.69 66.04 90)
+    (property "Reference" "D688" (at 59.69 66.04 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 64.008 64.643 90)
@@ -7045,7 +7045,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D688") (unit 1)
         )
       )
     )
@@ -7054,7 +7054,7 @@
   (symbol (lib_id "Device:LED_Small") (at 128.27 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f2b91693-7365-42a0-8396-55cc075963e8)
-    (property "Reference" "D?" (at 125.73 30.48 90)
+    (property "Reference" "D662" (at 125.73 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 130.048 29.083 90)
@@ -7071,7 +7071,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D662") (unit 1)
         )
       )
     )
@@ -7080,7 +7080,7 @@
   (symbol (lib_id "Device:R_Small") (at 52.07 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f3aecbdc-4d8c-423a-b11e-59710ef2ae6e)
-    (property "Reference" "R?" (at 50.8 123.19 90)
+    (property "Reference" "R95" (at 50.8 123.19 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3K" (at 52.07 125.73 90)
@@ -7097,7 +7097,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "R?") (unit 1)
+          (reference "R95") (unit 1)
         )
       )
     )
@@ -7106,7 +7106,7 @@
   (symbol (lib_id "Device:LED_Small") (at 204.47 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f61d190c-6488-4de5-a9e7-de1e21e1215e)
-    (property "Reference" "D?" (at 201.93 101.6 90)
+    (property "Reference" "D760" (at 201.93 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 206.248 100.203 90)
@@ -7123,7 +7123,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D760") (unit 1)
         )
       )
     )
@@ -7132,7 +7132,7 @@
   (symbol (lib_id "Device:LED_Small") (at 90.17 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f6ed9682-a53b-44af-b890-8f5e50744ffe)
-    (property "Reference" "D?" (at 87.63 30.48 90)
+    (property "Reference" "D653" (at 87.63 30.48 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 91.948 29.083 90)
@@ -7149,7 +7149,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D653") (unit 1)
         )
       )
     )
@@ -7158,7 +7158,7 @@
   (symbol (lib_id "Device:LED_Small") (at 196.85 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fbd41cc7-9c01-43bf-8a78-7cea3d813a91)
-    (property "Reference" "D?" (at 194.31 101.6 90)
+    (property "Reference" "D757" (at 194.31 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 198.628 100.203 90)
@@ -7175,7 +7175,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D757") (unit 1)
         )
       )
     )
@@ -7184,7 +7184,7 @@
   (symbol (lib_id "power:GND") (at 85.09 125.73 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fcf25f87-d6db-418e-bffa-d8b8f675d0c8)
-    (property "Reference" "#PWR?" (at 78.74 125.73 0)
+    (property "Reference" "#PWR0325" (at 78.74 125.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 81.8388 125.857 90)
@@ -7200,7 +7200,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR0325") (unit 1)
         )
       )
     )
@@ -7209,7 +7209,7 @@
   (symbol (lib_id "Device:LED_Small") (at 107.95 99.06 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fee9f308-ed59-4405-90e5-620abdf6705a)
-    (property "Reference" "D?" (at 105.41 101.6 90)
+    (property "Reference" "D740" (at 105.41 101.6 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LED_Small" (at 109.728 100.203 90)
@@ -7226,7 +7226,7 @@
     (instances
       (project "LedMatrixBusLarge"
         (path "/f7dc92ea-9261-4e51-ad78-f347ff770195/00000000-0000-0000-0000-00005f3fd61c/00000000-0000-0000-0000-00005fea68a1"
-          (reference "D?") (unit 1)
+          (reference "D740") (unit 1)
         )
       )
     )
