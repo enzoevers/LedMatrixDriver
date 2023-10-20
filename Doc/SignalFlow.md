@@ -41,7 +41,16 @@ The blocks "Main clock control" and "LED data shift register clock" needs some m
 - Whether LED data is clocked in or if panel/section select data is clocked in.
 - What panel is selected
 - What section of a panel is selected
-- Clocking in LED or panel/section select data 
+- Clocking in LED or panel/section select data
+
+Three pins of the input connector are needed for the clock:
+- Pin 2: clkIn
+- Pin 3: clkSelEn
+- Pin 5: clkEn
+
+The signals names of the pins are maybe a bit counterintuitive. The pin that acts as the clock-like signal is the ClkEn pin. This name for the signal is chosen since it relates to the function of the pin on the 74HC138D in the "Main clock control" block to which it is connected. It is connected to pin 4 which is ~E1. When this pin is HIGH, all outputs are HIGH. In this pin is LOW, the output depends on the clkIn signal that is connected to pin 1 on the 74HC138D.
+
+The clkSelEn signal is connected to the 74HC138D in the "LED data shift register clock" block to pin 5 (~E2) and is used in a similar way as clkEn. Mainly being the the actual clock while the inputs A0 and A1 are used to select which outputs are clocked.
 
 # MBI5167G connections to other ICs
 The following ICs (seen on the bottom of the PCB in the picture of the panel above) are connected to the MBI5167Gs:
