@@ -59,7 +59,10 @@ The clkSelEn signal is connected to the 74HC138D in the "LED data shift register
 
 Selecting how the data is interpretated is show in the image below. Also note that the clkSelEn signals acts as the clock for the MBI5167G shift registers of the LEDs 
 
-<img src="./Img/DrawIo/HanoverLedMatrixSignals_ClockDataInterpretation.svg" width="50%">
+<img src="./Img/DrawIo/HanoverLedMatrixSignals_ClockDataInterpretation.svg" width="60%">
+
+<br>
+From the datasheet of the SN74HC138 (to which clkEn is connected) we can see that, as 5V, a safe minimum clock pulse would need to stay at least 40ns HIGH or LOW or 80ns per pulse. This equals a maximum frequency of 12.5MHz for the clock.
 
 ## Section and panel select
 On the output of the left 74HC164 (section clock) in the "LED data shift register clock" block is also a header connected on which a jumper connects a certain output with a pull-up resistor. One of the active low enable pins on the left 74HC138 demultiplexer (which selects which section is clocked) is also connected to this pull-up resistor. when the jumper is set to, for example connect Q0 of the left 74HC164 with the pull-up resistor, then the left 74HC138 will only be enabled when there is a 0 on Q0. 
