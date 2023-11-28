@@ -7,7 +7,7 @@ pipeline {
                 echo "building app"
             }
              steps {
-                echo "Another step"
+                echo "Another"
             }
         }
     }
