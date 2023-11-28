@@ -5,8 +5,6 @@ pipeline {
         stage('build') {
             steps {
                 echo "building app"
-            }
-             steps {
                 echo "Another"
             }
         }
