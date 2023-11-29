@@ -5,7 +5,7 @@ pipeline {
         stage('build') {
             steps {
                 echo "building app"
-                echo "Yeah"
+                echo "Yeah!"
             }
         }
     }
