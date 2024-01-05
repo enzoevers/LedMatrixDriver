@@ -1,2 +1,0 @@
-https://learn.adafruit.com/creating-custom-symbol-font-for-adafruit-gfx-library/understanding-the-font-specification
-https://learn.adafruit.com/creating-custom-symbol-font-for-adafruit-gfx-library?view=all
