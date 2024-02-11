@@ -1,0 +1,6 @@
+{
+    "clang-format.executable": "clang-format",
+    "clang-format.style": "file",
+    "clang-format.fallbackStyle": "Google",
+    "editor.formatOnSave": true
+}
