@@ -7,8 +7,6 @@
 class IGPIOOutput {
     virtual ~IGPIOOutput() = default;
 
-    virtual auto Init() -> bool = 0;
-
     virtual auto SetState(bool on) -> void = 0;
     virtual auto GetState() -> bool = 0;
 };
