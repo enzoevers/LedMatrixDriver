@@ -5,6 +5,25 @@ cd <root of this repo>
 git submodule init
 ```
 
+# Build
+
+```bash
+cd Code
+
+mkdir build
+cd build
+
+cmake .. -DUSE_STM32_HAL=ON -DUSE_STM32F303XC=ON
+make
+```
+
+# Testing
+
+```bash
+cmake .. -DTEST_ON_PC=ON
+make
+```
+
 # Doxygen
 
 ## Install Doxygen
