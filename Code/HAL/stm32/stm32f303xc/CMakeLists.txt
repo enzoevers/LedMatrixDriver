@@ -1,6 +1,4 @@
-add_library(hal-stm32f303xc STATIC
-    GPIOOutputStm32F303xc.cpp
-)
+add_library(hal-stm32f303xc STATIC)
 
 # Generic HAL includes
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../include)

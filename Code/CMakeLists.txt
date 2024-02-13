@@ -5,6 +5,7 @@ if(USE_STM32)
 endif()
 
 if(TEST_ON_PC)
+    include(GoogleTest)
 endif()
 
 set(PROJECT_NAME LedDisplayDriverProject)
