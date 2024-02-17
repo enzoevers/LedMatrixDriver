@@ -1,13 +1,22 @@
 #include "GPIOOutputDesktop.h"
+//-----
+#include "fuzztest/fuzztest.h"
 #include "gtest/gtest.h"
 
 using namespace testing;
+using namespace fuzztest;
+
+namespace GPIOOutputDesktopTesting {
 
 class FixtureGPIOOutputDesktop : public Test {
    public:
     auto CreateIGPIOOutput() -> std::unique_ptr<IGPIOOutput> { return std::make_unique<GPIOOutputDesktop>(); }
 
     auto CreateIGPIOOutputDesktop() -> std::unique_ptr<IGPIOOutputDesktop> {
+        return std::make_unique<GPIOOutputDesktop>();
+    }
+
+    auto CreateGPIOOutputDesktop() -> std::unique_ptr<GPIOOutputDesktop> {
         return std::make_unique<GPIOOutputDesktop>();
     }
 };
@@ -36,6 +45,25 @@ TEST_F(FixtureGPIOOutputDesktop, SetStateIsReflectedInGetState_False) {
     EXPECT_FALSE(iGPIOOutput->GetState());
 }
 
+TEST_F(FixtureGPIOOutputDesktop, SetStateIsReflectedInGetState_Toggle) {
+    auto gPIOOutput = CreateGPIOOutputDesktop();
+
+    uint32_t outputRegister = 0;
+    gPIOOutput->SetOutputRegister(&outputRegister);
+
+    gPIOOutput->SetState(true);
+    EXPECT_TRUE(gPIOOutput->GetState());
+
+    gPIOOutput->SetState(false);
+    EXPECT_FALSE(gPIOOutput->GetState());
+
+    gPIOOutput->SetState(true);
+    EXPECT_TRUE(gPIOOutput->GetState());
+
+    gPIOOutput->SetState(false);
+    EXPECT_FALSE(gPIOOutput->GetState());
+}
+
 //---------------
 // IGPIOOutputDesktop
 //---------------
@@ -44,24 +72,29 @@ TEST_F(FixtureGPIOOutputDesktop, SetStateIsReflectedInGetState_False) {
 // SetOutputRegister() + GetOutputRegister()
 //====================
 
-TEST_F(FixtureGPIOOutputDesktop, SetOutputRegisterIsReflectedInGetOutputRegister) {
-    auto iGPIOOutputDesktop = CreateIGPIOOutputDesktop();
-    std::unique_ptr<uint32_t> pOutputRegister;
+// TODO: Make test for no nullptr allowed
 
-    iGPIOOutputDesktop->SetOutputRegister(pOutputRegister.get());
+void SetOutputRegisterIsReflectedInGetOutputRegisterFuzz(std::unique_ptr<uint32_t> pOutputRegister) {
+    auto iGPIOOutputStm32 = std::make_unique<GPIOOutputDesktop>();
 
-    EXPECT_EQ(iGPIOOutputDesktop->GetOutputRegister(), pOutputRegister.get());
+    iGPIOOutputStm32->SetOutputRegister(pOutputRegister.get());
+
+    EXPECT_EQ(iGPIOOutputStm32->GetOutputRegister(), pOutputRegister.get());
 }
+FUZZ_TEST(GPIOOutputDesktop, SetOutputRegisterIsReflectedInGetOutputRegisterFuzz)
+    .WithDomains(SmartPointerOf<std::unique_ptr<uint32_t>>(Arbitrary<uint32_t>()));
 
 //====================
 // SetPinMask() + GetPinMask()
 //====================
 
-TEST_F(FixtureGPIOOutputDesktop, SetPinMaskIsReflectedInGetPinMask) {
-    auto iGPIOOutputDesktop = CreateIGPIOOutputDesktop();
-    uint32_t pinMask;
+void SetPinMaskIsReflectedInGetPinMaskFuzz(uint32_t pinMask) {
+    auto iGPIOOutputStm32 = std::make_unique<GPIOOutputDesktop>();
 
-    iGPIOOutputDesktop->SetPinMask(pinMask);
+    iGPIOOutputStm32->SetPinMask(pinMask);
 
-    EXPECT_EQ(iGPIOOutputDesktop->GetPinMask(), pinMask);
+    EXPECT_EQ(iGPIOOutputStm32->GetPinMask(), pinMask);
 }
+FUZZ_TEST(GPIOOutputDesktop, SetPinMaskIsReflectedInGetPinMaskFuzz);
+
+}  // namespace GPIOOutputDesktopTesting

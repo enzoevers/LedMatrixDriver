@@ -14,15 +14,24 @@ cd <root of this repo>
 git submodule init
 ```
 
-# Build
-
 ```bash
 cd Code
 
 mkdir build
 cd build
+```
 
+## STM32
+
+```bash
 cmake .. -DUSE_STM32_HAL=ON -DUSE_STM32F303XC=ON
+make -j8
+```
+
+## Desktop
+
+```bash
+cmake .. -DUSE_DESKTOP_HAL=ON
 make -j8
 ```
 
