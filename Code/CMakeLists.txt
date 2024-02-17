@@ -13,6 +13,10 @@ set(EXECUTABLE_NAME LedDisplayDriverExecutable)
 
 project(${PROJECT_NAME} C CXX ASM)
 
+if(TEST_ON_PC)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/fuzztest)
+endif()
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Doc)
 
 set(MAIN_SOURCE_FILES main.cpp)

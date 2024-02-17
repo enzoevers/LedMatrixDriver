@@ -1,3 +1,12 @@
+# Prerequisits
+
+```bash
+sudo apt install clang \
+                 libstdc++-12-dev
+```
+
+> The reason for `libstdc++12-devmak` is described here: https://stackoverflow.com/questions/74543715/usr-bin-ld-cannot-find-lstdc-no-such-file-or-directory-on-running-flutte
+
 # Setup
 
 ```bash
@@ -14,14 +23,16 @@ mkdir build
 cd build
 
 cmake .. -DUSE_STM32_HAL=ON -DUSE_STM32F303XC=ON
-make
+make -j8
 ```
 
 # Testing
 
 ```bash
-cmake .. -DTEST_ON_PC=ON
-make
+CC=clang CXX=clang++ cmake .. -DTEST_ON_PC=ON
+make -j8
+
+./HAL/test/TestHAL
 ```
 
 # Doxygen
