@@ -10,16 +10,16 @@ class GPIOOutputStm32 : public IGPIOOutput, public IGPIOOutputStm32 {
     //---------------
     // IGPIOOutput
     //---------------
-    auto SetState(bool on) -> void override;
+    auto SetState(bool on) -> bool override;
     auto GetState() -> bool override;
 
     //---------------
     // IGPIOOutputStm32
     //---------------
-    auto SetOutputRegister(uint32_t* outputRegister) -> void override;
+    auto SetOutputRegister(uint32_t* outputRegister) -> bool override;
     auto GetOutputRegister() const -> const uint32_t* override;
 
-    auto SetPinMask(uint32_t pinMask) -> void override;
+    auto SetPinMask(uint32_t pinMask) -> bool override;
     auto GetPinMask() const -> uint32_t override;
 
    private:

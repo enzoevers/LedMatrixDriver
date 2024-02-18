@@ -10,7 +10,7 @@ class GPIOOutputDesktop : public IGPIOOutput, public IGPIOOutputDesktop {
     //---------------
     // IGPIOOutput
     //---------------
-    auto SetState(bool on) -> void override;
+    auto SetState(bool on) -> bool override;
     auto GetState() -> bool override;
 
     //---------------

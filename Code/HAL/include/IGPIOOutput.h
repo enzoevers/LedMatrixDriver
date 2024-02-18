@@ -8,6 +8,9 @@ class IGPIOOutput {
    public:
     virtual ~IGPIOOutput() = default;
 
-    virtual auto SetState(bool on) -> void = 0;
+    // \note When this functions is not able to set the state of the GPIO, returns false. Otherwise returns true
+    virtual auto SetState(bool on) -> bool = 0;
+
+    // \note When this functions is not able to get the state of the GPIO, false is returned.
     virtual auto GetState() -> bool = 0;
 };

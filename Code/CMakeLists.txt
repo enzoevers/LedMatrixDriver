@@ -5,7 +5,15 @@ if(USE_STM32)
 endif()
 
 if(TEST_ON_PC)
-    include(GoogleTest)
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+    )
+    
+    # For Windows: Prevent overriding the parent project's compiler/linker settings
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
 endif()
 
 set(PROJECT_NAME LedDisplayDriverProject)
@@ -15,6 +23,7 @@ project(${PROJECT_NAME} C CXX ASM)
 
 if(TEST_ON_PC)
     add_subdirectory(${CMAKE_SOURCE_DIR}/fuzztest)
+    set(CMAKE_CXX_STANDARD 23)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Doc)

@@ -1,6 +1,7 @@
 add_executable(TestHAL
-  test_hal_stm32.cpp
-  test_hal_desktop.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/TestHalStm32.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/TestHalDesktop.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/TestHalIGPIOOutput.cpp
 )
 
 link_fuzztest(TestHAL)
