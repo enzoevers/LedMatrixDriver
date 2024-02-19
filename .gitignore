@@ -1,6 +1,12 @@
 #----- Begin -----
 
 build
+
+# See Scripts/Variables.sh
+BuildDesktop
+BuildStm32
+BuildTest
+
 dist
 
 #----- End -----

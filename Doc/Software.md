@@ -1,11 +1,4 @@
-# Prerequisits
-
-```bash
-sudo apt install clang \
-                 libstdc++-12-dev
-```
-
-> The reason for `libstdc++12-devmak` is described here: https://stackoverflow.com/questions/74543715/usr-bin-ld-cannot-find-lstdc-no-such-file-or-directory-on-running-flutte
+#
 
 # Setup
 
@@ -14,39 +7,53 @@ cd <root of this repo>
 git submodule init
 ```
 
-```bash
-cd Code
-
-mkdir build
-cd build
-```
+# Using the scripts
 
 ## STM32
 
-```bash
-cmake .. -DUSE_STM32=ON -DUSE_STM32F303XC=ON
-make -j8
-```
+### Available scripts
+
+- ./Scripts/Stm32/BuildStm32.sh
+- [sudo] ./Scripts/Stm32/CleanStm32Build.sh
 
 ## Desktop
 
+### Available scripts
+
+- ./Scripts/Desktop/BuildDesktop.sh
+- ./Scripts/Desktop/CleanDesktopBuild.sh
+
+## Testing
+
+### Prerequisits
+
 ```bash
-cmake .. -DUSE_DESKTOP=ON
-make -j8
+sudo apt install clang \
+                 libstdc++-12-dev
 ```
 
-# Testing
+> The reason for `libstdc++12-devmak` is described here: https://stackoverflow.com/questions/74543715/usr-bin-ld-cannot-find-lstdc-no-such-file-or-directory-on-running-flutte
 
-```bash
-CC=clang CXX=clang++ cmake .. -DTEST_ON_PC=ON
-make -j8
+### Available scripts
 
-./HAL/test/TestHAL
-```
+- ./Scripts/Test/BuildTest.sh
+- [sudo] ./Scripts/Test/CleanTestBuild.sh
+- ./Scripts/Test/RunTest.sh
+
+## Documentation
+
+### Prerequisits
+
+This requiress that Doxygen is installed and available for cmake. See the [section](#doxygen) below
+
+### Available scripts
+
+- ./Scripts/Doc/BuildDoc.sh
+- ./Scripts/Doc/CleanDocBuild.sh
+
+The `index.html` can then be found in `Code/BuildDoc/Doc/html/index.html`
 
 # Doxygen
-
-## Install Doxygen
 
 > NOTE: The project can also be built without Doxygen. Just no documentation will be generated in this case.
 
@@ -69,19 +76,3 @@ make
 
 make install
 ```
-
-## Generating documentation
-
-To configure the doxygen files, use the `GENERATE_DOCS` property.
-
-```bash
-cmake .. -DGENERATE_DOCS=ON <any other properties>
-```
-
-After `cmake ..` was called from the `Code/build` directory, the following command can be build to generate html documentation.
-
-```bash
-doxygen Doc/Doxyfile.doxygen
-```
-
-The `index.html` can then be found in `Code/build/Doc/html/index.html`
