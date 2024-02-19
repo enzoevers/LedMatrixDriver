@@ -1,5 +1,5 @@
 # LedMatrixDriver
 
-- [Doc](./Doc/)
-  - [Documentation about the software and the usage of it](./Doc/Software.md)
-  - [Documentation of the electronics of the LED matrix](./Doc/SignalFlow.md)
+- Documentation
+  - [How to build and use the software.](./Doc/Software.md)
+  - [Electronics of the LED matrix.](./Doc/SignalFlow.md)

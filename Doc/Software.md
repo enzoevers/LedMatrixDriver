@@ -44,19 +44,6 @@ sudo apt install clang \
 
 ### Prerequisits
 
-This requiress that Doxygen is installed and available for cmake. See the [section](#doxygen) below
-
-### Available scripts
-
-- ./Scripts/Doc/BuildDoc.sh
-- ./Scripts/Doc/CleanDocBuild.sh
-
-The `index.html` can then be found in `Code/BuildDoc/Doc/html/index.html`
-
-# Doxygen
-
-> NOTE: The project can also be built without Doxygen. Just no documentation will be generated in this case.
-
 The [Code/Doc/CMakeLists.txt](../Code/Doc/CMakeLists.txt) makes use of the Doxygen cmake package. To use it, install Doxygen as described here: https://www.doxygen.nl/manual/install.html
 
 ```bash
@@ -76,3 +63,10 @@ make
 
 make install
 ```
+
+### Available scripts
+
+- ./Scripts/Doc/BuildDoc.sh
+- ./Scripts/Doc/CleanDocBuild.sh
+
+The `index.html` can then be found in `Code/BuildDoc/Doc/html/index.html`
