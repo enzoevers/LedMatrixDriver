@@ -36,13 +36,15 @@ endif()
 set(MAIN_SOURCE_FILES main.cpp)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
+if(USE_STM32 OR USE_DESKTOP OR TEST_ON_PC)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
+endif()
 
 add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
 
 if(USE_STM32)
     target_link_libraries(${EXECUTABLE_NAME}
-        STM32::NoSys
+        hal-stm32
     )
 
     stm32_print_size_of_target(${EXECUTABLE_NAME})

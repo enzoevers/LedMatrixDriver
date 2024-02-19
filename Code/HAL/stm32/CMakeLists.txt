@@ -12,6 +12,10 @@ if(USE_STM32)
     include(stm32/devices)
 
     set(CMSIS_COMP_LIST "")
+    
+    target_link_libraries(hal-stm32
+        STM32::NoSys
+    )
 endif()
 
 # Any F3 chip or when testing
