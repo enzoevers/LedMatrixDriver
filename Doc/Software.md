@@ -24,7 +24,7 @@ cd build
 ## STM32
 
 ```bash
-cmake .. -DUSE_STM32_HAL=ON -DUSE_STM32F303XC=ON
+cmake .. -DUSE_STM32=ON -DUSE_STM32F303XC=ON
 make -j8
 ```
 
@@ -71,6 +71,12 @@ make install
 ```
 
 ## Generating documentation
+
+To configure the doxygen files, use the `GENERATE_DOCS` property.
+
+```bash
+cmake .. -DGENERATE_DOCS=ON <any other properties>
+```
 
 After `cmake ..` was called from the `Code/build` directory, the following command can be build to generate html documentation.
 

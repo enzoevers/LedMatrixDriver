@@ -21,12 +21,14 @@ set(EXECUTABLE_NAME LedDisplayDriverExecutable)
 
 project(${PROJECT_NAME} C CXX ASM)
 
+if(GENERATE_DOCS)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Doc)
+endif()
+
 if(TEST_ON_PC)
     add_subdirectory(${CMAKE_SOURCE_DIR}/fuzztest)
     set(CMAKE_CXX_STANDARD 23)
 endif()
-
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Doc)
 
 set(MAIN_SOURCE_FILES main.cpp)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
@@ -37,9 +39,9 @@ add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
 
 if(USE_STM32)
     target_link_libraries(${EXECUTABLE_NAME}
-        hal-stm32
         STM32::NoSys
     )
+
     stm32_print_size_of_target(${EXECUTABLE_NAME})
     stm32_generate_binary_file(${EXECUTABLE_NAME})
     stm32_generate_hex_file(${EXECUTABLE_NAME})
