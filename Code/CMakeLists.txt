@@ -27,6 +27,9 @@ endif()
 
 if(TEST_ON_PC)
     add_subdirectory(${CMAKE_SOURCE_DIR}/fuzztest)
+endif()
+
+if(TEST_ON_PC OR USE_DESKTOP)
     set(CMAKE_CXX_STANDARD 23)
 endif()
 

@@ -31,7 +31,7 @@ make -j8
 ## Desktop
 
 ```bash
-cmake .. -DUSE_DESKTOP_HAL=ON
+cmake .. -DUSE_DESKTOP=ON
 make -j8
 ```
 
