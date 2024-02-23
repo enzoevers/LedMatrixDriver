@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
+configure_file(defines.h.in defines.h)
+
 if(USE_STM32)
     set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/stm32-cmake/cmake/stm32_gcc.cmake)
 endif()
@@ -34,13 +36,18 @@ if(TEST_ON_PC OR USE_DESKTOP)
 endif()
 
 set(MAIN_SOURCE_FILES main.cpp)
-set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-if(USE_STM32 OR USE_DESKTOP OR TEST_ON_PC)
+if(NOT GENERATE_DOCS)
     add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/Common)
 endif()
 
 add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
+
+target_link_libraries(${EXECUTABLE_NAME}
+    Common
+)
 
 if(USE_STM32)
     target_link_libraries(${EXECUTABLE_NAME}

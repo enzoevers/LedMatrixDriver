@@ -9,12 +9,13 @@ git submodule init
 
 # Using the scripts
 
-## STM32
+## STM32F303xc
 
 ### Available scripts
 
-- ./Scripts/Stm32/BuildStm32.sh
-- [sudo] ./Scripts/Stm32/CleanStm32Build.sh
+- ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh
+- [sudo] ./Scripts/Stm32/Stm32f303xc/CleanStm32f303xcBuild.sh
+- ./Scripts/Stm32/Stm32f303xc/StLinkFlash.sh
 
 ## Desktop
 

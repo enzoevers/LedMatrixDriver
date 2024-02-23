@@ -1,12 +1,23 @@
 #!/bin/bash
 
-ValidateCodePath() {
-    CODE_DIR_PATH=$1
+ValidateDirExists() {
+    DIR_PATH=$1
     
-    if [ -d ${CODE_PATH} ]; then
-        echo "Using code path ${CODE_PATH}"
+    if [ -d ${DIR_PATH} ]; then
+        echo "Using path ${DIR_PATH}"
     else
-        echo "Path '${CODE_PATH}' does not exist"
+        echo "Path '${DIR_PATH}' does not exist"
+        exit
+    fi
+}
+
+ValidateFileExists() {
+    FILE_PATH=$1
+    
+    if [ -f ${FILE_PATH} ]; then
+        echo "Using file path ${FILE_PATH}"
+    else
+        echo "Path '${FILE_PATH}' does not exist"
         exit
     fi
 }

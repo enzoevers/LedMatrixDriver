@@ -1,13 +1,13 @@
 #!/bin/bash
 
 CUR_PATH=$(dirname $(realpath "$0"))
-SCRIPT_PATH=${CUR_PATH}/../
+SCRIPT_PATH=${CUR_PATH}/../../
 
 source ${SCRIPT_PATH}/Variables.sh
 source ${SCRIPT_PATH}/Utils.sh
 
-ValidateCodePath ${CODE_PATH}
+ValidateDirExists ${CODE_PATH}
 
-DeleteBuildDirectoryIfExist ${BUILD_DIR_STM32}
+DeleteBuildDirectoryIfExist ${BUILD_DIR_STM32F303XC}
 
 echo "Done"
