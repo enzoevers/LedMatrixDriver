@@ -1,7 +1,6 @@
 #include "BitManipulation.h"
-#include "HardwareSetup.h"
+#include "SetupHardwareStm32f303xc.h"
 #include "defines.h"
-#include "stm32f303xc.h"
 
 //====================
 // Local

@@ -30,7 +30,7 @@ auto GPIOOutputStm32::GetState() -> bool {
 //---------------
 // IGPIOOutputStm32
 //---------------
-auto GPIOOutputStm32::SetOutputRegister(uint32_t* outputRegister) -> bool {
+auto GPIOOutputStm32::SetOutputRegister(volatile uint32_t* outputRegister) -> bool {
     if (outputRegister == nullptr) {
         return false;
     }
@@ -39,7 +39,7 @@ auto GPIOOutputStm32::SetOutputRegister(uint32_t* outputRegister) -> bool {
 
     return true;
 }
-auto GPIOOutputStm32::GetOutputRegister() const -> const uint32_t* { return m_outputRegister; }
+auto GPIOOutputStm32::GetOutputRegister() const -> volatile const uint32_t* { return m_outputRegister; }
 
 auto GPIOOutputStm32::SetPinMask(uint32_t pinMask) -> bool {
     if ((pinMask == 0) || (((pinMask & (pinMask - 1)) != 0))) {
