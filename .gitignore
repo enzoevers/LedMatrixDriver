@@ -3,9 +3,9 @@
 build
 
 # See Scripts/Variables.sh
-BuildDesktop
-BuildStm32*
-BuildTest
+Code/BuildDesktop
+Code/BuildStm32*
+Code/BuildTest
 
 dist
 

@@ -41,6 +41,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 if(NOT GENERATE_DOCS)
     add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
     add_subdirectory(${PROJECT_SOURCE_DIR}/Common)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/HardwareSetup)
 endif()
 
 add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
@@ -53,6 +54,12 @@ if(USE_STM32)
     target_link_libraries(${EXECUTABLE_NAME}
         hal-stm32
     )
+
+    if(USE_STM32F303XC)
+        target_link_libraries(${EXECUTABLE_NAME}
+            hardware-init-stm32f303xc
+        )
+    endif()
 
     stm32_print_size_of_target(${EXECUTABLE_NAME})
     stm32_generate_binary_file(${EXECUTABLE_NAME})
