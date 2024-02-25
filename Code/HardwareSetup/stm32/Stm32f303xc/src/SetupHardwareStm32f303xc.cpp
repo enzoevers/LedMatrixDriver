@@ -1,5 +1,5 @@
-#include "Common/BitManipulation.h"
-#include "InitHalHardware.h"
+#include "BitManipulation.h"
+#include "HardwareSetup.h"
 #include "defines.h"
 #include "stm32f303xc.h"
 
@@ -34,10 +34,10 @@ static auto SetupGpio() -> void {
 }
 
 //====================
-// InitHalHardware.h
+// HardwareSetup.h
 //====================
 
-auto InitHalHardware() -> void {
+auto HardwareSetup() -> void {
     SetupClock();
     SetupGpio();
 }

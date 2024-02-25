@@ -57,7 +57,7 @@ if(USE_STM32)
 
     if(USE_STM32F303XC)
         target_link_libraries(${EXECUTABLE_NAME}
-            hardware-init-stm32f303xc
+            hardware-setup-stm32f303xc
         )
     endif()
 
