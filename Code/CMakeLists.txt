@@ -4,7 +4,16 @@ configure_file(defines.h.in defines.h)
 
 if(USE_STM32)
     set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/stm32-cmake/cmake/stm32_gcc.cmake)
+    set(CMSIS_COMP_LIST "")
 endif()
+
+set(PROJECT_NAME LedDisplayDriverProject)
+set(EXECUTABLE_NAME LedDisplayDriverExecutable)
+
+project(${PROJECT_NAME} C CXX ASM)
+
+set(MAIN_SOURCE_FILES main.cpp)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 if(TEST_ON_PC)
     include(FetchContent)
@@ -18,10 +27,12 @@ if(TEST_ON_PC)
     FetchContent_MakeAvailable(googletest)
 endif()
 
-set(PROJECT_NAME LedDisplayDriverProject)
-set(EXECUTABLE_NAME LedDisplayDriverExecutable)
-
-project(${PROJECT_NAME} C CXX ASM)
+# Any F3 chip
+if(USE_STM32F3)
+    stm32_fetch_cmsis(F3)
+    list(APPEND CMSIS_COMP_LIST "STM32F3")
+    find_package(CMSIS COMPONENTS "${CMSIS_COMP_LIST}" REQUIRED) 
+endif()
 
 if(GENERATE_DOCS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Doc)
@@ -35,14 +46,12 @@ if(TEST_ON_PC OR USE_DESKTOP)
     set(CMAKE_CXX_STANDARD 23)
 endif()
 
-set(MAIN_SOURCE_FILES main.cpp)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
 if(NOT GENERATE_DOCS)
     add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
     add_subdirectory(${PROJECT_SOURCE_DIR}/Common)
     add_subdirectory(${PROJECT_SOURCE_DIR}/HardwareSetup)
 endif()
+
 
 add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
 
@@ -50,16 +59,19 @@ target_link_libraries(${EXECUTABLE_NAME}
     Common
 )
 
-if(USE_STM32)
-    target_link_libraries(${EXECUTABLE_NAME}
-        hal-stm32
-    )
-
+if(USE_STM32)    
     if(USE_STM32F303XC)
         target_link_libraries(${EXECUTABLE_NAME}
             hardware-setup-stm32f303xc
         )
+        target_link_libraries(hal-stm32
+            hardware-setup-stm32f303xc
+        )
     endif()
+
+    target_link_libraries(${EXECUTABLE_NAME}
+        hal-stm32
+    )
 
     stm32_print_size_of_target(${EXECUTABLE_NAME})
     stm32_generate_binary_file(${EXECUTABLE_NAME})

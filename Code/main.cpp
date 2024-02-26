@@ -9,9 +9,6 @@
 #include "GPIOOutputStm32.h"
 #endif
 
-// TODO: Make this available through HardwareSetup.h
-//#include "stm32f303xc.h"
-
 int main() {
     HardwareSetup();
 
@@ -21,9 +18,6 @@ int main() {
 
     pinE13.SetState(true);
     // pinE13.SetState(false);
-
-    // SET_BIT(GPIOE->ODR, GPIO_ODR_13);
-    // CLEAR_BIT(GPIOE->ODR, GPIO_ODR_13);
 
     while (true) {
     }
