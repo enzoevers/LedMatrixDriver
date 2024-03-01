@@ -3,9 +3,17 @@
 # Setup
 
 ```bash
-cd <root of this repo>
-git submodule init
+$ cd <root of this repo>
+$ git submodule init
+$ git submodule update
 ```
+
+## For visual studio code
+Go to the extensions and filter for `Recommended` to install the recommended extensions for this repository.
+
+## Install Ninja
+
+Go to: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-build/ninja/releases), install the binary for your platform and that the path to the binary to your system PATH.
 
 # Using the scripts
 
@@ -13,16 +21,16 @@ git submodule init
 
 ### Available scripts
 
-- ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh
-- [sudo] ./Scripts/Stm32/Stm32f303xc/CleanStm32f303xcBuild.sh
-- ./Scripts/Stm32/Stm32f303xc/StLinkFlash.sh
+- `$ ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh`
+- `$ [sudo] ./Scripts/Stm32/Stm32f303xc/CleanStm32f303xcBuild.sh`
+- `$ ./Scripts/Stm32/Stm32f303xc/StLinkFlash.sh`
 
 ## Desktop
 
 ### Available scripts
 
-- ./Scripts/Desktop/BuildDesktop.sh
-- ./Scripts/Desktop/CleanDesktopBuild.sh
+- `$ ./Scripts/Desktop/BuildDesktop.sh`
+- `$ ./Scripts/Desktop/CleanDesktopBuild.sh`
 
 ## Testing
 
@@ -37,9 +45,9 @@ sudo apt install clang \
 
 ### Available scripts
 
-- ./Scripts/Test/BuildTest.sh
-- [sudo] ./Scripts/Test/CleanTestBuild.sh
-- ./Scripts/Test/RunTest.sh
+- `$ ./Scripts/Test/BuildTest.sh`
+- `$ [sudo] ./Scripts/Test/CleanTestBuild.sh`
+- `$ ./Scripts/Test/RunTest.sh`
 
 ## Documentation
 
@@ -67,7 +75,7 @@ make install
 
 ### Available scripts
 
-- ./Scripts/Doc/BuildDoc.sh
-- ./Scripts/Doc/CleanDocBuild.sh
+- `$ ./Scripts/Doc/BuildDoc.sh`
+- `$ ./Scripts/Doc/CleanDocBuild.sh`
 
 The `index.html` can then be found in `Code/BuildDoc/Doc/html/index.html`

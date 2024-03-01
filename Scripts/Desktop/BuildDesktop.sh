@@ -11,7 +11,7 @@ ValidateDirExists ${CODE_PATH}
 CreateBuildDirectoryIfNotExist ${BUILD_DIR_DESKTOP}
 
 cd ${BUILD_DIR_DESKTOP}
-cmake .. -DUSE_DESKTOP=ON
-make -j8
+cmake -G Ninja .. -DUSE_DESKTOP=ON
+cmake --build .
 
 echo "Done"
