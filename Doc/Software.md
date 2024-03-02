@@ -11,13 +11,25 @@ $ git submodule update
 ## For visual studio code
 Go to the extensions and filter for `Recommended` to install the recommended extensions for this repository.
 
+## Install CMAKE
+
+[https://cmake.org/download/](https://cmake.org/download/)
+
 ## Install Ninja
 
-Go to: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-build/ninja/releases), install the binary for your platform and that the path to the binary to your system PATH.
+Go to: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-build/ninja/releases), download the binary for your platform and app the path to the binary to your system PATH.
 
 # Using the scripts
 
 ## STM32F303xc
+
+### Prerequisits
+
+```bash
+sudo apt install libnewlib-arm-none-eabi
+```
+
+TODO: Install steps for https://github.com/stlink-org/stlink/releases
 
 ### Available scripts
 

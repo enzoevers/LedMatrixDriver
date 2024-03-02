@@ -8,6 +8,7 @@ link_fuzztest(TestHAL)
 
 target_link_libraries(TestHAL PRIVATE 
   gtest
+  gmock
   gtest_main  
   hal-stm32
   hal-desktop
