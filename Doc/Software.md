@@ -19,6 +19,12 @@ Go to the extensions and filter for `Recommended` to install the recommended ext
 
 Go to: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-build/ninja/releases), download the binary for your platform and app the path to the binary to your system PATH.
 
+## Install clang-format
+
+```bash
+$ sudo apt install clang-format
+```
+
 # Using the scripts
 
 ## STM32F303xc
@@ -69,21 +75,25 @@ sudo apt install clang \
 The [Code/Doc/CMakeLists.txt](../Code/Doc/CMakeLists.txt) makes use of the Doxygen cmake package. To use it, install Doxygen as described here: https://www.doxygen.nl/manual/install.html
 
 ```bash
-export DOX_VERSION=1.10.0
+$ cd <somewhere other than this repo>
+$ sudo apt install flex \
+                   bison
 
-wget https://www.doxygen.nl/files/doxygen-$DOX_VERSION.src.tar.gz
+$ export DOX_VERSION=1.10.0
 
-gunzip doxygen-$DOX_VERSION.src.tar.gz
-tar xf doxygen-$DOX_VERSION.src.tar
+$ wget https://www.doxygen.nl/files/doxygen-$DOX_VERSION.src.tar.gz
 
-cd doxygen-$DOX_VERSION
-mkdir build
-cd build
+$ gunzip doxygen-$DOX_VERSION.src.tar.gz
+$ tar xf doxygen-$DOX_VERSION.src.tar
 
-cmake -G "Unix Makefiles" ..
-make
+$ cd doxygen-$DOX_VERSION
+$ mkdir build
+$ cd build
 
-make install
+$ cmake -G "Unix Makefiles" ..
+$ make -j12
+
+$ [sudo] make -j12 install
 ```
 
 ### Available scripts
@@ -91,4 +101,4 @@ make install
 - `$ ./Scripts/Doc/BuildDoc.sh`
 - `$ ./Scripts/Doc/CleanDocBuild.sh`
 
-The `index.html` can then be found in `Code/BuildDoc/Doc/html/index.html`
+The `index.html` can then be found in [`Code/BuildDoc/Doc/html/index.html`](Code/BuildDoc/Doc/html/index.html).

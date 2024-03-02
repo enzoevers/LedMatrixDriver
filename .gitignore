@@ -3,6 +3,7 @@
 build
 
 # See Scripts/Variables.sh
+Code/BuildDoc
 Code/BuildDesktop
 Code/BuildStm32*
 Code/BuildTest

@@ -1,6 +1,19 @@
-#include "BitManipulation.h"
 #include "SetupHardwareStm32f303xc.h"
+
+#include "BitManipulation.h"
 #include "defines.h"
+
+static auto SetupClock() -> void;
+static auto SetupGpio() -> void;
+
+//====================
+// HardwareSetup.h
+//====================
+
+auto HardwareSetup() -> void {
+    SetupClock();
+    SetupGpio();
+}
 
 //====================
 // Local
@@ -30,13 +43,4 @@ static auto SetupGpio() -> void {
     CLEAR_BIT(GPIOE->OTYPER, GPIO_OTYPER_OT_13);
     CLEAR_BIT(GPIOE->OSPEEDR, 0b11 << GPIO_OSPEEDER_OSPEEDR13_Pos);
     CLEAR_BIT(GPIOE->PUPDR, 0b11 << GPIO_PUPDR_PUPDR13_Pos);
-}
-
-//====================
-// HardwareSetup.h
-//====================
-
-auto HardwareSetup() -> void {
-    SetupClock();
-    SetupGpio();
 }
