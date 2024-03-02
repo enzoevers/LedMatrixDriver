@@ -1,8 +1,5 @@
 # LedMatrixDriver
 
-- [Code](./Code/)
-    - [Library source code](./Code/LedMatrixBusLargeDriver)
-    - [Demo usage](./Code/LedMatrixBusLargeDriver/demo/)
-- [Doc](./Doc/)
-    - [Documentation of the code](./Doc/UsingTheLibrary.md)
-    - [Documentation of the electronics of the LED matrix](./Doc/SignalFlow.md)
+- Documentation
+  - [How to build and use the software.](./Doc/Software.md)
+  - [Electronics of the LED matrix.](./Doc/SignalFlow.md)

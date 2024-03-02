@@ -1,0 +1,6 @@
+[submodule "Code/stm32-cmake"]
+	path = Code/stm32-cmake
+	url = git@github.com:ObKo/stm32-cmake.git
+[submodule "Code/fuzztest"]
+	path = Code/fuzztest
+	url = https://github.com/google/fuzztest.git

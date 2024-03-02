@@ -1,7 +1,14 @@
 #----- Begin -----
 
-.vscode
 build
+
+# See Scripts/Variables.sh
+Code/BuildDoc
+Code/BuildDesktop
+Code/BuildStm32*
+Code/BuildTest
+
+dist
 
 #----- End -----
 
@@ -27,6 +34,8 @@ _autosave-*
 *-save.pro
 *-save.kicad_pcb
 fp-info-cache
+
+*.lck
 
 # Netlist files (exported from Eeschema)
 *.net
