@@ -26,10 +26,11 @@ Go to: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-
 ### Prerequisits
 
 ```bash
-sudo apt install libnewlib-arm-none-eabi
+sudo apt install libnewlib-arm-none-eabi \
+                 stlink-tools
 ```
 
-TODO: Install steps for https://github.com/stlink-org/stlink/releases
+The `stlink-tools` package comes from [https://github.com/stlink-org/stlink](https://github.com/stlink-org/stlink).
 
 ### Available scripts
 

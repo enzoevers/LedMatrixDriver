@@ -11,7 +11,7 @@ ValidateDirExists ${CODE_PATH}
 CreateBuildDirectoryIfNotExist ${BUILD_DIR_TEST}
 
 cd ${BUILD_DIR_TEST}
-CC=clang CXX=clang++ cmake .. -DTEST_ON_PC=ON
-make -j8
+CC=clang CXX=clang++ cmake -G Ninja .. -DTEST_ON_PC=ON
+cmake --build .
 
 echo "Done"

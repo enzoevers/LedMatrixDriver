@@ -17,7 +17,7 @@ int main() {
     pinE13.SetPinMask(GPIO_ODR_13);
 
     pinE13.SetState(true);
-    // pinE13.SetState(false);
+    //pinE13.SetState(false);
 
     while (true) {
     }
