@@ -12,6 +12,4 @@ CreateBuildDirectoryIfNotExist ${BUILD_DIR_STM32F303XC}
 
 cd ${BUILD_DIR_STM32F303XC}
 cmake -G Ninja .. -DUSE_STM32=ON -DUSE_STM32F3=ON -DUSE_STM32F303XC=ON
-cmake --build .
-
-echo "Done"
+cmake --build . --parallel 8

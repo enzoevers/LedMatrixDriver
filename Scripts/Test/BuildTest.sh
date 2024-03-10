@@ -12,6 +12,4 @@ CreateBuildDirectoryIfNotExist ${BUILD_DIR_TEST}
 
 cd ${BUILD_DIR_TEST}
 CC=clang CXX=clang++ cmake -G Ninja .. -DTEST_ON_PC=ON
-cmake --build .
-
-echo "Done"
+cmake --build . --parallel 8

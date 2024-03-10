@@ -12,6 +12,4 @@ CreateBuildDirectoryIfNotExist ${BUILD_DIR_DESKTOP}
 
 cd ${BUILD_DIR_DESKTOP}
 cmake -G Ninja .. -DUSE_DESKTOP=ON
-cmake --build .
-
-echo "Done"
+cmake --build . --parallel 8

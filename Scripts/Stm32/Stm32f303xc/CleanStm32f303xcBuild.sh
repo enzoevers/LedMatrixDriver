@@ -9,5 +9,3 @@ source ${SCRIPT_PATH}/Utils.sh
 ValidateDirExists ${CODE_PATH}
 
 DeleteBuildDirectoryIfExist ${BUILD_DIR_STM32F303XC}
-
-echo "Done"

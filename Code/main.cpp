@@ -9,19 +9,51 @@
 #include "GPIOOutputStm32.h"
 #endif
 
+#include "HanoverOL037A.h"
+
 int main() {
     HardwareSetup();
 
-    // TODO: this currently only works when running ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh
-    // This kind of code should be part of a led matrix specific setup library
-    GPIOOutputStm32 pinE13;
-    pinE13.SetOutputRegister(&GPIOE->ODR);
-    pinE13.SetPinMask(GPIO_ODR_13);
+#if defined(USE_STM32)
+    auto clk = GPIOOutputStm32();
+    auto clkSelEn = GPIOOutputStm32();
+    auto data = GPIOOutputStm32();
+    auto clkEn = GPIOOutputStm32();
+    auto latch = GPIOOutputStm32();
+    auto ledOE = GPIOOutputStm32();
 
-    pinE13.SetState(true);
-    // pinE13.SetState(false);
+    { // IGPIOOutputStm32 setup
+        clk.SetOutputRegister(&GPIOE->ODR);
+        clk.SetPinMask(GPIO_ODR_13);
+
+        clkSelEn.SetOutputRegister(&GPIOE->ODR);
+        clkSelEn.SetPinMask(GPIO_ODR_13);
+
+        data.SetOutputRegister(&GPIOE->ODR);
+        data.SetPinMask(GPIO_ODR_13);
+
+        clkEn.SetOutputRegister(&GPIOE->ODR);
+        clkEn.SetPinMask(GPIO_ODR_13);
+
+        latch.SetOutputRegister(&GPIOE->ODR);
+        latch.SetPinMask(GPIO_ODR_13);
+
+        ledOE.SetOutputRegister(&GPIOE->ODR);
+        ledOE.SetPinMask(GPIO_ODR_13);
+    }
+#endif
+
+    HanoverOL037A_GPIOInterface hanoverOL037A_GPIOInterface = {
+        clk,
+        clkSelEn, 
+        data, 
+        clkEn, 
+        latch, 
+        ledOE
+    };
 
     while (true) {
     }
+
     return 0;
 }

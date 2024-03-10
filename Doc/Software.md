@@ -68,6 +68,8 @@ sudo apt install clang \
 - `$ [sudo] ./Scripts/Test/CleanTestBuild.sh`
 - `$ ./Scripts/Test/RunTest.sh`
 
+When creating new tests, make sure to add the test to the [./Scripts/Test/RunTest.sh](./Scripts/Test/RunTest.sh) script.
+
 ## Documentation
 
 ### Prerequisits

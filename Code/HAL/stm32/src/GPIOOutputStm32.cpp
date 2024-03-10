@@ -1,5 +1,3 @@
-#include <cassert>
-
 #include "GPIOOutputStm32.h"
 
 //---------------

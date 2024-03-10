@@ -13,5 +13,3 @@ CreateBuildDirectoryIfNotExist ${BUILD_DIR_DOC}
 cd ${BUILD_DIR_DOC}
 cmake .. -DGENERATE_DOCS=ON
 doxygen Doc/Doxyfile.doxygen
-
-echo "Done"

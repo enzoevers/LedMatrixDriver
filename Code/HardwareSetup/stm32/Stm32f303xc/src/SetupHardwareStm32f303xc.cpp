@@ -26,21 +26,22 @@ static auto SetupClock() -> void {
     UNUSED(tmpreg);
 }
 
+#define CONFIG_OUTPUT(PORT, PIN) { \
+    /* Output */ \
+    SET_BIT(GPIO##PORT->MODER, 0b1 << GPIO_MODER_MODER##PIN##_Pos); \
+    CLEAR_BIT(GPIO##PORT->MODER, 0b1 << (1 + GPIO_MODER_MODER##PIN##_Pos)); \
+    \
+    /* Push-Pull */ \
+    CLEAR_BIT(GPIO##PORT->OTYPER, GPIO_OTYPER_OT_##PIN); \
+    \
+    /* Low speed */ \
+    CLEAR_BIT(GPIO##PORT->OSPEEDR, 0b11 << GPIO_OSPEEDER_OSPEEDR##PIN##_Pos); \
+    \
+    /* No pull-up, pull-down */ \
+    CLEAR_BIT(GPIO##PORT->PUPDR, 0b11 << GPIO_PUPDR_PUPDR##PIN##_Pos); \
+}
+
 static auto SetupGpio() -> void {
-    //==========
-    // GPIOE
-    //==========
-
-    // Reset
-    CLEAR_REG(GPIOE->MODER);
-    CLEAR_REG(GPIOE->PUPDR);
-    CLEAR_REG(GPIOE->OTYPER);
-    CLEAR_REG(GPIOE->OSPEEDR);
-
-    // Config IO 13 as output
-    SET_BIT(GPIOE->MODER, 0b1 << GPIO_MODER_MODER13_Pos);
-    CLEAR_BIT(GPIOE->MODER, 0b1 << (1 + GPIO_MODER_MODER13_Pos));
-    CLEAR_BIT(GPIOE->OTYPER, GPIO_OTYPER_OT_13);
-    CLEAR_BIT(GPIOE->OSPEEDR, 0b11 << GPIO_OSPEEDER_OSPEEDR13_Pos);
-    CLEAR_BIT(GPIOE->PUPDR, 0b11 << GPIO_PUPDR_PUPDR13_Pos);
+    // Config port E IO 13
+    CONFIG_OUTPUT(E, 13)
 }
