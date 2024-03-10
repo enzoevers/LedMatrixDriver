@@ -31,13 +31,11 @@ class FixtureIGPIOOutput : public Test {
         if (auto _target = dynamic_cast<GPIOOutputDesktop*>(target)) {
             std::cout << "GPIOOutputDesktop" << std::endl;
             m_outputRegister = 0;
-            _target->SetOutputRegister(&m_outputRegister);
-            _target->SetPinMask(m_pinMask);
+            ASSERT_NO_THROW(_target->SetupConfiguration({&m_outputRegister, m_pinMask}));
         } else if (auto _target = dynamic_cast<GPIOOutputStm32*>(target)) {
             std::cout << "GPIOOutputStm32" << std::endl;
             m_outputRegister = 0;
-            ASSERT_TRUE(_target->SetOutputRegister(&m_outputRegister));
-            ASSERT_TRUE(_target->SetPinMask(m_pinMask));
+            ASSERT_TRUE(_target->SetupConfiguration({&m_outputRegister, m_pinMask}));
         } else {
             std::cout << "Invalid target" << std::endl;
         }

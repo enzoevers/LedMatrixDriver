@@ -47,14 +47,15 @@ if(TEST_ON_PC OR USE_DESKTOP)
 endif()
 
 if(NOT GENERATE_DOCS)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/Common)
+
     add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
     add_subdirectory(${PROJECT_SOURCE_DIR}/Displays)
 
     target_include_directories(Displays INTERFACE
         ${PROJECT_SOURCE_DIR}/HAL/include
     )
-
-    add_subdirectory(${PROJECT_SOURCE_DIR}/Common)
+    
     add_subdirectory(${PROJECT_SOURCE_DIR}/HardwareSetup)
 endif()
 
@@ -64,6 +65,12 @@ if(NOT TEST_ON_PC)
     target_link_libraries(${EXECUTABLE_NAME}
         Common
     )
+
+    if(HANOVER_OL037A)
+        target_link_libraries(${EXECUTABLE_NAME}
+            Hanover-OL037A
+        )
+    endif()
 
     if(USE_STM32)    
         if(USE_STM32F303XC)

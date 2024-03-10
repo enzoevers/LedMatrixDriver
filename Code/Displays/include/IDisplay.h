@@ -10,11 +10,11 @@ class IDisplay {
    public:
     virtual ~IDisplay() = default;
 
-    virtual auto getResolution() -> XYPair = 0;
-    virtual auto getCurrentDisplay() -> const PixelArea<Color>& = 0;
-    virtual auto getCurrentPixelArea(XYPair topLeftoordinate, uint32_t width, uint32_t height)
+    virtual auto GetResolution() -> XYPair = 0;
+    virtual auto GetCurrentDisplay() -> const PixelArea<Color>& = 0;
+    virtual auto GetCurrentPixelArea(XYPair topLeftoordinate, uint32_t width, uint32_t height)
         -> const PixelArea<Color>& = 0;
-    virtual auto setPixel(XYPair coordinate, Color color) -> bool = 0;
-    virtual auto setArea(XYPair topLeftoordinate, const PixelArea<Color>& pixelArea) -> bool = 0;
-    virtual auto updateDisplay() -> bool = 0;
+    virtual auto SetPixel(XYPair coordinate, Color color) -> bool = 0;
+    virtual auto SetArea(XYPair topLeftoordinate, const PixelArea<Color>& pixelArea) -> bool = 0;
+    virtual auto UpdateDisplay() -> bool = 0;
 };

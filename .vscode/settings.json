@@ -69,6 +69,10 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "complex": "cpp",
+        "unordered_set": "cpp",
+        "bitset": "cpp",
+        "codecvt": "cpp"
     }
 }

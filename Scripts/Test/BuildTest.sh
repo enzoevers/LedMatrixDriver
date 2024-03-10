@@ -11,5 +11,5 @@ ValidateDirExists ${CODE_PATH}
 CreateBuildDirectoryIfNotExist ${BUILD_DIR_TEST}
 
 cd ${BUILD_DIR_TEST}
-CC=clang CXX=clang++ cmake -G Ninja .. -DTEST_ON_PC=ON
+CC=clang CXX=clang++ cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug -DTEST_ON_PC=ON
 cmake --build . --parallel 8

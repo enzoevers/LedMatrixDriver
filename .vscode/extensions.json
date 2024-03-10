@@ -2,6 +2,7 @@
     "recommendations": [
         "xaver.clang-format",
         "ms-vscode.cmake-tools",
-        "ms-vscode.cpptools"
+        "ms-vscode.cpptools",
+        "tomoki1207.pdf"
     ]
 }
