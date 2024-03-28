@@ -48,9 +48,9 @@ static auto SetupClock() -> void {
     // Enable HSI clock
     RCC->CR |= RCC_CR_HSION;
 
-    // while (!(RCC->CR & RCC_CR_HSIRDY)) {
-    //  Wait till HSI is ready
-    //}
+    while (!(RCC->CR & RCC_CR_HSIRDY)) {
+        // Wait till HSI is ready
+    }
 }
 
 #define CONFIG_OUTPUT(PORT, PIN)                                                  \

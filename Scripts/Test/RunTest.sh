@@ -11,12 +11,19 @@ ValidateDirExists ${CODE_PATH}
 cd ${BUILD_DIR_TEST}
 
 # Run all tests
+
+echo
 echo "//========================="
 echo "// Running TestHAL"
 echo "//========================="
+echo
+
 ./HAL/test/TestHAL
 
+echo
 echo "//========================="
 echo "// Running TestDisplays"
 echo "//========================="
+echo
+
 ./Displays/test/TestDisplays
