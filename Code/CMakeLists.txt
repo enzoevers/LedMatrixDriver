@@ -47,33 +47,47 @@ if(TEST_ON_PC OR USE_DESKTOP)
 endif()
 
 if(NOT GENERATE_DOCS)
-    add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
     add_subdirectory(${PROJECT_SOURCE_DIR}/Common)
+
+    add_subdirectory(${PROJECT_SOURCE_DIR}/HAL)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/Displays)
+
+    target_include_directories(Displays INTERFACE
+        ${PROJECT_SOURCE_DIR}/HAL/include
+    )
+    
     add_subdirectory(${PROJECT_SOURCE_DIR}/HardwareSetup)
 endif()
 
+if(NOT TEST_ON_PC)
+    add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
 
-add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
+    target_link_libraries(${EXECUTABLE_NAME}
+        Common
+    )
 
-target_link_libraries(${EXECUTABLE_NAME}
-    Common
-)
-
-if(USE_STM32)    
-    if(USE_STM32F303XC)
+    if(HANOVER_OL037A)
         target_link_libraries(${EXECUTABLE_NAME}
-            hardware-setup-stm32f303xc
-        )
-        target_link_libraries(hal-stm32
-            hardware-setup-stm32f303xc
+            Hanover-OL037A
         )
     endif()
 
-    target_link_libraries(${EXECUTABLE_NAME}
-        hal-stm32
-    )
+    if(USE_STM32)    
+        if(USE_STM32F303XC)
+            target_link_libraries(${EXECUTABLE_NAME}
+                hardware-setup-stm32f303xc
+            )
+            target_link_libraries(hal-stm32
+                hardware-setup-stm32f303xc
+            )
+        endif()
 
-    stm32_print_size_of_target(${EXECUTABLE_NAME})
-    stm32_generate_binary_file(${EXECUTABLE_NAME})
-    stm32_generate_hex_file(${EXECUTABLE_NAME})
+        target_link_libraries(${EXECUTABLE_NAME}
+            hal-stm32
+        )
+
+        stm32_print_size_of_target(${EXECUTABLE_NAME})
+        stm32_generate_binary_file(${EXECUTABLE_NAME})
+        stm32_generate_hex_file(${EXECUTABLE_NAME})
+    endif()
 endif()

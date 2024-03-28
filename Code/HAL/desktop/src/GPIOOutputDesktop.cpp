@@ -1,47 +1,46 @@
+#include "GPIOOutputDesktop.h"
+
 #include <stdexcept>
 
-#include "GPIOOutputDesktop.h"
+#include "ValueChecks.h"
 
 //---------------
 // IGPIOOutput
 //---------------
 auto GPIOOutputDesktop::SetState(bool on) -> bool {
-    if (m_outputRegister == nullptr) {
+    if (m_gPIOOutputConfigDesktop.pOutputRegister == nullptr) {
         return false;
     }
 
     if (on) {
-        *m_outputRegister |= m_pinMask;
+        *m_gPIOOutputConfigDesktop.pOutputRegister |= m_gPIOOutputConfigDesktop.pinMask;
     } else {
-        *m_outputRegister &= ~m_pinMask;
+        *m_gPIOOutputConfigDesktop.pOutputRegister &= ~m_gPIOOutputConfigDesktop.pinMask;
     }
 
     return true;
 }
 
 auto GPIOOutputDesktop::GetState() -> bool {
-    if (m_outputRegister == nullptr) {
+    if (m_gPIOOutputConfigDesktop.pOutputRegister == nullptr) {
         return false;
     }
 
-    return *m_outputRegister & m_pinMask;
+    return *m_gPIOOutputConfigDesktop.pOutputRegister & m_gPIOOutputConfigDesktop.pinMask;
 }
 
 //---------------
 // IGPIOOutputDesktop
 //---------------
-auto GPIOOutputDesktop::SetOutputRegister(uint32_t* outputRegister) -> void {
-    if (outputRegister == nullptr) {
+auto GPIOOutputDesktop::SetupConfiguration(const GPIOOutputConfigDesktop&& gPIOOutputConfigDesktop) -> void {
+    if (gPIOOutputConfigDesktop.pOutputRegister == nullptr) {
         throw std::invalid_argument("No nullptr allowed");
     }
-    m_outputRegister = outputRegister;
-}
-auto GPIOOutputDesktop::GetOutputRegister() const -> const uint32_t* { return m_outputRegister; }
 
-auto GPIOOutputDesktop::SetPinMask(uint32_t pinMask) -> void {
-    if ((pinMask == 0) || (((pinMask & (pinMask - 1)) != 0))) {
+    if (!ValueChecks::HasSingleBitSet(gPIOOutputConfigDesktop.pinMask)) {
         throw std::invalid_argument("Only 1 set bit allowed");
     }
-    m_pinMask = pinMask;
+
+    m_gPIOOutputConfigDesktop = gPIOOutputConfigDesktop;
 }
-auto GPIOOutputDesktop::GetPinMask() const -> uint32_t { return m_pinMask; }
+auto GPIOOutputDesktop::GetConfiguration() -> const GPIOOutputConfigDesktop& { return m_gPIOOutputConfigDesktop; }

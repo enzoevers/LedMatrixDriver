@@ -1,4 +1,4 @@
 #pragma once
 
-#include "HardwareSetup.h"
+#include "HardwareSetup.h"  // Declares `auto HardwareSetup() -> void`
 #include "stm32f303xc.h"

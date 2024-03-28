@@ -1,53 +1,43 @@
-#include <cassert>
-
 #include "GPIOOutputStm32.h"
+
+#include "ValueChecks.h"
 
 //---------------
 // IGPIOOutput
 //---------------
 auto GPIOOutputStm32::SetState(bool on) -> bool {
-    if (m_outputRegister == nullptr) {
+    if (m_gPIOOutputConfigStm32.pOutputRegister == nullptr) {
         return false;
     }
 
     if (on) {
-        *m_outputRegister |= m_pinMask;
+        *m_gPIOOutputConfigStm32.pOutputRegister |= m_gPIOOutputConfigStm32.pinMask;
     } else {
-        *m_outputRegister &= ~m_pinMask;
+        *m_gPIOOutputConfigStm32.pOutputRegister &= ~m_gPIOOutputConfigStm32.pinMask;
     }
 
     return true;
 }
 
 auto GPIOOutputStm32::GetState() -> bool {
-    if (m_outputRegister == nullptr) {
+    if (m_gPIOOutputConfigStm32.pOutputRegister == nullptr) {
         return false;
     }
 
-    return *m_outputRegister & m_pinMask;
+    return *m_gPIOOutputConfigStm32.pOutputRegister & m_gPIOOutputConfigStm32.pinMask;
 }
 
 //---------------
 // IGPIOOutputStm32
 //---------------
-auto GPIOOutputStm32::SetOutputRegister(volatile uint32_t* outputRegister) -> bool {
-    if (outputRegister == nullptr) {
+auto GPIOOutputStm32::SetupConfiguration(const GPIOOutputConfigStm32&& gPIOOutputConfigstm32) -> bool {
+    if ((gPIOOutputConfigstm32.pOutputRegister == nullptr) ||
+        !ValueChecks::HasSingleBitSet(gPIOOutputConfigstm32.pinMask)) {
         return false;
     }
 
-    m_outputRegister = outputRegister;
+    m_gPIOOutputConfigStm32 = gPIOOutputConfigstm32;
 
     return true;
 }
-auto GPIOOutputStm32::GetOutputRegister() const -> volatile const uint32_t* { return m_outputRegister; }
-
-auto GPIOOutputStm32::SetPinMask(uint32_t pinMask) -> bool {
-    if ((pinMask == 0) || (((pinMask & (pinMask - 1)) != 0))) {
-        return false;
-    }
-
-    m_pinMask = pinMask;
-
-    return true;
-}
-auto GPIOOutputStm32::GetPinMask() const -> uint32_t { return m_pinMask; }
+auto GPIOOutputStm32::GetConfiguration() -> const GPIOOutputConfigStm32& { return m_gPIOOutputConfigStm32; }

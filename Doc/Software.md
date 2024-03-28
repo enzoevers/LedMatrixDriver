@@ -33,7 +33,9 @@ $ sudo apt install clang-format
 
 ```bash
 sudo apt install libnewlib-arm-none-eabi \
-                 stlink-tools
+                 stlink-tools            \
+                 openocd                 \
+                 gdb-multiarch
 ```
 
 The `stlink-tools` package comes from [https://github.com/stlink-org/stlink](https://github.com/stlink-org/stlink).
@@ -43,6 +45,40 @@ The `stlink-tools` package comes from [https://github.com/stlink-org/stlink](htt
 - `$ ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh`
 - `$ [sudo] ./Scripts/Stm32/Stm32f303xc/CleanStm32f303xcBuild.sh`
 - `$ ./Scripts/Stm32/Stm32f303xc/StLinkFlash.sh`
+- `$ ./Scripts/Stm32/Stm32f303xc/StLinkDebug.sh`
+
+### Debugging
+
+> This is based on https://www.youtube.com/watch?v=_1u7IOnivnM
+
+After running `./Scripts/Stm32/Stm32f303xc/StLinkDebug.sh`, type the following in the gdb window:
+
+```bash
+(gdb) target extended-remote localhost:3333
+```
+
+To restart the program, set a breakpoint at main and see the source code run (also see [https://openocd.org/doc/html/GDB-and-OpenOCD.html#Sample-GDB-session-startup](https://openocd.org/doc/html/GDB-and-OpenOCD.html#Sample-GDB-session-startup)):
+
+```bash
+(gdb) monitor reset halt
+...
+(gdb) load
+...
+(gdb) b main
+...
+(gdb) c
+...
+(geb) lay src
+```
+
+To close the source code viewer press `crtl+x+a`. To bring it back use the same command. For other layouts run `help lay`.
+
+To continue the program type again `c`.
+
+To break, press `ctrl+c`.
+
+From here on see the GDB and OpenOCD documentation on how to see variables values etc.
+
 
 ## Desktop
 
@@ -67,6 +103,8 @@ sudo apt install clang \
 - `$ ./Scripts/Test/BuildTest.sh`
 - `$ [sudo] ./Scripts/Test/CleanTestBuild.sh`
 - `$ ./Scripts/Test/RunTest.sh`
+
+When creating new tests, make sure to add the test to the [./Scripts/Test/RunTest.sh](./Scripts/Test/RunTest.sh) script.
 
 ## Documentation
 

@@ -16,13 +16,9 @@ class GPIOOutputStm32 : public IGPIOOutput, public IGPIOOutputStm32 {
     //---------------
     // IGPIOOutputStm32
     //---------------
-    auto SetOutputRegister(volatile uint32_t* outputRegister) -> bool override;
-    auto GetOutputRegister() const -> volatile const uint32_t* override;
-
-    auto SetPinMask(uint32_t pinMask) -> bool override;
-    auto GetPinMask() const -> uint32_t override;
+    auto SetupConfiguration(const GPIOOutputConfigStm32&& gPIOOutputConfigStm32) -> bool override;
+    auto GetConfiguration() -> const GPIOOutputConfigStm32& override;
 
    private:
-    volatile uint32_t* m_outputRegister;
-    uint32_t m_pinMask;
+    GPIOOutputConfigStm32 m_gPIOOutputConfigStm32;
 };

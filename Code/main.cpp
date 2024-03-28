@@ -6,22 +6,46 @@
 #endif
 
 #if defined(USE_STM32)
+#include "DelayStm32.h"
 #include "GPIOOutputStm32.h"
 #endif
+
+#include "HanoverOL037A.h"
 
 int main() {
     HardwareSetup();
 
-    // TODO: this currently only works when running ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh
-    // This kind of code should be part of a led matrix specific setup library
-    GPIOOutputStm32 pinE13;
-    pinE13.SetOutputRegister(&GPIOE->ODR);
-    pinE13.SetPinMask(GPIO_ODR_13);
+#if defined(USE_STM32)
+    auto clk = GPIOOutputStm32();
+    auto clkSelEn = GPIOOutputStm32();
+    // auto data = GPIOOutputStm32();
+    // auto clkEn = GPIOOutputStm32();
+    // auto latch = GPIOOutputStm32();
+    // auto ledOE = GPIOOutputStm32();
 
-    pinE13.SetState(true);
-    // pinE13.SetState(false);
+    {  // IGPIOOutputStm32 setup
+        clk.SetupConfiguration({&GPIOE->ODR, GPIO_ODR_13});
+        clkSelEn.SetupConfiguration({&GPIOE->ODR, GPIO_ODR_14});
+        // data.SetupConfiguration({&GPIOE->ODR, GPIO_ODR_13});
+        // clkEn.SetupConfiguration({&GPIOE->ODR, GPIO_ODR_13});
+        // latch.SetupConfiguration({&GPIOE->ODR, GPIO_ODR_13});
+        // ledOE.SetupConfiguration({&GPIOE->ODR, GPIO_ODR_13});
+    }
+    uint32_t tim3Hertz = 8000000;
+    auto delayTim3 = DelayStm32();
+    delayTim3.SetupConfiguration({&TIM3->SR, &TIM3->ARR, &TIM3->CR1, &TIM3->PSC, tim3Hertz, TIM_SR_UIF, TIM_CR1_CEN});
+#endif
+
+    // HanoverOL037A_GPIOInterface hanoverOL037A_GPIOInterface = {clk, clkSelEn, data, clkEn, latch, ledOE};
 
     while (true) {
+        clk.SetState(true);
+        clkSelEn.SetState(false);
+        delayTim3.SynchronousWait_us(1000000);
+        clk.SetState(false);
+        clkSelEn.SetState(true);
+        delayTim3.SynchronousWait_us(1000000);
     }
+
     return 0;
 }
