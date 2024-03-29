@@ -8,7 +8,15 @@ source ${SCRIPT_PATH}/Utils.sh
 
 ValidateDirExists ${CODE_PATH}
 
-cd ${BUILD_DIR_TEST}
+RETURN_CODE=0
+EvaluateTests()
+{
+    LAST_LINE=$( tail -n 1 $1 )
+    if [[ $LAST_LINE == *"FAILED"* ]]; then
+        RETURN_CODE=$((RETURN_CODE | 1))
+        echo "RETURN_CODE ${RETURN_CODE}"
+    fi
+}
 
 # Run all tests
 
@@ -18,7 +26,9 @@ echo "// Running TestHAL"
 echo "//========================="
 echo
 
-./HAL/test/TestHAL
+${BUILD_DIR_TEST}/HAL/test/TestHAL 2>&1 | tee TestHAL_log.txt
+EvaluateTests TestHAL_log.txt
+rm TestHAL_log.txt
 
 echo
 echo "//========================="
@@ -26,4 +36,8 @@ echo "// Running TestDisplays"
 echo "//========================="
 echo
 
-./Displays/test/TestDisplays
+${BUILD_DIR_TEST}/Displays/test/TestDisplays 2>&1 | tee TestDisplays_log.txt
+EvaluateTests TestDisplays_log.txt
+rm TestDisplays_log.txt
+
+exit ${RETURN_CODE}

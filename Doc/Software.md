@@ -9,6 +9,7 @@ $ git submodule update
 ```
 
 ## For visual studio code
+
 Go to the extensions and filter for `Recommended` to install the recommended extensions for this repository.
 
 ## Install CMAKE
@@ -79,7 +80,6 @@ To break, press `ctrl+c`.
 
 From here on see the GDB and OpenOCD documentation on how to see variables values etc.
 
-
 ## Desktop
 
 ### Available scripts
@@ -92,8 +92,16 @@ From here on see the GDB and OpenOCD documentation on how to see variables value
 ### Prerequisits
 
 ```bash
-sudo apt install clang \
+sudo apt install gcc-12 g++-12 \
                  libstdc++-12-dev
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100
+
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh 17
+rm llvm.sh
 ```
 
 > The reason for `libstdc++12-devmak` is described here: https://stackoverflow.com/questions/74543715/usr-bin-ld-cannot-find-lstdc-no-such-file-or-directory-on-running-flutte
