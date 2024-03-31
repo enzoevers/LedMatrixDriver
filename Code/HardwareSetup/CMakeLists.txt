@@ -7,3 +7,10 @@ if(USE_STM32)
         )
     endif()
 endif()
+
+if(USE_DESKTOP)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/desktop)
+    target_include_directories(hardware-setup-desktop PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+    )
+endif()
