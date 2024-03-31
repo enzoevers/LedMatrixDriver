@@ -5,9 +5,20 @@
 #include "SetupHardwareStm32f303xc.h"
 #endif
 
+#if defined(USE_DESKTOP)
+#include "SetupDesktop.h"
+#endif
+
 #if defined(USE_STM32)
 #include "DelayStm32.h"
 #include "GPIOOutputStm32.h"
+#endif
+
+#if defined(USE_DESKTOP)
+#include <iostream>
+
+#include "DelayDesktop.h"
+#include "GPIOOutputDesktop.h"
 #endif
 
 #include "HanoverOL037A.h"
@@ -32,8 +43,24 @@ int main() {
         // ledOE.SetupConfiguration({&GPIOE->ODR, GPIO_ODR_13});
     }
     uint32_t tim3Hertz = 8000000;
-    auto delayTim3 = DelayStm32();
-    delayTim3.SetupConfiguration({&TIM3->SR, &TIM3->ARR, &TIM3->CR1, &TIM3->PSC, tim3Hertz, TIM_SR_UIF, TIM_CR1_CEN});
+    auto mainDelay = DelayStm32();
+    mainDelay.SetupConfiguration({&TIM3->SR, &TIM3->ARR, &TIM3->CR1, &TIM3->PSC, tim3Hertz, TIM_SR_UIF, TIM_CR1_CEN});
+#endif
+
+#if defined(USE_DESKTOP)
+    auto clk = GPIOOutputDesktop();
+    auto clkSelEn = GPIOOutputDesktop();
+
+    uint32_t outputRegister;
+    uint32_t io0Mask = 0x1;
+    uint32_t io7Mask = 0x1 << 7;
+
+    {  // IGPIOOutputDesktop setup
+        clk.SetupConfiguration({&outputRegister, io0Mask});
+        clkSelEn.SetupConfiguration({&outputRegister, io7Mask});
+    }
+
+    auto mainDelay = DelayDesktop();
 #endif
 
     // HanoverOL037A_GPIOInterface hanoverOL037A_GPIOInterface = {clk, clkSelEn, data, clkEn, latch, ledOE};
@@ -41,10 +68,10 @@ int main() {
     while (true) {
         clk.SetState(true);
         clkSelEn.SetState(false);
-        delayTim3.SynchronousWait_us(1000000);
+        mainDelay.SynchronousWait_us(1000000);
         clk.SetState(false);
         clkSelEn.SetState(true);
-        delayTim3.SynchronousWait_us(1000000);
+        mainDelay.SynchronousWait_us(1000000);
     }
 
     return 0;

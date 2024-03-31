@@ -1,0 +1,59 @@
+name: CI-Scripts
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - ".github/workflows/*"
+      - "CI/*"
+      - "**.c"
+      - "**.cpp"
+      - "**.h"
+      - "**.hpp"
+
+jobs:
+  Build-targets:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ssciwr/doxygen-install@v1
+      - uses: seanmiddleditch/gha-setup-ninja@master
+      - uses: jwlawson/actions-setup-cmake@v1.14
+        with:
+          cmake-version: "3.25.x"
+
+      - name: Build target specific code
+        shell: bash
+        run: bash CI/BuildAllTargetSpecific.sh
+
+  Test-all:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ssciwr/doxygen-install@v1
+      - uses: seanmiddleditch/gha-setup-ninja@master
+      - uses: jwlawson/actions-setup-cmake@v1.14
+        with:
+          cmake-version: "3.25.x"
+
+      - name: Test all
+        shell: bash
+        run: bash CI/TestAll.sh
+
+  Generate-Doxygen:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ssciwr/doxygen-install@v1
+      - uses: seanmiddleditch/gha-setup-ninja@master
+      - uses: jwlawson/actions-setup-cmake@v1.14
+        with:
+          cmake-version: "3.25.x"
+
+      - name: Generate doxygen
+        shell: bash
+        run: bash CI/GenerateDoxygen.sh

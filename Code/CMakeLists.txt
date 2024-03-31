@@ -90,4 +90,14 @@ if(NOT TEST_ON_PC)
         stm32_generate_binary_file(${EXECUTABLE_NAME})
         stm32_generate_hex_file(${EXECUTABLE_NAME})
     endif()
+
+    if(USE_DESKTOP)
+        target_link_libraries(${EXECUTABLE_NAME}
+            hardware-setup-desktop
+        )
+        
+        target_link_libraries(${EXECUTABLE_NAME}
+            hal-desktop
+        )
+    endif()
 endif()
