@@ -1,14 +1,15 @@
 #----- Begin -----
 
 build
-
-# See Scripts/Variables.sh
-Code/BuildDoc
-Code/BuildDesktop
-Code/BuildStm32*
-Code/BuildTest
+Build
 
 dist
+
+node_modules
+yarn.lock
+
+Coverage/**
+!Coverage/coverage.svg
 
 #----- End -----
 

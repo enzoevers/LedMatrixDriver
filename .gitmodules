@@ -4,3 +4,6 @@
 [submodule "Code/fuzztest"]
 	path = Code/fuzztest
 	url = https://github.com/google/fuzztest.git
+[submodule "External/lcov-badge"]
+	path = External/lcov-badge
+	url = https://github.com/freejosh/lcov-badge.git

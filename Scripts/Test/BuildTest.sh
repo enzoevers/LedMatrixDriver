@@ -6,10 +6,12 @@ SCRIPT_PATH=${CUR_PATH}/../
 source ${SCRIPT_PATH}/Variables.sh
 source ${SCRIPT_PATH}/Utils.sh
 
+CreateBuildDirectoryIfNotExist ${BUILD_PATH}
+
 ValidateDirExists ${CODE_PATH}
 
 CreateBuildDirectoryIfNotExist ${BUILD_DIR_TEST}
 
 cd ${BUILD_DIR_TEST}
-CC=clang-17 CXX=clang++-17 cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug -DTEST_ON_PC=ON
+CC=clang-17 CXX=clang++-17 cmake -G Ninja ${CODE_PATH} -DCMAKE_BUILD_TYPE=Debug -DTEST_ON_PC=ON
 cmake --build . --parallel 8
