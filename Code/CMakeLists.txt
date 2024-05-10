@@ -31,7 +31,7 @@ endif()
 if(USE_STM32F3)
     stm32_fetch_cmsis(F3)
     list(APPEND CMSIS_COMP_LIST "STM32F3")
-    find_package(CMSIS COMPONENTS "${CMSIS_COMP_LIST}" REQUIRED) 
+    find_package(CMSIS COMPONENTS "${CMSIS_COMP_LIST}" REQUIRED)
 endif()
 
 if(GENERATE_DOCS)
@@ -55,6 +55,12 @@ if(NOT GENERATE_DOCS)
     target_include_directories(Displays INTERFACE
         ${PROJECT_SOURCE_DIR}/HAL/include
     )
+
+    if(TEST_ON_PC)
+        target_include_directories(Displays INTERFACE
+            ${PROJECT_SOURCE_DIR}/HAL/test/mocks
+        )
+    endif()
     
     add_subdirectory(${PROJECT_SOURCE_DIR}/HardwareSetup)
 endif()
@@ -66,11 +72,7 @@ if(NOT TEST_ON_PC)
         Common
     )
 
-    if(HANOVER_OL037A)
-        target_link_libraries(${EXECUTABLE_NAME}
-            Hanover-OL037A
-        )
-    endif()
+   
 
     if(USE_STM32)    
         if(USE_STM32F303XC)
@@ -80,6 +82,12 @@ if(NOT TEST_ON_PC)
             target_link_libraries(hal-stm32
                 hardware-setup-stm32f303xc
             )
+
+            if(HANOVER_OL037A)
+                target_link_libraries(Hanover-OL037A
+                    hardware-setup-stm32f303xc
+                )
+            endif()
         endif()
 
         target_link_libraries(${EXECUTABLE_NAME}
@@ -98,6 +106,12 @@ if(NOT TEST_ON_PC)
         
         target_link_libraries(${EXECUTABLE_NAME}
             hal-desktop
+        )
+    endif()
+
+    if(HANOVER_OL037A)
+        target_link_libraries(${EXECUTABLE_NAME}
+            Hanover-OL037A
         )
     endif()
 endif()

@@ -2,11 +2,21 @@
 
 #include <stdint.h>
 
-#include <span>
+#include <limits>
+
+#include "VecXD.h"
 
 template <typename Color>
 struct PixelArea {
-    uint32_t width;
-    uint32_t height;
-    Color* pixels;
+    Vec2D size = {0, 0};
+    Color* pixels = nullptr;
+
+    auto at(Vec2D coordinateInArea) -> Color {
+        if (coordinateInArea.x >= size.x || coordinateInArea.y >= size.y) {
+            return std::numeric_limits<Color>::min();
+        }
+
+        std::size_t index = coordinateInArea.y * size.x + coordinateInArea.x;
+        return pixels[index];
+    }
 };
