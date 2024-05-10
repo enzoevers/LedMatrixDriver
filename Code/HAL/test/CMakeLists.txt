@@ -8,6 +8,8 @@ add_executable(TestHAL
 
 link_fuzztest(TestHAL)
 
+target_include_directories(TestHAL PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/mocks)
+
 target_link_libraries(TestHAL PRIVATE 
   gtest
   gmock

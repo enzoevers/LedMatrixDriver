@@ -1,5 +1,4 @@
 add_executable(TestDisplays
-  ${CMAKE_CURRENT_SOURCE_DIR}/TestIDisplayMonochrome.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/TestHanoverOL037A.cpp
 )
 

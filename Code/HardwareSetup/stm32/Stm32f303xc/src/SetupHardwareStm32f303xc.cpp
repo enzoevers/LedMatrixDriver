@@ -27,8 +27,8 @@ static auto SetupClock() -> void {
     //----------
     // GPIO clocks
     //----------
-    SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOEEN); /* Delay after an RCC peripheral clock enabling */
-    tmpreg = READ_BIT(RCC->AHBENR, RCC_AHBENR_GPIOEEN);
+    SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIODEN); /* Delay after an RCC peripheral clock enabling */
+    tmpreg = READ_BIT(RCC->AHBENR, RCC_AHBENR_GPIODEN);
     UNUSED(tmpreg);
 
     //----------
@@ -70,8 +70,12 @@ static auto SetupClock() -> void {
     }
 
 static auto SetupGpio() -> void {
-    CONFIG_OUTPUT(E, 13)
-    CONFIG_OUTPUT(E, 14)
+    CONFIG_OUTPUT(D, 10)
+    CONFIG_OUTPUT(D, 11)
+    CONFIG_OUTPUT(D, 12)
+    CONFIG_OUTPUT(D, 13)
+    CONFIG_OUTPUT(D, 14)
+    CONFIG_OUTPUT(D, 15)
 }
 
 static auto SetupTimers() -> void {
