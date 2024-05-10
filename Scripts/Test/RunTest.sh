@@ -11,8 +11,8 @@ ValidateDirExists ${CODE_PATH}
 RETURN_CODE=0
 EvaluateTests()
 {
-    LAST_LINE=$( tail -n 1 $1 )
-    if [[ $LAST_LINE == *"FAILED"* ]]; then
+    LAST_LINE=$( tail -n 3 $1 | tr '\n' ' ' )
+    if [[ $LAST_LINE == *"FAILED"* ]]  || [[ $LAST_LINE != *"PASSED"* && $LAST_LINE != *"DISABLED TEST"* ]]; then
         RETURN_CODE=$((RETURN_CODE | 1))
         echo "RETURN_CODE ${RETURN_CODE}"
     fi
