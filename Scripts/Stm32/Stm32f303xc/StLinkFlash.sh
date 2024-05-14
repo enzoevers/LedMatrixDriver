@@ -15,4 +15,4 @@ ValidateFileExists ${BINARY_PATH}
 
 WRITE_ADDRESS=0x8000000
 
-st-flash write ${BINARY_PATH} ${WRITE_ADDRESS}
+st-flash --reset write ${BINARY_PATH} ${WRITE_ADDRESS}

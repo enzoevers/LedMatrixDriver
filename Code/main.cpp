@@ -42,7 +42,7 @@ int main() {
         latch.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_14});
         ledOE.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_15});
     }
-    uint32_t tim3Hertz = 8000000;
+    uint32_t tim3Hertz = 40000000;
     auto mainDelay = DelayStm32();
     mainDelay.SetupConfiguration({&TIM3->SR, &TIM3->ARR, &TIM3->CR1, &TIM3->PSC, tim3Hertz, TIM_SR_UIF, TIM_CR1_CEN});
 #endif
@@ -70,7 +70,6 @@ int main() {
 
     auto mainDelay = DelayDesktop();
 #endif
-
     HanoverOL037A_GPIOInterface hanoverOL037A_GPIOInterface{&clk, &clkEn, &clkSelEn, &data, &latch, &ledOE};
 
     auto hanoverOL037A = HanoverOL037A();

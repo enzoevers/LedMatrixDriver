@@ -41,9 +41,37 @@ static auto SetupClock() -> void {
     // HLCK - SYSCLK not divided
     RCC->CFGR &= ~RCC_CFGR_HPRE_3;
 
-    // Select HSI for SYSCLOCK
-    RCC->CFGR &= ~RCC_CFGR_SW_0;
-    RCC->CFGR &= ~RCC_CFGR_SW_1;
+    //----------
+    // PLL
+    //----------
+
+    // Stop PLL
+    RCC->CR &= ~RCC_CR_PLLON;
+    while (RCC->CR & RCC_CR_PLLRDY) {
+    }
+
+    // Use HSI/2 as the PLL source clock
+    RCC->CFGR |= RCC_CFGR_PLLSRC_HSI_DIV2;
+
+    // Max allowed frequency is 72MHz.
+    // With a PLL input frequency of 4MHz (HSI/2 = 8MHz / 2 = 4MHz)
+    // the max multiplication is 72 / 4 = 18
+
+    // PLL multiplication
+    // SYSCLOCK = 4MHz * 10 = 40MHz
+    RCC->CFGR |= RCC_CFGR_PLLMUL10;
+
+    // Enable PLL
+    RCC->CR |= RCC_CR_PLLON;
+    while (!(RCC->CR & RCC_CR_PLLRDY)) {
+    }
+
+    //----------
+    // Main clock
+    //----------
+
+    // Select PLL for SYSCLOCK
+    RCC->CFGR |= RCC_CFGR_SW_PLL;
 
     // Enable HSI clock
     RCC->CR |= RCC_CR_HSION;
