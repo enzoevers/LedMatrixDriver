@@ -11,6 +11,8 @@ yarn.lock
 Coverage/**
 !Coverage/coverage.svg
 
+*.profraw
+
 #----- End -----
 
 #----- Begin -----
