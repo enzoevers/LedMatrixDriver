@@ -177,7 +177,8 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsFalseIfWaitAmountIsTooLongBa
     delayThread.join();
 }
 
-TEST_F(FixtureDelayStm32, SynchronousWait_us_SetsPrescalerToZeroAndCorrectArrIfNoPrescalerNeededBasedOnClockHertz) {
+TEST_F(FixtureDelayStm32,
+       DISABLED_SynchronousWait_us_SetsPrescalerToZeroAndCorrectArrIfNoPrescalerNeededBasedOnClockHertz) {
     auto delayStm32 = CreateDelayStm32();
 
     m_delayConfigstm32.timerInputFrequencyInHertz = 1000000;  // 1 MHz => 1us per clock

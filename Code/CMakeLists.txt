@@ -38,12 +38,14 @@ if(GENERATE_DOCS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Doc)
 endif()
 
-if(TEST_ON_PC)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/fuzztest)
+if(TEST_ON_PC OR USE_DESKTOP)
+    set(CMAKE_CXX_STANDARD 20)
 endif()
 
-if(TEST_ON_PC OR USE_DESKTOP)
-    set(CMAKE_CXX_STANDARD 23)
+if(TEST_ON_PC)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/fuzztest)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
 endif()
 
 if(NOT GENERATE_DOCS)

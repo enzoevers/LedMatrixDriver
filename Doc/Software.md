@@ -102,6 +102,17 @@ wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
 sudo ./llvm.sh 17
 rm llvm.sh
+
+sudo apt install lcov \
+                 llvm-cov
+
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+nvm install 21.1.0
+nvm use 21.1.0
 ```
 
 > The reason for `libstdc++12-devmak` is described here: https://stackoverflow.com/questions/74543715/usr-bin-ld-cannot-find-lstdc-no-such-file-or-directory-on-running-flutte
@@ -113,6 +124,10 @@ rm llvm.sh
 - `$ ./Scripts/Test/RunTest.sh`
 
 When creating new tests, make sure to add the test to the [./Scripts/Test/RunTest.sh](./Scripts/Test/RunTest.sh) script.
+
+### Coverage
+
+After running `$ ./Scripts/Test/RunTest.sh` a coverage report can be found in `./Coverage/CoverageReport/`. Use `index.html` to open it.
 
 ## Documentation
 
