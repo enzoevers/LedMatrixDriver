@@ -23,7 +23,8 @@ class FixtureDelayStm32 : public Test {
           m_counterEnableMask(0x1 << 1),
           m_delayConfigstm32({&m_statusRegister, &m_autoReloadRegister, &m_controlRegister, &m_prescalerRegister,
                               m_timerInputFrequencyInHertz, m_updateInterruptMask, m_counterEnableMask}),
-          defaultMicrosecondsDelay(1000) {}
+          m_defaultMicrosecondsDelay(1000),
+          m_microsecondsWaitAfterJoinable(100000) {}
 
     auto CreateIDelayStm32() -> std::unique_ptr<IDelayStm32> { return std::make_unique<DelayStm32>(); }
     auto CreateDelayStm32() -> std::unique_ptr<DelayStm32> { return std::make_unique<DelayStm32>(); }
@@ -43,7 +44,8 @@ class FixtureDelayStm32 : public Test {
 
     DelayConfigstm32 m_delayConfigstm32;
 
-    uint32_t defaultMicrosecondsDelay;
+    uint32_t m_defaultMicrosecondsDelay;
+    uint32_t m_microsecondsWaitAfterJoinable;
 };
 
 class FixtureDelayStm32FuzzTests : public PerFuzzTestFixtureAdapter<FixtureDelayStm32> {
@@ -128,8 +130,7 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsFalseIfWaitAmountIsTooShortB
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     ASSERT_FALSE(result);
@@ -167,8 +168,7 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsFalseIfWaitAmountIsTooLongBa
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     ASSERT_FALSE(result);
@@ -192,8 +192,7 @@ TEST_F(FixtureDelayStm32,
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     ASSERT_EQ(m_prescalerRegister, 0);
@@ -203,8 +202,9 @@ TEST_F(FixtureDelayStm32,
     delayThread.join();
 }
 
+// TODO: Fix
 TEST_F(FixtureDelayStm32,
-       SynchronousWait_us_SetsPrescalerToOneAndCorrectArrIfNeededBasedOnClockHertzIfrequiredDelayEven) {
+       SynchronousWait_us_SetsPrescalerToOneAndCorrectArrIfNeededBasedOnClockHertzIfRequiredDelayEven) {
     auto delayStm32 = CreateDelayStm32();
 
     const uint32_t inputHertz = 1000000;  // 1 MHz => 1us per clock
@@ -221,8 +221,7 @@ TEST_F(FixtureDelayStm32,
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     ASSERT_EQ(m_prescalerRegister, 1);
@@ -238,8 +237,9 @@ TEST_F(FixtureDelayStm32,
     delayThread.join();
 }
 
+// TODO: Fix
 TEST_F(FixtureDelayStm32,
-       SynchronousWait_us_SetsPrescalerToOneAndCorrectArrIfNeededBasedOnClockHertzIfrequiredDelayUnven) {
+       SynchronousWait_us_SetsPrescalerToOneAndCorrectArrIfNeededBasedOnClockHertzIfRequiredDelayUnven) {
     auto delayStm32 = CreateDelayStm32();
 
     const uint32_t inputHertz = 1000000;  // 1 MHz => 1us per clock
@@ -256,8 +256,7 @@ TEST_F(FixtureDelayStm32,
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     ASSERT_EQ(m_prescalerRegister, 1);
@@ -288,8 +287,7 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_SetsPrescalerAndArrCorrectlyForOneS
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     // Assuming an infinite ARR bit-length would require (1,000,000 / 0.05 = 20,000,000) clocks.
@@ -318,15 +316,14 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_ClearsStatusRegisterOnStart) {
 
     ASSERT_NE(m_statusRegister, 0);
 
-    auto delayThread = std::jthread([&]() { delayStm32->SynchronousWait_us(defaultMicrosecondsDelay); });
+    auto delayThread = std::jthread([&]() { delayStm32->SynchronousWait_us(m_defaultMicrosecondsDelay); });
     // Make sure the thread is active
     while (!delayThread.joinable()) {
     }
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     ASSERT_EQ(m_statusRegister, 0);
@@ -340,15 +337,14 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_SetsCounterEnableInControlRegisterO
 
     ASSERT_FALSE(m_controlRegister & m_counterEnableMask);
 
-    auto delayThread = std::jthread([&]() { delayStm32->SynchronousWait_us(defaultMicrosecondsDelay); });
+    auto delayThread = std::jthread([&]() { delayStm32->SynchronousWait_us(m_defaultMicrosecondsDelay); });
     // Make sure the thread is active
     while (!delayThread.joinable()) {
     }
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     ASSERT_TRUE(m_controlRegister & m_counterEnableMask);
@@ -357,20 +353,20 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_SetsCounterEnableInControlRegisterO
     delayThread.join();
 }
 
+// TODO: Fix
 TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsTrueWhenUpdateInterruptFlagInStatusRegisterIsSet) {
     auto delayStm32 = CreateDelayStm32Configured();
 
     auto result = false;
 
-    auto delayThread = std::jthread([&]() { result = delayStm32->SynchronousWait_us(defaultMicrosecondsDelay); });
+    auto delayThread = std::jthread([&]() { result = delayStm32->SynchronousWait_us(m_defaultMicrosecondsDelay); });
     // Make sure the thread is active
     while (!delayThread.joinable()) {
     }
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 500;
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     m_statusRegister |= m_updateInterruptMask;
@@ -384,19 +380,18 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_WaitsForInterruptFlagToBeSetBeforeR
 
     auto result = false;
 
-    auto delayThread = std::jthread([&]() { result = delayStm32->SynchronousWait_us(defaultMicrosecondsDelay); });
+    auto delayThread = std::jthread([&]() { result = delayStm32->SynchronousWait_us(m_defaultMicrosecondsDelay); });
     // Make sure the thread is active
     while (!delayThread.joinable()) {
     }
 
     {
         // Wait for SynchronousWait_us to have started the timer
-        const auto microsecondsWait = 1000000;  // 2 seconds
-        usleep(microsecondsWait);
+        usleep(m_microsecondsWaitAfterJoinable);
     }
 
     // Note that this function should just wait for m_updateInterruptMask to be set.
-    // The defaultMicrosecondsDelay value only affects values in the real registers in the uController.
+    // The m_defaultMicrosecondsDelay value only affects values in the real registers in the uController.
     ASSERT_FALSE(result);
 
     m_statusRegister |= m_updateInterruptMask;
