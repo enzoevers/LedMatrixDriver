@@ -119,6 +119,15 @@ GenerateTraceFile TestDisplays ${BUILD_DIR_TEST}/Displays/test/
 
 echo
 echo "//========================="
+echo "// Running TestTextContent"
+echo "//========================="
+echo
+
+RunTests TestTextContent ${BUILD_DIR_TEST}/TextContent/test/
+GenerateTraceFile TestTextContent ${BUILD_DIR_TEST}/TextContent/test/
+
+echo
+echo "//========================="
 echo "// Generating coverage report"
 echo "//========================="
 echo

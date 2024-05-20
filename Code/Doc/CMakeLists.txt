@@ -7,6 +7,7 @@ if (DOXYGEN_FOUND)
                         ${PROJECT_SOURCE_DIR}/Common
                         ${PROJECT_SOURCE_DIR}/HAL
                         ${PROJECT_SOURCE_DIR}/Displays
+                        ${PROJECT_SOURCE_DIR}/TextContent
                         COMMENT "Generate man pages"
                     )
 
