@@ -1,3 +1,7 @@
+file(WRITE ${CMAKE_BINARY_DIR}/empty.cpp "")
+add_library(TestHAL_mocks STATIC ${CMAKE_BINARY_DIR}/empty.cpp)
+target_include_directories(TestHAL_mocks PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/mocks)
+
 add_executable(TestHAL
   ${CMAKE_CURRENT_SOURCE_DIR}/TestHalIGPIOOutput.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/TestHalGPIOOutputStm32.cpp
@@ -8,14 +12,12 @@ add_executable(TestHAL
 
 link_fuzztest(TestHAL)
 
-target_include_directories(TestHAL PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/mocks)
-
 target_link_libraries(TestHAL PRIVATE 
   gtest
   gmock
   gtest_main
-  hal-stm32
-  hal-desktop
+  TestHAL_mocks
+  HAL
 )
 
 gtest_discover_tests(TestHAL)

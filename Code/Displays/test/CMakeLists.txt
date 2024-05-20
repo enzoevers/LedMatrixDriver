@@ -8,7 +8,7 @@ target_link_libraries(TestDisplays PRIVATE
   gtest
   gmock
   gtest_main  
-  Hanover-OL037A
+  Displays
 )
 
 gtest_discover_tests(TestDisplays)
