@@ -8,6 +8,7 @@ on:
       - ".github/workflows/*"
       - "CI/*"
       - "Scripts/*"
+      - "**/CMakeLists.txt"
       - "**.c"
       - "**.cpp"
       - "**.h"

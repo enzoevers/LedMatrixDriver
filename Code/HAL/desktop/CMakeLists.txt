@@ -3,6 +3,5 @@ add_library(hal-desktop STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/DelayDesktop.cpp
 )
 
-target_include_directories(hal-desktop PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+target_include_directories(hal-desktop PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(hal-desktop Common)
