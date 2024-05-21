@@ -2,13 +2,18 @@ cmake_minimum_required(VERSION 3.25)
 
 configure_file(defines.h.in defines.h)
 
-if(USE_STM32)
+if(USE_STM32 AND (NOT GENERATE_DOCS))
     set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/stm32-cmake/cmake/stm32_gcc.cmake)
     set(CMSIS_COMP_LIST "")
 endif()
 
 set(PROJECT_NAME LedDisplayDriverProject)
 project(${PROJECT_NAME} C CXX ASM)
+
+if(GENERATE_DOCS)
+    add_subdirectory(Doc)
+    return()
+endif()
 
 set(MAIN_SOURCE_FILES main.cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -38,33 +43,25 @@ if(TEST_ON_PC)
     add_subdirectory(fuzztest)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
+else()
+    add_subdirectory(HardwareSetup)
 endif()
 
-if(GENERATE_DOCS)
-    add_subdirectory(Doc)
-else()
-    if(NOT TEST_ON_PC)
-        add_subdirectory(HardwareSetup)
-    endif()
-    
-    add_subdirectory(Common)
-    add_subdirectory(HAL)
-    add_subdirectory(Displays)
-    
-    if(NOT TEST_ON_PC)
-        set(EXECUTABLE_NAME LedDisplayDriverExecutable)
-        add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
+add_subdirectory(Common)
+add_subdirectory(HAL)
+add_subdirectory(Displays)
 
-        target_link_libraries(${EXECUTABLE_NAME}
-            Common
-            HAL
-            Displays
-        )
-
-        if(USE_STM32)    
-            stm32_print_size_of_target(${EXECUTABLE_NAME})
-            stm32_generate_binary_file(${EXECUTABLE_NAME})
-            stm32_generate_hex_file(${EXECUTABLE_NAME})
-        endif()
+if(NOT TEST_ON_PC)
+    set(EXECUTABLE_NAME LedDisplayDriverExecutable)
+    add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
+     target_link_libraries(${EXECUTABLE_NAME}
+        Common
+        HAL
+        Displays
+    )
+     if(USE_STM32)
+        stm32_print_size_of_target(${EXECUTABLE_NAME})
+        stm32_generate_binary_file(${EXECUTABLE_NAME})
+        stm32_generate_hex_file(${EXECUTABLE_NAME})
     endif()
 endif()
