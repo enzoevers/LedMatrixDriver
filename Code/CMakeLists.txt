@@ -50,7 +50,7 @@ endif()
 add_subdirectory(Common)
 add_subdirectory(HAL)
 add_subdirectory(Displays)
-add_subdirectory(TextContent)
+add_subdirectory(TextProvider)
 
 if(NOT TEST_ON_PC)
     set(EXECUTABLE_NAME LedDisplayDriverExecutable)
@@ -59,7 +59,7 @@ if(NOT TEST_ON_PC)
         Common
         HAL
         Displays
-        TextContent
+        TextProvider
     )
      if(USE_STM32)
         stm32_print_size_of_target(${EXECUTABLE_NAME})

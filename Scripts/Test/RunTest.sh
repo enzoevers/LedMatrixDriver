@@ -119,12 +119,12 @@ GenerateTraceFile TestDisplays ${BUILD_DIR_TEST}/Displays/test/
 
 echo
 echo "//========================="
-echo "// Running TestTextContent"
+echo "// Running TestTextProvider"
 echo "//========================="
 echo
 
-RunTests TestTextContent ${BUILD_DIR_TEST}/TextContent/test/
-GenerateTraceFile TestTextContent ${BUILD_DIR_TEST}/TextContent/test/
+RunTests TestTextProvider ${BUILD_DIR_TEST}/TextProvider/test/
+GenerateTraceFile TestTextProvider ${BUILD_DIR_TEST}/TextProvider/test/
 
 echo
 echo "//========================="

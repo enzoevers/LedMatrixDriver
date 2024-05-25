@@ -1,5 +1,5 @@
-add_library(TextContent STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/TextContent.cpp
+add_library(TextProvider STATIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/TextBmhFormat.cpp
 )
 
 set(FONT_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Generated/Fonts")
@@ -10,10 +10,10 @@ execute_process(COMMAND ${GENERATE_FONT_SCRIPT} ${FONT_INCLUDE_DIR} "Bitstream V
 execute_process(COMMAND ${GENERATE_FONT_SCRIPT} ${FONT_INCLUDE_DIR} "Bitstream Vera Sans Mono" 12)
 execute_process(COMMAND ${GENERATE_FONT_SCRIPT} ${FONT_INCLUDE_DIR} "Bitstream Vera Sans Mono" 16)
 
-target_include_directories(TextContent PUBLIC ${FONT_INCLUDE_DIR}/../)
+target_include_directories(TextProvider PUBLIC ${FONT_INCLUDE_DIR}/../)
 
-target_include_directories(TextContent PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(TextContent Displays)
+target_include_directories(TextProvider PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(TextProvider Displays)
 
 if(TEST_ON_PC)
     add_subdirectory(test)
