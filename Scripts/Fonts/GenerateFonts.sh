@@ -18,6 +18,7 @@ GenerateFont()
         --ttf_folder ${FONTS_PATH} \
         --variable_width \
         --ascii \
+        --struct \
         --font "$1" \
         --fontsize $2
 
