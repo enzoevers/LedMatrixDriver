@@ -126,6 +126,10 @@ echo
 RunTests TestTextProvider ${BUILD_DIR_TEST}/TextProvider/test/
 GenerateTraceFile TestTextProvider ${BUILD_DIR_TEST}/TextProvider/test/
 
+if [ ${RETURN_CODE} != 0 ]; then
+    exit ${RETURN_CODE}
+fi
+
 echo
 echo "//========================="
 echo "// Generating coverage report"

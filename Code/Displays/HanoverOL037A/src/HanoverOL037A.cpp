@@ -3,7 +3,7 @@
 #include <cstring>  // std::memcpy
 
 constexpr Vec2D HanoverOL037A::m_resolution;
-static constexpr int delayAfterIO_us = 5;
+static constexpr int delayAfterIO_us = 50;
 
 HanoverOL037A::HanoverOL037A() : m_pDelayManager(nullptr) { std::memset(m_pixelData.data(), 0, sizeof(m_pixelData)); }
 
