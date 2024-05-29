@@ -8,7 +8,7 @@ static constexpr auto NotFoundIndex = std::numeric_limits<uint8_t>::max();
 // ITextProvider
 //=========================
 
-auto TextBmhFormat::GetRequiredSizeCharacter(char character) -> Vec2D {
+auto TextBmhFormat::GetRequiredSizeCharacter(char character) const -> const Vec2D {
     if (m_font == nullptr) {
         return {0, 0};
     }
@@ -20,7 +20,7 @@ auto TextBmhFormat::GetRequiredSizeCharacter(char character) -> Vec2D {
 
     return {m_font->char_width[index], m_font->font_size};
 }
-auto TextBmhFormat::GetRequiredSizeString(const std::string& text, uint8_t spacing) -> Vec2D {
+auto TextBmhFormat::GetRequiredSizeString(const std::string& text, uint8_t spacing) const -> const Vec2D {
     if (m_font == nullptr) {
         return {0, 0};
     }
@@ -116,13 +116,13 @@ auto TextBmhFormat::SetFont(const BmhFont* font) -> bool {
     return true;
 }
 
-auto TextBmhFormat::GetFont() -> const BmhFont* { return m_font; }
+auto TextBmhFormat::GetFont() const -> const BmhFont* { return m_font; }
 
 //=========================
 // Private
 //=========================
 
-auto TextBmhFormat::GetCharacterIndex(const char character) -> uint8_t {
+auto TextBmhFormat::GetCharacterIndex(const char character) const -> const uint8_t {
     if (m_font == nullptr) {
         return NotFoundIndex;
     }

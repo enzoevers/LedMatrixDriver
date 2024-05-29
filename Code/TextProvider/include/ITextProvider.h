@@ -15,14 +15,14 @@ class ITextProvider {
     /*!
         @return The dimensions required to show the character
     */
-    virtual auto GetRequiredSizeCharacter(char character) -> Vec2D = 0;
+    virtual auto GetRequiredSizeCharacter(char character) const -> const Vec2D = 0;
 
     /*!
         @param string A string to show.
         @param spacing The amount of pixels between characters in the string.
         @return The dimensions required to show the string.
     */
-    virtual auto GetRequiredSizeString(const std::string& text, uint8_t spacing) -> Vec2D = 0;
+    virtual auto GetRequiredSizeString(const std::string& text, uint8_t spacing) const -> const Vec2D = 0;
 
     /*!
         @param string A string to show.

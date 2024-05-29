@@ -21,7 +21,12 @@
 #include "GPIOOutputDesktop.h"
 #endif
 
+#include <cstring>  // std::memset
+
+#include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_12.h"
+#include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_8.h"
 #include "HanoverOL037A.h"
+#include "TextBmhFormat.h"
 
 int main() {
     HardwareSetup();
@@ -70,33 +75,26 @@ int main() {
 
     auto mainDelay = DelayDesktop();
 #endif
-    HanoverOL037A_GPIOInterface hanoverOL037A_GPIOInterface{&clk, &clkEn, &clkSelEn, &data, &latch, &ledOE};
-
     auto hanoverOL037A = HanoverOL037A();
+    HanoverOL037A_GPIOInterface hanoverOL037A_GPIOInterface{&clk, &clkEn, &clkSelEn, &data, &latch, &ledOE};
     hanoverOL037A.SetGPIOInterface(hanoverOL037A_GPIOInterface);
     hanoverOL037A.SetDelayManager(&mainDelay);
 
     // Clear the display
     hanoverOL037A.UpdateDisplay();
 
-    const auto resolution = hanoverOL037A.GetResolution();
-    while (true) {
-        for (uint32_t x = 0; x < resolution.x; ++x) {
-            for (uint32_t y = 0; y < resolution.y; ++y) {
-                hanoverOL037A.SetPixel({x, y}, 1);
-                hanoverOL037A.UpdateDisplay();
-                // mainDelay.SynchronousWait_us(100);
-            }
-        }
+    auto textBmhFormat = TextBmhFormat();
+    textBmhFormat.SetFont(&Bitstream_Vera_Sans_Mono_12::font_data);
+    std::string text = "Hello World!";
+    const auto pixelAreaSize = textBmhFormat.GetRequiredSizeString(text, 1);
+    Monochrome pixelAreaData[pixelAreaSize.x * pixelAreaSize.y];
+    std::memset(pixelAreaData, 0, sizeof(pixelAreaData));
+    PixelArea<Monochrome> pixelArea{pixelAreaSize, pixelAreaData};
+    Vec2D offset{0, 0};
+    textBmhFormat.SetString(text, 1, offset, pixelArea);
 
-        for (uint32_t x = 0; x < resolution.x; ++x) {
-            for (uint32_t y = 0; y < resolution.y; ++y) {
-                hanoverOL037A.SetPixel({x, y}, 0);
-                hanoverOL037A.UpdateDisplay();
-                // mainDelay.SynchronousWait_us(100);
-            }
-        }
-    }
+    hanoverOL037A.SetArea({10, 0}, pixelArea);
+    hanoverOL037A.UpdateDisplay();
 
     return 0;
 }
