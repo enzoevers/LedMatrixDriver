@@ -51,13 +51,15 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 21.1.0
 nvm use 21.1.0
 
+python3 -m pip install fontTools pillow argparse
+
 echo
 echo "//===================="
 echo "// Build tests"
 echo "//===================="
 echo 
 
-Scripts/Test/BuildTest.sh
+Scripts/Test/BuildTest.sh "build"
 
 echo
 echo "//===================="

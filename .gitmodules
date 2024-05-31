@@ -7,3 +7,6 @@
 [submodule "External/lcov-badge"]
 	path = External/lcov-badge
 	url = https://github.com/freejosh/lcov-badge.git
+[submodule "External/TTF2BMH-fork"]
+	path = External/TTF2BMH-fork
+	url = https://github.com/enzoevers/TTF2BMH.git

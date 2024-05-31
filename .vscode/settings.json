@@ -73,6 +73,9 @@
         "complex": "cpp",
         "unordered_set": "cpp",
         "bitset": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "*.inc": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp"
     }
 }

@@ -19,4 +19,41 @@ struct PixelArea {
         std::size_t index = coordinateInArea.y * size.x + coordinateInArea.x;
         return pixels[index];
     }
+
+    auto Set(Vec2D coordinateInArea, Color newColor) -> bool {
+        if (coordinateInArea.x >= size.x || coordinateInArea.y >= size.y) {
+            return false;
+        }
+
+        std::size_t index = coordinateInArea.y * size.x + coordinateInArea.x;
+        pixels[index] = newColor;
+
+        return true;
+    }
+
+    auto HasSameData(const PixelArea<Color>& other) const -> bool {
+        if (size != other.size) {
+            return false;
+        }
+
+        if (pixels == other.pixels) {
+            return true;
+        }
+
+        if (pixels == nullptr || other.pixels == nullptr) {
+            return false;
+        }
+
+        for (auto i = 0; i < size.x * size.y; ++i) {
+            if (pixels[i] != other.pixels[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    auto operator==(const PixelArea<Color>& other) const -> bool {
+        return size == other.size && pixels == other.pixels;
+    }
 };

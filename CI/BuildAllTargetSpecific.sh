@@ -32,6 +32,7 @@ echo "//===================="
 echo 
 
 sudo apt install -y clang-format
+python3 -m pip install fontTools pillow argparse
 
 echo
 echo "//===================="
@@ -47,7 +48,7 @@ echo "// Build STM32F303xc"
 echo "//===================="
 echo 
 
-Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh
+Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh "build"
 
 echo
 echo "//===================="
@@ -55,4 +56,4 @@ echo "// Build Desktop"
 echo "//===================="
 echo
 
-Scripts/Desktop/BuildDesktop.sh
+Scripts/Desktop/BuildDesktop.sh "build"

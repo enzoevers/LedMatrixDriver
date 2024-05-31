@@ -3,6 +3,7 @@ CODE_PATH="${SCRIPT_PATH}/../Code/"
 BUILD_PATH="${SCRIPT_PATH}/../Build/"
 EXTERNAL_PATH="${SCRIPT_PATH}/../External/"
 COVERAGE_PATH="${SCRIPT_PATH}/../Coverage/"
+FONTS_PATH="${SCRIPT_PATH}/../Fonts/"
 
 # The full path to the build directory for the desktop target
 BUILD_DIR_DESKTOP="${BUILD_PATH}/BuildDesktop"
