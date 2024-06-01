@@ -43,6 +43,10 @@ class HanoverOL037A : public IHanoverOL037A, public IDisplay<Monochrome> {
     auto WritePixels(uint32_t panel, uint32_t section) const -> bool;
 
    private:
+    auto ClockInData(bool state) const -> void;
+    auto SetClockInPanelSectionSelectMode() const -> void;
+    auto SetClockInPixelDataMode() const -> void;
+
     static constexpr Vec2D m_resolution{160, 19};
     HanoverOL037A_GPIOInterface m_pGpioInterface;
     IDelay* m_pDelayManager;

@@ -17,6 +17,14 @@ auto HanoverOL037A::SetGPIOInterface(const HanoverOL037A_GPIOInterface& gpioInte
     }
 
     m_pGpioInterface = gpioInterface;
+
+    m_pGpioInterface.clk->SetState(0);
+    m_pGpioInterface.clkEn->SetState(1);
+    m_pGpioInterface.clkSelEn->SetState(1);
+    m_pGpioInterface.data->SetState(0);
+    m_pGpioInterface.latch->SetState(0);
+    m_pGpioInterface.ledOE->SetState(0);
+
     return true;
 }
 
@@ -95,27 +103,24 @@ auto HanoverOL037A::UpdateDisplay() -> bool {
     const auto nrPanels = GetNumberOfPanels();
     const auto nrSectionsPerPanel = GetNumberOfSectionsPerPanel();
 
-    m_pGpioInterface.latch->SetState(0);
-    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-
     for (auto p = 0; p < nrPanels; ++p) {
         for (auto s = 0; s < nrSectionsPerPanel; ++s) {
+            SetClockInPanelSectionSelectMode();
             if (!SelectPanelAndSection(p, s)) {
                 return false;
             }
+
+            SetClockInPixelDataMode();
             if (!WritePixels(p, s)) {
                 return false;
             }
         }
     }
-
+    m_pGpioInterface.latch->SetState(0);
+    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
     m_pGpioInterface.latch->SetState(1);
     m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
     m_pGpioInterface.latch->SetState(0);
-    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-
-    // TODO: remove this once the the `enableDisplay()` function is implemented
-    m_pGpioInterface.ledOE->SetState(0);
     m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
 
     return true;
@@ -141,27 +146,18 @@ auto HanoverOL037A::GetPanelAndSectionSelectionByte(uint32_t panel, uint32_t sec
     return ((section & 0b11) | (~(0b1 << (6 - (panel & 0b111111) - 1)) << 2));
 }
 
-inline auto clockInData(bool state) -> void {
-    // TODO: first make sure that the tests still work before implementing this
-}
-
 auto HanoverOL037A::SelectPanelAndSection(uint32_t panel, uint32_t section) const -> bool {
     if (panel >= GetNumberOfPanels() || section >= GetNumberOfSectionsPerPanel() ||
         m_pGpioInterface.ContainsNullptr()) {
         return false;
     }
 
-    m_pGpioInterface.clk->SetState(1);
-    // m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-
     const auto byteToWrite = GetPanelAndSectionSelectionByte(panel, section);
     for (auto i = 0; i < 8; i++) {
-        m_pGpioInterface.clkEn->SetState(0);
-        m_pGpioInterface.data->SetState((byteToWrite >> i) & 0b1);
-        m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-        m_pGpioInterface.clkEn->SetState(1);
-        m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+        ClockInData((byteToWrite >> i) & 0b1);
     }
+    m_pGpioInterface.clkEn->SetState(1);
+    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
 
     return true;
 }
@@ -172,16 +168,10 @@ auto HanoverOL037A::WritePixels(uint32_t panel, uint32_t section) const -> bool 
         return false;
     }
 
-    m_pGpioInterface.clk->SetState(0);
-    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-
     constexpr uint32_t columns = 40;
     const uint32_t rows = (section == 2) ? 3 : 8;
 
-    for (auto c = 0; c < columns; c++) {
-        m_pGpioInterface.clkSelEn->SetState(0);
-        m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-
+    for (auto c = 0; c < columns; ++c) {
         std::array<Monochrome, 8> columnData;
         auto pixelArea = PixelArea<Monochrome>{{1, rows}, columnData.data()};
         const auto topLeftCoordinate = Vec2D{(columns * panel) + c, section * 8};
@@ -189,26 +179,43 @@ auto HanoverOL037A::WritePixels(uint32_t panel, uint32_t section) const -> bool 
         GetCurrentPixelArea(topLeftCoordinate, pixelArea);
 
         for (auto r = 0; r < rows; ++r) {
-            m_pGpioInterface.clkEn->SetState(0);
-            m_pGpioInterface.data->SetState(pixelArea.pixels[r]);
-            m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-            m_pGpioInterface.clkEn->SetState(1);
-            m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+            ClockInData(pixelArea.pixels[r]);
         }
         if (section == 2) {
+            // The last section requires padding
             for (auto r = 0; r < 8 - rows; ++r) {
-                // The last section requires padding
-                m_pGpioInterface.clkEn->SetState(0);
-                m_pGpioInterface.data->SetState(0);
-                m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
-                m_pGpioInterface.clkEn->SetState(1);
-                m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+                ClockInData(0);
             }
         }
+        m_pGpioInterface.clkEn->SetState(1);
+        m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
 
+        m_pGpioInterface.clkSelEn->SetState(1);
+        m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+        m_pGpioInterface.clkSelEn->SetState(0);
+        m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
         m_pGpioInterface.clkSelEn->SetState(1);
         m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
     }
 
     return true;
+}
+
+auto HanoverOL037A::ClockInData(bool state) const -> void {
+    m_pGpioInterface.clkEn->SetState(1);
+    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+    m_pGpioInterface.data->SetState(state);
+    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+    m_pGpioInterface.clkEn->SetState(0);
+    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+}
+
+auto HanoverOL037A::SetClockInPanelSectionSelectMode() const -> void {
+    m_pGpioInterface.clk->SetState(1);
+    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
+}
+
+auto HanoverOL037A::SetClockInPixelDataMode() const -> void {
+    m_pGpioInterface.clk->SetState(0);
+    m_pDelayManager->SynchronousWait_us(delayAfterIO_us);
 }

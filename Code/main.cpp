@@ -81,7 +81,7 @@ int main() {
     hanoverOL037A.SetDelayManager(&mainDelay);
 
     // Clear the display
-    hanoverOL037A.UpdateDisplay();
+    // hanoverOL037A.UpdateDisplay();
 
     auto textBmhFormat = TextBmhFormat();
     textBmhFormat.SetFont(&Bitstream_Vera_Sans_Mono_12::font_data);
@@ -95,6 +95,16 @@ int main() {
 
     hanoverOL037A.SetArea({10, 0}, pixelArea);
     hanoverOL037A.UpdateDisplay();
+
+    // hanoverOL037A.SetPixel({0, 0}, 1);
+    // hanoverOL037A.SetPixel({39, 0}, 1);
+    // hanoverOL037A.SetPixel({0, 7}, 1);
+    // hanoverOL037A.SetPixel({39, 7}, 1);
+
+    // for (auto y = 0; y < 19; y++) {
+    //     hanoverOL037A.SetPixel({7, y}, 1);
+    // }
+    // hanoverOL037A.UpdateDisplay();
 
     return 0;
 }
