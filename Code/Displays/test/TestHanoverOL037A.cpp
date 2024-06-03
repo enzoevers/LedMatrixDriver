@@ -701,8 +701,6 @@ TEST_F(FixtureHanoverOL037A, UpdateDisplay_PerformsCorrectIOSequence) {
     {
         InSequence seq;
 
-        EXPECT_CALL(*latch, SetState(0)).WillOnce(Return(true));
-
         const auto expectedSectionSelections =
             hanoverOL037A->GetNumberOfPanels() * hanoverOL037A->GetNumberOfSectionsPerPanel();
         for (auto i = 0; i < expectedSectionSelections; ++i) {
@@ -710,10 +708,9 @@ TEST_F(FixtureHanoverOL037A, UpdateDisplay_PerformsCorrectIOSequence) {
             EXPECT_CALL(*clk, SetState(0)).WillOnce(Return(true));
         }
 
+        EXPECT_CALL(*latch, SetState(0)).WillOnce(Return(true));
         EXPECT_CALL(*latch, SetState(1)).WillOnce(Return(true));
         EXPECT_CALL(*latch, SetState(0)).WillOnce(Return(true));
-
-        EXPECT_CALL(*ledOE, SetState(0)).WillOnce(Return(true));
     }
 
     ASSERT_TRUE(hanoverOL037A->UpdateDisplay());
@@ -792,41 +789,41 @@ TEST_F(FixtureHanoverOL037A, SelectPanelAndSection_PerformsCorrectIOSequence) {
 
     InSequence seq;
 
-    EXPECT_CALL(*clk, SetState(1)).WillOnce(Return(true));
-
     uint8_t expectedByte = 0b11011101;
     // Writes 0b11011101 from bit 0 till 7
 
-    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-    EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
+    EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
-    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
-    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
-    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
-    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
-    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-    EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
-    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
 
-    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
     EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
+    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+    EXPECT_CALL(*data, SetState(1)).WillOnce(Return(true));
+    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
     EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
 
     hanoverOL037A->SelectPanelAndSection(2, 1);
@@ -872,66 +869,66 @@ TEST_F(FixtureHanoverOL037A, WritePixels_PerformsCorrectIOSequence_ForSectionZer
     for (auto s = 0; s < 2; ++s) {
         InSequence seq;
 
-        EXPECT_CALL(*clk, SetState(0)).WillOnce(Return(true));
-
         constexpr auto columns = 40;
         constexpr auto rows = 8;
 
         for (auto c = 0; c < columns; ++c) {
-            EXPECT_CALL(*clkSelEn, SetState(0)).WillOnce(Return(true));
-
             if (c == topLeftCoordinate.x) {
                 if (s == 0) {
                     for (auto i = 0; i < 3; ++i) {
-                        EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-                        EXPECT_CALL(*data, SetState(false)).WillOnce(Return(true));
                         EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+                        EXPECT_CALL(*data, SetState(false)).WillOnce(Return(true));
+                        EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
                     }
 
                     // Expected data
-                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-                    EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
                     EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
+                    EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
                     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
                     EXPECT_CALL(*data, SetState(false)).WillOnce(Return(true));
-                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
                     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
                     EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
-                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
                     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
                     EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
-                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
                     EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
                     EXPECT_CALL(*data, SetState(false)).WillOnce(Return(true));
-                    EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
                 } else {
                     // Expected data
-                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-                    EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
                     EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+                    EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
+                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
 
-                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-                    EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
                     EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+                    EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
+                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
 
                     for (auto i = 0; i < 6; ++i) {
-                        EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-                        EXPECT_CALL(*data, SetState(false)).WillOnce(Return(true));
                         EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+                        EXPECT_CALL(*data, SetState(false)).WillOnce(Return(true));
+                        EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
                     }
                 }
             } else {
                 for (auto i = 0; i < rows; ++i) {
-                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-                    EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
                     EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+                    EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
+                    EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
                 }
             }
 
+            EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+
+            EXPECT_CALL(*clkSelEn, SetState(1)).WillOnce(Return(true));
+            EXPECT_CALL(*clkSelEn, SetState(0)).WillOnce(Return(true));
             EXPECT_CALL(*clkSelEn, SetState(1)).WillOnce(Return(true));
         }
 
@@ -950,41 +947,41 @@ TEST_F(FixtureHanoverOL037A, WritePixels_PerformsCorrectIOSequence_ForSectionTwo
 
     InSequence seq;
 
-    EXPECT_CALL(*clk, SetState(0)).WillOnce(Return(true));
-
     constexpr auto columns = 40;
     constexpr auto rows = 3;
 
     for (auto c = 0; c < columns; ++c) {
-        EXPECT_CALL(*clkSelEn, SetState(0)).WillOnce(Return(true));
-
         if (c == topLeftCoordinate.x) {
-            EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-            EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
             EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
+            EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
             EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
+
+            EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
             EXPECT_CALL(*data, SetState(false)).WillOnce(Return(true));
-            EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
-
             EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-            EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
+
             EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+            EXPECT_CALL(*data, SetState(true)).WillOnce(Return(true));
+            EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
 
         } else {
             for (auto i = 0; i < rows; ++i) {
-                EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-                EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
                 EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+                EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
+                EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
             }
         }
 
         for (auto i = 0; i < 5; ++i) {
-            EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
-            EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
             EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+            EXPECT_CALL(*data, SetState(0)).WillOnce(Return(true));
+            EXPECT_CALL(*clkEn, SetState(0)).WillOnce(Return(true));
         }
 
+        EXPECT_CALL(*clkEn, SetState(1)).WillOnce(Return(true));
+
+        EXPECT_CALL(*clkSelEn, SetState(1)).WillOnce(Return(true));
+        EXPECT_CALL(*clkSelEn, SetState(0)).WillOnce(Return(true));
         EXPECT_CALL(*clkSelEn, SetState(1)).WillOnce(Return(true));
     }
 
