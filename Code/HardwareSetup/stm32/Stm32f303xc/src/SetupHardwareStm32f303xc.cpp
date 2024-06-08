@@ -6,6 +6,7 @@
 static auto SetupClock() -> void;
 static auto SetupGpio() -> void;
 static auto SetupTimers() -> void;
+static auto SetupRTC() -> void;
 
 //====================
 // HardwareSetup.h
@@ -15,6 +16,7 @@ auto HardwareSetup() -> void {
     SetupClock();
     SetupGpio();
     SetupTimers();
+    SetupRTC();
 }
 
 //====================
@@ -123,4 +125,59 @@ static auto SetupTimers() -> void {
     TIM3->CR1 &= ~TIM_CR1_DIR;
 
     RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
+}
+
+static auto SetupRTC() -> void {
+    // Enable the power interface clock
+    RCC->APB1ENR |= RCC_APB1ENR_PWREN;
+
+    // Enable write access to the RTC backup registers
+    PWR->CR |= PWR_CR_DBP;
+
+    // Reset the RTC clock domain
+    RCC->BDCR |= RCC_BDCR_BDRST;
+    RCC->BDCR &= ~RCC_BDCR_BDRST;
+
+    // Select LSI for the RTC clock source
+    RCC->BDCR &= ~RCC_BDCR_RTCSEL_0;
+    RCC->BDCR |= RCC_BDCR_RTCSEL_1;
+
+    // Enable RTC clock
+    RCC->BDCR |= RCC_BDCR_RTCEN;
+
+    // Enable LSI at 40KHz
+    RCC->CSR |= RCC_CSR_LSION;
+
+    while (!(RCC->CSR & RCC_CSR_LSIRDY))
+        ;
+
+    // Unlock RTC
+    RTC->WPR = 0xCA;
+    RTC->WPR = 0x53;
+
+    // Enter initialization mode
+    RTC->ISR |= RTC_ISR_INIT;
+
+    // Wait for initialization mode to be entered
+    while (!(RTC->ISR & RTC_ISR_INITF))
+        ;
+
+    // Set prescaler to go from 40KHz to 1Hz
+    // A division of 40.000 is needed which is (PREDIV_A + 1) * (PREDIV_S + 1)
+    // where PREDIV_A should be as high as possible to minimize power consumption.
+    // The division of 40.000/(PREDIV_A + 1) should be an integer.
+    // The division of (40.000/(PREDIV_A + 1))/(PREDIV_S + 1) should be 1.
+    //
+    // If PREDIV_A is 99 then PREDIV_S must be 399
+    // 40.000/(PREDIV_A + 1) = 40.0000 / 100 = 400
+    // 400/(PREDIV_S + 1) = 400 / 400 = 1
+    const uint32_t PREDIV_A = 99;
+    const uint32_t PREDIV_S = 399;
+    RTC->PRER = PREDIV_A << RTC_PRER_PREDIV_A_Pos | PREDIV_S << RTC_PRER_PREDIV_S_Pos;
+
+    // Exit initialization mode
+    RTC->ISR &= ~RTC_ISR_INIT;
+
+    // Lock RTC
+    RTC->WPR = 0;
 }
