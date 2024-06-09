@@ -7,17 +7,19 @@
 using namespace testing;
 using namespace fuzztest;
 
+namespace HAL::STM32 {
+
 namespace GPIOOutputStm32Testing {
 
 class FixtureGPIOOutputStm32 : public Test {
    public:
-    FixtureGPIOOutputStm32() : m_gPIOOutputConfigStm32({&m_outputRegister, 0x1}) {
+    FixtureGPIOOutputStm32() : m_gPIOOutputConfig({&m_outputRegister, 0x1}) {
         std::cout << "Creating FixtureGPIOOutputStm32" << std::endl;
     }
 
-    auto CreateIGPIOOutputStm32() -> std::unique_ptr<IGPIOOutputStm32> { return std::make_unique<GPIOOutputStm32>(); }
+    auto CreateIGPIOOutputStm32() -> std::unique_ptr<IGPIOOutput> { return std::make_unique<GPIOOutput>(); }
 
-    GPIOOutputConfigStm32 m_gPIOOutputConfigStm32;
+    GPIOOutputConfig m_gPIOOutputConfig;
 
     uint32_t m_outputRegister;
 };
@@ -31,9 +33,9 @@ class FixtureGPIOOutputStm32FuzzTests : public PerFuzzTestFixtureAdapter<Fixture
     void SetupConfiguration_ReturnsTrueIfOutputRegisterIsNotNullptr(uint32_t outputRegister) {
         auto iGPIOOutputStm32 = CreateIGPIOOutputStm32();
 
-        m_gPIOOutputConfigStm32.pOutputRegister = &outputRegister;
+        m_gPIOOutputConfig.pOutputRegister = &outputRegister;
 
-        EXPECT_TRUE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfigStm32)));
+        EXPECT_TRUE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfig)));
     }
 
     void SetupConfiguration_ReturnsTrueIfMaskHasOneBitSet(uint8_t shifts) {
@@ -41,9 +43,9 @@ class FixtureGPIOOutputStm32FuzzTests : public PerFuzzTestFixtureAdapter<Fixture
 
         uint32_t pinMask = 0x1 << shifts;
 
-        m_gPIOOutputConfigStm32.pinMask = pinMask;
+        m_gPIOOutputConfig.pinMask = pinMask;
 
-        EXPECT_TRUE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfigStm32)));
+        EXPECT_TRUE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfig)));
     }
 
     void SetupConfiguration_ReturnsFalseIfMaskDoesNotHaveOneBitSet(uint32_t pinMask) {
@@ -55,9 +57,9 @@ class FixtureGPIOOutputStm32FuzzTests : public PerFuzzTestFixtureAdapter<Fixture
 
         auto iGPIOOutputStm32 = CreateIGPIOOutputStm32();
 
-        m_gPIOOutputConfigStm32.pinMask = pinMask;
+        m_gPIOOutputConfig.pinMask = pinMask;
 
-        EXPECT_FALSE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfigStm32)));
+        EXPECT_FALSE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfig)));
     }
 
     //--------------------
@@ -69,11 +71,11 @@ class FixtureGPIOOutputStm32FuzzTests : public PerFuzzTestFixtureAdapter<Fixture
 
         uint32_t pinMask = 0x1 << shifts;
 
-        m_gPIOOutputConfigStm32.pOutputRegister = &outputRegister;
-        m_gPIOOutputConfigStm32.pinMask = pinMask;
+        m_gPIOOutputConfig.pOutputRegister = &outputRegister;
+        m_gPIOOutputConfig.pinMask = pinMask;
 
-        const auto expectedConfig = m_gPIOOutputConfigStm32;
-        iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfigStm32));
+        const auto expectedConfig = m_gPIOOutputConfig;
+        iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfig));
 
         EXPECT_EQ(iGPIOOutputStm32->GetConfiguration(), expectedConfig);
     }
@@ -90,9 +92,9 @@ class FixtureGPIOOutputStm32FuzzTests : public PerFuzzTestFixtureAdapter<Fixture
 TEST_F(FixtureGPIOOutputStm32, SetupConfiguration_ReturnsFalseIfOutputRegisterIsNullptr) {
     auto iGPIOOutputStm32 = CreateIGPIOOutputStm32();
 
-    m_gPIOOutputConfigStm32.pOutputRegister = nullptr;
+    m_gPIOOutputConfig.pOutputRegister = nullptr;
 
-    EXPECT_FALSE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfigStm32)));
+    EXPECT_FALSE(iGPIOOutputStm32->SetupConfiguration(std::move(m_gPIOOutputConfig)));
 }
 
 FUZZ_TEST_F(FixtureGPIOOutputStm32FuzzTests, SetupConfiguration_ReturnsTrueIfOutputRegisterIsNotNullptr);
@@ -110,3 +112,5 @@ FUZZ_TEST_F(FixtureGPIOOutputStm32FuzzTests, GetConfiguration_ReturnsCorrectConf
     .WithDomains(Arbitrary<uint32_t>(), InRange(0, 31));
 
 }  // namespace GPIOOutputStm32Testing
+
+}  // namespace HAL::STM32

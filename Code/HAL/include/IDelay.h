@@ -2,6 +2,8 @@
 
 #include <stdint.h>
 
+namespace HAL {
+
 class IDelay {
    public:
     virtual ~IDelay() = default;
@@ -12,3 +14,5 @@ class IDelay {
      */
     virtual auto SynchronousWait_us(uint32_t microseconds) -> bool = 0;
 };
+
+}  // namespace HAL

@@ -3,12 +3,12 @@
 #include "IGPIOOutput.h"
 
 struct HanoverOL037A_GPIOInterface {
-    IGPIOOutput* clk;
-    IGPIOOutput* clkEn;
-    IGPIOOutput* clkSelEn;
-    IGPIOOutput* data;
-    IGPIOOutput* latch;
-    IGPIOOutput* ledOE;  // TODO: later to be replaces with IPWMOutput&
+    HAL::IGPIOOutput* clk;
+    HAL::IGPIOOutput* clkEn;
+    HAL::IGPIOOutput* clkSelEn;
+    HAL::IGPIOOutput* data;
+    HAL::IGPIOOutput* latch;
+    HAL::IGPIOOutput* ledOE;  // TODO: later to be replaces with IPWMOutput&
 
     auto ContainsNullptr() const -> bool {
         return (clk == nullptr || clkEn == nullptr || clkSelEn == nullptr || data == nullptr || latch == nullptr ||

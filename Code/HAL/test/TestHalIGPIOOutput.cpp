@@ -8,11 +8,13 @@
 using namespace testing;
 using namespace fuzztest;
 
+namespace HAL {
+
 namespace IGPIOOutputTesting {
 
 class FixtureIGPIOOutput : public Test {
    public:
-    FixtureIGPIOOutput() : gPIOOutputTargets(std::make_tuple(GPIOOutputStm32())) {
+    FixtureIGPIOOutput() : gPIOOutputTargets(std::make_tuple(STM32::GPIOOutput())) {
         InitializeIGPIOOutputVec();
         AssertCorrectInitialized(gPIOOutputTargets);
     }
@@ -27,7 +29,7 @@ class FixtureIGPIOOutput : public Test {
     }
 
     auto SetupWorkableGPIOOutput(IGPIOOutput* target) -> void {
-        if (auto _target = dynamic_cast<GPIOOutputStm32*>(target)) {
+        if (auto _target = dynamic_cast<STM32::GPIOOutput*>(target)) {
             std::cout << "GPIOOutputStm32" << std::endl;
             m_outputRegister = 0;
             ASSERT_TRUE(_target->SetupConfiguration({&m_outputRegister, m_pinMask}));
@@ -37,7 +39,7 @@ class FixtureIGPIOOutput : public Test {
     }
 
     std::vector<IGPIOOutput*> iGPIOOutputVec;
-    std::tuple<GPIOOutputStm32> gPIOOutputTargets;
+    std::tuple<STM32::GPIOOutput> gPIOOutputTargets;
 
     // For:
     //  GPIOOutputStm32
@@ -108,3 +110,5 @@ TEST_F(FixtureIGPIOOutput, SetStateIsReflectedInGetState_Toggle) {
 }
 
 }  // namespace IGPIOOutputTesting
+
+}  // namespace HAL

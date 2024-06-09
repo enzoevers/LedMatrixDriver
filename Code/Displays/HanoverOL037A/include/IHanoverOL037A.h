@@ -9,6 +9,6 @@ class IHanoverOL037A {
 
     virtual auto SetGPIOInterface(const HanoverOL037A_GPIOInterface& gpioInterface) -> bool = 0;
     virtual auto GetGPIOInterface() const -> const HanoverOL037A_GPIOInterface& = 0;
-    virtual auto SetDelayManager(IDelay* const delayManager) -> void = 0;
-    virtual auto GetDelayManager() const -> IDelay* = 0;
+    virtual auto SetDelayManager(HAL::IDelay* const delayManager) -> void = 0;
+    virtual auto GetDelayManager() const -> HAL::IDelay* = 0;
 };

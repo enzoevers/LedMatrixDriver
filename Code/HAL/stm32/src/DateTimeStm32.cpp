@@ -1,20 +1,21 @@
 #include "DateTimeStm32.h"
 
-DateTimeStm32::DateTimeStm32()
-    : m_dateTimeConfigStm32({nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, 0, 0, 0, 0}) {}
+namespace HAL::STM32 {
+
+DateTime::DateTime() : m_dateTimeConfig({nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, 0, 0, 0, 0}) {}
 
 //---------------
-// ITime
+// HAL::IDateTime
 //---------------
 
-auto DateTimeStm32::GetTime() -> Time {
-    auto time = Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0};
+auto DateTime::GetTime() -> Types::Time {
+    auto time = Types::Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0};
 
-    if (m_dateTimeConfigStm32.ContainsNullptr()) {
+    if (m_dateTimeConfig.ContainsNullptr()) {
         return time;
     }
 
-    const uint32_t timeReg = *m_dateTimeConfigStm32.RTC_TR;
+    const uint32_t timeReg = *m_dateTimeConfig.RTC_TR;
 
     const uint8_t hoursTen = (timeReg & (0b11 << 20)) >> 20;
     const uint8_t hoursSingle = (timeReg & (0b1111 << 16)) >> 16;
@@ -30,8 +31,8 @@ auto DateTimeStm32::GetTime() -> Time {
     return time;
 }
 
-auto DateTimeStm32::SetTime(const Time& time) -> bool {
-    if (m_dateTimeConfigStm32.ContainsNullptr()) {
+auto DateTime::SetTime(const Types::Time& time) -> bool {
+    if (m_dateTimeConfig.ContainsNullptr()) {
         return false;
     }
 
@@ -46,14 +47,14 @@ auto DateTimeStm32::SetTime(const Time& time) -> bool {
     return true;
 }
 
-auto DateTimeStm32::GetDate() -> Date {
-    auto date = Date{.year = 0, .month = 0, .day = 0, .weekday = Weekday::Monday};
+auto DateTime::GetDate() -> Types::Date {
+    auto date = Types::Date{.year = 0, .month = 0, .day = 0, .weekday = Types::Weekday::Monday};
 
-    if (m_dateTimeConfigStm32.ContainsNullptr()) {
+    if (m_dateTimeConfig.ContainsNullptr()) {
         return date;
     }
 
-    const uint32_t dateReg = *m_dateTimeConfigStm32.RTC_DR;
+    const uint32_t dateReg = *m_dateTimeConfig.RTC_DR;
 
     const uint16_t yearTens = (dateReg & (0b1111 << 20)) >> 20;
     const uint16_t yearSingles = (dateReg & (0b1111 << 16)) >> 16;
@@ -69,14 +70,14 @@ auto DateTimeStm32::GetDate() -> Date {
         .year = static_cast<uint16_t>(m_yearBase + (yearTens * multiplier) + yearSingles),
         .month = static_cast<uint8_t>((monthTens * multiplier) + monthSingles),
         .day = static_cast<uint8_t>((dayTens * multiplier) + daySingles),
-        .weekday = static_cast<Weekday>(weekdayInt),
+        .weekday = static_cast<Types::Weekday>(weekdayInt),
     };
 
     return date;
 }
 
-auto DateTimeStm32::SetDate(const Date& date) -> bool {
-    if (m_dateTimeConfigStm32.ContainsNullptr()) {
+auto DateTime::SetDate(const Types::Date& date) -> bool {
+    if (m_dateTimeConfig.ContainsNullptr()) {
         return false;
     }
 
@@ -91,11 +92,12 @@ auto DateTimeStm32::SetDate(const Date& date) -> bool {
     return true;
 }
 
-auto DateTimeStm32::GetDateTime() -> DateTime {
-    auto dateTime = DateTime{.time = Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0},
-                             .date = Date{.year = 0, .month = 0, .day = 0, .weekday = Weekday::Monday}};
+auto DateTime::GetDateTime() -> Types::DateTime {
+    auto dateTime =
+        Types::DateTime{.time = Types::Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0},
+                        .date = Types::Date{.year = 0, .month = 0, .day = 0, .weekday = Types::Weekday::Monday}};
 
-    if (m_dateTimeConfigStm32.ContainsNullptr()) {
+    if (m_dateTimeConfig.ContainsNullptr()) {
         return dateTime;
     }
 
@@ -104,8 +106,8 @@ auto DateTimeStm32::GetDateTime() -> DateTime {
     return dateTime;
 }
 
-auto DateTimeStm32::SetDateTime(const DateTime& dateTime) -> bool {
-    if (m_dateTimeConfigStm32.ContainsNullptr()) {
+auto DateTime::SetDateTime(const Types::DateTime& dateTime) -> bool {
+    if (m_dateTimeConfig.ContainsNullptr()) {
         return false;
     }
 
@@ -122,26 +124,26 @@ auto DateTimeStm32::SetDateTime(const DateTime& dateTime) -> bool {
 }
 
 //---------------
-// ITimeStm32
+// HAL::STM32::IDateTime
 //---------------
 
-auto DateTimeStm32::SetConfig(const DateTimeConfigStm32&& dateTimeConfigStm32) -> bool {
-    if (dateTimeConfigStm32.ContainsNullptr()) {
+auto DateTime::SetConfig(const DateTimeConfig&& dateTimeConfig) -> bool {
+    if (dateTimeConfig.ContainsNullptr()) {
         return false;
     }
 
-    m_dateTimeConfigStm32 = dateTimeConfigStm32;
+    m_dateTimeConfig = dateTimeConfig;
 
     return true;
 }
 
-auto DateTimeStm32::GetConfig() -> const DateTimeConfigStm32& { return m_dateTimeConfigStm32; }
+auto DateTime::GetConfig() -> const DateTimeConfig& { return m_dateTimeConfig; }
 
 //---------------
 // Private
 //---------------
 
-auto DateTimeStm32::InternalSetTime(const Time& time) -> void {
+auto DateTime::InternalSetTime(const Types::Time& time) -> void {
     const uint8_t hourTens = time.hours / 10;
     const uint8_t hourSingles = time.hours - (hourTens * 10);
     const uint8_t minutesTens = time.minutes / 10;
@@ -149,14 +151,14 @@ auto DateTimeStm32::InternalSetTime(const Time& time) -> void {
     const uint8_t secondsTens = time.seconds / 10;
     const uint8_t secondsSingles = time.seconds - (secondsTens * 10);
 
-    *m_dateTimeConfigStm32.RTC_CR &= ~m_dateTimeConfigStm32.RTC_CR_FMF_pos;
+    *m_dateTimeConfig.RTC_CR &= ~m_dateTimeConfig.RTC_CR_FMF_pos;
 
     // Keep PM bit at 0 for 24 hour mode
-    *m_dateTimeConfigStm32.RTC_TR = (hourTens << 20) | (hourSingles << 16) | (minutesTens << 12) |
-                                    (minutesSingles << 8) | (secondsTens << 4) | secondsSingles;
+    *m_dateTimeConfig.RTC_TR = (hourTens << 20) | (hourSingles << 16) | (minutesTens << 12) | (minutesSingles << 8) |
+                               (secondsTens << 4) | secondsSingles;
 }
 
-auto DateTimeStm32::InternalSetDate(const Date& date) -> void {
+auto DateTime::InternalSetDate(const Types::Date& date) -> void {
     m_yearBase = (date.year / 100) * 100;
     const uint8_t yearTens = (date.year - m_yearBase) / 10;
     const uint8_t yearSingles = (date.year - m_yearBase) - (yearTens * 10);
@@ -166,26 +168,28 @@ auto DateTimeStm32::InternalSetDate(const Date& date) -> void {
     const uint8_t daySingles = date.day - (dayTens * 10);
     const uint8_t weekdayInt = static_cast<uint8_t>(date.weekday);
 
-    *m_dateTimeConfigStm32.RTC_DR = (yearTens << 20) | (yearSingles << 16) | (weekdayInt << 13) | (monthTens << 12) |
-                                    (monthSingles << 8) | (dayTens << 4) | daySingles;
+    *m_dateTimeConfig.RTC_DR = (yearTens << 20) | (yearSingles << 16) | (weekdayInt << 13) | (monthTens << 12) |
+                               (monthSingles << 8) | (dayTens << 4) | daySingles;
 }
 
-auto DateTimeStm32::UnlockRtcRegisters() -> void {
-    *m_dateTimeConfigStm32.PWR_CR |= 0b1 << m_dateTimeConfigStm32.PWR_CR_DBP_pos;
-    *m_dateTimeConfigStm32.RTC_WPR = 0xCA;
-    *m_dateTimeConfigStm32.RTC_WPR = 0x53;
+auto DateTime::UnlockRtcRegisters() -> void {
+    *m_dateTimeConfig.PWR_CR |= 0b1 << m_dateTimeConfig.PWR_CR_DBP_pos;
+    *m_dateTimeConfig.RTC_WPR = 0xCA;
+    *m_dateTimeConfig.RTC_WPR = 0x53;
 }
 
-auto DateTimeStm32::LockRtcRegisters() -> void {
-    *m_dateTimeConfigStm32.PWR_CR &= ~(0b1 << m_dateTimeConfigStm32.PWR_CR_DBP_pos);
-    *m_dateTimeConfigStm32.RTC_WPR = 0;
+auto DateTime::LockRtcRegisters() -> void {
+    *m_dateTimeConfig.PWR_CR &= ~(0b1 << m_dateTimeConfig.PWR_CR_DBP_pos);
+    *m_dateTimeConfig.RTC_WPR = 0;
 }
 
-auto DateTimeStm32::EnterInitializeMode() -> void {
-    *m_dateTimeConfigStm32.RTC_ISR |= 0b1 << m_dateTimeConfigStm32.RTC_ISR_INIT_pos;
-    while (!(*m_dateTimeConfigStm32.RTC_ISR & (0b1 << m_dateTimeConfigStm32.RTC_ISR_INITF_pos)))
+auto DateTime::EnterInitializeMode() -> void {
+    *m_dateTimeConfig.RTC_ISR |= 0b1 << m_dateTimeConfig.RTC_ISR_INIT_pos;
+    while (!(*m_dateTimeConfig.RTC_ISR & (0b1 << m_dateTimeConfig.RTC_ISR_INITF_pos)))
         ;
 }
-auto DateTimeStm32::ExitInitializeMode() -> void {
-    *m_dateTimeConfigStm32.RTC_ISR &= ~(0b1 << m_dateTimeConfigStm32.RTC_ISR_INIT_pos);
+auto DateTime::ExitInitializeMode() -> void {
+    *m_dateTimeConfig.RTC_ISR &= ~(0b1 << m_dateTimeConfig.RTC_ISR_INIT_pos);
 }
+
+}  // namespace HAL::STM32

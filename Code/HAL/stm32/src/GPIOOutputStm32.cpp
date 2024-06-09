@@ -2,42 +2,45 @@
 
 #include "ValueChecks.h"
 
+namespace HAL::STM32 {
+
 //---------------
-// IGPIOOutput
+// HAL::IGPIOOutput
 //---------------
-auto GPIOOutputStm32::SetState(bool on) -> bool {
-    if (m_gPIOOutputConfigStm32.pOutputRegister == nullptr) {
+auto GPIOOutput::SetState(bool on) -> bool {
+    if (m_gPIOOutputConfig.pOutputRegister == nullptr) {
         return false;
     }
 
     if (on) {
-        *m_gPIOOutputConfigStm32.pOutputRegister |= m_gPIOOutputConfigStm32.pinMask;
+        *m_gPIOOutputConfig.pOutputRegister |= m_gPIOOutputConfig.pinMask;
     } else {
-        *m_gPIOOutputConfigStm32.pOutputRegister &= ~m_gPIOOutputConfigStm32.pinMask;
+        *m_gPIOOutputConfig.pOutputRegister &= ~m_gPIOOutputConfig.pinMask;
     }
 
     return true;
 }
 
-auto GPIOOutputStm32::GetState() -> bool {
-    if (m_gPIOOutputConfigStm32.pOutputRegister == nullptr) {
+auto GPIOOutput::GetState() -> bool {
+    if (m_gPIOOutputConfig.pOutputRegister == nullptr) {
         return false;
     }
 
-    return *m_gPIOOutputConfigStm32.pOutputRegister & m_gPIOOutputConfigStm32.pinMask;
+    return *m_gPIOOutputConfig.pOutputRegister & m_gPIOOutputConfig.pinMask;
 }
 
 //---------------
-// IGPIOOutputStm32
+// HAL::STM32::IGPIOOutput
 //---------------
-auto GPIOOutputStm32::SetupConfiguration(const GPIOOutputConfigStm32&& gPIOOutputConfigstm32) -> bool {
-    if ((gPIOOutputConfigstm32.pOutputRegister == nullptr) ||
-        !ValueChecks::HasSingleBitSet(gPIOOutputConfigstm32.pinMask)) {
+auto GPIOOutput::SetupConfiguration(const GPIOOutputConfig&& gPIOOutputConfig) -> bool {
+    if ((gPIOOutputConfig.pOutputRegister == nullptr) || !ValueChecks::HasSingleBitSet(gPIOOutputConfig.pinMask)) {
         return false;
     }
 
-    m_gPIOOutputConfigStm32 = gPIOOutputConfigstm32;
+    m_gPIOOutputConfig = gPIOOutputConfig;
 
     return true;
 }
-auto GPIOOutputStm32::GetConfiguration() -> const GPIOOutputConfigStm32& { return m_gPIOOutputConfigStm32; }
+auto GPIOOutput::GetConfiguration() -> const GPIOOutputConfig& { return m_gPIOOutputConfig; }
+
+}  // namespace HAL::STM32

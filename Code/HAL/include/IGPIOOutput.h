@@ -1,5 +1,6 @@
 #pragma once
 
+namespace HAL {
 /*!
  * \class IGPIOOutput
  * \brief This interface is used to configure and control a single GPIO output pin.
@@ -14,3 +15,5 @@ class IGPIOOutput {
     // \note When this functions is not able to get the state of the GPIO, false is returned.
     virtual auto GetState() -> bool = 0;
 };
+
+}  // namespace HAL

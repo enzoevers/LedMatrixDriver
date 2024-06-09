@@ -3,35 +3,38 @@
 #include "IDateTime.h"
 #include "IDateTimeStm32.h"
 
-class DateTimeStm32 : public IDateTime, IDateTimeStm32 {
+namespace HAL::STM32 {
+class DateTime : public HAL::IDateTime, HAL::STM32::IDateTime {
    public:
-    DateTimeStm32();
-    ~DateTimeStm32() override = default;
+    DateTime();
+    ~DateTime() override = default;
 
-    //=========================
-    // ITime
-    //=========================
-    auto GetTime() -> Time override;
-    auto SetTime(const Time& time) -> bool override;
-    auto GetDate() -> Date override;
-    auto SetDate(const Date& date) -> bool override;
-    auto GetDateTime() -> DateTime override;
-    auto SetDateTime(const DateTime& dateTime) -> bool override;
+    //---------------
+    // HAL::IDateTime
+    //---------------
+    auto GetTime() -> Types::Time override;
+    auto SetTime(const Types::Time& time) -> bool override;
+    auto GetDate() -> Types::Date override;
+    auto SetDate(const Types::Date& date) -> bool override;
+    auto GetDateTime() -> Types::DateTime override;
+    auto SetDateTime(const Types::DateTime& dateTime) -> bool override;
 
-    //=========================
-    // ITimeStm32
-    //=========================
-    auto SetConfig(const DateTimeConfigStm32&& dateTimeConfigStm32) -> bool override;
-    auto GetConfig() -> const DateTimeConfigStm32& override;
+    //---------------
+    // HAL::STM32::IDateTime
+    //---------------
+    auto SetConfig(const DateTimeConfig&& dateTimeConfig) -> bool override;
+    auto GetConfig() -> const DateTimeConfig& override;
 
    private:
-    auto InternalSetTime(const Time& time) -> void;
-    auto InternalSetDate(const Date& date) -> void;
+    auto InternalSetTime(const Types::Time& time) -> void;
+    auto InternalSetDate(const Types::Date& date) -> void;
     auto UnlockRtcRegisters() -> void;
     auto LockRtcRegisters() -> void;
     auto EnterInitializeMode() -> void;
     auto ExitInitializeMode() -> void;
 
     uint16_t m_yearBase;
-    DateTimeConfigStm32 m_dateTimeConfigStm32;
+    DateTimeConfig m_dateTimeConfig;
 };
+
+}  // namespace HAL::STM32

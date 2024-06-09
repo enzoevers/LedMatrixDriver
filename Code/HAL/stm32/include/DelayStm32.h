@@ -3,22 +3,23 @@
 #include "IDelay.h"
 #include "IDelayStm32.h"
 
+namespace HAL::STM32 {
 /*!
- * \class DelayStm32
+ * \class Delay
  * \brief Use the stm32 timer register to wait a certain amount of microseconds.
  */
-class DelayStm32 : public IDelay, public IDelayStm32 {
+class Delay : public HAL::IDelay, public HAL::STM32::IDelay {
    public:
     //---------------
-    // IDelay
+    // HAL::IDelay
     //---------------
     auto SynchronousWait_us(uint32_t microseconds) -> bool override;
 
     //---------------
-    // IDelayStm32
+    // HAL::STM32::IDelay
     //---------------
-    auto SetupConfiguration(const DelayConfigstm32&& delayConfigstm32) -> bool override;
-    auto GetConfiguration() -> const DelayConfigstm32& override;
+    auto SetupConfiguration(const DelayConfig&& delayConfig) -> bool override;
+    auto GetConfiguration() -> const DelayConfig& override;
 
    private:
     /*! \returns UINT16_MAX if the requested delay is not possible. Otherwise return the required prescaler */
@@ -28,7 +29,9 @@ class DelayStm32 : public IDelay, public IDelayStm32 {
     static auto CalculateMicrosecondsPerClockWithPrescaler(uint32_t timerInputFrequencyInHertz, uint32_t prescaler)
         -> float;
 
-    DelayConfigstm32 m_delayConfigstm32;
+    DelayConfig m_delayConfig;
 
     static const auto DELAY_NOT_POSSIBLE = UINT16_MAX;
 };
+
+}  // namespace HAL::STM32

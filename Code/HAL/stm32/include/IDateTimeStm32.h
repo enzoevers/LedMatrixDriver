@@ -2,10 +2,14 @@
 
 #include "DateTimeConfigStm32.h"
 
-class IDateTimeStm32 {
-   public:
-    virtual ~IDateTimeStm32() = default;
+namespace HAL::STM32 {
 
-    virtual auto SetConfig(const DateTimeConfigStm32&& dateTimeConfigStm32) -> bool = 0;
-    virtual auto GetConfig() -> const DateTimeConfigStm32& = 0;
+class IDateTime {
+   public:
+    virtual ~IDateTime() = default;
+
+    virtual auto SetConfig(const DateTimeConfig&& dateTimeConfig) -> bool = 0;
+    virtual auto GetConfig() -> const DateTimeConfig& = 0;
 };
+
+}  // namespace HAL::STM32

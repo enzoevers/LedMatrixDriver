@@ -9,6 +9,8 @@
 using namespace testing;
 using namespace fuzztest;
 
+namespace HAL::STM32 {
+
 namespace DelayStm32Testing {
 
 class FixtureDelayStm32 : public Test {
@@ -21,16 +23,16 @@ class FixtureDelayStm32 : public Test {
           m_timerInputFrequencyInHertz(10000000),
           m_updateInterruptMask(0x1),
           m_counterEnableMask(0x1 << 1),
-          m_delayConfigstm32({&m_statusRegister, &m_autoReloadRegister, &m_controlRegister, &m_prescalerRegister,
-                              m_timerInputFrequencyInHertz, m_updateInterruptMask, m_counterEnableMask}),
+          m_delayConfig({&m_statusRegister, &m_autoReloadRegister, &m_controlRegister, &m_prescalerRegister,
+                         m_timerInputFrequencyInHertz, m_updateInterruptMask, m_counterEnableMask}),
           m_defaultMicrosecondsDelay(1000),
           m_microsecondsWaitAfterJoinable(100000) {}
 
-    auto CreateIDelayStm32() -> std::unique_ptr<IDelayStm32> { return std::make_unique<DelayStm32>(); }
-    auto CreateDelayStm32() -> std::unique_ptr<DelayStm32> { return std::make_unique<DelayStm32>(); }
-    auto CreateDelayStm32Configured() -> std::unique_ptr<DelayStm32> {
+    auto CreateIDelayStm32() -> std::unique_ptr<IDelay> { return std::make_unique<Delay>(); }
+    auto CreateDelayStm32() -> std::unique_ptr<Delay> { return std::make_unique<Delay>(); }
+    auto CreateDelayStm32Configured() -> std::unique_ptr<Delay> {
         auto delayStm32 = CreateDelayStm32();
-        delayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+        delayStm32->SetupConfiguration(std::move(m_delayConfig));
         return delayStm32;
     }
 
@@ -42,7 +44,7 @@ class FixtureDelayStm32 : public Test {
     uint32_t m_updateInterruptMask;
     uint32_t m_counterEnableMask;
 
-    DelayConfigstm32 m_delayConfigstm32;
+    DelayConfig m_delayConfig;
 
     uint32_t m_defaultMicrosecondsDelay;
     uint32_t m_microsecondsWaitAfterJoinable;
@@ -63,9 +65,9 @@ class FixtureDelayStm32FuzzTests : public PerFuzzTestFixtureAdapter<FixtureDelay
 
         auto iDelayStm32 = CreateIDelayStm32();
 
-        m_delayConfigstm32.updateInterruptMask = mask;
+        m_delayConfig.updateInterruptMask = mask;
 
-        EXPECT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+        EXPECT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
     }
 
     void SetupConfiguration_ReturnsTrueIfUpdateInterruptMaskHasOneBitSet(uint8_t shifts) {
@@ -73,9 +75,9 @@ class FixtureDelayStm32FuzzTests : public PerFuzzTestFixtureAdapter<FixtureDelay
 
         uint32_t mask = 0x1 << shifts;
 
-        m_delayConfigstm32.updateInterruptMask = mask;
+        m_delayConfig.updateInterruptMask = mask;
 
-        EXPECT_TRUE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+        EXPECT_TRUE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
     }
 
     void SetupConfiguration_ReturnsFalseIfCounterEnableMaskDoesNotHaveOneBitSet(uint32_t mask) {
@@ -87,9 +89,9 @@ class FixtureDelayStm32FuzzTests : public PerFuzzTestFixtureAdapter<FixtureDelay
 
         auto iDelayStm32 = CreateIDelayStm32();
 
-        m_delayConfigstm32.counterEnableMask = mask;
+        m_delayConfig.counterEnableMask = mask;
 
-        EXPECT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+        EXPECT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
     }
 
     void SetupConfiguration_ReturnsTrueIfCounterEnableMaskHasOneBitSet(uint8_t shifts) {
@@ -97,9 +99,9 @@ class FixtureDelayStm32FuzzTests : public PerFuzzTestFixtureAdapter<FixtureDelay
 
         uint32_t mask = 0x1 << shifts;
 
-        m_delayConfigstm32.counterEnableMask = mask;
+        m_delayConfig.counterEnableMask = mask;
 
-        EXPECT_TRUE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+        EXPECT_TRUE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
     }
 };
 
@@ -117,8 +119,8 @@ class FixtureDelayStm32FuzzTests : public PerFuzzTestFixtureAdapter<FixtureDelay
 TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsFalseIfWaitAmountIsTooShortBasedOnClockHertz) {
     auto delayStm32 = CreateDelayStm32();
 
-    m_delayConfigstm32.timerInputFrequencyInHertz = 1000;
-    delayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+    m_delayConfig.timerInputFrequencyInHertz = 1000;
+    delayStm32->SetupConfiguration(std::move(m_delayConfig));
 
     auto result = false;
 
@@ -142,10 +144,10 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsFalseIfWaitAmountIsTooShortB
 TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsFalseIfWaitAmountIsTooLongBasedOnClockHertz) {
     auto delayStm32 = CreateDelayStm32();
 
-    m_delayConfigstm32.timerInputFrequencyInHertz = UINT32_MAX;
+    m_delayConfig.timerInputFrequencyInHertz = UINT32_MAX;
 
     const auto maxPrescaler = static_cast<uint32_t>(UINT16_MAX) + 1;
-    const auto clockHertzWithHighestPrescaler = m_delayConfigstm32.timerInputFrequencyInHertz / (maxPrescaler + 1);
+    const auto clockHertzWithHighestPrescaler = m_delayConfig.timerInputFrequencyInHertz / (maxPrescaler + 1);
 
     // clockHertzWithHighestPrescaler is now 65,535.99998 which becomes 65,535
 
@@ -156,7 +158,7 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_ReturnsFalseIfWaitAmountIsTooLongBa
     // (2^16 - 1) / 0,065535 = 65535 / 0,065535 = 1000000
     const auto maxMicroSeconds = static_cast<uint32_t>(maxTimerClocks / clocksPerMicrosecond);
 
-    delayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+    delayStm32->SetupConfiguration(std::move(m_delayConfig));
 
     auto result = false;
 
@@ -181,8 +183,8 @@ TEST_F(FixtureDelayStm32,
        DISABLED_SynchronousWait_us_SetsPrescalerToZeroAndCorrectArrIfNoPrescalerNeededBasedOnClockHertz) {
     auto delayStm32 = CreateDelayStm32();
 
-    m_delayConfigstm32.timerInputFrequencyInHertz = 1000000;  // 1 MHz => 1us per clock
-    delayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+    m_delayConfig.timerInputFrequencyInHertz = 1000000;  // 1 MHz => 1us per clock
+    delayStm32->SetupConfiguration(std::move(m_delayConfig));
 
     const auto microsecondsWait = static_cast<uint32_t>(UINT16_MAX);
     auto delayThread = std::jthread([&]() { delayStm32->SynchronousWait_us(microsecondsWait); });
@@ -208,8 +210,8 @@ TEST_F(FixtureDelayStm32,
     auto delayStm32 = CreateDelayStm32();
 
     const uint32_t inputHertz = 1000000;  // 1 MHz => 1us per clock
-    m_delayConfigstm32.timerInputFrequencyInHertz = inputHertz;
-    delayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+    m_delayConfig.timerInputFrequencyInHertz = inputHertz;
+    delayStm32->SetupConfiguration(std::move(m_delayConfig));
 
     // The ARR register is assumed ot be 16-bits. At a clock of 1 MHz this means that
     // at 2^16 microseconds the prescaler should be at least 1.
@@ -243,8 +245,8 @@ TEST_F(FixtureDelayStm32,
     auto delayStm32 = CreateDelayStm32();
 
     const uint32_t inputHertz = 1000000;  // 1 MHz => 1us per clock
-    m_delayConfigstm32.timerInputFrequencyInHertz = inputHertz;
-    delayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+    m_delayConfig.timerInputFrequencyInHertz = inputHertz;
+    delayStm32->SetupConfiguration(std::move(m_delayConfig));
 
     // The ARR register is assumed ot be 16-bits. At a clock of 1 MHz this means that
     // at 2^16 microseconds the prescaler should be at least 1.
@@ -276,8 +278,8 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_SetsPrescalerAndArrCorrectlyForOneS
     auto delayStm32 = CreateDelayStm32();
 
     const uint32_t inputHertz = 20000000;  // 20 MHz => 0.05us per clock
-    m_delayConfigstm32.timerInputFrequencyInHertz = inputHertz;
-    delayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+    m_delayConfig.timerInputFrequencyInHertz = inputHertz;
+    delayStm32->SetupConfiguration(std::move(m_delayConfig));
 
     const auto microsecondsWait = 1000000;  // 1 second
     auto delayThread = std::jthread([&]() { delayStm32->SynchronousWait_us(microsecondsWait); });
@@ -411,33 +413,33 @@ TEST_F(FixtureDelayStm32, SynchronousWait_us_WaitsForInterruptFlagToBeSetBeforeR
 TEST_F(FixtureDelayStm32, SetupConfiguration_ReturnsFalseIfStatusRegisterIsNull) {
     auto iDelayStm32 = CreateIDelayStm32();
 
-    m_delayConfigstm32.pStatusRegister = nullptr;
+    m_delayConfig.pStatusRegister = nullptr;
 
-    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
 }
 
 TEST_F(FixtureDelayStm32, SetupConfiguration_ReturnsFalseIfAutoReloadRegisterIsNull) {
     auto iDelayStm32 = CreateIDelayStm32();
 
-    m_delayConfigstm32.pAutoReloadRegister = nullptr;
+    m_delayConfig.pAutoReloadRegister = nullptr;
 
-    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
 }
 
 TEST_F(FixtureDelayStm32, SetupConfiguration_ReturnsFalseIfControlRegisterIsNull) {
     auto iDelayStm32 = CreateIDelayStm32();
 
-    m_delayConfigstm32.pControlRegister = nullptr;
+    m_delayConfig.pControlRegister = nullptr;
 
-    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
 }
 
 TEST_F(FixtureDelayStm32, SetupConfiguration_ReturnsFalseIfPrescalerRegisterIsNull) {
     auto iDelayStm32 = CreateIDelayStm32();
 
-    m_delayConfigstm32.pPrescalerRegister = nullptr;
+    m_delayConfig.pPrescalerRegister = nullptr;
 
-    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32)));
+    ASSERT_FALSE(iDelayStm32->SetupConfiguration(std::move(m_delayConfig)));
 }
 
 FUZZ_TEST_F(FixtureDelayStm32FuzzTests, SetupConfiguration_ReturnsFalseIfUpdateInterruptMaskDoesNotHaveOneBitSet);
@@ -457,11 +459,13 @@ FUZZ_TEST_F(FixtureDelayStm32FuzzTests, SetupConfiguration_ReturnsTrueIfCounterE
 TEST_F(FixtureDelayStm32, GetConfiguration_ReturnsFalseIfPrescalerRegisterIsNull) {
     auto iDelayStm32 = CreateIDelayStm32();
 
-    auto expectedConfig = m_delayConfigstm32;
+    auto expectedConfig = m_delayConfig;
 
-    iDelayStm32->SetupConfiguration(std::move(m_delayConfigstm32));
+    iDelayStm32->SetupConfiguration(std::move(m_delayConfig));
 
     ASSERT_EQ(iDelayStm32->GetConfiguration(), expectedConfig);
 }
 
 }  // namespace DelayStm32Testing
+
+}  // namespace HAL::STM32
