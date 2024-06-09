@@ -3,22 +3,26 @@
 #include "IGPIOOutput.h"
 #include "IGPIOOutputStm32.h"
 
-class GPIOOutputStm32 : public IGPIOOutput, public IGPIOOutputStm32 {
+namespace HAL::STM32 {
+
+class GPIOOutput : public HAL::IGPIOOutput, public HAL::STM32::IGPIOOutput {
    public:
-    ~GPIOOutputStm32() override = default;
+    ~GPIOOutput() override = default;
 
     //---------------
-    // IGPIOOutput
+    // HAL::IGPIOOutput
     //---------------
     auto SetState(bool on) -> bool override;
     auto GetState() -> bool override;
 
     //---------------
-    // IGPIOOutputStm32
+    // HAL::STM32::IGPIOOutput
     //---------------
-    auto SetupConfiguration(const GPIOOutputConfigStm32&& gPIOOutputConfigStm32) -> bool override;
-    auto GetConfiguration() -> const GPIOOutputConfigStm32& override;
+    auto SetupConfiguration(const GPIOOutputConfig&& gPIOOutputConfig) -> bool override;
+    auto GetConfiguration() -> const GPIOOutputConfig& override;
 
    private:
-    GPIOOutputConfigStm32 m_gPIOOutputConfigStm32;
+    GPIOOutputConfig m_gPIOOutputConfig;
 };
+
+}  // namespace HAL::STM32

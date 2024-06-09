@@ -2,11 +2,15 @@
 
 #include <stdint.h>
 
-struct GPIOOutputConfigStm32 {
+namespace HAL::STM32 {
+
+struct GPIOOutputConfig {
     volatile uint32_t* pOutputRegister;
     uint32_t pinMask;
 
-    auto operator==(const GPIOOutputConfigStm32& rhs) const -> bool {
+    auto operator==(const GPIOOutputConfig& rhs) const -> bool {
         return (this->pOutputRegister == rhs.pOutputRegister && this->pinMask == rhs.pinMask);
     }
 };
+
+}  // namespace HAL::STM32

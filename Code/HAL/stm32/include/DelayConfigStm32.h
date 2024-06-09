@@ -2,7 +2,9 @@
 
 #include <stdint.h>
 
-struct DelayConfigstm32 {
+namespace HAL::STM32 {
+
+struct DelayConfig {
     volatile uint32_t *pStatusRegister;
     /*! \note It is assumes that the reload register can have a value of max 16 bits */
     volatile uint32_t *pAutoReloadRegister;
@@ -13,7 +15,7 @@ struct DelayConfigstm32 {
     uint32_t updateInterruptMask;
     uint32_t counterEnableMask;
 
-    auto operator==(const DelayConfigstm32 &rhs) const -> bool {
+    auto operator==(const DelayConfig &rhs) const -> bool {
         return (this->pStatusRegister == rhs.pStatusRegister && this->pAutoReloadRegister == rhs.pAutoReloadRegister &&
                 this->pControlRegister == rhs.pControlRegister && this->pPrescalerRegister == rhs.pPrescalerRegister &&
                 this->timerInputFrequencyInHertz == rhs.timerInputFrequencyInHertz &&
@@ -21,3 +23,5 @@ struct DelayConfigstm32 {
                 this->counterEnableMask == rhs.counterEnableMask);
     }
 };
+
+}  // namespace HAL::STM32

@@ -2,6 +2,8 @@
 
 #include <stdint.h>
 
+namespace HAL::Types {
+
 struct Time {
     uint8_t hours;
     uint8_t minutes;
@@ -33,3 +35,5 @@ struct DateTime {
 
     auto operator==(const DateTime& other) const -> bool { return time == other.time && date == other.date; }
 };
+
+}  // namespace HAL::Types

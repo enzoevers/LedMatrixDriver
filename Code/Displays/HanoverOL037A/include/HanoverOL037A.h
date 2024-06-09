@@ -16,8 +16,8 @@ class HanoverOL037A : public IHanoverOL037A, public IDisplay<Monochrome> {
     //=========================
     auto SetGPIOInterface(const HanoverOL037A_GPIOInterface& gpioInterface) -> bool override;
     auto GetGPIOInterface() const -> const HanoverOL037A_GPIOInterface& override;
-    auto SetDelayManager(IDelay* const delayManager) -> void override;
-    auto GetDelayManager() const -> IDelay* override;
+    auto SetDelayManager(HAL::IDelay* const delayManager) -> void override;
+    auto GetDelayManager() const -> HAL::IDelay* override;
 
     //=========================
     // IDisplay<Monochrome>
@@ -49,6 +49,6 @@ class HanoverOL037A : public IHanoverOL037A, public IDisplay<Monochrome> {
 
     static constexpr Vec2D m_resolution{160, 19};
     HanoverOL037A_GPIOInterface m_pGpioInterface;
-    IDelay* m_pDelayManager;
+    HAL::IDelay* m_pDelayManager;
     std::array<Monochrome, (m_resolution.x * m_resolution.y)> m_pixelData;
 };

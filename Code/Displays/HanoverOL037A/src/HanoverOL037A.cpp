@@ -30,9 +30,9 @@ auto HanoverOL037A::SetGPIOInterface(const HanoverOL037A_GPIOInterface& gpioInte
 
 auto HanoverOL037A::GetGPIOInterface() const -> const HanoverOL037A_GPIOInterface& { return m_pGpioInterface; }
 
-auto HanoverOL037A::SetDelayManager(IDelay* const delayManager) -> void { m_pDelayManager = delayManager; }
+auto HanoverOL037A::SetDelayManager(HAL::IDelay* const delayManager) -> void { m_pDelayManager = delayManager; }
 
-auto HanoverOL037A::GetDelayManager() const -> IDelay* { return m_pDelayManager; }
+auto HanoverOL037A::GetDelayManager() const -> HAL::IDelay* { return m_pDelayManager; }
 
 //=========================
 // IDisplay<Monochrome>

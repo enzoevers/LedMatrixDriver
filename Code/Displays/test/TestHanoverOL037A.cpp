@@ -8,6 +8,7 @@
 
 using namespace testing;
 using namespace fuzztest;
+using namespace HAL::Mock;
 
 namespace HanoverOL037ATesting {
 

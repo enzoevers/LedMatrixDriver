@@ -2,10 +2,14 @@
 
 #include "DelayConfigStm32.h"
 
-class IDelayStm32 {
-   public:
-    virtual ~IDelayStm32() = default;
+namespace HAL::STM32 {
 
-    virtual auto SetupConfiguration(const DelayConfigstm32&& delayConfigstm32) -> bool = 0;
-    virtual auto GetConfiguration() -> const DelayConfigstm32& = 0;
+class IDelay {
+   public:
+    virtual ~IDelay() = default;
+
+    virtual auto SetupConfiguration(const DelayConfig&& delayConfig) -> bool = 0;
+    virtual auto GetConfiguration() -> const DelayConfig& = 0;
 };
+
+}  // namespace HAL::STM32

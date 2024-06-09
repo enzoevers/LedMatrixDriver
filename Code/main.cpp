@@ -22,14 +22,14 @@ int main() {
     HardwareSetup();
 
 #if defined(USE_STM32)
-    auto clk = GPIOOutputStm32();
-    auto clkEn = GPIOOutputStm32();
-    auto clkSelEn = GPIOOutputStm32();
-    auto data = GPIOOutputStm32();
-    auto latch = GPIOOutputStm32();
-    auto ledOE = GPIOOutputStm32();
+    auto clk = HAL::STM32::GPIOOutput();
+    auto clkEn = HAL::STM32::GPIOOutput();
+    auto clkSelEn = HAL::STM32::GPIOOutput();
+    auto data = HAL::STM32::GPIOOutput();
+    auto latch = HAL::STM32::GPIOOutput();
+    auto ledOE = HAL::STM32::GPIOOutput();
 
-    {  // IGPIOOutputStm32 setup
+    {  // HAL::STM32::GPIOOutput setup
         clk.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_10});
         clkEn.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_11});
         clkSelEn.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_12});
@@ -39,10 +39,10 @@ int main() {
     }
 
     uint32_t tim3Hertz = 40000000;
-    auto mainDelay = DelayStm32();
+    auto mainDelay = HAL::STM32::Delay();
     mainDelay.SetupConfiguration({&TIM3->SR, &TIM3->ARR, &TIM3->CR1, &TIM3->PSC, tim3Hertz, TIM_SR_UIF, TIM_CR1_CEN});
 
-    auto dateTime = DateTimeStm32();
+    auto dateTime = HAL::STM32::DateTime();
     dateTime.SetConfig({.PWR_CR = &PWR->CR,
                         .RTC_WPR = &RTC->WPR,
                         .RTC_ISR = &RTC->ISR,
@@ -85,11 +85,11 @@ int main() {
 
     dateTime.SetDateTime({
         .time = {.hours = 14, .minutes = 4, .seconds = 25, .milliseconds = 0},
-        .date = {.year = 2021, .month = 9, .day = 1, .weekday = Weekday::Wednesday},
+        .date = {.year = 2021, .month = 9, .day = 1, .weekday = HAL::Types::Weekday::Wednesday},
     });
 
     const auto screenResolution = hanoverOL037A.GetResolution();
-    DateTime lastDateTime;
+    HAL::Types::DateTime lastDateTime;
     while (true) {
         auto currentDateTime = dateTime.GetDateTime();
         if (currentDateTime == lastDateTime) {

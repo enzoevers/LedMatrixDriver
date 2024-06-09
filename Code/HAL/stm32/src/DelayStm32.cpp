@@ -3,36 +3,37 @@
 #include <cmath>
 
 #include "ValueChecks.h"
+namespace HAL::STM32 {
+
 //---------------
-// IDelay
+// HAL::IDelay
 //---------------
-auto DelayStm32::SynchronousWait_us(uint32_t microseconds) -> bool {
+auto Delay::SynchronousWait_us(uint32_t microseconds) -> bool {
     // Based on https://gist.github.com/MayaPosch/32710d2aac8c46cb6327479b203f0b27
     // Note that the actual counter enable signal CNT_EN is set 1 clock cycle after CEN
 
     // TODO: subtract (estimated) clock required for the code itself
 
-    const auto prescaler = CalculateRequiredPrescaler(m_delayConfigstm32.timerInputFrequencyInHertz, microseconds);
+    const auto prescaler = CalculateRequiredPrescaler(m_delayConfig.timerInputFrequencyInHertz, microseconds);
     if (prescaler == DELAY_NOT_POSSIBLE) {
         return false;
     }
-    *m_delayConfigstm32.pPrescalerRegister = prescaler;
+    *m_delayConfig.pPrescalerRegister = prescaler;
 
     const auto autoReloadValue =
-        CalculateRequiredClocks(m_delayConfigstm32.timerInputFrequencyInHertz, prescaler, microseconds);
-    *m_delayConfigstm32.pAutoReloadRegister = autoReloadValue;
+        CalculateRequiredClocks(m_delayConfig.timerInputFrequencyInHertz, prescaler, microseconds);
+    *m_delayConfig.pAutoReloadRegister = autoReloadValue;
 
-    *m_delayConfigstm32.pStatusRegister = 0;
-    *m_delayConfigstm32.pControlRegister |= m_delayConfigstm32.counterEnableMask;
+    *m_delayConfig.pStatusRegister = 0;
+    *m_delayConfig.pControlRegister |= m_delayConfig.counterEnableMask;
 
-    while (!(*m_delayConfigstm32.pStatusRegister & m_delayConfigstm32.updateInterruptMask)) {
-        // Empty loop
-    }
+    while (!(*m_delayConfig.pStatusRegister & m_delayConfig.updateInterruptMask))
+        ;
 
     return true;
 };
 
-auto DelayStm32::CalculateRequiredPrescaler(uint32_t timerInputFrequencyInHertz, uint32_t microseconds) -> uint16_t {
+auto Delay::CalculateRequiredPrescaler(uint32_t timerInputFrequencyInHertz, uint32_t microseconds) -> uint16_t {
     // Check if microseconds is too short
     const float microsecondsPerClock = 1000000.0f / timerInputFrequencyInHertz;
     if (microsecondsPerClock == 0) {
@@ -60,7 +61,7 @@ auto DelayStm32::CalculateRequiredPrescaler(uint32_t timerInputFrequencyInHertz,
     }
 }
 
-auto DelayStm32::CalculateRequiredClocks(uint32_t timerInputFrequencyInHertz, uint16_t prescaler, uint32_t microseconds)
+auto Delay::CalculateRequiredClocks(uint32_t timerInputFrequencyInHertz, uint16_t prescaler, uint32_t microseconds)
     -> uint16_t {
     const float microsecondsPerClock =
         CalculateMicrosecondsPerClockWithPrescaler(timerInputFrequencyInHertz, prescaler);
@@ -69,7 +70,7 @@ auto DelayStm32::CalculateRequiredClocks(uint32_t timerInputFrequencyInHertz, ui
     return requiredClocks;
 }
 
-auto DelayStm32::CalculateMicrosecondsPerClockWithPrescaler(uint32_t timerInputFrequencyInHertz, uint32_t prescaler)
+auto Delay::CalculateMicrosecondsPerClockWithPrescaler(uint32_t timerInputFrequencyInHertz, uint32_t prescaler)
     -> float {
     const auto clockAfterPrescaler = timerInputFrequencyInHertz / (static_cast<uint32_t>(prescaler) + 1);
     const float microsecondsPerClock = 1000000.0f / clockAfterPrescaler;
@@ -78,18 +79,20 @@ auto DelayStm32::CalculateMicrosecondsPerClockWithPrescaler(uint32_t timerInputF
 }
 
 //---------------
-// IDelayStm32
+// HAL::STM32::IDelay
 //---------------
-auto DelayStm32::SetupConfiguration(const DelayConfigstm32&& delayConfigstm32) -> bool {
-    if (delayConfigstm32.pStatusRegister == nullptr || delayConfigstm32.pAutoReloadRegister == nullptr ||
-        delayConfigstm32.pControlRegister == nullptr || delayConfigstm32.pPrescalerRegister == nullptr ||
-        !ValueChecks::HasSingleBitSet(delayConfigstm32.updateInterruptMask) ||
-        !ValueChecks::HasSingleBitSet(delayConfigstm32.counterEnableMask)) {
+auto Delay::SetupConfiguration(const DelayConfig&& delayConfig) -> bool {
+    if (delayConfig.pStatusRegister == nullptr || delayConfig.pAutoReloadRegister == nullptr ||
+        delayConfig.pControlRegister == nullptr || delayConfig.pPrescalerRegister == nullptr ||
+        !ValueChecks::HasSingleBitSet(delayConfig.updateInterruptMask) ||
+        !ValueChecks::HasSingleBitSet(delayConfig.counterEnableMask)) {
         return false;
     }
 
-    m_delayConfigstm32 = delayConfigstm32;
+    m_delayConfig = delayConfig;
     return true;
 }
 
-auto DelayStm32::GetConfiguration() -> const DelayConfigstm32& { return m_delayConfigstm32; }
+auto Delay::GetConfiguration() -> const DelayConfig& { return m_delayConfig; }
+
+}  // namespace HAL::STM32
