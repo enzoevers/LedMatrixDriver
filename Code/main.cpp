@@ -5,21 +5,10 @@
 #include "SetupHardwareStm32f303xc.h"
 #endif
 
-#if defined(USE_DESKTOP)
-#include "SetupDesktop.h"
-#endif
-
 #if defined(USE_STM32)
 #include "DateTimeStm32.h"
 #include "DelayStm32.h"
 #include "GPIOOutputStm32.h"
-#endif
-
-#if defined(USE_DESKTOP)
-#include <iostream>
-
-#include "DelayDesktop.h"
-#include "GPIOOutputDesktop.h"
 #endif
 
 #include <cstring>  // std::memset
@@ -68,29 +57,6 @@ int main() {
 
 #endif
 
-#if defined(USE_DESKTOP)
-    auto clk = GPIOOutputDesktop();
-    auto clkEn = GPIOOutputDesktop();
-    auto clkSelEn = GPIOOutputDesktop();
-    auto data = GPIOOutputDesktop();
-    auto latch = GPIOOutputDesktop();
-    auto ledOE = GPIOOutputDesktop();
-
-    uint32_t outputRegister;
-    uint32_t io0Mask = 0x1;
-    uint32_t io7Mask = 0x1 << 7;
-
-    {  // IGPIOOutputDesktop setup
-        clk.SetupConfiguration({&outputRegister, 0x1 << 0});
-        clkEn.SetupConfiguration({&outputRegister, 0x1 << 1});
-        clkSelEn.SetupConfiguration({&outputRegister, 0x1 << 2});
-        data.SetupConfiguration({&outputRegister, 0x1 << 3});
-        latch.SetupConfiguration({&outputRegister, 0x1 << 4});
-        ledOE.SetupConfiguration({&outputRegister, 0x1 << 5});
-    }
-
-    auto mainDelay = DelayDesktop();
-#endif
     auto hanoverOL037A = HanoverOL037A();
     HanoverOL037A_GPIOInterface hanoverOL037A_GPIOInterface{&clk, &clkEn, &clkSelEn, &data, &latch, &ledOE};
     hanoverOL037A.SetGPIOInterface(hanoverOL037A_GPIOInterface);
@@ -110,7 +76,6 @@ int main() {
     hanoverOL037A.SetArea({10, 0}, pixelArea);
     hanoverOL037A.UpdateDisplay();
 
-#if !defined(USE_DESKTOP)
     mainDelay.SynchronousWait_us(1000000);
 
     // Reset display
@@ -153,7 +118,6 @@ int main() {
             }
         }
     }
-#endif
 
     return 0;
 }
