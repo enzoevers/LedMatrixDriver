@@ -14,17 +14,6 @@ if(TEST_ON_PC OR USE_STM32)
     target_link_libraries(HAL hal-stm32)
 endif()
 
-if(TEST_ON_PC OR USE_DESKTOP)
-    add_subdirectory(desktop)
-    target_include_directories(hal-desktop PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-    if(NOT TEST_ON_PC)
-        target_link_libraries(hal-desktop hardware-setup-desktop)
-    endif()
-
-    target_link_libraries(HAL hal-desktop)
-endif()
-
 if(TEST_ON_PC)
     add_subdirectory(test)
 endif()

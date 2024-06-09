@@ -11,7 +11,6 @@ function cleanup()
     echo 
 
     sudo Scripts/Stm32/Stm32f303xc/CleanStm32f303xcBuild.sh
-    sudo Scripts/Desktop/CleanDesktopBuild.sh
 }
 
 trap cleanup EXIT
@@ -49,11 +48,3 @@ echo "//===================="
 echo 
 
 Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh "build"
-
-echo
-echo "//===================="
-echo "// Build Desktop"
-echo "//===================="
-echo
-
-Scripts/Desktop/BuildDesktop.sh "build"

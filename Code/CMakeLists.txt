@@ -25,11 +25,9 @@ if(USE_STM32F3)
     find_package(CMSIS COMPONENTS "${CMSIS_COMP_LIST}" REQUIRED)
 endif()
 
-if(TEST_ON_PC OR USE_DESKTOP)
-    set(CMAKE_CXX_STANDARD 20)
-endif()
-
 if(TEST_ON_PC)
+    set(CMAKE_CXX_STANDARD 20)
+
     include(FetchContent)
     FetchContent_Declare(
         googletest

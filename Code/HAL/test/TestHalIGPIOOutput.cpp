@@ -1,4 +1,3 @@
-#include "GPIOOutputDesktop.h"
 #include "GPIOOutputStm32.h"
 //-----
 #include <tuple>
@@ -13,7 +12,7 @@ namespace IGPIOOutputTesting {
 
 class FixtureIGPIOOutput : public Test {
    public:
-    FixtureIGPIOOutput() : gPIOOutputTargets(std::make_tuple(GPIOOutputDesktop(), GPIOOutputStm32())) {
+    FixtureIGPIOOutput() : gPIOOutputTargets(std::make_tuple(GPIOOutputStm32())) {
         InitializeIGPIOOutputVec();
         AssertCorrectInitialized(gPIOOutputTargets);
     }
@@ -28,11 +27,7 @@ class FixtureIGPIOOutput : public Test {
     }
 
     auto SetupWorkableGPIOOutput(IGPIOOutput* target) -> void {
-        if (auto _target = dynamic_cast<GPIOOutputDesktop*>(target)) {
-            std::cout << "GPIOOutputDesktop" << std::endl;
-            m_outputRegister = 0;
-            ASSERT_NO_THROW(_target->SetupConfiguration({&m_outputRegister, m_pinMask}));
-        } else if (auto _target = dynamic_cast<GPIOOutputStm32*>(target)) {
+        if (auto _target = dynamic_cast<GPIOOutputStm32*>(target)) {
             std::cout << "GPIOOutputStm32" << std::endl;
             m_outputRegister = 0;
             ASSERT_TRUE(_target->SetupConfiguration({&m_outputRegister, m_pinMask}));
@@ -42,10 +37,9 @@ class FixtureIGPIOOutput : public Test {
     }
 
     std::vector<IGPIOOutput*> iGPIOOutputVec;
-    std::tuple<GPIOOutputDesktop, GPIOOutputStm32> gPIOOutputTargets;
+    std::tuple<GPIOOutputStm32> gPIOOutputTargets;
 
     // For:
-    //  GPIOOutputDesktop
     //  GPIOOutputStm32
     uint32_t m_outputRegister = 0;
     uint32_t m_pinMask = 1 << 13;

@@ -1,4 +1,2 @@
 #cmakedefine USE_STM32
 #cmakedefine USE_STM32F303XC
-
-#cmakedefine USE_DESKTOP

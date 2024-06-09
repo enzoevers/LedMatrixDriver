@@ -5,10 +5,7 @@ EXTERNAL_PATH="${SCRIPT_PATH}/../External/"
 COVERAGE_PATH="${SCRIPT_PATH}/../Coverage/"
 FONTS_PATH="${SCRIPT_PATH}/../Fonts/"
 
-# The full path to the build directory for the desktop target
-BUILD_DIR_DESKTOP="${BUILD_PATH}/BuildDesktop"
-
-# The full path to the build directory for the desktop target
+# The full path to the build directory for the Stm32f303xc target
 BUILD_DIR_STM32F303XC="${BUILD_PATH}/BuildStm32f303xc"
 
 # The full path to the build directory for the tests

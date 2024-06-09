@@ -91,14 +91,6 @@ To break, press `ctrl+c`.
 
 From here on see the GDB and OpenOCD documentation on how to see variables values etc.
 
-## Desktop
-
-### Available scripts
-
-- `$ ./Scripts/Desktop/BuildDesktop.sh ["build"]`
-  - If no `"build"` argument is given only the cmake configuration is executed.
-- `$ ./Scripts/Desktop/CleanDesktopBuild.sh`
-
 ## Testing
 
 ### Prerequisits
