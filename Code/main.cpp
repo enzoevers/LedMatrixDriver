@@ -6,17 +6,48 @@
 #endif
 
 #if defined(USE_STM32)
+#include <memory>
+#include <vector>
+
 #include "DateTimeStm32.h"
 #include "DelayStm32.h"
+#include "GPIOInputStm32.h"
 #include "GPIOOutputStm32.h"
 #endif
 
 #include <cstring>  // std::memset
 
 #include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_12.h"
+#include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_16.h"
 #include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_8.h"
 #include "HanoverOL037A.h"
 #include "TextBmhFormat.h"
+
+#if defined(USE_STM32)
+
+std::vector<HAL::STM32::IGPIOInput*> pGPIOInputs(2);
+
+/*
+    \brief The IRQ handler for GPIO input debounce.
+*/
+extern "C" {
+void TIM4_IRQHandler() {
+    // Check if the update interrupt flag is set
+    if (TIM4->SR & TIM_SR_UIF) {
+        // Clear the update interrupt flag
+        TIM4->SR &= ~TIM_SR_UIF;
+
+        for (auto pGPIOInput : pGPIOInputs) {
+            if (pGPIOInput == nullptr) {
+                continue;
+            }
+            pGPIOInput->DebounceInterruptHandler();
+        }
+    }
+}
+}
+
+#endif
 
 int main() {
     HardwareSetup();
@@ -36,6 +67,17 @@ int main() {
         data.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_13});
         latch.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_14});
         ledOE.SetupConfiguration({&GPIOD->ODR, GPIO_ODR_15});
+    }
+
+    auto timeIncrease = HAL::STM32::GPIOInput();
+    auto timeDecrease = HAL::STM32::GPIOInput();
+    pGPIOInputs[0] = &timeIncrease;
+    pGPIOInputs[1] = &timeDecrease;
+
+    {  // HAL::STM32::GPIOInput setup
+        constexpr auto debounceCount = 3;
+        timeIncrease.SetupConfiguration({&GPIOE->IDR, GPIO_IDR_11, debounceCount});
+        timeDecrease.SetupConfiguration({&GPIOE->IDR, GPIO_IDR_13, debounceCount});
     }
 
     uint32_t tim3Hertz = 40000000;
@@ -63,7 +105,7 @@ int main() {
     hanoverOL037A.SetDelayManager(&mainDelay);
 
     auto textBmhFormat = TextBmhFormat();
-    textBmhFormat.SetFont(&Bitstream_Vera_Sans_Mono_12::font_data);
+    textBmhFormat.SetFont(&Bitstream_Vera_Sans_Mono_16::font_data);
 
     std::string text = "Hello World!";
     const auto pixelAreaSize = textBmhFormat.GetRequiredSizeString(text, 1);
@@ -90,12 +132,21 @@ int main() {
 
     const auto screenResolution = hanoverOL037A.GetResolution();
     HAL::Types::DateTime lastDateTime;
+    bool lastTimeIncreaseState;
+    bool lastTimeDecreaseState;
     while (true) {
+        auto curTimeIncreaseState = timeIncrease.GetState();
+        auto curTimeDecreaseState = timeDecrease.GetState();
+
         auto currentDateTime = dateTime.GetDateTime();
-        if (currentDateTime == lastDateTime) {
+        if (currentDateTime == lastDateTime && curTimeIncreaseState == lastTimeIncreaseState &&
+            curTimeDecreaseState == lastTimeDecreaseState) {
             continue;
         }
+
         lastDateTime = currentDateTime;
+        lastTimeIncreaseState = curTimeIncreaseState;
+        lastTimeDecreaseState = curTimeDecreaseState;
 
         char timeTextBuffer[13];
         std::snprintf(&timeTextBuffer[0], sizeof(timeTextBuffer), "%.2u : %.2u : %.2u", currentDateTime.time.hours,
@@ -108,6 +159,8 @@ int main() {
         Vec2D offset{0, 0};
         textBmhFormat.SetString(timeTextBuffer, 1, offset, pixelArea);
 
+        hanoverOL037A.SetPixel({0, 0}, curTimeIncreaseState);
+        hanoverOL037A.SetPixel({0, 1}, curTimeDecreaseState);
         hanoverOL037A.SetArea({5, 0}, pixelArea);
         hanoverOL037A.UpdateDisplay();
 

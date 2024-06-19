@@ -19,9 +19,8 @@ class FixtureGPIOOutputStm32 : public Test {
 
     auto CreateIGPIOOutputStm32() -> std::unique_ptr<IGPIOOutput> { return std::make_unique<GPIOOutput>(); }
 
+    uint32_t m_outputRegister;    
     GPIOOutputConfig m_gPIOOutputConfig;
-
-    uint32_t m_outputRegister;
 };
 
 class FixtureGPIOOutputStm32FuzzTests : public PerFuzzTestFixtureAdapter<FixtureGPIOOutputStm32> {
