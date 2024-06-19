@@ -33,8 +33,12 @@ static auto SetupClock() -> void {
     tmpreg = READ_BIT(RCC->AHBENR, RCC_AHBENR_GPIODEN);
     UNUSED(tmpreg);
 
+    SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOEEN); /* Delay after an RCC peripheral clock enabling */
+    tmpreg = READ_BIT(RCC->AHBENR, RCC_AHBENR_GPIOEEN);
+    UNUSED(tmpreg);
+
     //----------
-    // Timer clocks
+    // APB1 (PCLK) clocks
     //----------
 
     // APB1 - HCLK not divided
@@ -86,8 +90,8 @@ static auto SetupClock() -> void {
 #define CONFIG_OUTPUT(PORT, PIN)                                                  \
     {                                                                             \
         /* Output */                                                              \
-        SET_BIT(GPIO##PORT->MODER, 0b1 << GPIO_MODER_MODER##PIN##_Pos);           \
-        CLEAR_BIT(GPIO##PORT->MODER, 0b1 << (1 + GPIO_MODER_MODER##PIN##_Pos));   \
+        SET_BIT(GPIO##PORT->MODER, GPIO_MODER_MODER##PIN##_0);                    \
+        CLEAR_BIT(GPIO##PORT->MODER, GPIO_MODER_MODER##PIN##_1);                  \
                                                                                   \
         /* Push-Pull */                                                           \
         CLEAR_BIT(GPIO##PORT->OTYPER, GPIO_OTYPER_OT_##PIN);                      \
@@ -99,6 +103,17 @@ static auto SetupClock() -> void {
         CLEAR_BIT(GPIO##PORT->PUPDR, 0b11 << GPIO_PUPDR_PUPDR##PIN##_Pos);        \
     }
 
+#define CONFIG_INPUT(PORT, PIN)                                  \
+    {                                                            \
+        /* Input */                                              \
+        CLEAR_BIT(GPIO##PORT->MODER, GPIO_MODER_MODER##PIN##_0); \
+        CLEAR_BIT(GPIO##PORT->MODER, GPIO_MODER_MODER##PIN##_1); \
+                                                                 \
+        /* pull-down */                                          \
+        CLEAR_BIT(GPIO##PORT->PUPDR, GPIO_PUPDR_PUPDR##PIN##_0); \
+        SET_BIT(GPIO##PORT->PUPDR, GPIO_PUPDR_PUPDR##PIN##_1);   \
+    }
+
 static auto SetupGpio() -> void {
     CONFIG_OUTPUT(D, 10)
     CONFIG_OUTPUT(D, 11)
@@ -106,14 +121,17 @@ static auto SetupGpio() -> void {
     CONFIG_OUTPUT(D, 13)
     CONFIG_OUTPUT(D, 14)
     CONFIG_OUTPUT(D, 15)
+
+    CONFIG_INPUT(E, 11)
+    CONFIG_INPUT(E, 13)
 }
 
 static auto SetupTimers() -> void {
     //----------
-    // TIM3
+    // TIM3 used for the delay function
     //----------
 
-    // Disable slave mode
+    // Disable slave mode to use the internal clock as source
     TIM3->SMCR &= ~TIM_SMCR_SMS_0;
     TIM3->SMCR &= ~TIM_SMCR_SMS_1;
     TIM3->SMCR &= ~TIM_SMCR_SMS_2;
@@ -125,6 +143,47 @@ static auto SetupTimers() -> void {
     TIM3->CR1 &= ~TIM_CR1_DIR;
 
     RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
+
+    //----------
+    // TIM4 used for the GPIO debounce interrupt polling
+    //----------
+
+    // Disable slave mode to use the internal clock as source
+    TIM4->SMCR &= ~TIM_SMCR_SMS_0;
+    TIM4->SMCR &= ~TIM_SMCR_SMS_1;
+    TIM4->SMCR &= ~TIM_SMCR_SMS_2;
+    TIM4->SMCR &= ~TIM_SMCR_SMS_3;
+
+    // Set as edge-aligned upcounter
+    TIM4->CR1 &= ~TIM_CR1_CMS_0;
+    TIM4->CR1 &= ~TIM_CR1_CMS_1;
+    TIM4->CR1 &= ~TIM_CR1_DIR;
+
+    RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
+
+    // The APB1 clock is 40MHz
+    // Assuming that we want a debounce interrupt
+    // frequency of 20ms (50Hz).
+    // Then the clock should be divided by 800 (40.000.000 / 50 = 800.000)
+    // The pre-scaler is a 16-bit value however and thus the maximum value is 65.535
+    // Using a prescaler or 8000 instead gives a timer 4 frequency of
+    // 40.000.000 / 8000 = 5000Hz = 5Khz
+    TIM4->PSC = 800000 - 1;
+
+    // For an interrupt frequeny of 50Hz, the auto-reload register should be 100
+    TIM4->ARR = 100;
+
+    // Force counter reintialization
+    TIM4->EGR |= TIM_EGR_UG;
+
+    // Enable interrupt
+    TIM4->DIER |= TIM_DIER_UIE;
+
+    // Clear the interrupt flag
+    TIM4->SR &= ~TIM_SR_UIF;
+
+    TIM4->CR1 |= TIM_CR1_CEN;
+    NVIC_EnableIRQ(TIM4_IRQn);  // TIM4_IRQHandler
 }
 
 static auto SetupRTC() -> void {
