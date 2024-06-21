@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.25)
 configure_file(defines.h.in defines.h)
 
 if(USE_STM32 AND (NOT GENERATE_DOCS))
-    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/stm32-cmake/cmake/stm32_gcc.cmake)
+    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/../External/stm32-cmake/cmake/stm32_gcc.cmake)
     set(CMSIS_COMP_LIST "")
 endif()
 
@@ -38,7 +38,7 @@ if(TEST_ON_PC)
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(googletest)
 
-    add_subdirectory(fuzztest)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../External/fuzztest ${CMAKE_CURRENT_BINARY_DIR}/fuzztest)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
 else()

@@ -1,8 +1,8 @@
 [submodule "Code/stm32-cmake"]
-	path = Code/stm32-cmake
+	path = External/stm32-cmake
 	url = https://github.com/ObKo/stm32-cmake.git
 [submodule "Code/fuzztest"]
-	path = Code/fuzztest
+	path = External/fuzztest
 	url = https://github.com/google/fuzztest.git
 [submodule "External/lcov-badge"]
 	path = External/lcov-badge
