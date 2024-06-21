@@ -105,8 +105,8 @@ echo "// Running TestHAL"
 echo "//========================="
 echo
 
-RunTests TestHAL ${BUILD_DIR_TEST}/HAL/test/
-GenerateTraceFile TestHAL ${BUILD_DIR_TEST}/HAL/test/
+RunTests TestHAL ${BUILD_DIR_TEST}/Libs/HAL/test/
+GenerateTraceFile TestHAL ${BUILD_DIR_TEST}/Libs/HAL/test/
 
 echo
 echo "//========================="
@@ -114,8 +114,8 @@ echo "// Running TestDisplays"
 echo "//========================="
 echo
 
-RunTests TestDisplays ${BUILD_DIR_TEST}/Displays/test/
-GenerateTraceFile TestDisplays ${BUILD_DIR_TEST}/Displays/test/
+RunTests TestDisplays ${BUILD_DIR_TEST}/Libs/Displays/test/
+GenerateTraceFile TestDisplays ${BUILD_DIR_TEST}/Libs/Displays/test/
 
 echo
 echo "//========================="
@@ -123,8 +123,8 @@ echo "// Running TestTextProvider"
 echo "//========================="
 echo
 
-RunTests TestTextProvider ${BUILD_DIR_TEST}/TextProvider/test/
-GenerateTraceFile TestTextProvider ${BUILD_DIR_TEST}/TextProvider/test/
+RunTests TestTextProvider ${BUILD_DIR_TEST}/Libs/TextProvider/test/
+GenerateTraceFile TestTextProvider ${BUILD_DIR_TEST}/Libs/TextProvider/test/
 
 if [ ${RETURN_CODE} != 0 ]; then
     exit ${RETURN_CODE}
