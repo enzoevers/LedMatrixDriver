@@ -50,7 +50,7 @@ class FixtureDateTimeStm32 : public Test {
 //====================
 
 TEST_F(FixtureDateTimeStm32, SetTime_ReturnsFalseIfConfigNotSet) {
-    bool success = m_dateTime->SetTime(Types::Time{});
+    bool success = m_dateTime->SetTime(Common::Types::Time{});
 
     ASSERT_FALSE(success);
 }
@@ -58,7 +58,7 @@ TEST_F(FixtureDateTimeStm32, SetTime_ReturnsFalseIfConfigNotSet) {
 TEST_F(FixtureDateTimeStm32, SetTime_PerformsCorrectRegisterWrites) {
     m_dateTime->SetConfig(std::move(m_dateTimeConfig));
 
-    auto time = Types::Time{
+    auto time = Common::Types::Time{
         .hours = 12,
         .minutes = 34,
         .seconds = 56,
@@ -89,13 +89,13 @@ TEST_F(FixtureDateTimeStm32, SetTime_PerformsCorrectRegisterWrites) {
 TEST_F(FixtureDateTimeStm32, GetTime_ReturnsZerodTimeIfConfigNotSet) {
     auto receivedTime = m_dateTime->GetTime();
 
-    ASSERT_EQ(receivedTime, Types::Time({.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0}));
+    ASSERT_EQ(receivedTime, Common::Types::Time({.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0}));
 }
 
 TEST_F(FixtureDateTimeStm32, GetTime_ReturnsCorrectTime) {
     m_dateTime->SetConfig(std::move(m_dateTimeConfig));
 
-    auto time = Types::Time{.hours = 12, .minutes = 34, .seconds = 56, .milliseconds = 0};
+    auto time = Common::Types::Time{.hours = 12, .minutes = 34, .seconds = 56, .milliseconds = 0};
 
     m_dateTime->SetTime(time);
 
@@ -109,7 +109,7 @@ TEST_F(FixtureDateTimeStm32, GetTime_ReturnsCorrectTime) {
 //====================
 
 TEST_F(FixtureDateTimeStm32, SetDate_ReturnsFalseIfConfigNotSet) {
-    bool success = m_dateTime->SetDate(Types::Date{});
+    bool success = m_dateTime->SetDate(Common::Types::Date{});
 
     ASSERT_FALSE(success);
 }
@@ -117,11 +117,11 @@ TEST_F(FixtureDateTimeStm32, SetDate_ReturnsFalseIfConfigNotSet) {
 TEST_F(FixtureDateTimeStm32, SetDate_PerformsCorrectRegisterWrites) {
     m_dateTime->SetConfig(std::move(m_dateTimeConfig));
 
-    auto date = Types::Date{
+    auto date = Common::Types::Date{
         .year = 2024,
         .month = 5,
         .day = 14,
-        .weekday = Types::Weekday::Saturday,
+        .weekday = Common::Types::Weekday::Saturday,
     };
 
     const auto expected_DR = 0 | 2 << 20  // tens of the year
@@ -148,13 +148,14 @@ TEST_F(FixtureDateTimeStm32, SetDate_PerformsCorrectRegisterWrites) {
 TEST_F(FixtureDateTimeStm32, GetDate_ReturnsZerodDateIfConfigNotSet) {
     auto receivedDate = m_dateTime->GetDate();
 
-    ASSERT_EQ(receivedDate, Types::Date({.year = 0, .month = 0, .day = 0, .weekday = Types::Weekday::Monday}));
+    ASSERT_EQ(receivedDate,
+              Common::Types::Date({.year = 0, .month = 0, .day = 0, .weekday = Common::Types::Weekday::Monday}));
 }
 
 TEST_F(FixtureDateTimeStm32, GetDate_ReturnsCorrectDate) {
     m_dateTime->SetConfig(std::move(m_dateTimeConfig));
 
-    auto date = Types::Date{.year = 2024, .month = 5, .day = 12, .weekday = Types::Weekday::Wednesday};
+    auto date = Common::Types::Date{.year = 2024, .month = 5, .day = 12, .weekday = Common::Types::Weekday::Wednesday};
 
     m_dateTime->SetDate(date);
 
@@ -168,7 +169,7 @@ TEST_F(FixtureDateTimeStm32, GetDate_ReturnsCorrectDate) {
 //====================
 
 TEST_F(FixtureDateTimeStm32, SetDateTime_ReturnsFalseIfConfigNotSet) {
-    bool success = m_dateTime->SetDateTime(Types::DateTime{});
+    bool success = m_dateTime->SetDateTime(Common::Types::DateTime{});
 
     ASSERT_FALSE(success);
 }
@@ -180,19 +181,20 @@ TEST_F(FixtureDateTimeStm32, SetDateTime_ReturnsFalseIfConfigNotSet) {
 TEST_F(FixtureDateTimeStm32, GetDateTime_ReturnsZerodDateTimeIfConfigNotSet) {
     auto receivedDateTime = m_dateTime->GetDateTime();
 
-    ASSERT_EQ(receivedDateTime,
-              Types::DateTime({
-                  .time = Types::Time({.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0}),
-                  .date = Types::Date({.year = 0, .month = 0, .day = 0, .weekday = Types::Weekday::Monday}),
-              }));
+    ASSERT_EQ(
+        receivedDateTime,
+        Common::Types::DateTime({
+            .time = Common::Types::Time({.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0}),
+            .date = Common::Types::Date({.year = 0, .month = 0, .day = 0, .weekday = Common::Types::Weekday::Monday}),
+        }));
 }
 
 TEST_F(FixtureDateTimeStm32, GetDateTime_ReturnsCorrectDateTime) {
     m_dateTime->SetConfig(std::move(m_dateTimeConfig));
 
-    auto dateTime = Types::DateTime{
-        .time = Types::Time{.hours = 12, .minutes = 34, .seconds = 56, .milliseconds = 0},
-        .date = Types::Date{.year = 2024, .month = 5, .day = 12, .weekday = Types::Weekday::Wednesday},
+    auto dateTime = Common::Types::DateTime{
+        .time = Common::Types::Time{.hours = 12, .minutes = 34, .seconds = 56, .milliseconds = 0},
+        .date = Common::Types::Date{.year = 2024, .month = 5, .day = 12, .weekday = Common::Types::Weekday::Wednesday},
     };
 
     m_dateTime->SetDateTime(dateTime);

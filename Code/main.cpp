@@ -22,6 +22,7 @@
 #include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_8.h"
 #include "HanoverOL037A.h"
 #include "TextBmhFormat.h"
+#include "Types/DateTimeData.h"
 
 #if defined(USE_STM32)
 
@@ -127,11 +128,11 @@ int main() {
 
     dateTime.SetDateTime({
         .time = {.hours = 14, .minutes = 4, .seconds = 25, .milliseconds = 0},
-        .date = {.year = 2021, .month = 9, .day = 1, .weekday = HAL::Types::Weekday::Wednesday},
+        .date = {.year = 2021, .month = 9, .day = 1, .weekday = Common::Types::Weekday::Wednesday},
     });
 
     const auto screenResolution = hanoverOL037A.GetResolution();
-    HAL::Types::DateTime lastDateTime;
+    Common::Types::DateTime lastDateTime;
     bool lastTimeIncreaseState;
     bool lastTimeDecreaseState;
     while (true) {

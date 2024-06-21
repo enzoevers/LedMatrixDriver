@@ -8,8 +8,8 @@ DateTime::DateTime() : m_dateTimeConfig({nullptr, nullptr, nullptr, nullptr, nul
 // HAL::IDateTime
 //---------------
 
-auto DateTime::GetTime() -> Types::Time {
-    auto time = Types::Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0};
+auto DateTime::GetTime() -> Common::Types::Time {
+    auto time = Common::Types::Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0};
 
     if (m_dateTimeConfig.ContainsNullptr()) {
         return time;
@@ -31,7 +31,7 @@ auto DateTime::GetTime() -> Types::Time {
     return time;
 }
 
-auto DateTime::SetTime(const Types::Time& time) -> bool {
+auto DateTime::SetTime(const Common::Types::Time& time) -> bool {
     if (m_dateTimeConfig.ContainsNullptr()) {
         return false;
     }
@@ -47,8 +47,8 @@ auto DateTime::SetTime(const Types::Time& time) -> bool {
     return true;
 }
 
-auto DateTime::GetDate() -> Types::Date {
-    auto date = Types::Date{.year = 0, .month = 0, .day = 0, .weekday = Types::Weekday::Monday};
+auto DateTime::GetDate() -> Common::Types::Date {
+    auto date = Common::Types::Date{.year = 0, .month = 0, .day = 0, .weekday = Common::Types::Weekday::Monday};
 
     if (m_dateTimeConfig.ContainsNullptr()) {
         return date;
@@ -70,13 +70,13 @@ auto DateTime::GetDate() -> Types::Date {
         .year = static_cast<uint16_t>(m_yearBase + (yearTens * multiplier) + yearSingles),
         .month = static_cast<uint8_t>((monthTens * multiplier) + monthSingles),
         .day = static_cast<uint8_t>((dayTens * multiplier) + daySingles),
-        .weekday = static_cast<Types::Weekday>(weekdayInt),
+        .weekday = static_cast<Common::Types::Weekday>(weekdayInt),
     };
 
     return date;
 }
 
-auto DateTime::SetDate(const Types::Date& date) -> bool {
+auto DateTime::SetDate(const Common::Types::Date& date) -> bool {
     if (m_dateTimeConfig.ContainsNullptr()) {
         return false;
     }
@@ -92,10 +92,10 @@ auto DateTime::SetDate(const Types::Date& date) -> bool {
     return true;
 }
 
-auto DateTime::GetDateTime() -> Types::DateTime {
-    auto dateTime =
-        Types::DateTime{.time = Types::Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0},
-                        .date = Types::Date{.year = 0, .month = 0, .day = 0, .weekday = Types::Weekday::Monday}};
+auto DateTime::GetDateTime() -> Common::Types::DateTime {
+    auto dateTime = Common::Types::DateTime{
+        .time = Common::Types::Time{.hours = 0, .minutes = 0, .seconds = 0, .milliseconds = 0},
+        .date = Common::Types::Date{.year = 0, .month = 0, .day = 0, .weekday = Common::Types::Weekday::Monday}};
 
     if (m_dateTimeConfig.ContainsNullptr()) {
         return dateTime;
@@ -106,7 +106,7 @@ auto DateTime::GetDateTime() -> Types::DateTime {
     return dateTime;
 }
 
-auto DateTime::SetDateTime(const Types::DateTime& dateTime) -> bool {
+auto DateTime::SetDateTime(const Common::Types::DateTime& dateTime) -> bool {
     if (m_dateTimeConfig.ContainsNullptr()) {
         return false;
     }
@@ -143,7 +143,7 @@ auto DateTime::GetConfig() -> const DateTimeConfig& { return m_dateTimeConfig; }
 // Private
 //---------------
 
-auto DateTime::InternalSetTime(const Types::Time& time) -> void {
+auto DateTime::InternalSetTime(const Common::Types::Time& time) -> void {
     const uint8_t hourTens = time.hours / 10;
     const uint8_t hourSingles = time.hours - (hourTens * 10);
     const uint8_t minutesTens = time.minutes / 10;
@@ -158,7 +158,7 @@ auto DateTime::InternalSetTime(const Types::Time& time) -> void {
                                (secondsTens << 4) | secondsSingles;
 }
 
-auto DateTime::InternalSetDate(const Types::Date& date) -> void {
+auto DateTime::InternalSetDate(const Common::Types::Date& date) -> void {
     m_yearBase = (date.year / 100) * 100;
     const uint8_t yearTens = (date.year - m_yearBase) / 10;
     const uint8_t yearSingles = (date.year - m_yearBase) - (yearTens * 10);

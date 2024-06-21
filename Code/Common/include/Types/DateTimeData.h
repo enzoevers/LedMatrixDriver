@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-namespace HAL::Types {
+namespace Common::Types {
 
 struct Time {
     uint8_t hours;
@@ -36,4 +36,4 @@ struct DateTime {
     auto operator==(const DateTime& other) const -> bool { return time == other.time && date == other.date; }
 };
 
-}  // namespace HAL::Types
+}  // namespace Common::Types

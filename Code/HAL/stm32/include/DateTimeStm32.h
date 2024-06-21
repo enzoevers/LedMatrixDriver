@@ -12,12 +12,12 @@ class DateTime : public HAL::IDateTime, HAL::STM32::IDateTime {
     //---------------
     // HAL::IDateTime
     //---------------
-    auto GetTime() -> Types::Time override;
-    auto SetTime(const Types::Time& time) -> bool override;
-    auto GetDate() -> Types::Date override;
-    auto SetDate(const Types::Date& date) -> bool override;
-    auto GetDateTime() -> Types::DateTime override;
-    auto SetDateTime(const Types::DateTime& dateTime) -> bool override;
+    auto GetTime() -> Common::Types::Time override;
+    auto SetTime(const Common::Types::Time& time) -> bool override;
+    auto GetDate() -> Common::Types::Date override;
+    auto SetDate(const Common::Types::Date& date) -> bool override;
+    auto GetDateTime() -> Common::Types::DateTime override;
+    auto SetDateTime(const Common::Types::DateTime& dateTime) -> bool override;
 
     //---------------
     // HAL::STM32::IDateTime
@@ -26,8 +26,8 @@ class DateTime : public HAL::IDateTime, HAL::STM32::IDateTime {
     auto GetConfig() -> const DateTimeConfig& override;
 
    private:
-    auto InternalSetTime(const Types::Time& time) -> void;
-    auto InternalSetDate(const Types::Date& date) -> void;
+    auto InternalSetTime(const Common::Types::Time& time) -> void;
+    auto InternalSetDate(const Common::Types::Date& date) -> void;
     auto UnlockRtcRegisters() -> void;
     auto LockRtcRegisters() -> void;
     auto EnterInitializeMode() -> void;
