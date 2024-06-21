@@ -53,11 +53,15 @@ The `stlink-tools` package comes from [https://github.com/stlink-org/stlink](htt
 
 ### Available scripts
 
-- `$ ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh ["build"]`
+- `$ ./Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh <Application name> ["build"]`
   - If no `"build"` argument is given only the cmake configuration is executed.
 - `$ [sudo] ./Scripts/Stm32/Stm32f303xc/CleanStm32f303xcBuild.sh`
-- `$ ./Scripts/Stm32/Stm32f303xc/StLinkFlash.sh`
-- `$ ./Scripts/Stm32/Stm32f303xc/StLinkDebug.sh`
+- `$ ./Scripts/Stm32/Stm32f303xc/StLinkFlash.sh <Application name>`
+- `$ ./Scripts/Stm32/Stm32f303xc/StLinkDebug.sh <Application name>`
+
+Available applications for `<Application name>` are:
+
+- `"Clock"`
 
 ### Debugging
 

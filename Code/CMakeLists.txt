@@ -12,7 +12,6 @@ if(GENERATE_DOCS)
     return()
 endif()
 
-set(MAIN_SOURCE_FILES main.cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 if(TEST_ON_PC)
@@ -36,21 +35,8 @@ endif()
 add_subdirectory(Libs)
 
 if(NOT TEST_ON_PC)
-    add_subdirectory(HardwareSetup)
-endif()
-
-if(NOT TEST_ON_PC)
-    set(EXECUTABLE_NAME LedDisplayDriverExecutable)
-    add_executable(${EXECUTABLE_NAME} ${MAIN_SOURCE_FILES})
-     target_link_libraries(${EXECUTABLE_NAME}
-        Common
-        HAL
-        Displays
-        TextProvider
-    )
-     if(USE_STM32)
-        stm32_print_size_of_target(${EXECUTABLE_NAME})
-        stm32_generate_binary_file(${EXECUTABLE_NAME})
-        stm32_generate_hex_file(${EXECUTABLE_NAME})
+    message("APPLICATION_NAME: ${APPLICATION_NAME}")
+    if(${APPLICATION_NAME} STREQUAL "Clock")
+        add_subdirectory(Applications/${APPLICATION_NAME})
     endif()
 endif()
