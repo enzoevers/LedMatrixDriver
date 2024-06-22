@@ -126,6 +126,15 @@ echo
 RunTests TestTextProvider ${BUILD_DIR_TEST}/Libs/TextProvider/test/
 GenerateTraceFile TestTextProvider ${BUILD_DIR_TEST}/Libs/TextProvider/test/
 
+echo
+echo "//========================="
+echo "// Running TestStateMachine"
+echo "//========================="
+echo
+
+RunTests TestStateMachine ${BUILD_DIR_TEST}/Applications/Clock/StateMachine/test/
+GenerateTraceFile TestStateMachine ${BUILD_DIR_TEST}/Applications/Clock/StateMachine/test/
+
 if [ ${RETURN_CODE} != 0 ]; then
     exit ${RETURN_CODE}
 fi

@@ -21,6 +21,7 @@
 #include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_16.h"
 #include "Fonts/Bitstream_Vera_Sans_Mono/Bitstream_Vera_Sans_Mono_8.h"
 #include "HanoverOL037A.h"
+#include "StateMachine.h"
 #include "TextBmhFormat.h"
 #include "Types/DateTimeData.h"
 
@@ -131,46 +132,11 @@ int main() {
         .date = {.year = 2021, .month = 9, .day = 1, .weekday = Common::Types::Weekday::Wednesday},
     });
 
-    const auto screenResolution = hanoverOL037A.GetResolution();
-    Common::Types::DateTime lastDateTime;
-    bool lastTimeIncreaseState;
-    bool lastTimeDecreaseState;
+    Clock::StateMachine stateMachine(hanoverOL037A, textBmhFormat, dateTime, mainDelay, timeIncrease, timeDecrease);
+
+    stateMachine.Start();
     while (true) {
-        auto curTimeIncreaseState = timeIncrease.GetState();
-        auto curTimeDecreaseState = timeDecrease.GetState();
-
-        auto currentDateTime = dateTime.GetDateTime();
-        if (currentDateTime == lastDateTime && curTimeIncreaseState == lastTimeIncreaseState &&
-            curTimeDecreaseState == lastTimeDecreaseState) {
-            continue;
-        }
-
-        lastDateTime = currentDateTime;
-        lastTimeIncreaseState = curTimeIncreaseState;
-        lastTimeDecreaseState = curTimeDecreaseState;
-
-        char timeTextBuffer[13];
-        std::snprintf(&timeTextBuffer[0], sizeof(timeTextBuffer), "%.2u : %.2u : %.2u", currentDateTime.time.hours,
-                      currentDateTime.time.minutes, currentDateTime.time.seconds);
-
-        const auto pixelAreaSize = textBmhFormat.GetRequiredSizeString(timeTextBuffer, 1);
-        Monochrome pixelAreaData[pixelAreaSize.x * pixelAreaSize.y];
-        std::memset(pixelAreaData, 0, sizeof(pixelAreaData));
-        PixelArea<Monochrome> pixelArea{pixelAreaSize, pixelAreaData};
-        Vec2D offset{0, 0};
-        textBmhFormat.SetString(timeTextBuffer, 1, offset, pixelArea);
-
-        hanoverOL037A.SetPixel({0, 0}, curTimeIncreaseState);
-        hanoverOL037A.SetPixel({0, 1}, curTimeDecreaseState);
-        hanoverOL037A.SetArea({5, 0}, pixelArea);
-        hanoverOL037A.UpdateDisplay();
-
-        // Clear all screen pixels
-        for (uint32_t y = 0; y < screenResolution.y; ++y) {
-            for (uint32_t x = 0; x < screenResolution.x; ++x) {
-                hanoverOL037A.SetPixel({x, y}, 0);
-            }
-        }
+        stateMachine.Update();
     }
 
     return 0;
