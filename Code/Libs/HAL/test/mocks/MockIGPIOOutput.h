@@ -5,7 +5,6 @@
 #include "IGPIOOutput.h"
 
 namespace HAL::Mock {
-
 class MockIGPIOOutput : public IGPIOOutput {
    public:
     ~MockIGPIOOutput() override = default;
