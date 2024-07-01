@@ -1,5 +1,7 @@
 #!/bin/bash
 
+APP_NAME="$1"
+
 CUR_PATH=$(dirname $(realpath "$0"))
 SCRIPT_PATH=${CUR_PATH}/../../
 
@@ -10,7 +12,7 @@ ValidateDirExists ${BUILD_DIR_STM32F303XC}
 
 echo "APPLICATION_NAME ${APPLICATION_NAME}"
 
-BINARY_PATH=${BUILD_DIR_STM32F303XC}/${APPLICATION_NAME}.bin
+BINARY_PATH=${BUILD_DIR_STM32F303XC}/Applications/${APP_NAME}/${APP_NAME}.bin
 ValidateFileExists ${BINARY_PATH}
 
 WRITE_ADDRESS=0x8000000

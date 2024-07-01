@@ -43,8 +43,8 @@ sudo apt install -y libnewlib-arm-none-eabi
 
 echo
 echo "//===================="
-echo "// Build STM32F303xc"
+echo "// Build - STM32F303xc - Clock"
 echo "//===================="
 echo 
 
-Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh "build"
+Scripts/Stm32/Stm32f303xc/BuildStm32f303xc.sh "Clock" "build"

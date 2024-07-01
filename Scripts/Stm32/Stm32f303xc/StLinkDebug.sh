@@ -1,5 +1,7 @@
 #!/bin/bash
 
+APP_NAME="$1"
+
 CUR_PATH=$(dirname $(realpath "$0"))
 SCRIPT_PATH=${CUR_PATH}/../../
 
@@ -8,9 +10,7 @@ source ${SCRIPT_PATH}/Utils.sh
 
 ValidateDirExists ${BUILD_DIR_STM32F303XC}
 
-echo "APPLICATION_NAME ${APPLICATION_NAME}"
-
-ELF_PATH=${BUILD_DIR_STM32F303XC}/${APPLICATION_NAME}.elf
+ELF_PATH=${BUILD_DIR_STM32F303XC}/Applications/${APP_NAME}/${APP_NAME}.elf
 
 echo
 echo "//========================="

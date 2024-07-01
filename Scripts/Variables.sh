@@ -13,5 +13,3 @@ BUILD_DIR_TEST="${BUILD_PATH}/BuildTest"
 
 # The full path to the build directory for the documentation
 BUILD_DIR_DOC="${BUILD_PATH}/BuildDoc"
-
-APPLICATION_NAME="LedDisplayDriverExecutable"
